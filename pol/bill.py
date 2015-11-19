@@ -63,7 +63,7 @@ class Bill(PrintableObject):
         self.importance = importance
         self.stance_for = stance_for
         self.stance_against = stance_against
-        self.inferred_stance_for = stance_against
+        self.inferred_stance_for = inferred_stance_for
         self.inferred_stance_against = inferred_stance_against
         self.synonyms = synonyms
         self.notes = notes
