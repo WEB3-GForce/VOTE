@@ -64,4 +64,24 @@ class Member(PrintableObject):
         self.party = party
         self.committees = committees
 
+    def extract_voting_stances():
+        print "Extracting stances based on voting record of %s" % self.name
+        
+        self.stances = []
+        for vote in member.votes:
+            result = self.extract_vote_stance(vote)
+            self.stances.append(result)
+            
 
+    def extract_vote_stance(vote):
+        bill_id = vote[0]
+        for_or_agn = vote[1]
+        
+        bill = DBBill.GetById(bill_id)
+        
+        if for_or_agn == "FOR":
+            return bill.stance_for
+        elif for_or_agn == "AGN":
+            return bill.stance_agn
+        else:
+            print "ERROR in EXTRACT STANCE: Expected FOR or AGN. Not %s" % for_or_agn
