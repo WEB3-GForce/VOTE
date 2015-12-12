@@ -42,13 +42,15 @@ def initialize_decision(decision, member_id, bill_id):
 """
 
 def infer_rel_stances(decision):
-    mem_id = decision.member
-    infer_member_rel_stances(mem_id)
+    infer_member_rel_stances(decision.member)
 
 
 def infer_member_rel_stances(mem_id):
     member = db(mem_id)
-    if member.pro_rel_stances == None:
+    if member.pro_rel_stances is None:
+        print "Inferring Stances from relations of %s" % member.name
+        member.get_relations_stances()
+        print "Done"
 
 """
     Next-level

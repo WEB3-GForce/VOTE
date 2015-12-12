@@ -85,3 +85,24 @@ class Member(PrintableObject):
             return bill.stance_agn
         else:
             print "ERROR in EXTRACT STANCE: Expected FOR or AGN. Not %s" % for_or_agn
+            
+
+    def get_relations_stances():
+        
+        results = []
+        for relationid in self.relations:
+            relation = DBRelation.getById(relationid)
+            groupid = relation.group
+            
+            group = DBGroup.getById(groupid)
+            
+            for stanceid in group.stances:
+                stance = DBRelation.getById(stanceid)
+                stance.relation = relation
+                results.append(stance)
+                
+        pro_stance? = lambda stance : "PRO" == stance.relation.side
+        con_stance? = lambda stance : "CON" == stance.relation.side
+        member.pro_rel_stances = filter(pro_stance?, stances)
+        member.con_rel_stances = filter(con_stance?, stances)
+        
