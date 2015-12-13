@@ -10,7 +10,7 @@ class Bill(PrintableObject):
     def __init__(self, name, english_name, french_name, bill_number, date_of_vote,
         vote_tally, presidents_position, majority_factor, importance, stance_for,
         stance_against, inferred_stance_for, inferred_stance_against, synonyms,
-        notes):
+        notes, remarks):
     
         """
         Construct a new Bill object.
@@ -49,7 +49,7 @@ class Bill(PrintableObject):
         synonyms                -- A list of synonyms for the bill (AKA related
                                    topics).
         notes                   -- This is a list of remarks about the bill.
-        
+        remarks                 -- textual comments
         return                  -- returns nothing.
         """
         self.name = name
@@ -67,3 +67,4 @@ class Bill(PrintableObject):
         self.inferred_stance_against = inferred_stance_against
         self.synonyms = synonyms
         self.notes = notes
+        self.remarks = remarks
