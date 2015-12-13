@@ -12,9 +12,9 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 |mem_anal|:white_check_mark:|
 |operations|:speech_balloon:|
 |parse|:white_check_mark:|
-|party_strat|:speech_balloon:|
+|party_strat|:white_check_mark:|
 |protocol|:black_medium_square:|
-|remove|:black_medium_square:|
+|remove|:speech_balloon:|
 |shift|:black_medium_square:|
 |strats|:black_medium_square:|
 |utils|:black_medium_square:|
