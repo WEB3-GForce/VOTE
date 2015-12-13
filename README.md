@@ -9,9 +9,9 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 |anal2|:white_check_mark:|
 |anal3|:white_check_mark:|
 |cg|:white_check_mark:|
-|mem_anal|:speech_balloon:|
+|mem_anal|:white_check_mark:|
 |operations|:black_medium_square:|
-|parse|:black_medium_square:|
+|parse|:speech_balloon:|
 |party_strat|:black_medium_square:|
 |protocol|:black_medium_square:|
 |remove|:black_medium_square:|
