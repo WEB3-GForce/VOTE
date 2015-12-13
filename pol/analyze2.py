@@ -5,8 +5,8 @@
     (analyze-decisions 'deep) uses only deep-analysis decisions
 
     Arguments:
-    
-        members = A list of the names of teh members of congress 
+
+        members = A list of the names of teh members of congress
         whose decisions will be analyzed. If the empty list is
         given, it will analyze all members.
 
@@ -32,7 +32,7 @@ def initialize_hash():
 
 # Note determine what you are storing here whether in members
 # whether members is a name or a DB entry
-def valid_decision(decision, members, bill_ids)
+def valid_decision(decision, members, bill_ids):
     return decision.member in members and decision.bill in bill_ids
 
 
@@ -47,7 +47,7 @@ def analyze_score(member=None, bill=None, deep=None):
     else:
         bill_ids = [decision.bill for decision in decisions]
         bill_ids = list(set(bill_ids)
-    
+
     if deep:
         decisions = filter(has_deeper_analysis, DBDecision.GetAll())
     else:
@@ -64,19 +64,19 @@ def analyze_score_helper(members, decisions, bill_ids):
     for decision in decisions:
         if valid_decision(decision, members, bill_ids):
             new_decisions.append(decision)
-        
+
     results = {}
     results[BILL_TOTAL]     = initialize_hash()
     results[MEMBER_TOTAL]   = initialize_hash()
     results[STRATEGY_TOTAL] = initialize_hash()
-    
+
     print "Initializing..."
-    
+
     for decision in final_decisions:
         results[decision.bill]   = initialize_hash()
         results[decision.member] = initialize_hash()
         results[decision.strat]  = initialize_hash()
- 
+
    print "Processing decisions..."
 
    for decision in final_decisions:
@@ -87,24 +87,24 @@ def analyze_score_helper(members, decisions, bill_ids):
             results[BILL_TOTAL][stat] += 1
             results[MEMBER_TOTAL][stat] += 1
             results[STRATEGY_TOTAL][stat] += 1
-          
+
 
 def print_score(results, members, decisions, bill_ids):
- 
+
     global BILL_TOTAL, MEMBER_TOTAL, STRATEGY_TOTAL
-    
+
     stats_header = ["Right%", "Wrong%", Stances.FOR_POS, Stances.AGNR_POS, Stances.FOR_NEG, Stances.AGN_NEG]
-    
-    grand_total = sum(results[BILL_TOTAL].values)
-    
+
+    grand_total = sum(results[BILL_TOTAL].values())
+
     print_aggregate_score(bill_ids)
-    
+
     print "Score Results:"
     print_formatted("Bill", *stats_header)
-    
+
     for billid in bill_ids:
-    
-        bill = DBBill.getBillById(billid)        
+
+        bill = DBBill.getBillById(billid)
         stats_list = right_wrong(results[billid])
         print_formatted(bill.bill_number, *stats_list)
 
@@ -114,7 +114,7 @@ def print_score(results, members, decisions, bill_ids):
 
 
     print_formatted("Member.", *stats_header)
-    
+
     for member in members:
         stats_list = right_wrong(results[member])
         print_formatted(member.lname.capitalize(), *stats_list)
@@ -124,7 +124,7 @@ def print_score(results, members, decisions, bill_ids):
 
 
     print_formatted("Strategy & Rank.", *stats_header)
-    
+
     #See how strategy names are stored in a decision.
     for strategy in DBStrategy.getAll():
         stats_list = right_wrong(results[strategy.name])
@@ -137,7 +137,7 @@ def print_score(results, members, decisions, bill_ids):
 
     print "Total decisions: %s." %grand_total
 
-def right_wrong(results_stats)
+def right_wrong(results_stats):
 
     for_pos = results_stats[Stances.FOR_POS]
     for_neg = results_stats[Stances.FOR_NEG]
@@ -153,7 +153,7 @@ def right_wrong(results_stats)
 def print_aggregate_scores(results, bill_ids):
 
     print_formatted("Bills", "FOR", "AGN", "DIF", "Predicted", "Real", "Right/Wrong")
-    
+
     for billid in bill_ids:
         print_one_aggregate_score(results, billid)
 
@@ -162,22 +162,22 @@ def print_aggregate_scores(results, bill_ids):
     total = right + wrong
     percent_right = (right/(total*1.0)) *100
     na = results["NA"]
-    
+
     print "Aggregate correct: %s out of %s. %s percent." % (right, total, percent_right)
-    
+
     if na > 0:
         print "%s Hypothetical Votes not included." % na
 
-def print_one_aggregate_score(results, billid)
+def print_one_aggregate_score(results, billid):
 
     for_total = results[billid][Stance.FOR_POS] + results[billid][Stance.FOR_NEG]
     agn_total = results[billid][Stance.AGN_POS] + results[Stance.billid][AGN_NEG]
     diff = abs(for_total - agn_total)
-    
+
     bill = DBBill.getById(billid)
-    
+
     real_outcome = get_real_outcome(bill)
-    
+
     predicted_outcome = get_predicted_outcome(bill, for_total, agn_total)
 
     if real_outcome is None:
@@ -188,32 +188,32 @@ def print_one_aggregate_score(results, billid)
         vote_accurate = "WRONG"
 
     results[vote_accurate] += 1
-        
+
     print_formatted(bill.bill_number, for_total, agn_total, diff,
                     predicted_outcome, real_outcome, vote_accurate)
-  
-  
+
+
 real_outcome_map = {"PASSED": "FOR", "ADOPTED": "FOR",
-    "APPROVED": "FOR", "FAILED" : "AGN", "REJECTED": "AGN"}  
-    
+    "APPROVED": "FOR", "FAILED" : "AGN", "REJECTED": "AGN"}
+
 def get_real_outcome(bill):
 
    global real_outcome_map
 
-   tally = bill.vote_tally   
+   tally = bill.vote_tally
    if tally is None:
     return None
-   
-   return real_outcome_map[bill.vote_tally[0].upper()]
-   
 
-def get_predicted_outcome(for_total, agn_total)
-    
+   return real_outcome_map[bill.vote_tally[0].upper()]
+
+
+def get_predicted_outcome(for_total, agn_total):
+
     factor = bill.majority_factor
 
     if factor is None:
         factor = 1
-        
+
     if for_total >= agn_total * factor:
         return "FOR"
     else:

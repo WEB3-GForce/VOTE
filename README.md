@@ -5,12 +5,12 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 
 | File | Status |
 |------|--------|
-|analyze|:speech_balloon:|
+|analyze|:white_check_mark:|
 |anal2|:white_check_mark:|
 |anal3|:white_check_mark:|
 |cg|:white_check_mark:|
 |mem_anal|:white_check_mark:|
-|operations|:black_medium_square:|
+|operations|:speech_balloon:|
 |parse|:white_check_mark:|
 |party_strat|:speech_balloon:|
 |protocol|:black_medium_square:|
