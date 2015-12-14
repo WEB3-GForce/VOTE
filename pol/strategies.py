@@ -51,6 +51,7 @@ def firm_decision(decision, side, reasons, old_downside, strat):
     else:
         decision.downside = downside
 
+    return decision
 
 def set_decision_outcome(decision, result, strat):
     if result == "FOR":
@@ -64,5 +65,30 @@ def set_decision_outcome(decision, result, strat):
         return
     
     firm_dicision(decision, result, reason, downside, strat)
+
+"""
+==================================================================
+      0   Popular decision                        [A] @(POPULAR)
+
+  Remarks:       Vote is consistent with major constituencies.
+  Quote:         I just try to vote my district.
+                 I was sent to Washington to represent the way people back home feel.
+                 This is what the vast majority want.
+                 I owe it to my constiuents if they feel that strongly about it. [Delegate stance]
+  Rank:          "A"
+  Test:          All stances on one side of bill.
+  Test-code:     STRAT-POPULAR
+  Example:       (VOTE 'BRUCE 'PLANT-CLOSING)
+==================================================================
+"""    
+
+def strat_popular(decision, strat):
+    for_stances = decision.for_Stances
+    agn_stances = decision.agn_stances
     
-    
+    if not for_stances and agn_stances:
+        return firm_decision(decision, "AGN", agn_stances, [], strat)
+    if not agn_stances and for_stances:
+        return firm_decision(decision, "FOR", for_stances, [], strat)
+    else:
+        return None
