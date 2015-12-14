@@ -221,3 +221,11 @@ def get_predicted_outcome(for_total, agn_total):
 
 def print_formatted(*args):
     print '{0:<25} {1:>11} {2:>11} {3:>11} {4:>11} {5:>11} {6:>15}'.format(*args)
+
+def analye_all():
+    analyze_decisions()
+    tally_scores()
+    tally_da_scores()
+    analyze_scores()
+    analyze_decisions(deep=True)
+
