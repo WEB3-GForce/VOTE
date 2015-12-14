@@ -28,4 +28,8 @@ def opposite_result(result):
 
 # Typecheck will not be handled. DB will be handled by Mongo
 
-# The utility procedures from utils.lusp can all be easily done in # python by built in procedures.
+# The utility procedures from utils.lisp can all be easily done in # python by built in procedures.
+# For simplicty, a few have been defined here.
+
+def remove_duplicates(the_list):
+    return list(set(the_list))

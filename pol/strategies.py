@@ -88,7 +88,52 @@ def strat_popular(decision, strat):
     
     if not for_stances and agn_stances:
         return firm_decision(decision, "AGN", agn_stances, [], strat)
-    if not agn_stances and for_stances:
+    elif not agn_stances and for_stances:
         return firm_decision(decision, "FOR", for_stances, [], strat)
     else:
         return None
+
+
+"""
+==================================================================
+      1   Inconsistent constituency               [B] @(INCONSISTENT-CONSTITUENCY)
+    Same group on both sides of issue
+==================================================================
+"""
+
+def strat_inconsistent_constituency(decision, strat):
+    source_conflicts = decision.split_group
+    result = consensus(decision)
+    
+    if not source_conflicts:
+        return None
+    elif result:
+        set_decision_outcome(decision, result, strat)
+    else:
+        return None
+
+def majority(decision):
+    fors = decision.number_for
+    agns = decision.number_agn
+    
+    if fors > agns:
+        return "FOR"
+    elif agns > fors:
+        return "AGN"
+    else:
+        return None
+
+def consensus(decision)
+    filter_fun = lambda lst : lst[0]
+    MI = map(filter_fun, collect_MI(decision))
+    
+    if len(remove_duplicates(MI)) == 1 :
+        return MI[0]
+    else:
+        return None
+
+def collect_MI(decion):
+    result = [decision.MI_stance, decision.MI_group, decision.MI_credo, decision.MI_record, decision.MI_norm]
+    
+    filter_fun = lambda x : x != []
+    return filter(filter_fun, result)

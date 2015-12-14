@@ -92,3 +92,15 @@ class Decision(PrintableObject):
         self.score = score
 
 
+def collect_groups(stances)
+    return collect_source_type("GROUP", stances)
+
+def collect_credo(stances)
+    return collect_source_type("MEMBER", stances)
+
+def collect_bills(stances)
+    return collect_source_type("BILL", stances)
+
+def collect_source_type(db, stances)
+    filter_fun = lambda stance : stance.source_db == db
+    return filter(filter_fun, stances)
