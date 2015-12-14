@@ -180,3 +180,32 @@ def strat_non_partisan(decision, strat):
         return set_decision_outcome(decision, credo_side, strat)
     else:
         return None
+
+"""
+==================================================================
+      3   Not constitutional                      [B]  (NOT-CONSTITUTIONAL)
+
+  Remarks:       Vote against a measure that would be struck down by
+                 the Supreme Court.
+  Rank:          "B"
+==================================================================
+"""
+
+def strat_not_constitutional(decision, strat):
+    constitution_issue = DBIssue.getByName("CONSTITUTION")
+    filter_fun = lambda stance : DBStance.getById(stance).issue == constitution_issue
+
+    result = consensus(decision)
+
+    if result == "AGN" and filter(filter_fun, decision.agn_stances):    
+    
+        reason = decision.agn_stances
+        downside = decision.for_stances
+        return firm_decision(decision, result, reason, downside, strat)
+    
+    else:
+        return None
+    
+    
+    
+    
