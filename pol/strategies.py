@@ -444,7 +444,51 @@ def get_MI_level(decision, result):
   Rank:          "C"
   Test:          District must be divided and there should be symmetry on stances.
 ==================================================================
-""
+"""
 
 # note - same as balance the books ...
 
+
+"""
+==================================================================
+      12  Not good enough                         [C]  (NOT-GOOD-ENOUGH)
+
+  Remarks:       Bill importance is less than my own stances would call for.
+                 For example, personal stance of A, bill importance of C.
+  Quote:         I would have voted for a stronger bill.
+                 This measure is a fraud.  It has no teeth in it.
+  Rank:          "C"
+  Test:          Compare importance of bill stance with own stances.  Check for disparity.
+==================================================================
+"""
+
+def strat_not_good_enough(decision, strat):
+
+    result = majority(decision)
+    MI_up_level = None
+    MI_bill_level = None
+    if result:
+        MI_up_level = get_MI_level(decision, result)
+        MI_bill_level = get-MI-bill-level(decision, result)
+    
+    if result == "FOR" and greater_than_importance?(MI_up_level, MI_bill_level):
+        return set_decision_outcome(decision, "AGN", strat)
+    else:
+        return None
+
+def get_MI_bill_level(decision, result):
+    bill = DBBill.GetById(decision.bill)
+    stances = None
+    if result == "FOR":
+        stances = bill.stance_for
+    if result = "AGN":
+        stances = bill.stance_agn
+     
+     if stances:
+        stances.sort(key=lambda stance: stance.importance)
+        return stances[0].importance
+     else:
+        # In Python, "A" > None, but we want A to be of
+        # higher importance. Hence, we use an importance
+        # of "Z" that will be lower than all others.
+        return "Z"
