@@ -24,18 +24,25 @@ def vote(member_id, bill_id):
 
 def initialize_decision(decision, member_id, bill_id):
 
+    member = DBMember.getById(member_id)
+    bill   = DBMember.getById(bill_id)
+    if not member.stances:
+        member.extract_voting_stances()
+
     decision.member = member_id
     decision.bill    = bill_id
 
     print Decision
+    print member
+    print bill
 
-    rel_stances(decision)
+    infer_rel_stances(decision)
 
     print "Analyzing alternative positions"
 
-    decision.for_stances = match_stances_for_agn(decision, FOR)
+    decision.for_stances = match_stances_for_agn(decision, "FOR")
 
-    decision.agn_stances = match_stances_for_agn(decision, AGN)
+    decision.agn_stances = match_stances_for_agn(decision, "AGN")
 
 """
     Infer Stances from relations
@@ -149,8 +156,15 @@ def group_reasons(stance_list):
 
 def vote_all(member_name = None, bill_name = None):
     if member_name:
-        # return all bills for member to database
-    elif bill_name:
-        # return all members for given bill to database
+        member_ids = [DBMembers.getEntryByName(member).id]
     else:
-        # return all members on all bills to database
+        member_ids = [member.id for member in DBMember.GetAll()]
+
+    if bill_name:
+        bill_ids = [bill.id for bill in DBBill.getEntryByName(bill_name)]
+    else:
+        bill_ids = [bill.id for bill in DBBill.GetAll()]
+        
+    for memberid in members:
+        for billid in bill_ids:
+            vote(memberid, billid)
