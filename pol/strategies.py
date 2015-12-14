@@ -399,3 +399,38 @@ def approved?(bill):
 def rejected?(bill):
     tally = DBBill.GetById(billid).vote_tally
     return tally[0] in ["REJECTED", "FAILED"]
+
+"""
+==================================================================
+      10  Minimize adverse effects                [C]  (MINIMIZE-ADVERSE-EFFECTS)
+
+  Remarks:       Adverse effects are less important than the benefits of the vote.
+  Quote:         Nothing's perfect.  You have to break a few eggs to make
+                 omelets.
+  Rank:          "C"
+  Test:          The downside results are lower in importance than the upside.
+==================================================================
+"""
+
+def strat_minimize_adverse_effects(decision, strat):
+    result = majority(decision)
+    if result:
+        MI_up_level = get_MI_level(decision, result)
+        MI_down_level = get_MI_level(decision, oposite_result(result))
+        if greater_than_importance?(MI_up_level, MI_down_level):
+            return set_decision_outcome(decision, result, strat)        
+        
+    return None
+
+def get_MI_level(decision, result):
+    stances = None 
+    if result == "FOR":
+        stances = decision.for_stances 
+    if result == "AGN":
+        stances = decision.agn_stances
+    
+    if stances:
+        stances.sort(key=lambda stance: stance.importance)
+        return stances[0].importance
+     else:
+        return "D"
