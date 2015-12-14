@@ -492,3 +492,28 @@ def get_MI_bill_level(decision, result):
         # higher importance. Hence, we use an importance
         # of "Z" that will be lower than all others.
         return "Z"
+
+"""
+==================================================================
+      14  Shifting alliances                      [C]  (SHIFTING-ALLIANCES)
+
+  Remarks:       Conflict resolution through changing relations.
+                 When two constituencies are in conflict, try to see if one is more
+                 valuable or compatible than the other.  If so, shift their relative
+                 importance by either lowering one or raising the other.
+  Quote:         I am voting with my good friends in ().  I am sorry to disappoint
+                 my many supporters in ().  They know that I have fought many fights
+                 with them.
+  Rank:          "C"
+  Test:          Two constituencies in conflict.
+                 Identify other important issue in which they disagree which is
+                 important to me.  Pick the one that sides with me.
+==================================================================
+"""
+
+def strat_shifting_alliances(decision, strat):
+    result = divided_groups(decision)
+    if result:
+        return set_decision_outcome(decision, result, strat)
+    else:
+        return None

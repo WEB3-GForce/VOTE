@@ -15,7 +15,8 @@ def divided_groups(decision):
     agns.sort()
     
     if fors and agns and no_credo and beliefs:
-        resolve_credo_conflicts(decision)
+        return resolve_credo_conflicts(decision)
+    return None
 
 def equal_stance_rel_import?(stance1, stance2):
     return stance_rel_import(stance1) == stance_Rel_import(stance2)
