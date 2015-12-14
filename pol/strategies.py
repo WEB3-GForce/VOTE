@@ -206,6 +206,38 @@ def strat_not_constitutional(decision, strat):
     else:
         return None
     
+"""
+==================================================================
+      4   Unimportant Bill                        [B]   (UNIMPORTANT-BILL)
+  
+  Date-open:     Monday, May 22, 1989
+  Symbol:        STRATEGY.681
+  Name:          "Unimportant Bill"
+  Sort-key:      "BUnimportant Bill"
+  Synonyms:      (UNIMPORTANT-BILL)
+  Isa-depth:     ""
+  Remarks:       Not much riding on this bill.
+  
+  Quote:         [Morrison:] some things that are close calls are not treated
+                 as close calls because they're not important enough.  I mean
+                 its very different if there's enough riding -- either substantively
+                 or politically -- on a vote.  You might have exactly the same
+                 tensions among the various priorities if you were to pull 
+                 this up, but it might be about how you spend $100,000 and you
+                 say, **** this.
+  
+  Rank:          "B"
+  Test:          Importance of bill is minimal.
+==================================================================
+"""
+
+def strat_unimportant_bill(decision, strat):
+    result = consensus(decision)
+    importance = DBBill.GetById(decision.bill).importance
     
-    
-    
+    if result and importance == "C":
+        return set_decision_outcome(decision, result, strat)
+    else:
+        return None
+
+
