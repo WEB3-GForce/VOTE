@@ -64,7 +64,7 @@ def set_decision_outcome(decision, result, strat):
         print "Reason expected to be FOR or AGN. Got: %s" % reason
         return
     
-    firm_dicision(decision, result, reason, downside, strat)
+    return firm_dicision(decision, result, reason, downside, strat)
 
 """
 ==================================================================
@@ -108,7 +108,7 @@ def strat_inconsistent_constituency(decision, strat):
     if not source_conflicts:
         return None
     elif result:
-        set_decision_outcome(decision, result, strat)
+        return set_decision_outcome(decision, result, strat)
     else:
         return None
 
@@ -137,3 +137,46 @@ def collect_MI(decion):
     
     filter_fun = lambda x : x != []
     return filter(filter_fun, result)
+
+
+"""
+==================================================================
+      2   Non-partisan decision                   [B]  (NON-PARTISAN)
+  
+  Remarks:       Vote of conscience or credo that violates party line.  Not a district vote.
+  Quote:         Sometimes party loyalty demands too much. (JFK)
+  Rank:          "B"
+  Test:          Major conflict between credo and party stances.
+==================================================================
+"""
+#  The vote is a matter of conscience.
+#  The credo position is in conflict with a party position.
+#  The credo position is very important.
+
+def strat_non_partisan(decision, strat):
+    member = DBMember.getById(decision.member)
+
+    credo = decision.MI_credo
+    credo_side = credo[0]
+    credo_stance_list = credo[1]
+    opposing_groups = decision.group_agn if credo_side == "FOR" else decision.group_for
+    
+    party = "Unknown Party Affiliation"
+    if member.party == "REP":
+        party = "REPUBLICANS"
+    if member.party == "DEM":
+        party = "Democrats"
+    
+    # Translate the following and add it to the if statement
+    # below:
+
+    # (member party (mapcar #'stance-source opposing-groups)
+    #any(party == group.stance for group)
+    
+    credo_stance1 = DBStance.getById(credo_stance_list[0])
+    
+    if (credo and opposing_groups and credo_stance_list and
+        most_important?(credo_stance1.importance):
+        return set_decision_outcome(decision, credo_side, strat)
+    else:
+        return None
