@@ -260,3 +260,38 @@ def strat_balance_the_books(decision, strat):
         set_decision_outcome(decision, result, strat)
     else:
         return None
+
+"""
+==================================================================
+      6   Best for the country                    [C]  (BEST-FOR-THE-COUNTRY)
+
+  Remarks:       Take the broad view, over parochial interests.
+  Quote:         The needs of the country, in this case, must come first.
+  Rank:          "C"
+  Test:          National interest in conflict with local interest.
+==================================================================
+"""
+
+# relies on a group: country which has the broad issue agenda for
+#  the whole country.  Each congressman has a positive relation with COUNTRY.
+
+def strat_best_for_country(decision, strat):
+    result = consensus(decision)
+    country = DBGroup.GetByName("COUNTRY")
+
+    # Translate the following once you know more about group_for.
+    # Is it a stance object or group object?
+
+    #(country-for (collect (decision-group-for decision)
+                              #'(lambda (st) (eq country (reveal-source st)))))
+    country_for = None
+    # (country-agn (collect (decision-group-agn decision)
+                              #'(lambda (st) (eq country (reveal-source st))))) 
+    country_agn = None
+    
+    if result == "FOR" and country_for and not country_agn:
+        return set_decision_outcome(decision, result, strat)
+    elif result == "AGN" and country_agn and not country_for:
+        return set_decision_outcome(decision, result, strat)
+    else:
+        return None
