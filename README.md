@@ -14,7 +14,7 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 |parse|:white_check_mark:|
 |party_strat|:white_check_mark:|
 |protocol|:black_medium_square:|
-|remove|:speech_balloon:|
-|shift|:black_medium_square:|
+|remove|:white_check_mark:|
+|shift|:speech_balloon:|
 |strats|:black_medium_square:|
 |utils|:black_medium_square:|
