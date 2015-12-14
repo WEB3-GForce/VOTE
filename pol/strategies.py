@@ -257,7 +257,7 @@ def strat_balance_the_books(decision, strat):
     result = majority(decision)
     split  = decision.split_record
     if result and split:
-        set_decision_outcome(decision, result, strat)
+        return set_decision_outcome(decision, result, strat)
     else:
         return None
 
@@ -339,6 +339,63 @@ def strat_inoculation(decision, strat):
         importance_level = temp[0].importance
         
      if result and split_groups and less_than_importance?(importance_level1, "B"):
-        set_decision_outcome(decision, result, strat)
+        return set_decision_outcome(decision, result, strat)
      else:
         return None
+
+"""
+==================================================================
+      9   It couldn't pass                        [C]  (IT-COULD-NOT-PASS)
+
+  Remarks:       Do not waste a vote on a symbolic measure.  Better to
+                 build credibility and a consensus for the future.
+  Quote:         Why waste a vote on a measure that has so little chance of passing.
+  Rank:          "C"
+  Test:          Bill has far higher importance (and low likelihood of passage)
+                 but for issue stance consistent (but stronger than) with my own.
+                 This is the flip side of not-good-enough.
+==================================================================
+"""
+
+def strat_could_not_pass(decision, strat)
+    result = majority(decision)
+    billid = decision.bill
+    if result == "AGN" and could_not_pass?(billid):
+        return set_decision_outcome(decision, result, strat)
+    else:
+        return None
+
+def might_pass?(billid):
+    tally = DBBill.GetById(billid).vote_tally
+    
+    if tally:
+        return approved?(billid) or vote_ratio(billid) > 1
+
+def could_not_pass?(billid):
+    tally = DBBill.GetById(billid).vote_tally
+    if tally:
+        return vote_ratio(billid) < 1
+
+def vote_ratio(billid):
+    tally = DBBill.GetById(billid).vote_tally
+    fors = tally[0]
+    agns = tally[1]
+    
+    if type(fors) != type(0) and type(agns) != type(0):
+        return None
+    
+    # Simply let the ratio be fors if agn is 0 to avoid divide
+    # by 0.
+    if agn == 0:
+        return fors
+    
+    if fors and agns:
+        return fors/agns
+
+def approved?(bill):
+    tally = DBBill.GetById(billid).vote_tally
+    return tally[0] in ["PASSED", "ADOPTED", "APPROVED"]
+
+def rejected?(bill):
+    tally = DBBill.GetById(billid).vote_tally
+    return tally[0] in ["REJECTED", "FAILED"]
