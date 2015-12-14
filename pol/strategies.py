@@ -567,3 +567,30 @@ def strat_normative(decision, strat):
         return firm_decision(decision, "FOR", for_norms, [], strat)
     else:
         return None
+
+"""
+==================================================================
+      18  Unpopular decision                      [D]  (UNPOPULAR)
+
+  Remarks:       Recognizes that vote will not play well with many constituents.
+  Quote:         I know people will criticize me for this vote, but I had to do it.
+                 I couldn't live with myself if I didn't.
+                 I have to use my judgment.  You can express an opinion.  I have to make a decision. [Trustee]
+                 I stand by my record.  I'm not going to change my principles.
+                 I hope you appreciate that and will look at my record as a whole.
+  Rank:          "D"
+  Test:          Major conflicts among stances.
+==================================================================
+"""
+
+"""
+==================================================================
+      19  No decision                             [E] @(NO-DECISION)
+  Test-code:   STRAT-NO-DECISION
+  Remarks:     No previous decision was triggered.
+  Test:        Always true.
+==================================================================
+"""
+
+def strat_no_decision(decision, strat):
+    firm_decision(decision, None, [], [], strat)
