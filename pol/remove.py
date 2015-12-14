@@ -1,3 +1,7 @@
+def remove_intersection(list1, list2, equal_fun):
+    filter_fun = lambda item : not any(equal_fun(item, element) for element in l2)
+    return filter(filter_fun, list1)
+
 def stance_equal?(stance1, stance2):
     return (stance_alikev?(stance1, stance2) and
            stance1.importance == stance2.importance)
