@@ -240,4 +240,23 @@ def strat_unimportant_bill(decision, strat):
     else:
         return None
 
+"""
+==================================================================
+      5   Balance the books                       [C]  (BALANCE-THE-BOOKS)
 
+  Remarks:       Offset current vote with past or future votes.
+  Quote:         I know you are upset with this vote, but I have always been there in the
+                   past, and I shall be there in the future.
+                 I will make it up to you.
+                 (point to specific past votes)
+  Rank:          "C"
+==================================================================
+"""
+
+def strat_balance_the_books(decision, strat):
+    result = majority(decision)
+    split  = decision.split_record
+    if result and split:
+        set_decision_outcome(decision, result, strat)
+    else:
+        return None
