@@ -517,3 +517,32 @@ def strat_shifting_alliances(decision, strat):
         return set_decision_outcome(decision, result, strat)
     else:
         return None
+
+"""
+==================================================================
+        15  Simple consensus                        [C] @ (SIMPLE-CONSENSUS)
+  
+  Status:        "Active"
+  Date-open:     Thursday, May 11, 1989
+  Symbol:        STRATEGY.1018
+  Name:          "Simple consensus"
+  Sort-key:      "CSimple consensus"
+  Synonyms:      (SIMPLE-CONSENSUS)
+  Isa-depth:     ""
+  Remarks:       The most important issues/groups/norms etc. concur.
+  
+  Rank:          "C"
+  Test:          Check all most important features
+  
+  Test-code:     STRAT-SIMPLE-CONSENSUS
+==================================================================
+"""
+
+def strat_stimple_consensus(decision, strat):
+    result = consensus(decision)
+    if result:
+        return set_decision_outcome(decision, result, strat)
+    else:
+        return None
+
+
