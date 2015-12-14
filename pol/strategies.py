@@ -295,3 +295,50 @@ def strat_best_for_country(decision, strat):
         return set_decision_outcome(decision, result, strat)
     else:
         return None
+
+"""
+==================================================================
+      7   Change of heart                         [C]  (CHANGE-OF-HEART)
+  
+  Remarks:       Reverse a credo/vote position on the record to accomodate
+                 conflict in constituencies.
+  Quote:         A foolish consistency is the hobgoblin of small minds.
+  Rank:          "C"
+  Test:          Credo importance is less than conflicting relation importance.
+==================================================================
+"""
+
+def strat_change_of_heart(decision, strat):
+    result = majority(decision)
+    split  = decision.split_credo
+    if result and split:
+        return set_decision_outcome(decision, result, strat)
+    else:
+        return None
+
+"""
+==================================================================
+      8   Inoculation                            [C]  (INOCULATION)
+  
+  Remarks:       Decision which may prove to be unpopular later on.
+                 Need to begin laying groundwork for defense early on.
+  Rank:          "C"
+  Test:          Low priority stances, pro or con.
+==================================================================
+"""
+
+def strat_inoculation(decision, strat):
+    result = majority(decision)
+    split_groups = decision.group_for and decision.group_agn
+    importance_level = None
+    # SAME ISSUE AS ABOVE. Check whether group_for is stances
+    # or groups. Otherwise, stance-importance not defined.
+    if split_groups:
+        temp = decision.group_for + decision.group_agn
+        temp.sort(key=lambda stance: stance.importance)
+        importance_level = temp[0].importance
+        
+     if result and split_groups and less_than_importance?(importance_level1, "B"):
+        set_decision_outcome(decision, result, strat)
+     else:
+        return None
