@@ -546,3 +546,24 @@ def strat_stimple_consensus(decision, strat):
         return None
 
 
+"""
+==================================================================
+      17  Normative decision                      [D] @(NORMATIVE)
+
+  Remarks:       Decision reflects normative opinion on relevant issues.
+  Rank:          "D"
+  Test:          Bill stances match normative stances for given issues.
+  Test-code:     STRAT-NORMATIVE
+==================================================================
+"""
+
+def strat_normative(decision, strat):
+    for_norms = decision.for_bnorms
+    agn_norms = decision.agn_bnorms
+    
+    if not for_norms and agn_norms:
+        return firm_decision(decision, "AGN", agn_norms, [], strat)
+    elif for_norms and not agn_norms:
+        return firm_decision(decision, "FOR", for_norms, [], strat)
+    else:
+        return None
