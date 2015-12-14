@@ -426,7 +426,7 @@ def get_MI_level(decision, result):
     stances = None 
     if result == "FOR":
         stances = decision.for_stances 
-    if result == "AGN":
+    if result == "AGN"
         stances = decision.agn_stances
     
     if stances:
@@ -434,3 +434,17 @@ def get_MI_level(decision, result):
         return stances[0].importance
      else:
         return "D"
+
+"""
+==================================================================
+      11  Mixed constituency                      [C]  (MIXED-CONSTITUENCY)
+
+  Remarks:       E.g., rural/urban. can justify pro-rural vote to urbans by
+                 pointing to other constituency, and vice-versa.
+  Rank:          "C"
+  Test:          District must be divided and there should be symmetry on stances.
+==================================================================
+""
+
+# note - same as balance the books ...
+
