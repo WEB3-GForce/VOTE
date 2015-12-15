@@ -156,7 +156,7 @@ def print_scores(correct_for, correct_agn, wrong_for, wrong_agn):
     print "T{0:<10} {1:>5}".format("Total", total)
 
 
-def tally_da_scores():
+def tally_da_scores(): # deep analysis scores
     tally_scores()
 
 
