@@ -495,6 +495,93 @@ def get_MI_bill_level(decision, result):
 
 """
 ==================================================================
+      13  Partisan Decision                       [C]  (PARTISAN)
+
+  Remarks:       Counter-planning vote against the opposing interests.
+  Quote:         I could not let those rich Republicans tear this country apart.
+                 I am not going to let those Democrats have their special interests tell
+                   me what to do.
+  Rank:          "C"
+  Test:          Voting to deny something wanted by opposition.
+==================================================================
+"""
+
+def start_partisan(decision, strat):
+    result = majority(decision)
+    if result:
+        MI_up_level = get_MI_level(decision, result)
+        update_con_rel_stances(decision)
+        MI_con_rel_level = get_MI_con_rel_level(decision, opposite_result(result))
+    
+        if MI_con_rel_level and less_than_importance?(MI_up_level , MI_con_rel_level):
+            return set_decision_outcome(decision, result, strat)
+
+    return None
+
+def update_con_rel_stances(decision):
+    decision.con_rel_for_stances = match_con_rel_stances_for_agn(decision, "FOR")
+    
+    decision.con_rel_agn_stances = match_con_rel_stances_for_agn(decision, "AGN")
+    return "DONE"
+
+def get_MI_con_rel_level(decision, result):
+    stances = []
+    if result == "FOR":
+        stances = decision.con_rel_for_stances
+    elif result == "AGN":
+        stances = decision.con_rel_agn_stances
+    
+    if stances:
+        stances.sort(key = lambda stance: stance.sort_key)
+        return stances[0].importance
+
+# match-con-rel-stances will check
+# con group/relationship stances
+#
+
+def match_con_rel_stances(stance_id, mem_id):
+    print stance_id
+    stance = DBStance.GetById(stance_id)
+    member = DBMember.GetById(mem_id)
+    filter_fun = lambda mem_stance : mem_stance.match?(stance)
+    matches = filter(filter_fun, member.con_rel_stances)
+    
+    filter_fun = lambda element : element != []
+    return filter(filter_fun, matches)
+
+def match_con_rel_stances_for_agn(decision, side):
+
+    member = DBMember.GetById(decision.member)
+    bill = DBBill.GetById(decision.bill)
+
+    print "Vote %s %s" % (side, bill.bnumber)
+    print "Considering counter-planning implications of %s %s" % (side, bill.bnumber)
+    print "Matching member con-rel stances with bill stances:"
+    
+    bill_stance = bill.stance_for
+    
+    if side == "AGN":
+        bill_stance = bill.stance_agn
+     
+    sort_key = member.stance_sort_key or "EQUITY"
+    
+    stances = []
+    for stance in bill_stance:
+        stances += match_con_rel_stances(stance, decision.member)
+
+    print "Sorting stances based on %s order..." % sort_key
+    
+    for stance in stances:
+        stance.set_sort_key(sort_key)
+    
+    stances.sort(key=lambda stance: stance.sort_key)
+    print "Done."
+    print "Stances %s" %side
+    print stances
+
+
+"""
+==================================================================
       14  Shifting alliances                      [C]  (SHIFTING-ALLIANCES)
 
   Remarks:       Conflict resolution through changing relations.
