@@ -1,3 +1,9 @@
+# sourced from pol/operations.lisp
+#
+# Copyright 2015 krishpop <krishnan1994@gmail.com>
+#
+# Distributed under terms of the MIT license.
+
 from functools import singledispatch
 
 # to implement a generic function, use singledispatch

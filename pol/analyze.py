@@ -1,6 +1,6 @@
 # sourced from pol/analyze.lisp
 #
-# Copyright © 2015 krishpop <krishnan1994@gmail.com>
+# Copyright 2015 krishpop <krishnan1994@gmail.com>
 #
 # Distributed under terms of the MIT license.
 
@@ -160,8 +160,8 @@ def tally_da_scores(): # deep analysis scores
     tally_scores()
 
 
-def print_formatted(header, *args):
+def print_formatted(row_header, *args):
     print_string = "{0:<25}"
     for i in xrange(1, len(args) + 1):
         print_string += " {" + str(i) + ":>11}"
-    print print_string.format(header, *args)
+    print print_string.format(row_header, *args)
