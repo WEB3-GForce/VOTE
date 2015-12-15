@@ -16,5 +16,5 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 |protocol|:speech_balloon:|
 |remove|:white_check_mark:|
 |shift|:white_check_mark:|
-|strats|:black_medium_square:|
+|strats|:white_check_mark:|
 |utils|:white_check_mark:|
