@@ -13,7 +13,7 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 |operations|:white_check_mark:|
 |parse|:white_check_mark:|
 |party_strat|:white_check_mark:|
-|protocol|:speech_balloon:|
+|protocol|:white_check_mark:|
 |remove|:white_check_mark:|
 |shift|:white_check_mark:|
 |strats|:white_check_mark:|
