@@ -195,11 +195,6 @@ def remove_less_important(stances):
 
 def normative_stance?(stance)
     norm = DBIssue.GetById(stance.issue).norm
-    # Here, they have a match? function. Check this out later
-    # if you need to do something specific. For now, just
-    # assume that it is fine. Check after you have done
-    # DB modeling
-
     if norm:
-        return stance == norm
+        return stance.match?(norm)
     
