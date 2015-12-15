@@ -335,7 +335,7 @@ def strat_inoculation(decision, strat):
     # or groups. Otherwise, stance-importance not defined.
     if split_groups:
         temp = decision.group_for + decision.group_agn
-        temp.sort(key=lambda stance: stance.importance)
+        temp.sort(key=lambda stance: stance.sort_key)
         importance_level = temp[0].importance
         
      if result and split_groups and less_than_importance?(importance_level1, "B"):
@@ -430,7 +430,7 @@ def get_MI_level(decision, result):
         stances = decision.agn_stances
     
     if stances:
-        stances.sort(key=lambda stance: stance.importance)
+        stances.sort(key=lambda stance: stance.sort_key)
         return stances[0].importance
      else:
         return "D"
@@ -485,7 +485,7 @@ def get_MI_bill_level(decision, result):
         stances = bill.stance_agn
      
      if stances:
-        stances.sort(key=lambda stance: stance.importance)
+        stances.sort(key=lambda stance: stance.sort_key)
         return stances[0].importance
      else:
         # In Python, "A" > None, but we want A to be of

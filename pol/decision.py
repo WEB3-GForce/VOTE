@@ -172,8 +172,8 @@ def check_norms(stances)
 
 def compare_stances(fors, agns):
 
-    fors.sort(key=lambda stance: stance.importance)
-    agns.sort(key=lambda stance: stance.importance)
+    fors.sort(key=lambda stance: stance.sort_key)
+    agns.sort(key=lambda stance: stance.sort_key)
 
     for a_for, an_agn in map(None, fors, agns):
         if not a_for and not an_agn:

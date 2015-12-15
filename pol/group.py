@@ -62,4 +62,6 @@ class Group(PrintableObject):
         self.norm = norm
         self.instances = instances
 
-
+    # Only support named searches for now.
+    def sort_key(self):
+        return self.name
