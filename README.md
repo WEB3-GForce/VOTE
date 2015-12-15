@@ -10,10 +10,10 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 |anal3|:white_check_mark:|
 |cg|:white_check_mark:|
 |mem_anal|:white_check_mark:|
-|operations|:speech_balloon:|
+|operations|:white_check_mark:|
 |parse|:white_check_mark:|
 |party_strat|:white_check_mark:|
-|protocol|:black_medium_square:|
+|protocol|:speech_balloon:|
 |remove|:white_check_mark:|
 |shift|:white_check_mark:|
 |strats|:black_medium_square:|
