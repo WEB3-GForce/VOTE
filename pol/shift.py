@@ -11,8 +11,8 @@ def divided_groups(decision):
     
     agns = remove_intersection(decision.group_agn, decision.group_for, stance_relation_alikev?)
     
-    fors.sort()
-    agns.sort()
+    fors.sort(key=lambda group : group.sort_key)
+    agns.sort(key=lambda group : group.sort_key)
     
     if fors and agns and no_credo and beliefs:
         return resolve_credo_conflicts(decision)

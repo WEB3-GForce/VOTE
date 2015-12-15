@@ -335,7 +335,7 @@ def strat_inoculation(decision, strat):
     # or groups. Otherwise, stance-importance not defined.
     if split_groups:
         temp = decision.group_for + decision.group_agn
-        temp.sort(key=lambda stance: stance.importance)
+        temp.sort(key=lambda stance: stance.sort_key)
         importance_level = temp[0].importance
         
      if result and split_groups and less_than_importance?(importance_level1, "B"):
@@ -430,7 +430,7 @@ def get_MI_level(decision, result):
         stances = decision.agn_stances
     
     if stances:
-        stances.sort(key=lambda stance: stance.importance)
+        stances.sort(key=lambda stance: stance.sort_key)
         return stances[0].importance
      else:
         return "D"
@@ -485,13 +485,100 @@ def get_MI_bill_level(decision, result):
         stances = bill.stance_agn
      
      if stances:
-        stances.sort(key=lambda stance: stance.importance)
+        stances.sort(key=lambda stance: stance.sort_key)
         return stances[0].importance
      else:
         # In Python, "A" > None, but we want A to be of
         # higher importance. Hence, we use an importance
         # of "Z" that will be lower than all others.
         return "Z"
+
+"""
+==================================================================
+      13  Partisan Decision                       [C]  (PARTISAN)
+
+  Remarks:       Counter-planning vote against the opposing interests.
+  Quote:         I could not let those rich Republicans tear this country apart.
+                 I am not going to let those Democrats have their special interests tell
+                   me what to do.
+  Rank:          "C"
+  Test:          Voting to deny something wanted by opposition.
+==================================================================
+"""
+
+def start_partisan(decision, strat):
+    result = majority(decision)
+    if result:
+        MI_up_level = get_MI_level(decision, result)
+        update_con_rel_stances(decision)
+        MI_con_rel_level = get_MI_con_rel_level(decision, opposite_result(result))
+    
+        if MI_con_rel_level and less_than_importance?(MI_up_level , MI_con_rel_level):
+            return set_decision_outcome(decision, result, strat)
+
+    return None
+
+def update_con_rel_stances(decision):
+    decision.con_rel_for_stances = match_con_rel_stances_for_agn(decision, "FOR")
+    
+    decision.con_rel_agn_stances = match_con_rel_stances_for_agn(decision, "AGN")
+    return "DONE"
+
+def get_MI_con_rel_level(decision, result):
+    stances = []
+    if result == "FOR":
+        stances = decision.con_rel_for_stances
+    elif result == "AGN":
+        stances = decision.con_rel_agn_stances
+    
+    if stances:
+        stances.sort(key = lambda stance: stance.sort_key)
+        return stances[0].importance
+
+# match-con-rel-stances will check
+# con group/relationship stances
+#
+
+def match_con_rel_stances(stance_id, mem_id):
+    print stance_id
+    stance = DBStance.GetById(stance_id)
+    member = DBMember.GetById(mem_id)
+    filter_fun = lambda mem_stance : mem_stance.match?(stance)
+    matches = filter(filter_fun, member.con_rel_stances)
+    
+    filter_fun = lambda element : element != []
+    return filter(filter_fun, matches)
+
+def match_con_rel_stances_for_agn(decision, side):
+
+    member = DBMember.GetById(decision.member)
+    bill = DBBill.GetById(decision.bill)
+
+    print "Vote %s %s" % (side, bill.bnumber)
+    print "Considering counter-planning implications of %s %s" % (side, bill.bnumber)
+    print "Matching member con-rel stances with bill stances:"
+    
+    bill_stance = bill.stance_for
+    
+    if side == "AGN":
+        bill_stance = bill.stance_agn
+     
+    sort_key = member.stance_sort_key or "EQUITY"
+    
+    stances = []
+    for stance in bill_stance:
+        stances += match_con_rel_stances(stance, decision.member)
+
+    print "Sorting stances based on %s order..." % sort_key
+    
+    for stance in stances:
+        stance.set_sort_key(sort_key)
+    
+    stances.sort(key=lambda stance: stance.sort_key)
+    print "Done."
+    print "Stances %s" %side
+    print stances
+
 
 """
 ==================================================================
@@ -545,6 +632,147 @@ def strat_stimple_consensus(decision, strat):
     else:
         return None
 
+"""
+==================================================================
+    *   16  Deeper analysis                         [D+]   (DEEPER-ANALYSIS)
+  
+  Status:        "Active"
+  Date-open:     Sunday, February 11, 1990
+  Symbol:        STRATEGY.323
+  Name:          "Deeper analysis"
+  Synonyms:      (DEEPER-ANALYSIS)
+  Isa-depth:     ""
+  Remarks:       Consider the symbolic implication of the for/agn stances of the bill.
+  
+  Rank:          "D+"
+  Test:          Find a consensus after expanding the bill-stance through inference.
+==================================================================
+"""
+
+def strat_deeper_analysis(decision, strat):
+    level = decision.deeper_analysis
+
+    if level is None:
+        new_analysis_level(decision)
+        reanalyze_decision(decision)
+        filter_fun = lambda strategy : not strategy.no_second_try
+        strategies = DBStrategy.GetAll()
+        return apply_strats(decision, filter(filter_fun, strategies)
+    else:
+        return strat_deeper_analysis2(decision, strat)  
+
+def strat_deeper_analysis2(decision, strat):
+    level = new_analysis_level(decision)
+    billid = decision.bill
+    bill = DBBill.GetById(billid)
+    old_bill_for_stances = bill.stance_for
+    old_bill_agn_stances = bill.stance_agn
+    
+    filter_fun = lambda strategy : not strategy.no_second_try
+    strategies = filter(filter_fun, DBStrategy.GetAll())
+    
+    new_bill_for_stance  = expand_stances(old_bill_for_stances, level)
+    new_bill_agn_stances = expand_stances(old_bill_agn_stances, level)
+
+    temp_for = remove_intersection(new_bill_for_stances, new_bill_agn_stances, stance_equal?)
+    
+    temp_agn = remove_intersection(new_bill_agn_stances, new_bill_for_stances, stance_equal?)
+    
+    new_bill_for_stance  = temp_for
+    new_bill_agn_stances = temp_agn
+    
+    if level == "D":
+        return None
+    elif (len(new_bill_for_stances) > len(old_bill_for_stances) or
+         len(new_bill_agn_stances) > len(old_bill_agn_stances)):
+         print "Deeper Analysis results in new bill stances at level %s..." % level
+         
+         print_new_stances(new_bill_for_stances, old_bill_for_stances, "FOR")
+         
+         print_new_stances(new_bill_agn_stances, old_bill_agn_stances, "AGN")
+         
+         bill.stance_for = new_bill_for_stances
+         bill.stance_agn = new_bill_agn_stances
+         
+         reanalyze_decision(decision)
+         
+         result = apply_strats(decision, strats)
+         bill.stance_for = old_bill_for_stances
+         bill.stance_agn = old_bill_agn_stances
+         return result
+    else:
+        print "No Change at this level. Trying deeper Deeper Analysis"
+        return strat_deeper_analysis(decision, strat)
+
+def reanalyze_decision(decision):
+    print "Re-Analyzing alternative positions"
+    
+    decision.for_stances = match_stances_for_agn(decision, "FOR")
+    decision.agn_stances = match_stances_for_agn(decision, "AGN")
+    decision.update_decision_metrics()
+
+def new_analysis_level(decision):
+    old_level = decision.deeper_analysis
+    new_level = next_analysis_level(old_level)
+    decision.deeper_analysis = new_level
+    return new_level
+
+def next_analysis_level(level):
+    next_hash = {"X" : "A", "A": "B", "B":"C", "C":"D"}
+    if not next_hash.has_key(level.upper()):
+        return "X"
+    return next_hash[level]
+
+#  expand-stances infers as much as possible from a list of stances
+#  with importance greater than or equal to given level
+#------------------------------------------------------------------
+
+def expand_stances(stance_list, level)
+    new_stances = []
+    for stance in stance_list:
+        new_stances += expand_one_stance(stance, level)
+
+    new_stances = stance_list + new_stances
+
+    remove_duplicates(new_stances)
+
+
+#  Expand the stances that are of importance greater than or equal
+#  to the given level of importance.  
+
+def expand_one_stance(stance, level):
+    side = stance.side
+    issue = DBIssue.GetById(stance.issue)
+    
+    new_stances = []
+    if side == "PRO":
+        new_stances = issue.pro_stances
+    elif side == "CON":
+        new_stances = issue.con_stances
+    
+    filter_fun = lambda stance : greater_than_or_equal_importance?(stance.importance, level)
+    return filter(filter_fun, new_stances)
+
+
+def set_filter(set1, set2):
+    filter_fun = lambda element : element in set2
+    return filter(filter_fun, set1)
+
+def strat_simple_majority(decision, strat):
+    result = majority(decision)
+    
+    if result:
+        return set_decision_outcome(decision, result, strat)
+    else:
+        return None
+
+def print_new_stances(new, old, side):
+    if len(new) > len(old):
+        print "New %s stances resulting from deeper analysis: " % side
+     
+        for stance in remove_intersection(new, old, stance_equal?):
+            print stance
+        
 
 """
 ==================================================================
