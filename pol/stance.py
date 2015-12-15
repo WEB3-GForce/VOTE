@@ -40,4 +40,42 @@ class Stance(PrintableObject):
         self.sort_key = sort_key
         self.siblings = siblings
 
+    def sort_key(self):
+        return self.stance_sort_key or self.importance
 
+    def set_sort_key(self, keyword):
+        stance_import = self.importance
+        rel_import = "B"
+        if self.relation:
+            rel_import = DBRelation.GetById(self.relation).importance
+        
+        #Lisp made the lists one string. Since python can
+        #perform comparisons over lists, it was left as is.
+        if keyword == "LOYALTY":
+            self.sort_key = (rel_import, stance_import)
+        elif keyword == "EQUITY":
+            self.sort_key = (stance_import, rel_import)
+        elif keyword == "IMPSIDE":
+            self.sort_key = (stance_import, self.side)
+        # Support alpha later
+        #elif keyword == "ALPHA":
+        #    self.sort_key = (issue, stance_import, rel_import
+        else:
+            print "ERROR: Unknown keyword: %s" % keyword
+    
+    def match?(self, stance2):
+        # The lisp uses a match? on the issue. Unsure what does
+        match_issue = self.issue == stance2.issue
+        match_side = self.side == stance2.side
+        match_import = self.importance == stance2.importance
+        
+        if match_issue and match_side and match_import:
+            # Complete match
+            return stance2
+        elif match_issue and match_side:
+            # Partial match
+            return stance2
+        else:
+            return None
+        
+        
