@@ -574,6 +574,48 @@ def strat_deeper_analysis(decision, strat):
     else:
         return strat_deeper_analysis2(decision, strat)  
 
+def strat_deeper_analysis2(decision, strat):
+    level = new_analysis_level(decision)
+    billid = decision.bill
+    bill = DBBill.GetById(billid)
+    old_bill_for_stances = bill.stance_for
+    old_bill_agn_stances = bill.stance_agn
+    
+    filter_fun = lambda strategy : not strategy.no_second_try
+    strategies = filter(filter_fun, DBStrategy.GetAll())
+    
+    new_bill_for_stance  = expand_stances(old_bill_for_stances, level)
+    new_bill_agn_stances = expand_stances(old_bill_agn_stances, level)
+
+    temp_for = remove_intersection(new_bill_for_stances, new_bill_agn_stances, stance_equal?)
+    
+    temp_agn = remove_intersection(new_bill_agn_stances, new_bill_for_stances, stance_equal?)
+    
+    new_bill_for_stance  = temp_for
+    new_bill_agn_stances = temp_agn
+    
+    if level == "D":
+        return None
+    elif (len(new_bill_for_stances) > len(old_bill_for_stances) or
+         len(new_bill_agn_stances) > len(old_bill_agn_stances)):
+         print "Deeper Analysis results in new bill stances at level %s..." % level
+         
+         print_new_stances(new_bill_for_stances, old_bill_for_stances, "FOR")
+         
+         print_new_stances(new_bill_agn_stances, old_bill_agn_stances, "AGN")
+         
+         bill.stance_for = new_bill_for_stances
+         bill.stance_agn = new_bill_agn_stances
+         
+         reanalyze_decision(decision)
+         
+         result = apply_strats(decision, strats)
+         bill.stance_for = old_bill_for_stances
+         bill.stance_agn = old_bill_agn_stances
+         return result
+    else:
+        print "No Change at this level. Trying deeper Deeper Analysis"
+        return strat_deeper_analysis(decision, strat)
 
 def reanalyze_decision(decision):
     print "Re-Analyzing alternative positions"
@@ -633,9 +675,9 @@ def strat_simple_majority(decision, strat):
     result = majority(decision)
     
     if result:
-        set_decision_outcome(decision, result, strat)
+        return set_decision_outcome(decision, result, strat)
     else:
-        None
+        return None
 
 def print_new_stances(new, old, side):
     if len(new) > len(old):
