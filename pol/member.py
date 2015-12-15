@@ -10,10 +10,7 @@ class Member(PrintableObject):
     A class that represnts a particular member.
     """
 
-    def __init__(self, name, fname, lname, english_short, notes, gender, votes,
-                 new_votes, stances, issues, credo, groups, relations,
-                 pro_rel_stances, con_rel_stances, stance_sort_key, district,
-                 term_start, term_end, party, committees):
+    def __init__(self, **entries):
 
         """
         Constructs a new Member object.
@@ -42,67 +39,67 @@ class Member(PrintableObject):
 
         return          -- returns nothing
         """
-        self.name = name
-        self.fname = fname
-        self.lname = lname
-        self.english_short = english_short
-        self.notes = notes
-        self.gender = gender
-        self.votes = votes
-        self.new_votes = new_votes
-        self.stances = stances
-        self.issues = issues
-        self.credo = credo
-        self.groups = groups
-        self.relations = relations
-        self.pro_rel_stances = pro_rel_stances
-        self.con_rel_stances = con_rel_stances
-        self.stance_sort_key = stance_sort_key
-        self.district = district
-        self.term_start = term_start
-        self.term_end = term_end
-        self.party = party
-        self.committees = committees
+        self.name = None
+        self.fname = None
+        self.lname = None
+        self.english_short = None
+        self.notes = None
+        self.gender = None
+        self.votes = None
+        self.new_votes = None
+        self.stances = None
+        self.issues = None
+        self.credo = None
+        self.groups = None
+        self.relations = None
+        self.pro_rel_stances = None
+        self.con_rel_stances = None
+        self.stance_sort_key = None
+        self.district = None
+        self.term_start = None
+        self.term_end = None
+        self.party = None
+        self.committees = None
+        self.__dict__.update(entries)
 
     def extract_voting_stances():
         print "Extracting stances based on voting record of %s" % self.name
-        
+
         self.stances = []
         for vote in member.votes:
             result = self.extract_vote_stance(vote)
             self.stances.append(result)
-            
+
 
     def extract_vote_stance(vote):
         bill_id = vote[0]
         for_or_agn = vote[1]
-        
+
         bill = DBBill.GetById(bill_id)
-        
+
         if for_or_agn == "FOR":
             return bill.stance_for
         elif for_or_agn == "AGN":
             return bill.stance_agn
         else:
             print "ERROR in EXTRACT STANCE: Expected FOR or AGN. Not %s" % for_or_agn
-            
+
 
     def get_relations_stances():
-        
+
         results = []
         for relationid in self.relations:
             relation = DBRelation.getById(relationid)
             groupid = relation.group
-            
+
             group = DBGroup.getById(groupid)
-            
+
             for stanceid in group.stances:
                 stance = DBRelation.getById(stanceid)
                 stance.relation = relation
                 results.append(stance)
-                
-        pro_stance? = lambda stance : "PRO" == stance.relation.side
-        con_stance? = lambda stance : "CON" == stance.relation.side
-        member.pro_rel_stances = filter(pro_stance?, stances)
-        member.con_rel_stances = filter(con_stance?, stances)
-        
+
+        pro_stance = lambda stance : "PRO" == stance.relation.side
+        con_stance = lambda stance : "CON" == stance.relation.side
+        member.pro_rel_stances = filter(pro_stance, stances)
+        member.con_rel_stances = filter(con_stance, stances)
