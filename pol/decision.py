@@ -11,13 +11,7 @@ class Decision(PrintableObject):
     An object for storing decisions on a bill.
     """
 
-    def __init__(self, for_stances, agn_stances, neg_for_stances, neg_agn_stances,
-                 con_rel_for_stances, con_rel_agn_stances, no_update,
-                 number_for, number_agn, group_for, group_agn, for_norms,
-                 agn_norms, for_bnorms, agn_bnorms, split_group, split_record,
-                 split_credo, MI_stance, MI_group, MI_credo, MI_record, MI_norm,
-                 strategy, result, reason, downside, downside_record,
-                 deeper_analysis, real_vote, score):
+    def __init__(self, **entries):
 
         """
         Constructs a new Decision object.
@@ -56,99 +50,100 @@ class Decision(PrintableObject):
 
         return              -- returns nothing
         """
-        self.isa_depth = isa_depth
-        self.sort_key = sort_key
-        self.bill = bill
-        self.member = member
-        self.for_stances = for_stances
-        self.agn_stances = agn_stances
-        self.neg_for_stances = neg_for_stances
-        self.neg_agn_stances = neg_agn_stances
-        self.con_rel_for_stances = con_rel_for_stances
-        self.con_rel_agn_stances = con_rel_agn_stances
-        self.no_update = no_update
-        self.number_for = number_for
-        self.number_agn = number_agn
-        self.group_for = group_for
-        self.group_agn = group_agn
-        self.for_norms = for_norms
-        self.agn_norms = agn_norms
-        self.for_bnorms = for_bnorms
-        self.agn_bnorms = agn_bnorms
-        self.split_group = split_group
-        self.split_record = split_record
-        self.split_credo = split_credo
-        self.MI_stance = MI_stance
-        self.MI_group = MI_group
-        self.MI_credo = MI_credo
-        self.MI_record = MI_record
-        self.MI_norm = MI_norm
-        self.strategy = strategy
-        self.result = result
-        self.reason = reason
-        self.downside = downside
-        self.downside_record = downside_record
-        self.deeper_analysis = deeper_analysis
-        self.real_vote = real_vote
-        self.score = score
+        self.isa_depth = None
+        self.sort_key = None
+        self.bill = None
+        self.member = None
+        self.for_stances = None
+        self.agn_stances = None
+        self.neg_for_stances = None
+        self.neg_agn_stances = None
+        self.con_rel_for_stances = None
+        self.con_rel_agn_stances = None
+        self.no_update = None
+        self.number_for = None
+        self.number_agn = None
+        self.group_for = None
+        self.group_agn = None
+        self.for_norms = None
+        self.agn_norms = None
+        self.for_bnorms = None
+        self.agn_bnorms = None
+        self.split_group = None
+        self.split_record = None
+        self.split_credo = None
+        self.MI_stance = None
+        self.MI_group = None
+        self.MI_credo = None
+        self.MI_record = None
+        self.MI_norm = None
+        self.strategy = None
+        self.result = None
+        self.reason = None
+        self.downside = None
+        self.downside_record = None
+        self.deeper_analysis = None
+        self.real_vote = None
+        self.score = None
+        self.__dict__.update(entries)
 
     def update_decision_metrics(self):
         fors   = self.for_stances
         agns   = self.agn_stances
         billid = self.bill
         bill   = DBBill.getById(billid)
-        
+
         self.number_for = len(fors)
         self.number_agn = len(agns)
-        
+
         self.for_bnorms = check_norms(bill.stance_for)
         self.agn_bnorms = check_norms(bill.stance_agn)
 
         self.for_norms = check_norms(fors)
         self.agn_norms = check_norms(agns)
-        
+
         self.group_for = collect_groups(fors)
         self.group_agn = collect_groups(agns)
-        
+
         self.split_group = find_intersection(self.group_for, self.group_ag, operator.eq)
 
         self.split_record = None
         for_bills = collect_bills(fors)
         agn_bills = collect_bills(agns)
-        
+
         # Lisp syntax would have just have assigned this as
         # the agn_bills. I decided to do this to be able to
         # show all data. I think this is simply a matter of
         # is nil versus assigned.
         if for_bills and agn_bills:
             self.split_record = for_bills + agn_bills
-        
+
         self.split_credo = None
         for_credo = collect_credo(fors)
-        agn_credo = collect_credo(agns)       
+        agn_credo = collect_credo(agns)
 
         if for_credo and agn_credo:
             self.split_credo = for_cred + agn_credo
-            
+
         self.update_MI_stances()
         self.no_update = None
 
     def update_MI_stances(self):
         self.MI_stance = self.MI_stance()
         self.MI_group  = self.MI_stance("GROUP")
-        self.MI_credo  = self.MI_stance("MEMBER") 
+        self.MI_credo  = self.MI_stance("MEMBER")
         self.MI_record  = self.MI_stance("BILL")
         self.MI_norm  = compare_stances(self.for_norms, self.agn_norms)
-    
+
     def MI_stances(self, db_type=None):
         fors = self.for_stances
         agns = self.agn_stances
-        
+
         if db_type:
             fors = collect_source_type(db_type, fors)
             agns = collect_source_type(db_type, agns)
         compare_stances(fors, agns)
-    
+
 
 
 def collect_groups(stances)
@@ -197,4 +192,3 @@ def normative_stance?(stance)
     norm = DBIssue.GetById(stance.issue).norm
     if norm:
         return stance.match?(norm)
-    
