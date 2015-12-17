@@ -10,8 +10,7 @@ class Relation(PrintableObject):
     A class that represents a particular relationship.
     """
 
-    def __init__(self, source, source_db, source_structure, group,
-                 group_structure, importance, side):
+    def __init__(self, **entries):
 
         """
         Constructs a new Relation object.
@@ -26,12 +25,12 @@ class Relation(PrintableObject):
 
         return            -- returns nothing
         """
-        self.source = source
-        self.source_db = source_db
-        self.source_structure = source_structure
-        self.group = group
-        self.group_structure = group_structure
-        self.importance = importance
-        self.side = side
-
+        self.source = None
+        self.source_db = None
+        self.source_structure = None
+        self.group = None
+        self.group_structure = None
+        self.importance = None
+        self.side = None
+        self.__dict__.update(entries)
 
