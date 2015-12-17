@@ -14,6 +14,8 @@ for member_data in members:
 # import groups
 groups = []
 for gdata in open("group.txt").read().splitlines():
-    print loads(gdata.decode('utf-8'))
+    groups.append(loads(gdata))
 
-print groups
+for group_data in groups:
+    if not db.GROUP.find(group_data):
+        db.GROUP.insert(groups)
