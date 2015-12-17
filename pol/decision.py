@@ -146,21 +146,21 @@ class Decision(PrintableObject):
 
 
 
-def collect_groups(stances)
+def collect_groups(stances):
     return collect_source_type("GROUP", stances)
 
-def collect_credo(stances)
+def collect_credo(stances):
     return collect_source_type("MEMBER", stances)
 
-def collect_bills(stances)
+def collect_bills(stances):
     return collect_source_type("BILL", stances)
 
-def collect_source_type(db, stances)
+def collect_source_type(db, stances):
     filter_fun = lambda stance : stance.source_db == db
     return filter(filter_fun, stances)
 
-def check_norms(stances)
-    filter_fun = lambda stance: normative_stance?(stance)
+def check_norms(stances):
+    filter_fun = lambda stance: normative_stance(stance)
     norms = filter(filter_fun, stances)
     if norms:
         return remove_duplicates(norms)
@@ -177,18 +177,18 @@ def compare_stances(fors, agns):
             return ["AGN", remove_less_important(agns)]
         elif not an_agn:
             return ["FOR", remove_less_important(fors)]
-        elif greater_than_importance?(a_for,an_agn):
+        elif greater_than_importance(a_for,an_agn):
             return ["FOR", remove_less_important(fors)]
-        elif less_than_importance?(a_for, an_agn):
+        elif less_than_importance(a_for, an_agn):
             return ["AGN", remove_less_important(agns)]
 
     return None
 
 def remove_less_important(stances):
-    filter_fun = lambda stance : not less_than_importance?(stance, stances[0])
+    filter_fun = lambda stance : not less_than_importance(stance, stances[0])
     return filter(filter_fun, stances)
 
-def normative_stance?(stance)
+def normative_stance(stance):
     norm = DBIssue.GetById(stance.issue).norm
     if norm:
-        return stance.match?(norm)
+        return stance.matchrem(norm)

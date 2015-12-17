@@ -63,7 +63,7 @@ class Stance(PrintableObject):
         else:
             print "ERROR: Unknown keyword: %s" % keyword
     
-    def match?(self, stance2):
+    def match(self, stance2):
         # The lisp uses a match? on the issue. Unsure what does
         match_issue = self.issue == stance2.issue
         match_side = self.side == stance2.side
