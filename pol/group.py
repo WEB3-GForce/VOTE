@@ -10,10 +10,7 @@ class Group(PrintableObject):
     A class that represents a particular group.
     """
 
-    def __init__(self, name, notes, gender, issues, stances, credo, english,
-                 english_short, pro_english, con_english, french, french_short,
-                 pro_french, con_french, number, synonyms, pro_stances,
-                 con_stances, norm, instances):
+    def __init__(self, **entries):
 
         """
         Constructs a new Group object.
@@ -41,26 +38,27 @@ class Group(PrintableObject):
 
         return            -- returns nothing
         """
-        self.name = name
-        self.notes = notes
-        self.gender = gender
-        self.issues = issues
-        self.stances = stances
-        self.credo = credo
-        self.english = english
-        self.english_short = english_short
-        self.pro_english = pro_english
-        self.con_english = con_english
-        self.french = french
-        self.french_short = french_short
-        self.pro_french = pro_french
-        self.con_french = con_french
-        self.number = number
-        self.synonyms = synonyms
-        self.pro_stances = pro_stances
-        self.con_stances = con_stances
-        self.norm = norm
-        self.instances = instances
+        self.name = None
+        self.notes = None
+        self.gender = None
+        self.issues = None
+        self.stances = None
+        self.credo = None
+        self.english = None
+        self.english_short = None
+        self.pro_english = None
+        self.con_english = None
+        self.french = None
+        self.french_short = None
+        self.pro_french = None
+        self.con_french = None
+        self.number = None
+        self.synonyms = None
+        self.pro_stances = None
+        self.con_stances = None
+        self.norm = None
+        self.instances = None
+        self.__dict__.update(entries)
 
     # Only support named searches for now.
     def sort_key(self):

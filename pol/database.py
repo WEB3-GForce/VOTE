@@ -9,3 +9,4 @@ MEMBER = DB.member
 GROUP  = DB.group
 BILL   = DB.bill
 ISSUE  = DB.issue
+RELATION = DB.relation
