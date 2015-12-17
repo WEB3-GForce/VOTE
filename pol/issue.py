@@ -10,10 +10,7 @@ class Issue(PrintableObject):
     A document that represnts a particular issue.
     """
 
-    def __init__(self, name, type, sort_key, synonyms, isa, isa_depth, instances,
-                 polarity, english, english_short, pro_english, con_english,
-                 french, french_short, pro_french, con_french, number, groups,
-                 pro_stances, con_stances, norm, opposite, notes):
+    def __init__(self, **entries):
 
         """
         Constructs a new Issue object.
@@ -44,28 +41,27 @@ class Issue(PrintableObject):
 
         return        -- returns nothing
         """
-        self.name = name
-        self.type = type
-        self.sort_key = sort_key
-        self.synonyms = synonyms
-        self.isa = isa
-        self.isa_depth = isa_depth
-        self.instances = instances
-        self.polarity = polarity
-        self.english = english
-        self.english_short = english_short
-        self.pro_english = pro_english
-        self.con_english = con_english
-        self.french = french
-        self.french_short = french_short
-        self.pro_french = pro_french
-        self.con_french = con_french
-        self.number = number
-        self.groups = groups
-        self.pro_stances = pro_stances
-        self.con_stances = con_stances
-        self.norm = norm
-        self.opposite = opposite
-        self.notes = notes
-
-
+        self.name = None
+        self.type = None
+        self.sort_key = None
+        self.synonyms = []
+        self.isa = []
+        self.isa_depth = None
+        self.instances = []
+        self.polarity = None
+        self.english = None
+        self.english_short = None
+        self.pro_english = None
+        self.con_english = None
+        self.french = None
+        self.french_short = None
+        self.pro_french = None
+        self.con_french = None
+        self.number = None
+        self.groups = []
+        self.pro_stances = []
+        self.con_stances = []
+        self.norm = None
+        self.opposite = None
+        self.notes = []
+        self.__dict__.update(entries)
