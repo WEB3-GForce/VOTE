@@ -1,10 +1,41 @@
-import decision
-from decision import Decision
+from constants import *
+from database import *
+from decision import *
+from member_stats import *
 
-def vote(member_id, bill_id):
-    vote_decision = Decision()
+from member import Member
 
-    initialize_decision(vote_decision, member_id bill_id)
+
+def vote(member_lname, bill_name):
+    """Predicts how the specified member will vote on the given bill. This
+    function is the standard way of calling VOTE from the commandline. It relies
+    on a helper that takes actual DB objects.
+
+    Keyword arguments:
+        member_lname -- the last name of the member
+        bill_name    -- the name of the bill
+    
+    Returns:
+        A decision object containing the results of the decision.
+    """
+    member = get(MEMBER, {"lname" : member_lname.upper()})
+    bill   = get(BILL, {"name" : bill_name.upper()})
+    return vote_helper(member, bill)
+
+def vote_helper(member, bill):
+    """A helper to vote, predicts how the specified member will vote on the
+    given bill.
+
+    Keyword arguments:
+        member -- a Member object corresponding on the member who will vete
+        bill   -- a Bill object of the bill to be voted on.
+    
+    Returns:
+        A decision object containing the results of the decision.
+    """
+    
+    decision = Decision()
+    initialize_decision(decision, member, bill)
 
     update_decision_metrics(vote_decision)
 
@@ -22,27 +53,27 @@ def vote(member_id, bill_id):
     return vote_decision
 
 
-def initialize_decision(decision, member_id, bill_id):
+def initialize_decision(decision, member, bill):
 
-    member = DBMember.getById(member_id)
-    bill   = DBMember.getById(bill_id)
+    print "Initializing Decision..."
+
     if not member.stances:
-        member.extract_voting_stances()
+        extract_voting_stances(member)
 
-    decision.member = member_id
-    decision.bill    = bill_id
-
-    print Decision
-    print member
-    print bill
+    decision.member = member._id
+    decision.bill   = bill._id
 
     infer_rel_stances(decision)
 
-    print "Analyzing alternative positions"
+    print "Analyzing alternative positions..."
 
     decision.for_stances = match_stances_for_agn(decision, "FOR")
-
     decision.agn_stances = match_stances_for_agn(decision, "AGN")
+
+    print "Initialization complete."
+    print Decision
+    print member
+    print bill
 
 """
     Infer Stances from relations
@@ -70,7 +101,7 @@ def match_stances_for_agn(decision, side):
 
     sort_key = DB[decision.member].stance_sort_key
 
-    if side = FOR:
+    if side == FOR:
         stances = match-stances(DB[decision.bill].for_stances, decision.member)
 
     else:
@@ -90,7 +121,8 @@ def remove_old_votes(stances, bill_id):
 
 
 def no_old_votes(flag):
-    global no_old_votes = flag
+    global no_old_votes
+    no_old_votes = flag
 
 """
     match_stances will check personal stances, voting record stances,
@@ -98,7 +130,7 @@ def no_old_votes(flag):
 """
 def match_stances(stance_id, mem_id):
     print stance_id
-    matches = map((lambda mem_stances: stance_id == mem_stance), mem_id.credo + mem_id.stances + mem_id.pro_rel_stances])
+    matches = map((lambda mem_stances: stance_id == mem_stance), [mem_id.credo + mem_id.stances + mem_id.pro_rel_stances])
 
 """
     Apply decision strategies
@@ -112,7 +144,7 @@ def apply_decision_strategies(decision):
    apply_strats(decision, strategies)
 
 
-def apply_strats(decision, strategies)
+def apply_strats(decision, strategies):
 
     for strategy in strategies:
 
