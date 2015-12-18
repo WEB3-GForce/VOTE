@@ -7,10 +7,7 @@ class Bill(PrintableObject):
     and Congresswomen will vote for these bills either for or against them.
     """
 
-    def __init__(self, name, english_name, french_name, bill_number, date_of_vote,
-        vote_tally, presidents_position, majority_factor, importance, stance_for,
-        stance_against, inferred_stance_for, inferred_stance_against, synonyms,
-        notes, remarks):
+    def __init__(self, **entries):
     
         """
         Construct a new Bill object.
@@ -31,10 +28,10 @@ class Bill(PrintableObject):
         majority_factor         -- The number of votes needed for the bill to pass
         importance              -- The intrinsic importance of the bill.
 
-        stance-for              -- What voting for this bill would imply about 
+        stance_for              -- What voting for this bill would imply about 
                                    what the Congressman or -woman supports.
 
-        stance-against          -- What voting against this bill would imply 
+        stance_against          -- What voting against this bill would imply 
                                    about what the Congressman or -woman supports.
 
         inferred_stance_for     -- What voting for this bill would imply about 
@@ -52,19 +49,20 @@ class Bill(PrintableObject):
         remarks                 -- textual comments
         return                  -- returns nothing.
         """
-        self.name = name
-        self.english_name = english_name
-        self.french_name = french_name 
-        self.bill_number = bill_number
-        self.date_of_vote = date_of_vote
-        self.vote_tally = vote_tally
-        self.presidents_position = presidents_position
-        self.majority_factor = majority_factor
-        self.importance = importance
-        self.stance_for = stance_for
-        self.stance_against = stance_against
-        self.inferred_stance_for = inferred_stance_for
-        self.inferred_stance_against = inferred_stance_against
-        self.synonyms = synonyms
-        self.notes = notes
-        self.remarks = remarks
+        self.name = None
+        self.english_name = None
+        self.french_name = None
+        self.bill_number = None
+        self.date_of_vote = None
+        self.vote_tally = []
+        self.presidents_position = None
+        self.majority_factor =  None
+        self.importance = None
+        self.stance_for = []
+        self.stance_against = []
+        self.inferred_stance_for = []
+        self.inferred_stance_against = []
+        self.synonyms = []
+        self.notes = []
+        self.remarks = None
+        self.__dict__.update(entries)
