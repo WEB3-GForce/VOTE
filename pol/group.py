@@ -39,10 +39,10 @@ class Group(PrintableObject):
         return            -- returns nothing
         """
         self.name = None
-        self.notes = None
+        self.notes = []
         self.gender = None
-        self.issues = None
-        self.stances = None
+        self.issues = []
+        self.stances = []
         self.credo = None
         self.english = None
         self.english_short = None
@@ -53,11 +53,11 @@ class Group(PrintableObject):
         self.pro_french = None
         self.con_french = None
         self.number = None
-        self.synonyms = None
-        self.pro_stances = None
-        self.con_stances = None
+        self.synonyms = []
+        self.pro_stances = []
+        self.con_stances = []
         self.norm = None
-        self.instances = None
+        self.instances = []
         self.__dict__.update(entries)
 
     # Only support named searches for now.

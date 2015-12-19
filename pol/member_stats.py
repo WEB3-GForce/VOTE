@@ -17,15 +17,20 @@ def extract_voting_stances(member):
        Postcondition:
             All stances for the member have been extracted. The results are
             NOT saved to the database. The caller must do so.
+       
+       WARNING:
+            This erases any stances already contained by the member.
     """
 
     print "Extracting stances based on voting record of %s..." % member.name
-
+    print "Erasing old stances..."
+    
     member.stances = []
     for vote in member.votes:
-        result = extract_vote_stance(vote)
-        member.stances.append(result)
+        member.stances += extract_vote_stance(vote)
 
+    print "Extracting stances based on voting stances completed."
+    return
 
 # Private
 def extract_vote_stance(vote):
@@ -41,12 +46,17 @@ def extract_vote_stance(vote):
     """
     print "Extracting stances from vote: %s" % vote
 
-    bill_name    = vote[0]
+    bill_pointer = vote[0]
     for_or_agn   = vote[1]
 
-    bill = get(BILL, {"name": bill_name})    
+    # Check if the name used in vote is the name of the bill, bill number, or
+    # a synonym
+    query = {"$or": [{"name": bill_pointer}, 
+             {"synonyms": { "$in" : [ bill_pointer ] }},
+             {"bnumber" : bill_pointer} ] }
+    bill = get(BILL, query) 
     if not bill:
-        print "WARNING Bill not found: %s" % bill_name
+        print "WARNING Bill not found: %s" % bill_pointer
         return []
 
     if for_or_agn == FOR:
@@ -58,16 +68,31 @@ def extract_vote_stance(vote):
         return []
 
 def get_relations_stances(member):
-
+    """This function looks through the member's relationships and extracts stances
+       the member might hold by association. The member opposes what his enemies
+       like and supports what his friends support.
+       
+       Keyword arguments:
+            member -- the member to examine
+        
+       Postcondition
+           member.pro_rel_stances contains all the stances the member's friends
+           support while member.con_rel_stances contains all the stances the
+           member's enemies support.
+    """
     results = []
-    for relationid in member.relations:
-        relation = DBRelation.getById(relationid)
-        groupid = relation.group
+    for relation in member.relations:
+        # Check if the relation group is identified by name or id.
+        query = {"$or": [{"name": relation.group}, 
+                         {"synonyms": { "$in" : [ relation.group ]}},
+                         {"_id" : relation.group}] }
+        group = get(GROUP, query)
 
-        group = DBGroup.getById(groupid)
+        if not group:
+            print "ERROR group not found for id: %s" % relation.group
+            continue
 
-        for stanceid in group.stances:
-            stance = DBRelation.getById(stanceid)
+        for stance in group.stances:
             stance.relation = relation
             results.append(stance)
 
