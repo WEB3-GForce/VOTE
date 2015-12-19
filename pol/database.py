@@ -54,7 +54,6 @@ def encode_classes(value):
 # This function is used to encode Relation or Stance objects stored in a list.
 def list_encoding(list_value):
     custom = encode_classes(list_value)
-    print custom
     return custom if custom else list_value
 
 # This decoding is used to decode any Relation or Stance objects stored directly
@@ -79,7 +78,6 @@ def list_decoding(list_value):
 class Transform(SONManipulator):
     def transform_incoming(self, son, collection):
         for (key, value) in son.items():
-
             custom = encode_classes(value)
             if custom:
                 son[key] = custom
@@ -88,6 +86,7 @@ class Transform(SONManipulator):
             elif isinstance(value, dict): # Make sure we recurse into sub-docs
                 son[key] = self.transform_incoming(value, collection)
         return son
+
 
     def transform_outgoing(self, son, collection):
         for (key, value) in son.items():

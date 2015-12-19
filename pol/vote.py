@@ -6,20 +6,28 @@ from member_stats import *
 from member import Member
 
 
-def vote(member_lname, bill_name):
+def vote(member_lname, bill_number):
     """Predicts how the specified member will vote on the given bill. This
     function is the standard way of calling VOTE from the commandline. It relies
     on a helper that takes actual DB objects.
 
     Keyword arguments:
         member_lname -- the last name of the member
-        bill_name    -- the name of the bill
+        bill_number  -- the number of the bill
     
     Returns:
         A decision object containing the results of the decision.
     """
     member = get(MEMBER, {"lname" : member_lname.upper()})
-    bill   = get(BILL, {"name" : bill_name.upper()})
+    bill   = get(BILL, {"bnumber" : bill_number.upper()})
+
+    if not member:
+        print "Member not found in DB: %s" % member_lname
+        return None
+    if not bill:
+        print "Bill not found in DB: %s" % bill_number
+        return None
+
     return vote_helper(member, bill)
 
 def vote_helper(member, bill):
@@ -54,6 +62,18 @@ def vote_helper(member, bill):
 
 
 def initialize_decision(decision, member, bill):
+    """Initializes a decision object with basic info about the member and bill.
+       Extracts stances for the member based on the bill and the member's
+       relations.
+
+       Keyword arguments:
+            decision -- the decision object to initialize
+            member   -- a Member object corresponding on the member who will vote
+            bill     -- a Bill object of the bill to be voted on.
+    
+        Postcondition:
+            The decision object has been updated.
+    """
 
     print "Initializing Decision..."
 
@@ -63,7 +83,9 @@ def initialize_decision(decision, member, bill):
     decision.member = member._id
     decision.bill   = bill._id
 
-    infer_rel_stances(decision)
+    infer_member_rel_stances(member)
+    
+    print member
 
     print "Analyzing alternative positions..."
 
@@ -75,20 +97,22 @@ def initialize_decision(decision, member, bill):
     print member
     print bill
 
-"""
-    Infer Stances from relations
-"""
+def infer_member_rel_stances(member):
+    """Infers the stances that a member might have based on relationships with
+       others.
 
-def infer_rel_stances(decision):
-    infer_member_rel_stances(decision.member)
-
-
-def infer_member_rel_stances(mem_id):
-    member = db(mem_id)
-    if member.pro_rel_stances is None:
-        print "Inferring Stances from relations of %s" % member.name
-        member.get_relations_stances()
+       Keyword arguments:
+            member   -- the member whose stances will be inferred
+    
+        Postcondition:
+            The member's stances have been updated to include those from
+            relationships.
+    """
+    if not member.pro_rel_stances:
+        print "Inferring stances from relations of %s" % member.name
+        get_relations_stances(member)
         print "Done"
+
 
 """
     Next-level
