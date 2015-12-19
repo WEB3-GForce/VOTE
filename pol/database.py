@@ -1,3 +1,4 @@
+from pymongo.son_manipulator import SONManipulator
 from pymongo import MongoClient
 from member import Member
 from group import Group
@@ -39,3 +40,65 @@ def get(collection, query):
     if data_hash:
         return collection_class(**data_hash)
     return None
+
+# This encoding is used to encode any Relation or Stance objects stored directly
+# in mongo.
+def encode_classes(value):
+    if isinstance(value, Stance):
+        return {"_type" : "Stance", "x" : value.__dict__}
+    elif isinstance(value, Relation):
+        return {"_type" : "Relation", "x" : value.__dict__}
+    else:
+        return None
+
+# This function is used to encode Relation or Stance objects stored in a list.
+def list_encoding(list_value):
+    custom = encode_classes(list_value)
+    print custom
+    return custom if custom else list_value
+
+# This decoding is used to decode any Relation or Stance objects stored directly
+# in mongo.
+def decode_classes(value):
+    if not isinstance(value, dict):
+        return None
+    if "_type" in value and value["_type"] == "Relation":
+        return Relation(**value["x"])
+    if "_type" in value and value["_type"] == "Strategy":
+        return Strategy(**value["x"])
+    else:
+        return None
+
+# This function is used to decode Relation or Stance objects stored in a list.
+def list_decoding(list_value):
+    custom = decode_classes(list_value)
+    return custom if custom else list_value
+
+# Transform automatically transforms Stance and Relation objects.
+# http://api.mongodb.org/python/current/examples/custom_type.html
+class Transform(SONManipulator):
+    def transform_incoming(self, son, collection):
+        for (key, value) in son.items():
+
+            custom = encode_classes(value)
+            if custom:
+                son[key] = custom
+            if isinstance(value, list):
+                son[key] = map(list_encoding, value)
+            elif isinstance(value, dict): # Make sure we recurse into sub-docs
+                son[key] = self.transform_incoming(value, collection)
+        return son
+
+    def transform_outgoing(self, son, collection):
+        for (key, value) in son.items():
+            if isinstance(value, list):
+                son[key] = map(list_decoding, value)
+            if isinstance(value, dict):
+                custom = decode_classes(value)
+                if custom:
+                    son[key] = custom
+                else: # Again, make sure to recurse into sub-docs
+                    son[key] = self.transform_outgoing(value, collection)
+        return son
+
+DB.add_son_manipulator(Transform())

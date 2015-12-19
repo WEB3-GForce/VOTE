@@ -10,8 +10,7 @@ class Stance(PrintableObject):
     A class that represents a particular stance.
     """
 
-    def __init__(self, source, source_db, source_structure, relation, issue,
-                 issue_structure, importance, side, sort_key, siblings):
+    def __init__(self, **entries):
 
         """
         Constructs a new Stance object.
@@ -29,16 +28,17 @@ class Stance(PrintableObject):
 
         return            -- returns nothing
         """
-        self.source = source
-        self.source_db = source_db
-        self.source_structure = source_structure
-        self.relation = relation
-        self.issue = issue
-        self.issue_structure = issue_structure
-        self.importance = importance
-        self.side = side
-        self.sort_key = sort_key
-        self.siblings = siblings
+        self.source = None
+        self.source_db = None
+        self.source_structure = None
+        self.relation = None
+        self.issue = None
+        self.issue_structure = None
+        self.importance = None
+        self.side = None
+        self.sort_key = None
+        self.siblings = None
+        self.__dict__.update(entries)
 
     def sort_key(self):
         return self.stance_sort_key or self.importance
