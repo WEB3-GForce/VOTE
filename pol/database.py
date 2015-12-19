@@ -62,10 +62,10 @@ def list_encoding(list_value):
 def decode_classes(value):
     if not isinstance(value, dict):
         return None
+    if "_type" in value and value["_type"] == "Stance":
+        return Stance(**value["x"])
     if "_type" in value and value["_type"] == "Relation":
         return Relation(**value["x"])
-    if "_type" in value and value["_type"] == "Strategy":
-        return Strategy(**value["x"])
     else:
         return None
 
