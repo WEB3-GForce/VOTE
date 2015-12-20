@@ -37,6 +37,7 @@ class Stance(PrintableObject):
         self.issue_structure = None
         self.importance = None
         self.side = None
+
         # Never use sort key directly but use get_sort_key
         self.sort_key = None
         self.siblings = None
@@ -44,7 +45,8 @@ class Stance(PrintableObject):
 
 
     def get_sort_key(self):
-        """Returns the sort_key if defined or the importance otherwise. IMPORTANT: Call this instead of self.sort_key."""
+        """Returns the sort_key if defined or the importance otherwise.
+           IMPORTANT: Call this instead of self.sort_key."""
         return self.sort_key or self.importance
 
 
