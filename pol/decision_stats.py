@@ -4,6 +4,15 @@ from constants import *
 from utils import *
 
 def update_decision_metrics(decision):
+    """Updates the decision object based on stances for and against the decision.
+    See the code for more details.
+    
+        Briefly, the function calculates the norms for the issues that it
+    considers, sorts the stances based on their source (group, member, bill),
+    determines if the member, groups, or bill stances are split on the decision,
+    and determines which side the categories (group, member, bill) would support.    
+    """
+
     fors   = decision.for_stances
     agns   = decision.agn_stances
     bill   = get(BILL, {"_id" : decision.bill})
@@ -58,20 +67,47 @@ def update_decision_metrics(decision):
 
 
 def update_MI_stances(decision):
+    """This function takes the decisions for and against the decision and checks
+    which side is the stronger one. It checks this for stances from groups, the
+    member making the decision, the bill that will be decided upon, and the
+    normative stances on the issues from decision.for_norms and decision.agn_norms.
+
+        Keyword arguments:
+            decision -- the decision object to update.
+        
+        Postcondition:
+            The MI_stances for the decision have been updated.
+    """
     decision.MI_stance = decision.MI_stance()
     decision.MI_group  = decision.MI_stance(GROUP.name)
     decision.MI_credo  = decision.MI_stance(MEMBER.name)
     decision.MI_record = decision.MI_stance(BILL.name)
     decision.MI_norm   = compare_stances(decision.for_norms, decision.agn_norms)
 
-def MI_stances(decision, db_type=None):
+
+def MI_stances(decision, db_source=None):
+    """Updates a specific MI_stance such as that for the group, member, bill,
+    or for all stances. It take the for and agn stances for the decision, filters
+    them by the appropriate database, and then calls compare_stances to determine
+    which side is strongest.
+
+        Keyword arguments:
+            decision  -- the decision object to update
+            db_source -- the name of the database; will be used to filter stances
+                         so that they only come from that db. 
+        
+        Returns:
+            A list showing the side that is stronger. It is of the form:
+            
+            [[FOR|AGN], List_Of_Compelling_Stances_From_Winning_Side]
+    """
     fors = decision.for_stances
     agns = decision.agn_stances
 
-    if db_type:
-        fors = collect_source_type(db_type, fors)
-        agns = collect_source_type(db_type, agns)
-    compare_stances(fors, agns)
+    if db:
+        fors = collect_source_type(db_source, fors)
+        agns = collect_source_type(db_source, agns)
+    return compare_stances(fors, agns)
 
 
 def collect_groups(stances):
