@@ -14,7 +14,7 @@ def vote(member_lname, bill_number):
     Keyword arguments:
         member_lname -- the last name of the member
         bill_number  -- the number of the bill
-    
+
     Returns:
         A decision object containing the results of the decision.
     """
@@ -37,28 +37,28 @@ def vote_helper(member, bill):
     Keyword arguments:
         member -- a Member object corresponding on the member who will vete
         bill   -- a Bill object of the bill to be voted on.
-    
+
     Returns:
         A decision object containing the results of the decision.
     """
-    
+
     decision = Decision()
     initialize_decision(decision, member, bill)
 
-    update_decision_metrics(vote_decision)
+    update_decision_metrics(decision)
 
-    apply_decision_strategies(vote_decision)
+    apply_decision_strategies(decision)
 
-    compare_with_real_vote(vote_decision)
+    compare_with_real_vote(decision)
 
-    update_decision_dbase(vote_decision)
+    update_decision_dbase(decision) # insert into database
 
-    if vote_decision.strategy:
-       print vote_decision
+    if decision.strategy:
+       print decision
     else:
         print "No decision"
 
-    return vote_decision
+    return decision
 
 
 def initialize_decision(decision, member, bill):
@@ -70,7 +70,7 @@ def initialize_decision(decision, member, bill):
             decision -- the decision object to initialize
             member   -- a Member object corresponding on the member who will vote
             bill     -- a Bill object of the bill to be voted on.
-    
+
         Postcondition:
             The decision object has been updated.
     """
@@ -84,7 +84,7 @@ def initialize_decision(decision, member, bill):
     decision.bill   = bill._id
 
     infer_member_rel_stances(member)
-    
+
     print member
 
     print "Analyzing alternative positions..."
@@ -103,7 +103,7 @@ def infer_member_rel_stances(member):
 
        Keyword arguments:
             member   -- the member whose stances will be inferred
-    
+
         Postcondition:
             The member's stances have been updated to include those from
             relationships.
@@ -220,7 +220,7 @@ def vote_all(member_name = None, bill_name = None):
         bill_ids = [bill.id for bill in DBBill.getEntryByName(bill_name)]
     else:
         bill_ids = [bill.id for bill in DBBill.GetAll()]
-        
+
     for memberid in members:
         for billid in bill_ids:
             vote(memberid, billid)

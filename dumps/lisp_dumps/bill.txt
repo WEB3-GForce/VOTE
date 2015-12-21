@@ -1,0 +1,82 @@
+[
+    {
+    	"name": "Defense Authorization, Fiscal 1988 / Chemical Weapons",
+    	"bnumber": "AMD",
+    	"synonyms": ["DEFENSE-AUTHORIZATION"],
+    	"date_of_vote": "Monday, May 18, 1987",
+    	"vote_tally": ["REJECTED", 191, 230, {
+    		"D": [161, 86],
+    		"R": [30, 144]
+    	}],
+    	"pres_pos": "AGN",
+    	"session": 100,
+    	"issues": ["DEFENSE", "CHEMICAL-WEAPONS"],
+    	"importance": "C",
+    	"stance_for": [],
+    	"stance_agn": []
+    }, {
+    	"name": "Space Station",
+    	"bnumber": "HR-4800",
+    	"synonyms": ["SPACE-STATION"],
+    	"date_of_vote": "Wednesday, June 22, 1988",
+    	"vote_tally": ["REJECTED", 166, 256, {
+    		"D": [126, 123],
+    		"R": [40, 133]
+    	}],
+    	"pres_pos": "AGN",
+    	"session": "100 - 2",
+    	"issues": ["SPACE", "VETERANS", "ELDERLY", "HANDICAPPED", "HOMELESS", "URBAN-DEVELOPMENT"],
+    	"importance": "C",
+    	"stance_for": [],
+    	"stance_agn": []
+    }, {
+    	"name": "Star Wars",
+    	"english": "reduced Star Wars funding",
+    	"bnumber": "HR-4264",
+    	"synonyms": ["STAR-WARS"],
+    	"date_of_vote": "Wednesday, May 4, 1988",
+    	"vote_tally": ["APPROVED", 223, 195, {
+    		"D": [197, 47],
+    		"R": [26, 148]
+    	}],
+    	"pres_pos": "AGN",
+    	"session": "100 - 2",
+    	"issues": ["SDI"],
+    	"importance": "B",
+    	"stance_for": [],
+    	"stance_agn": []
+    }, {
+    	"name": "Civil Rights Restoration Act/Passage",
+    	"english": "an override of the veto of the Civil Rights Restoration Act",
+    	"bnumber": "S-557",
+    	"synonyms": ["CIVIL-RIGHTS-RESTORATION-ACT"],
+    	"date_of_vote": "Tuesday, March 22, 1988",
+    	"vote_tally": ["PASSED", 292, 133, {
+    		"D": [240, 10],
+    		"R": [52, 123]
+    	}],
+    	"pres_pos": "AGN",
+    	"session": "100 - 2",
+    	"Majority - Factor": 2,
+    	"issues": ["CIVIL-RIGHTS"],
+    	"importance": "B",
+    	"stance_for": [],
+    	"stance_agn": []
+    }, {
+    	"name": "Child Care",
+    	"english": "the child care bill",
+    	"bnumber": "HR-3",
+    	"synonyms": ["CHILD-CARE"],
+    	"date_of_vote": "Thursday, March 29, 1990",
+    	"vote_tally": ["PASSED", 265, 145, {
+    		"R": [47, 119],
+    		"D": [218, 26]
+    	}],
+    	"pres_pos": "AGN",
+    	"session": "101 - 2",
+    	"issues": ["CHILD-CARE"],
+    	"importance": "B",
+    	"stance_for": [],
+    	"stance_agn": []
+    }
+]

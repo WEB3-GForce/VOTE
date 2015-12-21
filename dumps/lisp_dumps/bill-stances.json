@@ -1,0 +1,85 @@
+{
+    "stances": [{
+            "name": "defense-authorization",
+            "for": [{
+                "issue": "CHEMICAL-WEAPONS",
+                "side": "CON",
+                "importance": "B",
+                "source_db": "BILL"
+            }],
+            "agn": [{
+                "issue": "REAGAN",
+                "side": "PRO",
+                "importance": "B",
+                "source_db": "BILL"
+            }, {
+                "issue": "CHEMICAL-WEAPONS",
+                "side": "PRO",
+                "importance": "B",
+                "source_db": "BILL"
+            }]
+        }, {
+            "name": "space-station",
+            "for": [{
+                    "issue": "ELDERLY",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "HANDICAPPED",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "HOMELESSNESS",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "URBAN-RENEWAL",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }],
+            "agn": [{
+                    "issue": "SPACE",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }]
+        },
+
+        {
+            "name": "star-wars",
+            "for": ["#{Stance (10) [C:PRO] SDI (BILL:HR-4264)}",
+                "#{Stance (11) [C:CON] SPENDING (BILL:HR-4264)}"
+            ],
+            "agn": ["#{Stance (12) [B:PRO] REAGAN (BILL:HR-4264)}",
+                "#{Stance (13) [A:PRO] SDI (BILL:HR-4264)}"
+            ]
+        },
+
+        {
+            "name": "civil-rights-restoration-act",
+            "for": ["#{Stance (14) [B:PRO] CIVIL-RIGHTS (BILL:S-557)}",
+                "#{Stance (15) [B:PRO] FAIRNESS (BILL:S-557)}"
+                "#{Stance (16) [B:CON] AGE-DISCRIMINATION (BILL:S-557)}",
+                "#{Stance (17) [B:PRO] EDUCATION-RIGHTS (BILL:S-557)}"
+            ],
+            "agn": ["#{Stance (18) [B:PRO] REAGAN (BILL:S-557)}",
+                "#{Stance (19) [B:PRO] DEREGULATION (BILL:S-557)}"
+            ]
+        }, {
+            "name": "child-care",
+            "for": ["#{Stance (20) [B:PRO] CHILD-CARE (BILL:HR-3)}",
+                "#{Stance (21) [B:PRO] FAMILY (BILL:HR-3)}",
+                "#{Stance (22) [C:PRO] EDUCATION (BILL:HR-3)}",
+                "#{Stance (23) [C:PRO] LABOR (BILL:HR-3)}"
+            ],
+            "agn": ["#{Stance (24) [B:PRO] FISCAL-RESPONSIBILITY (BILL:HR-3)}",
+                "#{Stance (25) [B:PRO] BUSH (BILL:HR-3)}",
+                "#{Stance (26) [C:CON] LABOR (BILL:HR-3)}"
+            ]
+        }
+    ]
+}
