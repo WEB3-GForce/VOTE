@@ -29,7 +29,7 @@ def extract_voting_stances(member):
     for vote in member.votes:
         member.stances += extract_vote_stance(vote)
 
-    print "Extracting stances based on voting stances completed."
+    print "Extracting stances completed."
     return
 
 # Private

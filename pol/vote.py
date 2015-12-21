@@ -31,6 +31,7 @@ def vote(member_lname, bill_number):
 
     return vote_helper(member, bill)
 
+
 def vote_helper(member, bill):
     """A helper to vote, predicts how the specified member will vote on the
     given bill.
@@ -70,7 +71,7 @@ def initialize_decision(decision, member, bill):
 
        Keyword arguments:
             decision -- the decision object to initialize
-            member   -- a Member object corresponding on the member who will vote
+            member   -- a Member object corresponding to the member who will vote
             bill     -- a Bill object of the bill to be voted on.
     
         Postcondition:
@@ -89,13 +90,14 @@ def initialize_decision(decision, member, bill):
 
     print "Analyzing alternative positions..."
 
-    decision.for_stances = match_stances_for_agn(decision, member, bill, FOR)
-    decision.agn_stances = match_stances_for_agn(decision, member, bill, AGN)
+    decision.for_stances = match_stances_for(member, bill)
+    decision.agn_stances = match_stances_agn(member, bill)
 
     print "Initialization complete."
     print member
     print bill
     print decision
+
 
 def infer_member_rel_stances(member):
     """Infers the stances that a member might have based on relationships with
@@ -114,39 +116,79 @@ def infer_member_rel_stances(member):
         print "Inferring stances from relations completed."
 
 
-"""
-    Next-level
-"""
+def match_stances_for(member, bill):
+    """This function filters member stances by stances that are implied by
+    voting for the bill.
 
-
-def match_stances_for_agn(decision, member, bill, side):
-
-    print "Considering implications of voting %s on bill %s" % (side, bill.bnumber)
+       Keyword arguments:
+            member   -- the member whose stances will be filtered
+            bill     -- the bill whose stances will be used to filter the member
+                        stances.
     
+       Return:
+            A list that contains only those member stances that would be implied
+            by voting for the bill.
+            
+       Notes: 
+            In other words, this function checks to see if the member has any
+            reasons to vote for the bill.
+    """
+    print "Considering implications of voting FOR on bill %s" % bill.bnumber
     print "Matching member stances with bill stances."
+    stances = match_stances(bill.stance_for, member)
+    stances = match_stances_sort(member, bill, stances)
+    print "Considering FOR implications completed."
+    return stances
 
-    print member
-    print bill
 
+def match_stances_agn(member, bill):
+    """This function filters member stances by stances that are implied by
+    voting against the bill.
+
+       Keyword arguments:
+            member   -- the member whose stances will be filtered
+            bill     -- the bill whose stances will be used to filter the member
+                        stances.
+    
+       Return:
+            A list that contains only those member stances that would be implied
+            by voting against the bill.
+            
+       Notes: 
+            In other words, this function checks to see if the member has any
+            reasons to vote against the bill.
+    """
+    print "Considering implications of voting AGN on bill %s" % bill.bnumber
+    print "Matching member stances with bill stances."
+    stances = match_stances(bill.stance_agn, member)
+    stances = match_stances_sort(member, bill, stances)
+    print "Considering AGN implications completed."
+    return stances
+
+
+def match_stances_sort(member, bill, stances):
+    """This is a helper function for the two functions above. It sorts the
+    matched stances list and removes old voting data if necessary.
+
+       Keyword arguments:
+            member   -- the member whose stances were filtered
+            bill     -- the bill whose stances were used to filter the member
+                        stances.
+            stances  -- the filtered stances
+    
+       Return:
+            A sorted list with the old votes removed
+    """
     sort_key = member.stance_sort_key or EQUITY
+    print "Sorting stances based on %s order." % sort_key
 
-    if side == FOR:
-        stances = match_stances(bill.stance_for, member)
-
-    else:
-        stances = match_stances(bill.stance_agn, member)
-
-    print "Sorting stances based on %s order" % sort_key
-    print stances
-    print "STANCES HAVE COME"
     for stance in stances:
         stance.set_sort_key(sort_key)
 
     stances = remove_old_votes(stances, bill)
     stances.sort(key=lambda stance: stance.get_sort_key)
-
-    print "Considering implications completed."
     return stances
+
 
 def is_bill_source(stance, bill):
     """Used as a filter function, determines if a stance's source is a given bill.
@@ -161,6 +203,7 @@ def is_bill_source(stance, bill):
     """   
     return (stance.source == bill._id or stance.source == bill.name or
             stance.source == bill.bnumber or stance in bill.synonyms)
+
 
 def remove_old_votes(stances, bill):
     """Filters stances to contain only stances that come from the bill.
@@ -179,20 +222,19 @@ def remove_old_votes(stances, bill):
         stances = filter(filter_fun, stances)
     return stances
 
+
 # This flag is used in remove_old_votes. This is used to determine whether the
 # function should filter stances such that only stances that originate from the
 # bill are kept.
 no_old_votes = True
+
 
 def no_old_votes(flag):
     """ Sets the no_old_votes flag."""
     global no_old_votes
     no_old_votes = flag
 
-"""
-    match_stances will check personal stances, voting record stances,
-    group
-"""
+
 def match_stances(stances, member):
     """Filters the member's stances keeping only those that match a stance in
        stances. The member's stances consist of personal stances (member.credo),
