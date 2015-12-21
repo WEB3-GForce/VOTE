@@ -3,7 +3,7 @@ from database import *
 from constants import *
 
 """
-    This file contains various functions useful for aquiring statistics about
+    This file contains various functions useful for acquiring statistics about
     members such as extracting stances from voting records and relations with
     others.
 """
@@ -82,14 +82,14 @@ def get_relations_stances(member):
     """
     results = []
     for relation in member.relations:
-        # Check if the relation group is identified by name or id.
+        # Check if the relation group is identified by name or id or synonym.
         query = {"$or": [{"name": relation.group}, 
                          {"synonyms": { "$in" : [ relation.group ]}},
                          {"_id" : relation.group}] }
         group = get(GROUP, query)
 
         if not group:
-            print "ERROR group not found for id: %s" % relation.group
+            print "ERROR group not found: %s" % relation.group
             continue
 
         for stance in group.stances:
