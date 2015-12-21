@@ -2,6 +2,7 @@ from constants import *
 from database import *
 from decision import *
 from member_stats import *
+from utils import remove_duplicates
 
 from member import Member
 
@@ -44,6 +45,7 @@ def vote_helper(member, bill):
     
     decision = Decision()
     initialize_decision(decision, member, bill)
+    return "DONE"
 
     update_decision_metrics(vote_decision)
 
@@ -84,18 +86,16 @@ def initialize_decision(decision, member, bill):
     decision.bill   = bill._id
 
     infer_member_rel_stances(member)
-    
-    print member
 
     print "Analyzing alternative positions..."
 
-    decision.for_stances = match_stances_for_agn(decision, "FOR")
-    decision.agn_stances = match_stances_for_agn(decision, "AGN")
+    decision.for_stances = match_stances_for_agn(decision, member, bill, FOR)
+    decision.agn_stances = match_stances_for_agn(decision, member, bill, AGN)
 
     print "Initialization complete."
-    print Decision
     print member
     print bill
+    print decision
 
 def infer_member_rel_stances(member):
     """Infers the stances that a member might have based on relationships with
@@ -111,7 +111,7 @@ def infer_member_rel_stances(member):
     if not member.pro_rel_stances:
         print "Inferring stances from relations of %s" % member.name
         get_relations_stances(member)
-        print "Done"
+        print "Inferring stances from relations completed."
 
 
 """
@@ -119,32 +119,73 @@ def infer_member_rel_stances(member):
 """
 
 
-def match_stances_for_agn(decision, side):
+def match_stances_for_agn(decision, member, bill, side):
 
-    print "Considering implications of vote %s on bill %s" % (side, decision.bill)
+    print "Considering implications of voting %s on bill %s" % (side, bill.bnumber)
+    
+    print "Matching member stances with bill stances."
 
-    sort_key = DB[decision.member].stance_sort_key
+    print member
+    print bill
+
+    sort_key = member.stance_sort_key or EQUITY
 
     if side == FOR:
-        stances = match-stances(DB[decision.bill].for_stances, decision.member)
+        stances = match_stances(bill.stance_for, member)
 
     else:
-        stances = match-stances(DB[decision.bill].agn_stances, decision.member)
+        stances = match_stances(bill.stance_agn, member)
 
     print "Sorting stances based on %s order" % sort_key
+    print stances
+    print "STANCES HAVE COME"
+    for stance in stances:
+        stance.set_sort_key(sort_key)
 
-    remove_old_votes(stances, decision.bill)
-    stances.sort_key = sort_key
+    stances = remove_old_votes(stances, bill)
+    stances.sort(key=lambda stance: stance.get_sort_key)
 
-    print "Done"
-
-def remove_old_votes(stances, bill_id):
-    if not no_old_votes:
-        stances = filter(lambda(st): st.reveal_source.id == bill_id, stances)
+    print "Considering implications completed."
     return stances
 
+def is_bill_source(stance, bill):
+    """Used as a filter function, determines if a stance's source is a given bill.
+
+       Keyword arguments:
+            stance   -- the stance to check the source of
+            bill     -- the potential source of the stance.
+    
+        Postcondition:
+            Whether the bill is the stance's source. Since bills can be referenced
+            by a synonym, name, bill number, or Mongo id, all are checked.
+    """   
+    return (stance.source == bill._id or stance.source == bill.name or
+            stance.source == bill.bnumber or stance in bill.synonyms)
+
+def remove_old_votes(stances, bill):
+    """Filters stances to contain only stances that come from the bill.
+
+       Keyword arguments:
+            stances   -- the list of stances to purge
+            bill      -- the bill whose stances will be kept
+    
+        Return:
+            The newly filtered stances list. If the flag no_old_votes is set,
+            then the stances will be filtered so that only stances from the bill
+            itself are used. If it is not set, all stances are used.
+    """   
+    if no_old_votes:
+        filter_fun = lambda stance : is_bill_source(stance, bill)
+        stances = filter(filter_fun, stances)
+    return stances
+
+# This flag is used in remove_old_votes. This is used to determine whether the
+# function should filter stances such that only stances that originate from the
+# bill are kept.
+no_old_votes = True
 
 def no_old_votes(flag):
+    """ Sets the no_old_votes flag."""
     global no_old_votes
     no_old_votes = flag
 
@@ -152,9 +193,27 @@ def no_old_votes(flag):
     match_stances will check personal stances, voting record stances,
     group
 """
-def match_stances(stance_id, mem_id):
-    print stance_id
-    matches = map((lambda mem_stances: stance_id == mem_stance), [mem_id.credo + mem_id.stances + mem_id.pro_rel_stances])
+def match_stances(stances, member):
+    """Filters the member's stances keeping only those that match a stance in
+       stances. The member's stances consist of personal stances (member.credo),
+       voting record stances (member.stances), and group stances
+       (member.pro_rel_stances)
+    
+       Keyword arguments:
+            stances   -- the list of stances to filter the member stances by
+            member    -- the member whose stances will be filtered.
+    
+        Return:
+            A list of all member stances found in stances. The list has
+            duplicates removed.
+    """
+    matches = []
+    member_stances = member.credo + member.stances + member.pro_rel_stances
+    for stance in stances:
+        filter_fun = lambda member_stance : stance.match(member_stance)
+        matches += filter(filter_fun, member_stances)
+    return remove_duplicates(matches)
+
 
 """
     Apply decision strategies
