@@ -1,6 +1,7 @@
 from constants import *
 from database import *
 from decision import *
+from decision_stats import *
 from member_stats import *
 from utils import remove_duplicates
 
@@ -46,9 +47,8 @@ def vote_helper(member, bill):
     
     decision = Decision()
     initialize_decision(decision, member, bill)
-    return "DONE"
-
-    update_decision_metrics(vote_decision)
+    update_decision_metrics(decision)
+    return decision
 
     apply_decision_strategies(vote_decision)
 

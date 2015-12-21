@@ -78,10 +78,10 @@ def update_MI_stances(decision):
         Postcondition:
             The MI_stances for the decision have been updated.
     """
-    decision.MI_stance = decision.MI_stance()
-    decision.MI_group  = decision.MI_stance(GROUP.name)
-    decision.MI_credo  = decision.MI_stance(MEMBER.name)
-    decision.MI_record = decision.MI_stance(BILL.name)
+    decision.MI_stance = MI_stances(decision)
+    decision.MI_group  = MI_stances(decision, GROUP.name)
+    decision.MI_credo  = MI_stances(decision, MEMBER.name)
+    decision.MI_record = MI_stances(decision, BILL.name)
     decision.MI_norm   = compare_stances(decision.for_norms, decision.agn_norms)
 
 
@@ -104,7 +104,7 @@ def MI_stances(decision, db_source=None):
     fors = decision.for_stances
     agns = decision.agn_stances
 
-    if db:
+    if db_source:
         fors = collect_source_type(db_source, fors)
         agns = collect_source_type(db_source, agns)
     return compare_stances(fors, agns)
