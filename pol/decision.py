@@ -16,6 +16,10 @@ class Decision(PrintableObject):
         """
         Constructs a new Decision object.
 
+        isa_depth           -- ?
+        sort_key            -- ?
+        bill                -- the bill the decision is being made on
+        member              -- the member making the decision.
         for_stances         -- list of stances in favor
         agn_stances         -- list of stances opposed
         neg_for_stances     -- list of flip stances in favor
@@ -52,24 +56,24 @@ class Decision(PrintableObject):
         """
         self.isa_depth = None
         self.sort_key = None
-        self.bill = None
-        self.member = None
-        self.for_stances = None
-        self.agn_stances = None
-        self.neg_for_stances = None
-        self.neg_agn_stances = None
-        self.con_rel_for_stances = None
-        self.con_rel_agn_stances = None
+        self.bill = []
+        self.member = []
+        self.for_stances = []
+        self.agn_stances = []
+        self.neg_for_stances = []
+        self.neg_agn_stances = []
+        self.con_rel_for_stances = []
+        self.con_rel_agn_stances = []
         self.no_update = None
         self.number_for = None
         self.number_agn = None
-        self.group_for = None
-        self.group_agn = None
-        self.for_norms = None
-        self.agn_norms = None
-        self.for_bnorms = None
-        self.agn_bnorms = None
-        self.split_group = None
+        self.group_for = []
+        self.group_agn = []
+        self.for_norms = []
+        self.agn_norms = []
+        self.for_bnorms = []
+        self.agn_bnorms = []
+        self.split_group = []
         self.split_record = None
         self.split_credo = None
         self.MI_stance = None
@@ -81,114 +85,9 @@ class Decision(PrintableObject):
         self.result = None
         self.reason = None
         self.downside = None
-        self.downside_record = None
+        self.downside_record = []
         self.deeper_analysis = None
         self.real_vote = None
         self.score = None
         self.__dict__.update(entries)
 
-    def update_decision_metrics(self):
-        fors   = self.for_stances
-        agns   = self.agn_stances
-        billid = self.bill
-        bill   = DBBill.getById(billid)
-
-        self.number_for = len(fors)
-        self.number_agn = len(agns)
-
-        self.for_bnorms = check_norms(bill.stance_for)
-        self.agn_bnorms = check_norms(bill.stance_agn)
-
-        self.for_norms = check_norms(fors)
-        self.agn_norms = check_norms(agns)
-
-        self.group_for = collect_groups(fors)
-        self.group_agn = collect_groups(agns)
-
-        self.split_group = find_intersection(self.group_for, self.group_ag, operator.eq)
-
-        self.split_record = None
-        for_bills = collect_bills(fors)
-        agn_bills = collect_bills(agns)
-
-        # Lisp syntax would have just have assigned this as
-        # the agn_bills. I decided to do this to be able to
-        # show all data. I think this is simply a matter of
-        # is nil versus assigned.
-        if for_bills and agn_bills:
-            self.split_record = for_bills + agn_bills
-
-        self.split_credo = None
-        for_credo = collect_credo(fors)
-        agn_credo = collect_credo(agns)
-
-        if for_credo and agn_credo:
-            self.split_credo = for_cred + agn_credo
-
-        self.update_MI_stances()
-        self.no_update = None
-
-    def update_MI_stances(self):
-        self.MI_stance = self.MI_stance()
-        self.MI_group  = self.MI_stance("GROUP")
-        self.MI_credo  = self.MI_stance("MEMBER")
-        self.MI_record  = self.MI_stance("BILL")
-        self.MI_norm  = compare_stances(self.for_norms, self.agn_norms)
-
-    def MI_stances(self, db_type=None):
-        fors = self.for_stances
-        agns = self.agn_stances
-
-        if db_type:
-            fors = collect_source_type(db_type, fors)
-            agns = collect_source_type(db_type, agns)
-        compare_stances(fors, agns)
-
-
-
-def collect_groups(stances):
-    return collect_source_type("GROUP", stances)
-
-def collect_credo(stances):
-    return collect_source_type("MEMBER", stances)
-
-def collect_bills(stances):
-    return collect_source_type("BILL", stances)
-
-def collect_source_type(db, stances):
-    filter_fun = lambda stance : stance.source_db == db
-    return filter(filter_fun, stances)
-
-def check_norms(stances):
-    filter_fun = lambda stance: normative_stance(stance)
-    norms = filter(filter_fun, stances)
-    if norms:
-        return remove_duplicates(norms)
-
-def compare_stances(fors, agns):
-
-    fors.sort(key=lambda stance: stance.sort_key)
-    agns.sort(key=lambda stance: stance.sort_key)
-
-    for a_for, an_agn in map(None, fors, agns):
-        if not a_for and not an_agn:
-            return None
-        elif not a_for:
-            return ["AGN", remove_less_important(agns)]
-        elif not an_agn:
-            return ["FOR", remove_less_important(fors)]
-        elif greater_than_importance(a_for,an_agn):
-            return ["FOR", remove_less_important(fors)]
-        elif less_than_importance(a_for, an_agn):
-            return ["AGN", remove_less_important(agns)]
-
-    return None
-
-def remove_less_important(stances):
-    filter_fun = lambda stance : not less_than_importance(stance, stances[0])
-    return filter(filter_fun, stances)
-
-def normative_stance(stance):
-    norm = DBIssue.GetById(stance.issue).norm
-    if norm:
-        return stance.matchrem(norm)

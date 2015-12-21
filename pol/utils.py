@@ -31,5 +31,11 @@ def opposite_result(result):
 # The utility procedures from utils.lisp can all be easily done in # python by built in procedures.
 # For simplicty, a few have been defined here.
 
+def find_intersection(list1, list2, equal_fun):
+    """Returns the intersection of list1 and list2 using equal_fun to test for
+    equality"""
+    filter_fun = lambda item : any(equal_fun(item, element) for element in list2)
+    return filter(filter_fun, list1)
+
 def remove_duplicates(the_list):
     return list(set(the_list))
