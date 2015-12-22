@@ -19,13 +19,13 @@ MEMBER   = DB.member
 GROUP    = DB.groups
 BILL     = DB.bill
 ISSUE    = DB.issue
-RELATION = DB.relation
-STANCE   = DB.stance
+RELATION = DB.relation #(don't need relation table)
+# STANCE   = DB.stance #(don't need stance table)
 STRATEGY = DB.strategy
 DECISION = DB.decision
 
 # List of all the collections
-collection_list = [MEMBER, GROUP, BILL, ISSUE, RELATION, STANCE, STRATEGY, DECISION]
+collection_list = [MEMBER, GROUP, BILL, ISSUE, RELATION, STRATEGY, DECISION]
 
 # Maps the names of the collections to their corresponding object
 # class
@@ -53,7 +53,7 @@ def encode_classes(value):
 
 # This function is used to encode Relation or Stance objects stored in a list.
 def list_encoding(list_value):
-    custom = map(encode_classes, list_value)
+    custom = encode_classes(list_value)
     return custom if custom else list_value
 
 # This decoding is used to decode any Relation or Stance objects stored directly

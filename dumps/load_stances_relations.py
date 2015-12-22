@@ -47,5 +47,11 @@ def load_group_stances():
         ]}
         db.GROUP.update_one(query, {"$set": {"stances": stances_encoded}})
 
-# load_groups()
-load_group_stances()
+
+def load_relations():
+    member_relations = json.load(open("lisp_dumps/member_relations.json"))
+
+    for member_name in member_relations:
+        relations = [db.Relation(**d) for d in member_relations[member_name]]
+        relations_encoded = map(encode_classes, relations)
+        db.MEMBER.update_one({"name": member_name}, {"$set": {"relations": relations_encoded}})

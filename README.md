@@ -22,7 +22,7 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 ### In progress / to-do:
 
 - database
-  - adding stances, relations, and groups
+  - adding member, stances, bills, relations, and groups :white_check_mark:
 - proofing the code ~ trying to run the entire system
 - make sure the following functions work:
 
