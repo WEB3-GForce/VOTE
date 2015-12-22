@@ -13,7 +13,7 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 2. run "execfile('init_vote.py')"
 3. run "vote_all()" to see the outcome of all of the members voting on all bills
 4. run "vote('PARRIS', 'HR-4264')" to see what a specific member would vote on a specific bill.
-5. run "print_all([COLLECTION])" to view a collection in the database.
+5. run "print_all(COLLECTION)" to view a collection in the database.
   - collection list: [MEMBER, BILLS, GROUPS, ISSUES] 
 
 ### List of completed members:
