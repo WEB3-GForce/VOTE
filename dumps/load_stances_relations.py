@@ -66,3 +66,8 @@ def issue_norm_stance():
             norm_stance = Stance(**norm_dict)
             encoded_stance = db.encode_classes(norm_stance)
             db.ISSUE.update(issue, {"$set": {"norm": encoded_stance}})
+
+load_bill_stances()
+load_groups()
+load_group_stances()
+load_relations()

@@ -25,7 +25,7 @@ STRATEGY = DB.strategy
 DECISION = DB.decision
 
 # List of all the collections
-collection_list = [MEMBER, GROUP, BILL, ISSUE, RELATION, STRATEGY, DECISION]
+collection_list = [MEMBER, BILL, ISSUE, RELATION, STRATEGY, DECISION]
 
 # Maps the names of the collections to their corresponding object
 # class
