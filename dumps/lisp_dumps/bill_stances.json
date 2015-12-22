@@ -5,18 +5,18 @@
                 "issue": "CHEMICAL-WEAPONS",
                 "side": "CON",
                 "importance": "B",
-                "source_db": "BILL"
+                "source_db": "bill"
             }],
             "agn": [{
                 "issue": "REAGAN",
                 "side": "PRO",
                 "importance": "B",
-                "source_db": "BILL"
+                "source_db": "bill"
             }, {
                 "issue": "CHEMICAL-WEAPONS",
                 "side": "PRO",
                 "importance": "B",
-                "source_db": "BILL"
+                "source_db": "bill"
             }]
         }, {
             "name": "SPACE-STATION",
@@ -24,28 +24,28 @@
                     "issue": "ELDERLY",
                     "side": "PRO",
                     "importance": "C",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "HANDICAPPED",
                     "side": "PRO",
                     "importance": "C",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "HOMELESSNESS",
                     "side": "PRO",
                     "importance": "C",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "URBAN-RENEWAL",
                     "side": "PRO",
                     "importance": "C",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }],
             "agn": [{
                     "issue": "SPACE",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }]
         },
 
@@ -55,23 +55,23 @@
                     "issue": "SDI",
                     "side": "PRO",
                     "importance": "C",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "SPENDING",
                     "side": "CON",
                     "importance": "C",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }],
             "agn": [{
                     "issue": "REAGAN",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "SDI",
                     "side": "PRO",
                     "importance": "A",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }]
         },
 
@@ -81,33 +81,33 @@
                     "issue": "CIVIL-RIGHTS",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "FAIRNESS",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "AGE-DISCRIMINATION",
                     "side": "CON",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "EDUCATION-RIGHTS",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }],
             "agn": [{
                     "issue": "REAGAN",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "DEREGULATION",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }]
         }, {
             "name": "CHILD-CARE",
@@ -115,34 +115,34 @@
                     "issue": "CHILD-CARE",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "FAMILY",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "EDUCATION",
                     "side": "PRO",
                     "importance": "C",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }
             ],
             "agn": [{
                     "issue": "FISCAL-RESPONSIBILITY",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "BUSH",
                     "side": "PRO",
                     "importance": "B",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }, {
                     "issue": "LABOR",
                     "side": "CON",
                     "importance": "C",
-                    "source_db": "BILL"
+                    "source_db": "bill"
                 }]
         }
     ]
