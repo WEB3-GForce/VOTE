@@ -1,6 +1,7 @@
-import operator
 import pol.database as db
 from pol.decision import *
+from pol.decision_stats import *
+from pol.utils import *
 
 """
       As of 9/25/90
@@ -36,10 +37,9 @@ def flatten(a_list):
 #  firm-decision  sets final outcome of decision structure
 # ------------------------------------------------------------------
 
-# TODO: check collect_bills correctly defined
 def firm_decision(decision, side, reasons, old_downside, strat):
     bill = db.get(db.BILL, {"_id": decision.bill})
-    filter_fin = lambda stance : stance.source == bill.id
+    filter_fun = lambda stance : stance.source == bill.id
     downside = filter(filter_fun, flatten(old_downside))
     record = collect_bills(downside)
 
@@ -49,18 +49,19 @@ def firm_decision(decision, side, reasons, old_downside, strat):
 
     if record:
         decision.downside_record = record
-        decision.downside = remove_intersection(downside, record, operator.eq)
+        # Consider how to better compare
+        eq_fun = lambda stance1, stance2: stance1.match(stance2)
+        decision.downside = remove_intersection(downside, record, eq_fun)
 
     else:
         decision.downside = downside
 
     return decision
 
-# TODO
 def set_decision_outcome(decision, result, strat):
     if result == "FOR":
         reason = decision.for_stances
-        dowside = decision.agn_stances
+        downside = decision.agn_stances
     elif result == "AGN":
         reason = decision.agn_stances
         downside = decision.for_stances
@@ -68,7 +69,7 @@ def set_decision_outcome(decision, result, strat):
         print "Reason expected to be FOR or AGN. Got: %s" % reason
         return
 
-    return firm_dicision(decision, result, reason, downside, strat)
+    return firm_decision(decision, result, reason, downside, strat)
 
 """
 ==================================================================
@@ -117,8 +118,8 @@ def strat_inconsistent_constituency(decision, strat):
         return None
 
 def majority(decision):
-    fors = decision.number_for if decision.number_for else len(decision.stance_for)
-    agns = decision.number_agn if decision.number_agn else len(decision.stance_agn)
+    fors = decision.number_for if decision.number_for else len(decision.for_stances)
+    agns = decision.number_agn if decision.number_agn else len(decision.agn_stances)
 
     if fors > agns:
         return "FOR"
