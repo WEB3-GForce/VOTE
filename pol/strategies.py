@@ -36,7 +36,6 @@ def flatten(a_list):
 #  firm-decision  sets final outcome of decision structure
 # ------------------------------------------------------------------
 
-# TODO: check collect_bills correctly defined
 def firm_decision(decision, side, reasons, old_downside, strat):
     bill = db.get(db.BILL, {"_id": decision.bill})
     filter_fin = lambda stance : stance.source == bill.id
@@ -56,7 +55,6 @@ def firm_decision(decision, side, reasons, old_downside, strat):
 
     return decision
 
-# TODO
 def set_decision_outcome(decision, result, strat):
     if result == "FOR":
         reason = decision.for_stances
