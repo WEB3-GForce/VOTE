@@ -147,7 +147,7 @@ def protocol_simple_majority(decision):
 def print_majority_stances(decision, result):
     stances = decision.for_stances if result == "FOR" else decision.agn_stances
     count = len(stances)
-    print "There {0} {1} {2} stance{3}: {3:>28}".format("are" if count > 1 or count == 0 else "is", count, result, "s" if count > 1 or count == 0 else "", count)
+    print "There {0} {1} {2} stance{3}:".format("are" if count > 1 or count == 0 else "is", count, result, "s" if count > 1 or count == 0 else "")
     pp.pprint(stances)
 
 def protocol_no_decision(decision):

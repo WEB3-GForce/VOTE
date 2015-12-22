@@ -8,7 +8,9 @@ from relation import Relation
 from stance import Stance
 from strategy import Strategy
 from decision import Decision
+import pprint
 
+pp = pprint.PrettyPrinter(indent=4)
 
 # MongoClient and database
 CLIENT = MongoClient()
@@ -46,11 +48,15 @@ def print_all(collection):
     collection_class = collection_to_class_map[collection.name]
 
     for data_hash in collection.find({}):
-        print collection_class(**data_hash)
+        pp.pprint(collection_class(**data_hash))
 
 # This encoding is used to encode any Relation or Stance objects stored directly
 # in mongo.
 def encode_classes(value):
+    print "DOING VALUE"
+    print value
+    print isinstance(value, Stance)
+    print "DOES IT WORK"
     if isinstance(value, Stance):
         return {"_type" : "Stance", "x" : value.__dict__}
     elif isinstance(value, Relation):
@@ -60,6 +66,9 @@ def encode_classes(value):
 
 # This function is used to encode Relation or Stance objects stored in a list.
 def list_encoding(list_value):
+    print "I AM HERE"
+    print list_value
+    print "HERE WE GO"
     if type(list_value) == list:
         return map(list_encoding, list_value)
     custom = encode_classes(list_value)
