@@ -4,7 +4,7 @@ from pol.stance import Stance
 from pol.group import Group
 
 
-def load_member_stances():
+def load_bill_stances():
     bill_stances = json.load(open("lisp_dumps/bill_stances.json"))["stances"]
     # bill_stances is just a list
     for stance in bill_stances:
