@@ -91,7 +91,8 @@ def get_relations_stances(member):
         if not group:
             print "ERROR group not found: %s" % relation.group
             continue
-
+            
+        print "Inferring stances from group: %s" % group.name
         for stance in group.stances:
             stance.relation = relation
             results.append(stance)

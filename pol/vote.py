@@ -1,3 +1,5 @@
+import copy
+
 from constants import *
 from database import *
 from decision import *
@@ -7,7 +9,8 @@ from utils import remove_duplicates
 
 from member import Member
 
-
+# Future note for expansion. Lname is a proper identifier for now. Change once
+# there are multiple members with the same last name.
 def vote(member_lname, bill_number):
     """Predicts how the specified member will vote on the given bill. This
     function is the standard way of calling VOTE from the commandline. It relies
@@ -44,24 +47,34 @@ def vote_helper(member, bill):
     Returns:
         A decision object containing the results of the decision.
     """
-    
+    print "Calculating vote for %s on bill %s..." % (member.name, bill.bnumber)
+
     decision = Decision()
     initialize_decision(decision, member, bill)
+    
+    print "Updating decision metrics..."
     update_decision_metrics(decision)
+    print "Update completed."
+
+    apply_decision_strategies(decision)
+
+    #compare_with_real_vote(vote_decision)
+    if decision.strategy:
+        save(decision)
+    else:
+        print "No decision."
+
     return decision
 
-    apply_decision_strategies(vote_decision)
 
-    compare_with_real_vote(vote_decision)
+def save(decision):
+    """Save the decision to the DB."""
 
-    update_decision_dbase(vote_decision)
-
-    if vote_decision.strategy:
-       print vote_decision
+    print "Saving the decision to the database."
+    if DECISION.insert(copy.deepcopy(decision.__dict__)):
+        print "Decision saved."
     else:
-        print "No decision"
-
-    return vote_decision
+        print "ERROR decision not saved."
 
 
 def initialize_decision(decision, member, bill):
@@ -78,7 +91,7 @@ def initialize_decision(decision, member, bill):
             The decision object has been updated.
     """
 
-    print "Initializing Decision..."
+    print "Initializing decision..."
 
     if not member.stances:
         extract_voting_stances(member)
@@ -94,9 +107,6 @@ def initialize_decision(decision, member, bill):
     decision.agn_stances = match_stances_agn(member, bill)
 
     print "Initialization complete."
-    print member
-    print bill
-    print decision
 
 
 def infer_member_rel_stances(member):
@@ -111,7 +121,7 @@ def infer_member_rel_stances(member):
             relationships.
     """
     if not member.pro_rel_stances:
-        print "Inferring stances from relations of %s" % member.name
+        print "Inferring stances from relations of %s..." % member.name
         get_relations_stances(member)
         print "Inferring stances from relations completed."
 
@@ -133,8 +143,8 @@ def match_stances_for(member, bill):
             In other words, this function checks to see if the member has any
             reasons to vote for the bill.
     """
-    print "Considering implications of voting FOR on bill %s" % bill.bnumber
-    print "Matching member stances with bill stances."
+    print "Considering implications of voting FOR on bill %s..." % bill.bnumber
+    print "Matching member stances with bill stances..."
     stances = match_stances(bill.stance_for, member)
     stances = match_stances_sort(member, bill, stances)
     print "Considering FOR implications completed."
@@ -158,8 +168,8 @@ def match_stances_agn(member, bill):
             In other words, this function checks to see if the member has any
             reasons to vote against the bill.
     """
-    print "Considering implications of voting AGN on bill %s" % bill.bnumber
-    print "Matching member stances with bill stances."
+    print "Considering implications of voting AGN on bill %s..." % bill.bnumber
+    print "Matching member stances with bill stances..."
     stances = match_stances(bill.stance_agn, member)
     stances = match_stances_sort(member, bill, stances)
     print "Considering AGN implications completed."
@@ -180,7 +190,7 @@ def match_stances_sort(member, bill, stances):
             A sorted list with the old votes removed
     """
     sort_key = member.stance_sort_key or EQUITY
-    print "Sorting stances based on %s order." % sort_key
+    print "Sorting stances based on %s order..." % sort_key
 
     for stance in stances:
         stance.set_sort_key(sort_key)
@@ -257,71 +267,148 @@ def match_stances(stances, member):
     return remove_duplicates(matches)
 
 
-"""
-    Apply decision strategies
-"""
-
-
 def apply_decision_strategies(decision):
+    """Applies strategies to make the decision. Tries all possible strategies
+    in the database and stops at the first one that succeeds.
+    
+       Keyword arguments:
+            decision   -- the object that will store the decision
+    
+        Return:
+            The decision object passed into the function updated with the decision.
+    """
 
-   print "Applying Decision Strategies"
-   strategies = DB[ALL_STRATEGIES]
-   apply_strats(decision, strategies)
+    print "Applying decision strategies..."
+    
+    # In the future, define a specific order for how to apply
+    # strategies. For now, just run them in whatever order
+    # Mongo gives them.
+    for strategy_hash in STRATEGY.find({}):
 
+        strategy = Strategy(**strategy_hash)
 
-def apply_strats(decision, strategies):
-
-    for strategy in strategies:
-
-        strategy_code = strategy.test_code
-
+        # See if the name of the strategy function is defined
+        # globally.
+        # Dangerous. If database is corrupted, could lead to
+        # calling strange things. For future, create a hash
+        # that limits the options.
+        strategy_function = globals()[strategy.test_code]
+        
         print "Trying decision strategy: %s" % strategy.name
 
-        if strategy_code(decision, strategy):
-
-            print "Success"
+        if strategy_function and strategy_code(decision, strategy):
+            member = get(MEMBER, {"_id" : decision.member})
+            bill   = get(BILL,   {"_id" : decision.bill})
+            print "Success!"
+            print "DECISION: %s will vote %s on bill %s" % (member.name, decision.result, bill.bnumber)
+            
+            # This prints more information about the decision.
+            # Proof this code and add when ready.
+            #strategy_protocol = globals()[strategy.protocol]
+            #if strategy_protocol:
+            #   strategy_protocol(decision)
 
             decision.reason = group_reasons(decision.reason)
-            decision.downside = group_reasons(decision.reason)
+            decision.downside = group_reasons(decision.downside)
             return decision
 
+        elif not strategy_function:
+            print "ERROR strategy code not found."
         else:
-             print "%s Failed" % strategy
+             print "%s failed." % strategy.name
 
 
-"""
-    Group reasons:
-    Take the list of stances and group together the stances on the same issue
-"""
-
-def group_reasons(stance_list):
-    if stance_list == None:
-        return None
-    else:
-        return sort(stance_list)
-
-
-"""
-    Batch processing and analysis:
-
-    There are three ways of invoking VOTE-ALL
-
-    vote-all() : process all members on all bills
-    vote-all(member_name = name) : process all bills for given member
-    vote-all(bill_name = bill) : process all members for given bill
-"""
-
-def vote_all(member_name = None, bill_name = None):
-    if member_name:
-        member_ids = [DBMembers.getEntryByName(member).id]
-    else:
-        member_ids = [member.id for member in DBMember.GetAll()]
-
-    if bill_name:
-        bill_ids = [bill.id for bill in DBBill.getEntryByName(bill_name)]
-    else:
-        bill_ids = [bill.id for bill in DBBill.GetAll()]
+def group_reasons(stances):
+    """Groups together the stances list so that the stances that match each other
+    via their stance.match function will be next to each other.
+    
+       Keyword arguments:
+            stances   -- the list of stances to sort into groups
+    
+        Return:
+            The new stance list sorted into groups.
+    """
+    result = []
+    
+    while stances:
+    
+        key = stances[0]
+        left = []
+        result.append(key)
         
-    for memberid in members:
-        for billid in bill_ids:
-            vote(memberid, billid)
+        for stance in stances[1:]:
+            if key.match(stance):
+                result.append(stance)
+            else:
+                left.append(stance)
+
+        stances = left    
+
+    return result
+
+
+def get_members(member_name=None):
+    """Retrieves the members for vote_all. If the name is specified, the specific
+    member is looked up in the DB. If the name is not specified or the member
+    was not found, an iterator over a search for all members is returned.
+    
+       Keyword arguments:
+            member_name   -- the name of the member to get.
+    
+        Return:
+            An iterator for all members who will vote.
+    """
+    member = None
+    if member_name:
+        member = get(MEMBER, {"lname" : member_lname.upper()})
+    
+    if member:
+        return [member]
+    else:    
+        return MEMBER.find({})
+
+
+def get_bills(bill_number=None):
+    """Retrieves the bills for vote_all. If the bill_number is specified, it
+    returns a list of the specified bill. If not or the bill is not found, it
+    returns an iterator over all the bills in the database.
+    
+       Keyword arguments:
+            bill_number   -- the number of the bill to retrieve.
+    
+        Return:
+            An iterator for all bills that will be voted upon.
+    """
+    bill = None
+    if bill_number:
+        bill = get(BILL, {"bnumber" : bill_number.upper()})
+    
+    if bill:
+        return [bill]
+    else:
+        return BILL.find({})
+
+
+def vote_all(member_lname = None, bill_number = None):
+    """Run the vote program for all members on all bills.
+    
+       Keyword arguments:
+            member_lname  -- optional, the last name of the member to simulate
+            bill_number   -- optional, the bill number of the bill to decide on
+    
+        Postcondition:
+            The decisions have been made and the database updated approriately
+            
+        Note:
+            There are multiple ways to call this function     
+
+            vote-all()                   : process all members on all bills
+            vote-all(member_name = name) : process all bills for given member
+            vote-all(bill_name = bill)   : process all members for given bill
+    """        
+    for member_hash in get_members(member_lname):
+        for bill_hash in get_bills(bill_number):
+            member = Member(**member_hash)
+            bill   = Bill(**bill_hash)
+            vote_helper(member, bill)
+            print "\n"

@@ -41,6 +41,13 @@ def get(collection, query):
         return collection_class(**data_hash)
     return None
 
+# Prints out all the decisions in the decision DB.
+def print_all(collection):
+    collection_class = collection_to_class_map[collection.name]
+
+    for data_hash in collection.find({}):
+        print collection_class(**data_hash)
+
 # This encoding is used to encode any Relation or Stance objects stored directly
 # in mongo.
 def encode_classes(value):
@@ -53,6 +60,8 @@ def encode_classes(value):
 
 # This function is used to encode Relation or Stance objects stored in a list.
 def list_encoding(list_value):
+    if type(list_value) == list:
+        return map(list_encoding, list_value)
     custom = encode_classes(list_value)
     return custom if custom else list_value
 
@@ -70,6 +79,8 @@ def decode_classes(value):
 
 # This function is used to decode Relation or Stance objects stored in a list.
 def list_decoding(list_value):
+    if type(list_value) == list:
+        return map(list_decoding, list_value)
     custom = decode_classes(list_value)
     return custom if custom else list_value
 
