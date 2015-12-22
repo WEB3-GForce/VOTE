@@ -1,7 +1,37 @@
 # VOTE
 Translation of Professor Slade's VOTE system from Lisp to Python
 
-Status: [ not started :black_medium_square: | completed :white_check_mark: | in progress :speech_balloon:]
+## Requirements
+
+- Python 2.7
+- [pymongo](http://api.mongodb.org/python/current/installation.html) >= 3.2
+- [MongoDB](https://docs.mongodb.org/v3.0/installation/) 3.0.7 (for Mac, just run 'brew install mongodb' in Terminal)
+
+## Running the code
+
+1. Open the Python 2 interpreter from the pol folder
+2. run "execfile('init_vote.py')"
+3. run "vote_all()" to see the outcome of all of the members voting on all bills
+4. run "vote('PARRIS', 'HR-4264')" to see what a specific member would vote on a specific bill.
+5. run "print_all([COLLECTION])" to view a collection in the database.
+  - collection list: [MEMBER, BILLS, GROUPS, ISSUES] 
+
+### List of completed members:
+- Robert William Kastenmeier ("KASTENMEIER")
+- Timothy Peter Johnson ("JOHNSON")
+- Stan Parris ("PARRIS")
+
+### List of [completed bills](https://github.com/WEB3-GForce/VOTE/blob/master/dumps/lisp_dumps/bill.txt):
+- AMD
+- HR-4800
+- HR-4264
+- S-557
+- HR-3
+
+
+
+
+File translation from Lisp repo to Python
 
 | File | Status |
 |------|--------|
@@ -18,41 +48,3 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 |shift|:white_check_mark:|
 |strats|:white_check_mark:|
 |utils|:white_check_mark:|
-
-### In progress / to-do:
-
-- database
-  - adding member, stances, bills, relations, and groups :white_check_mark:
-- proofing the code ~ trying to run the entire system
-- make sure the following functions work:
-
-```python
-initialize_decision(decision, member, bill)
-
-update_decision_metrics(decision)
-
-apply_decision_strategies(decision)
-
-compare_with_real_vote(decision)
-
-update_decision_dbase(decision) # insert into database
-```
-
-- proof all of the existing code
-- add pretty print to analyze
-- files to complete
-  - vote.py
-  - strategies.py : we need decision object to store bill mongo ids
-     - majority :white_check_mark:
-     - consensus :white_check_mark:
-     - strat_simple_consensus :white_check_mark:
-     - strat_popular :white_check_mark:
-     - firm_decision :white_check_mark:
-     - set_decision_outcome :white_check_mark:
-     - strat_simple_majority :white_check_mark:
-  - decision.py
-- readme
-- initialize_db.py
-- requirements to install ~
-- project summary
-  - explanation of what we did ~ translation, database, making vote work
