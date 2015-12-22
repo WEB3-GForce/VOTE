@@ -58,7 +58,9 @@ def vote_helper(member, bill):
 
     apply_decision_strategies(decision)
 
+    # Future update. Add the real vote counts.
     #compare_with_real_vote(vote_decision)
+
     if decision.strategy:
         save(decision)
     else:
