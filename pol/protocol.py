@@ -4,6 +4,7 @@
 #
 # Distributed under terms of the MIT license.
 
+from utils import *
 from pol.strategies import *
 import pprint
 
@@ -14,7 +15,7 @@ def protocol_popular(decision):
     reasons = decision.reason
     print "All stances are {0} this bill:".format(result), "\n"
     pp.pprint(reasons)
-    print "There are no reasons to vote {0} on this bill.".format(opposite_result(result))
+    print "There are no reasons to vote {0} this bill.".format(opposite_result(result))
 
 
 def protocol_non_partisan(decision):
@@ -118,15 +119,14 @@ def protocol_shifting_alliances(decision):
 def protocol_simple_consensus(decision):
     result = decision.result
     print "Found a consensus {0} this bill".format(result)
-    print "The most important stances are all on the {0} of this bill:".format(result)
-    pairs = [(mi_group, "Group"), (mi_credo, "Credo"), (mi_record), "Record", (mi_norm, "Norm")]
+    print "The most important stances are all {0} this bill:".format(result)
+    pairs = [[decision.MI_group, "Group"], [decision.MI_credo, "Credo"], [decision.MI_record, "Record"], [decision.MI_norm, "Norm"]]
     for pair in pairs:
         slot = pair[0]
         string = pair[1]
-        if slot_value(decision, slot):
-            print "{0:>20}".format(string)
-            pp.pprint(slot_value(decision, slot))
-
+        if slot:
+            print "{0:<20}".format(string)
+            pp.pprint(slot)
 
 def protocol_normative(decision):
     for_norms = decision.for_bnorms
@@ -138,18 +138,17 @@ def protocol_normative(decision):
 
 
 def protocol_simple_majority(decision):
-    result = majority(decision)
+    result = decision.result
     print "Found a simple majority {0} this bill.".format(result)
     print_majority_stances(decision, result)
     print_majority_stances(decision, opposite_result(result))
 
 
 def print_majority_stances(decision, result):
-    stances = decision.for_stances if result == "for" else decision.agn_stances
+    stances = decision.for_stances if result == "FOR" else decision.agn_stances
     count = len(stances)
-    print "There {0} {1} {2} stance(s): {3:>28}".format("are" if count > 1 else "is", str(count), result, str(count))
+    print "There {0} {1} {2} stance{3}:".format("are" if count > 1 or count == 0 else "is", count, result, "s" if count > 1 or count == 0 else "")
     pp.pprint(stances)
-
 
 def protocol_no_decision(decision):
     print "VOTE has failed to arrive at a decision"

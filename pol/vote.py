@@ -1,10 +1,21 @@
 import copy
 
+from member import Member
+from group import Group
+from bill import Bill
+from issue import Issue
+from relation import Relation
+from stance import Stance
+from strategy import Strategy
+from decision import Decision
+
 from constants import *
 from database import *
 from decision import *
 from decision_stats import *
 from member_stats import *
+from strategies import *
+from protocol import *
 from utils import remove_duplicates
 
 from member import Member
@@ -61,14 +72,11 @@ def vote_helper(member, bill):
 
     apply_decision_strategies(decision)
 
-    compare_with_real_vote(decision)
+    # Future update. Add the real vote counts.
+    #compare_with_real_vote(vote_decision)
 
-    update_decision_dbase(decision) # insert into database
-
-    if decision.strategy:
-       print decision
-    else:
-        print "No decision"
+    #if decision.strategy:
+    #  save(decision)
 
     return decision
 
@@ -76,6 +84,7 @@ def save(decision):
     """Save the decision to the DB."""
 
     print "Saving the decision to the database."
+    print decision.__dict__
     if DECISION.insert(copy.deepcopy(decision.__dict__)):
         print "Decision saved."
     else:
@@ -105,8 +114,6 @@ def initialize_decision(decision, member, bill):
     decision.bill   = bill._id
 
     infer_member_rel_stances(member)
-
-    print member
 
     print "Analyzing alternative positions..."
 
@@ -303,17 +310,19 @@ def apply_decision_strategies(decision):
 
         print "Trying decision strategy: %s" % strategy.name
 
-        if strategy_function and strategy_code(decision, strategy):
+        if strategy_function and strategy_function(decision, strategy.name):
             member = get(MEMBER, {"_id" : decision.member})
             bill   = get(BILL,   {"_id" : decision.bill})
             print "Success!"
             print "DECISION: %s will vote %s on bill %s" % (member.name, decision.result, bill.bnumber)
 
-            # This prints more information about the decision.
-            # Proof this code and add when ready.
-            #strategy_protocol = globals()[strategy.protocol]
-            #if strategy_protocol:
-            #   strategy_protocol(decision)
+            # This prints information explaining the decision.
+            strategy_protocol = globals()[strategy.protocol]
+            if strategy_protocol:
+               print "Explaining decision..."
+               strategy_protocol(decision)
+            else:
+               print "No explanation available for this decision."
 
             decision.reason = group_reasons(decision.reason)
             decision.downside = group_reasons(decision.downside)
@@ -324,6 +333,8 @@ def apply_decision_strategies(decision):
         else:
              print "%s failed." % strategy.name
 
+    print "No decision"
+    return None
 
 def group_reasons(stances):
     """Groups together the stances list so that the stances that match each other
