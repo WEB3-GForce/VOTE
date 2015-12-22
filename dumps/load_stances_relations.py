@@ -57,3 +57,12 @@ def load_relations():
         relations = [db.Relation(**d) for d in member_relations[member_name]]
         relations_encoded = map(db.encode_classes, relations)
         db.MEMBER.update_one({"name": member_name}, {"$set": {"relations": relations_encoded}})
+
+
+def issue_norm_stance():
+    for issue in db.ISSUE.find({}):
+        if isinstance(issue["norm"], list):
+            norm_dict = dict(zip(["side", "importance", "issue", "source_db"], issue["norm"] + ["issue"]))
+            norm_stance = Stance(**norm_dict)
+            encoded_stance = db.encode_classes(norm_stance)
+            db.ISSUE.update(issue, {"$set": {"norm": encoded_stance}})
