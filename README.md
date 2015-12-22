@@ -42,14 +42,14 @@ update_decision_dbase(decision) # insert into database
 - add pretty print to analyze
 - files to complete
   - vote.py
-  - strategies.py
-     - majority
-     - consensus
-     - strat_simple_consensus
-     - strat_popular
-     - firm decision
-     - decision outcome
-     - strat_simple_majority
+  - strategies.py : we need decision object to store bill mongo ids
+     - majority :white_check_mark:
+     - consensus :white_check_mark:
+     - strat_simple_consensus :white_check_mark:
+     - strat_popular :white_check_mark:
+     - firm_decision :white_check_mark:
+     - set_decision_outcome :white_check_mark:
+     - strat_simple_majority :white_check_mark:
   - decision.py
 - readme
 - initialize_db.py

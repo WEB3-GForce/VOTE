@@ -147,13 +147,13 @@ class Decision(PrintableObject):
 
 
 def collect_groups(stances):
-    return collect_source_type("GROUP", stances)
+    return collect_source_type("group", stances)
 
 def collect_credo(stances):
-    return collect_source_type("MEMBER", stances)
+    return collect_source_type("member", stances)
 
 def collect_bills(stances):
-    return collect_source_type("BILL", stances)
+    return collect_source_type("bill", stances)
 
 def collect_source_type(db, stances):
     filter_fun = lambda stance : stance.source_db == db

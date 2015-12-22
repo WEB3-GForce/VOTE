@@ -1,4 +1,6 @@
 import operator
+import pol.database as db
+from pol.decision import *
 
 """
       As of 9/25/90
@@ -34,8 +36,9 @@ def flatten(a_list):
 #  firm-decision  sets final outcome of decision structure
 # ------------------------------------------------------------------
 
+# TODO: check collect_bills correctly defined
 def firm_decision(decision, side, reasons, old_downside, strat):
-    bill = DBBill.getById(decision.bill)
+    bill = db.get(db.BILL, {"_id": decision.bill})
     filter_fin = lambda stance : stance.source == bill.id
     downside = filter(filter_fun, flatten(old_downside))
     record = collect_bills(downside)
@@ -53,6 +56,7 @@ def firm_decision(decision, side, reasons, old_downside, strat):
 
     return decision
 
+# TODO
 def set_decision_outcome(decision, result, strat):
     if result == "FOR":
         reason = decision.for_stances
@@ -113,8 +117,8 @@ def strat_inconsistent_constituency(decision, strat):
         return None
 
 def majority(decision):
-    fors = decision.number_for
-    agns = decision.number_agn
+    fors = decision.number_for if decision.number_for else len(decision.stance_for)
+    agns = decision.number_agn if decision.number_agn else len(decision.stance_agn)
 
     if fors > agns:
         return "FOR"
@@ -132,7 +136,7 @@ def consensus(decision):
     else:
         return None
 
-def collect_MI(decion):
+def collect_MI(decision):
     result = [decision.MI_stance, decision.MI_group, decision.MI_credo, decision.MI_record, decision.MI_norm]
 
     filter_fun = lambda x : x != []
