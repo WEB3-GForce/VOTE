@@ -28,8 +28,9 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 - S-557
 - HR-3
 
-
-
+### Screenshots (examples)
+![screenshot 1](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/screenshot-1.png)
+![screenshot 2](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/screenshot-2.png)
 
 File translation from Lisp repo to Python
 
