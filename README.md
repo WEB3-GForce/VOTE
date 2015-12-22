@@ -28,7 +28,7 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 - S-557
 - HR-3
 
-
+### Screenshots (examples)
 
 
 File translation from Lisp repo to Python
