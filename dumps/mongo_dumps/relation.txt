@@ -1,0 +1,4 @@
+{"group": {"$oid": "5672029aa58a140c1598146d"}, "importance": "A", "source_structure": null, "source": {"$oid": "5671d7f9a58a145b1f1c906d"}, "source_db": null, "_id": {"$oid": "56720c78a58a140c1598146e"}, "group_structure": null, "side": "PRO"}
+{"group": {"$oid": "5672016fa58a140c1598146b"}, "importance": "C", "source_structure": null, "source": {"$oid": "5671d7f9a58a145b1f1c906d"}, "source_db": null, "_id": {"$oid": "56720d7ea58a140c1598146f"}, "group_structure": null, "side": "PRO"}
+{"group": {"$oid": "5671f01ca58a140c1598146a"}, "importance": "C", "source_structure": null, "source": {"$oid": "5671d7f9a58a145b1f1c906d"}, "source_db": null, "_id": {"$oid": "56720e04a58a140c15981470"}, "group_structure": null, "side": "CON"}
+{"group": {"$oid": "56720223a58a140c1598146c"}, "importance": "C", "source_structure": null, "source": {"$oid": "5671d7f9a58a145b1f1c906d"}, "source_db": null, "_id": {"$oid": "56720e4da58a140c15981471"}, "group_structure": null, "side": "PRO"}

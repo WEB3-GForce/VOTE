@@ -4,7 +4,7 @@
         {
             "con_stances": null,
             "credo": null,
-            "issues": null,
+            "issues": [],
             "name": "Republicans",
             "gender": null,
             "notes": null,
@@ -28,7 +28,7 @@
         {
             "con_stances": null,
             "credo": null,
-            "issues": null,
+            "issues": [],
             "name": "Democrats",
             "gender": null,
             "notes": null,
@@ -50,7 +50,7 @@
         {
             "con_stances": null,
             "credo": null,
-            "issues": null,
+            "issues": [],
             "name": "Country",
             "gender": null,
             "notes": null,
@@ -75,7 +75,7 @@
         {
             "con_stances": null,
             "credo": null,
-            "issues": null,
+            "issues": [],
             "name": "American Civil Liberties Union",
             "gender": null,
             "notes": null,
