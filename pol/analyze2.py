@@ -46,7 +46,7 @@ def analyze_score(member=None, bill=None, deep=None):
         bill_ids = [bill.id for bill in DBBill.getEntryByName(bill)]
     else:
         bill_ids = [decision.bill for decision in decisions]
-        bill_ids = list(set(bill_ids)
+        bill_ids = list(set(bill_ids))
 
     if deep:
         decisions = filter(has_deeper_analysis, DBDecision.GetAll())
@@ -77,9 +77,9 @@ def analyze_score_helper(members, decisions, bill_ids):
         results[decision.member] = initialize_hash()
         results[decision.strat]  = initialize_hash()
 
-   print "Processing decisions..."
+    print "Processing decisions..."
 
-   for decision in final_decisions:
+    for decision in final_decisions:
         if decision.score and decision.result:
             stat = (decision.result + decision.score).upper()
             results[decision.bill][stat] += 1
@@ -228,4 +228,3 @@ def analye_all():
     tally_da_scores()
     analyze_scores()
     analyze_decisions(deep=True)
-

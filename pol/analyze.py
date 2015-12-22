@@ -6,7 +6,7 @@
 
 bill_total, mem_total, mem_results, billid_results = {}, {}, {}, {}
 
-def analyze_decisions(*opts, deep=False):
+def analyze_decisions(deep=False, *opts):
     options = opts[0]
     bills = list(get_node(options, "bill")) if options else db_all("bill")
     billids = [bill.id for bill in bills]
@@ -134,12 +134,12 @@ def tally_scores():
     correct_for, correct_agn, wrong_for, wrong_agn = 0, 0, 0, 0
     for decision in db_all(decisions):
         if decision.score == '+':
-            if decision.result = "for":
+            if decision.result == "for":
                 correct_for += 1
             elif decison.result == "agn":
                 correct_agn += 1
         elif decision.score == '-':
-            if decision.result = "for":
+            if decision.result == "for":
                 wrong_for += 1
             elif decison.result == "agn":
                 wrong_agn += 1

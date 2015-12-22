@@ -4,10 +4,11 @@
 #
 # Distributed under terms of the MIT license.
 
-from functools import singledispatch
+from singledispatch import singledispatch
 
 # to implement a generic function, use singledispatch
 # see https://www.python.org/dev/peps/pep-0443/
+# https://pypi.python.org/pypi/singledispatch for python 2
 @singledispatch
 def synonyms(self):
     pass

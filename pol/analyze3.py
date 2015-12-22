@@ -1,6 +1,6 @@
 # sourced from pol/anal3.lisp
 #
-# Copyright © 2015 krishpop <krishnan1994@gmail.com>
+# Copyright 2015 krishpop <krishnan1994@gmail.com>
 #
 # Distributed under terms of the MIT license.
 
