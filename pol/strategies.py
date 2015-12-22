@@ -2,6 +2,7 @@ import pol.database as db
 from pol.decision import *
 from pol.decision_stats import *
 from pol.utils import *
+from pol.remove import *
 
 """
       As of 9/25/90
@@ -40,7 +41,9 @@ def flatten(a_list):
 def firm_decision(decision, side, reasons, old_downside, strat):
     bill = db.get(db.BILL, {"_id": decision.bill})
     filter_fun = lambda stance : stance.source == bill.id
-    downside = filter(filter_fun, flatten(old_downside))
+    downside = old_downside 
+    # Old lisp code
+    #downside = filter(filter_fun, flatten(old_downside))
     record = collect_bills(downside)
 
     decision.result = side

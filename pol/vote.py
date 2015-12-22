@@ -69,12 +69,7 @@ def vote_helper(member, bill):
     print "Update completed."
 
     update_decision_metrics(decision)
-
-    print member
-    print decision
-
     apply_decision_strategies(decision)
-    #print bill
 
     # Future update. Add the real vote counts.
     #compare_with_real_vote(vote_decision)
@@ -123,7 +118,7 @@ def initialize_decision(decision, member, bill):
 
     decision.for_stances = match_stances_for(member, bill)
     decision.agn_stances = match_stances_agn(member, bill)
-
+    
     print "Initialization complete."
 
 
@@ -212,7 +207,6 @@ def match_stances_sort(member, bill, stances):
 
     for stance in stances:
         stance.set_sort_key(sort_key)
-
     stances = remove_old_votes(stances, bill)
     stances.sort(key=lambda stance: stance.get_sort_key)
     return stances
@@ -245,7 +239,7 @@ def remove_old_votes(stances, bill):
             then the stances will be filtered so that only stances from the bill
             itself are used. If it is not set, all stances are used.
     """
-    if no_old_votes:
+    if NO_OLD_VOTES:
         filter_fun = lambda stance : is_bill_source(stance, bill)
         stances = filter(filter_fun, stances)
     return stances
@@ -254,13 +248,13 @@ def remove_old_votes(stances, bill):
 # This flag is used in remove_old_votes. This is used to determine whether the
 # function should filter stances such that only stances that originate from the
 # bill are kept.
-no_old_votes = False
+NO_OLD_VOTES = False
 
 
 def no_old_votes(flag):
     """ Sets the no_old_votes flag."""
-    global no_old_votes
-    no_old_votes = flag
+    global NO_OLD_VOTES
+    NO_OLD_VOTES = flag
 
 
 def match_stances(stances, member):
@@ -279,6 +273,7 @@ def match_stances(stances, member):
     """
     matches = []
     member_stances = member.credo + member.stances + member.pro_rel_stances
+
     for stance in stances:
         filter_fun = lambda member_stance : stance.match(member_stance)
         matches += filter(filter_fun, member_stances)
