@@ -1,8 +1,8 @@
-import pol.database as db
-from pol.decision import *
-from pol.decision_stats import *
-from pol.utils import *
-from pol.remove import *
+import database as db
+from decision import *
+from decision_stats import *
+from utils import *
+from remove import *
 
 """
       As of 9/25/90

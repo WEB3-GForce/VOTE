@@ -5,7 +5,7 @@
 # Distributed under terms of the MIT license.
 
 from utils import *
-from pol.strategies import *
+from strategies import *
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)

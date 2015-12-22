@@ -108,6 +108,9 @@ class Transform(SONManipulator):
 
     def transform_outgoing(self, son, collection):
         for (key, value) in son.items():
+            custom = decode_classes(value)
+            if custom:
+                son[key] = custom
             if isinstance(value, list):
                 son[key] = map(list_decoding, value)
             if isinstance(value, dict):
@@ -117,5 +120,5 @@ class Transform(SONManipulator):
                 else: # Again, make sure to recurse into sub-docs
                     son[key] = self.transform_outgoing(value, collection)
         return son
-
+        
 DB.add_son_manipulator(Transform())

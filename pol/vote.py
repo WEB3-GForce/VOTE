@@ -1,14 +1,5 @@
 import copy
 
-from member import Member
-from group import Group
-from bill import Bill
-from issue import Issue
-from relation import Relation
-from stance import Stance
-from strategy import Strategy
-from decision import Decision
-
 from constants import *
 from database import *
 from decision import *
@@ -83,7 +74,6 @@ def save(decision):
     """Save the decision to the DB."""
 
     print "Saving the decision to the database."
-    print decision.__dict__
     if DECISION.insert(copy.deepcopy(decision.__dict__)):
         print "Decision saved."
     else:
