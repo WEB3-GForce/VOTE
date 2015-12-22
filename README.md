@@ -22,7 +22,7 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 ### In progress / to-do:
 
 - database
-  - adding member stances, bills, relations, and groups
+  - adding stances, relations, and groups
 - proofing the code ~ trying to run the entire system
 - make sure the following functions work:
 
@@ -51,7 +51,7 @@ update_decision_dbase(decision) # insert into database
      - decision outcome
      - strat_simple_majority
   - decision.py
-- readme 
+- readme
 - initialize_db.py
 - requirements to install ~
 - project summary

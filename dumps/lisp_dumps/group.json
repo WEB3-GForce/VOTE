@@ -1,0 +1,148 @@
+{
+    "groups":
+    [
+        {
+            "con_stances": null,
+            "credo": null,
+            "issues": null,
+            "name": "Republicans",
+            "gender": null,
+            "notes": null,
+            "french_short": null,
+            "number": "PLUR",
+            "pro_french": null,
+            "instances": null,
+            "synonyms": [
+                "GOP"
+            ],
+            "stances": null,
+            "french": null,
+            "pro_english": "conservative and fiscally responsible Republicans",
+            "english": "Republicans",
+            "english_short": null,
+            "con_english": "heartless and reactionary Republicans",
+            "pro_stances": null,
+            "norm": null,
+            "con_french": null
+        },
+        {
+            "con_stances": null,
+            "credo": null,
+            "issues": null,
+            "name": "Democrats",
+            "gender": null,
+            "notes": null,
+            "french_short": null,
+            "number": "PLUR",
+            "pro_french": null,
+            "instances": null,
+            "synonyms": null,
+            "stances": null,
+            "french": "les membres du parti De'mocratique",
+            "pro_english": "progressive, compassionate Democrats",
+            "english": "members of the Democratic party",
+            "english_short": null,
+            "con_english": "tax-and-spend, liberal Democrats",
+            "pro_stances": null,
+            "norm": null,
+            "con_french": null
+        },
+        {
+            "con_stances": null,
+            "credo": null,
+            "issues": null,
+            "name": "Country",
+            "gender": null,
+            "notes": null,
+            "french_short": null,
+            "number": null,
+            "pro_french": null,
+            "instances": null,
+            "synonyms": [
+                "COUNTRY",
+                "US"
+            ],
+            "stances": null,
+            "french": null,
+            "pro_english": null,
+            "english": "the country as a whole",
+            "english_short": "the country",
+            "con_english": null,
+            "pro_stances": null,
+            "norm": null,
+            "con_french": null
+        },
+        {
+            "con_stances": null,
+            "credo": null,
+            "issues": null,
+            "name": "American Civil Liberties Union",
+            "gender": null,
+            "notes": null,
+            "french_short": null,
+            "number": null,
+            "pro_french": null,
+            "instances": null,
+            "synonyms": null,
+            "stances": null,
+            "french": null,
+            "pro_english": "the ACLU's strong defense of the Bill of Rights",
+            "english": "the American Civil Liberties Union",
+            "english_short": "the ACLU",
+            "con_english": "the ACLU's radical and subversive posture",
+            "pro_stances": null,
+            "norm": null,
+            "con_french": null
+        },
+        {
+            "name":          "Americans for Democratic Action",
+            "issues":        ["EQUALITY", "DEFENSE-SPENDING", "CIVIL-LIBERTIES", "HUMAN-RIGHTS"],
+            "stances":       null,
+            "english":       "the Americans for Democratic Action",
+            "english_short":  "the ADA",
+            "pro_english":   "the ADA as a proponent of basic American values",
+            "con_english":   "the left-wing pinko ADA",
+            "synonyms":      ["ADA"]
+        },
+        {
+            "name":          "Committee on Political Education of the AFL-CIO",
+            "issues":        ["LABOR"],
+            "stances":       null,
+            "english":       "the Committee on Political Education of the AFL-CIO",
+            "english_short":  "COPE",
+            "pro_english":   "the progressive agenda of COPE",
+            "con_english":   "the COPE special interest agenda",
+            "synonyms":      ["COPE"]
+        },
+        {
+            "name":          "American Conservative Union",
+            "issues":        ["FOREIGN", "SOCIAL", "DEFICIT"],
+            "stances":       null,
+            "english":       "the American Conservative Union",
+            "english_short": "the ACU",
+            "pro_english":   "the ACU's conservative ideology",
+            "con_english":   "the ACU's right-wing reactionism",
+            "synonyms":      ["ACU"]
+        },
+        {
+            "name":          "Chamber of Commerce of the United States",
+            "issues":        ["ECONOMY"],
+            "stances":       null,
+            "english":       "the US Chamber of Commerce",
+            "english_short": "the Chamber of Commerce",
+            "pro_english":   "the stabilizing influence of the Chamber of Commerce",
+            "con_english":   "the narrow special interest of the Chamber of Commerce",
+            "synonyms":      ["COC"]
+        },
+        {
+            "name":          "Competitive Enterprise Institute",
+            "issues":        ["FREE-ENTERPRISE", "DEREGULATION", "PRIVATIZATION", "FREE-MARKET", "ANTI-TRUST-REFORM", "TRADE"],
+            "stances":       null,
+            "english":       "the Competitive Enterprise Institute",
+            "english_short": "the CEI",
+            "pro_english":   "the sound business agenda of CEI",
+            "con_english":   "the CEI business special interest lobby",
+            "synonyms":      ["CEI"]
+        }
+    ]
+}

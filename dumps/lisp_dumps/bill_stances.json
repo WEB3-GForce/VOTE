@@ -1,0 +1,149 @@
+{
+    "stances": [{
+            "name": "DEFENSE-AUTHORIZATION",
+            "for": [{
+                "issue": "CHEMICAL-WEAPONS",
+                "side": "CON",
+                "importance": "B",
+                "source_db": "BILL"
+            }],
+            "agn": [{
+                "issue": "REAGAN",
+                "side": "PRO",
+                "importance": "B",
+                "source_db": "BILL"
+            }, {
+                "issue": "CHEMICAL-WEAPONS",
+                "side": "PRO",
+                "importance": "B",
+                "source_db": "BILL"
+            }]
+        }, {
+            "name": "SPACE-STATION",
+            "for": [{
+                    "issue": "ELDERLY",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "HANDICAPPED",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "HOMELESSNESS",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "URBAN-RENEWAL",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }],
+            "agn": [{
+                    "issue": "SPACE",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }]
+        },
+
+        {
+            "name": "STAR-WARS",
+            "for": [{
+                    "issue": "SDI",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "SPENDING",
+                    "side": "CON",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }],
+            "agn": [{
+                    "issue": "REAGAN",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "SDI",
+                    "side": "PRO",
+                    "importance": "A",
+                    "source_db": "BILL"
+                }]
+        },
+
+        {
+            "name": "CIVIL-RIGHTS-RESTORATION-ACT",
+            "for": [{
+                    "issue": "CIVIL-RIGHTS",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "FAIRNESS",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "AGE-DISCRIMINATION",
+                    "side": "CON",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "EDUCATION-RIGHTS",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }],
+            "agn": [{
+                    "issue": "REAGAN",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "DEREGULATION",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }]
+        }, {
+            "name": "CHILD-CARE",
+            "for": [{
+                    "issue": "CHILD-CARE",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "FAMILY",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "EDUCATION",
+                    "side": "PRO",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }
+            ],
+            "agn": [{
+                    "issue": "FISCAL-RESPONSIBILITY",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "BUSH",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "BILL"
+                }, {
+                    "issue": "LABOR",
+                    "side": "CON",
+                    "importance": "C",
+                    "source_db": "BILL"
+                }]
+        }
+    ]
+}

@@ -16,7 +16,7 @@ DB = CLIENT.vote
 
 # Collections for all the objects
 MEMBER   = DB.member
-GROUP    = DB.group
+GROUP    = DB.groups
 BILL     = DB.bill
 ISSUE    = DB.issue
 RELATION = DB.relation
@@ -29,14 +29,14 @@ collection_list = [MEMBER, GROUP, BILL, ISSUE, RELATION, STANCE, STRATEGY, DECIS
 
 # Maps the names of the collections to their corresponding object
 # class
-collection_to_class_map = {"member" : Member, "group" : Group, "bill": Bill, "issue" : Issue, "relation": Relation, "stance": Stance, "strategy": Strategy, "decision" : Decision}
+collection_to_class_map = {"member" : Member, "groups" : Group, "bill": Bill, "issue" : Issue, "relation": Relation, "stance": Stance, "strategy": Strategy, "decision" : Decision}
 
 # Performs a query on the collection and then converts it into
 # an object of the corresponding class.
 def get(collection, query):
     data_hash = collection.find_one(query)
     collection_class = collection_to_class_map[collection.name]
-    
+
     if data_hash:
         return collection_class(**data_hash)
     return None
@@ -53,7 +53,7 @@ def encode_classes(value):
 
 # This function is used to encode Relation or Stance objects stored in a list.
 def list_encoding(list_value):
-    custom = encode_classes(list_value)
+    custom = map(encode_classes, list_value)
     return custom if custom else list_value
 
 # This decoding is used to decode any Relation or Stance objects stored directly
