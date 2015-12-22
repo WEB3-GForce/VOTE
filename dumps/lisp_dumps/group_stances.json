@@ -1,0 +1,186 @@
+{
+    "GOP":
+        [{
+            "source": "REPUBLICANS",
+            "source_db": "group",
+            "issue": "DEREGULATION",
+            "side": "PRO",
+            "importance": "B"
+        }],
+    "Democrats": [
+        {
+            "source": "DEMOCRATS",
+            "source_db": "group",
+            "issue": "CHILD-CARE",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "DEMOCRATS",
+            "source_db": "group",
+            "issue": "CIVIL-RIGHTS",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "DEMOCRATS",
+            "source_db": "group",
+            "issue": "DOMESTIC",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "DEMOCRATS",
+            "source_db": "group",
+            "issue": "LABOR",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "DEMOCRATS",
+            "source_db": "group",
+            "issue": "SDI",
+            "side": "CON",
+            "importance": "C"
+        }],
+    "COUNTRY": [{
+            "source": "COUNTRY",
+            "source_db": "group",
+            "issue": "CHILD-CARE",
+            "side": "PRO",
+            "importance": "C"
+        },
+        {
+            "source": "COUNTRY",
+            "source_db": "group",
+            "issue": "CIVIL-LIBERTIES",
+            "side": "PRO",
+            "importance": "C"
+        },
+        {
+            "source": "COUNTRY",
+            "source_db": "group",
+            "issue": "CIVIL-RIGHTS",
+            "side": "PRO",
+            "importance": "C"
+        },
+        {
+            "source": "COUNTRY",
+            "source_db": "group",
+            "issue": "EDUCATION-RIGHTS",
+            "side": "PRO",
+            "importance": "C"
+    }],
+        "ADA": [{
+            "source": "ADA",
+            "source_db": "group",
+            "issue": "HOUSING",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "ADA",
+            "source_db": "group",
+            "issue": "LABOR",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "ADA",
+            "source_db": "group",
+            "issue": "SDI",
+            "side": "CON",
+            "importance": "B"
+        },
+        {
+            "source": "ADA",
+            "source_db": "group",
+            "issue": "URBAN",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "ADA",
+            "source_db": "group",
+            "issue": "FOOD-STAMPS",
+            "side": "PRO",
+            "importance": "B"
+    }],
+    "COPE": [{
+            "source": "COPE",
+            "source_db": "group",
+            "issue": "LABOR",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "COPE",
+            "source_db": "group",
+            "issue": "CHILD-CARE",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "COPE",
+            "source_db": "group",
+            "issue": "SPENDING",
+            "side": "PRO",
+            "importance": "B"
+    }],
+    "ACU": [{
+            "source": "ACU",
+            "source_db": "group",
+            "issue": "LABOR",
+            "side": "CON",
+            "importance": "C"
+        },
+        {
+            "source": "ACU",
+            "source_db": "group",
+            "issue": "SDI",
+            "side": "PRO",
+            "importance": "B"
+    }],
+    "COC": [{
+            "source": "COC",
+            "source_db": "group",
+            "issue": "DEREGULATION",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "COC",
+            "source_db": "group",
+            "issue": "LABOR",
+            "side": "CON",
+            "importance": "B"
+        },
+        {
+            "source": "COC",
+            "source_db": "group",
+            "issue": "SPENDING",
+            "side": "CON",
+            "importance": "B"
+    }],
+    "CEI": [{
+            "source": "CEI",
+            "source_db": "group",
+            "issue": "DEREGULATION",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "CEI",
+            "source_db": "group",
+            "issue": "FREE-ENTERPRISE",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "CEI",
+            "source_db": "group",
+            "issue": "PRIVATIZATION",
+            "side": "PRO",
+            "importance": "B"
+    }]
+}

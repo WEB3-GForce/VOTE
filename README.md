@@ -22,7 +22,7 @@ Status: [ not started :black_medium_square: | completed :white_check_mark: | in 
 ### In progress / to-do:
 
 - database
-  - adding member stances, bills, relations, and groups
+  - adding member, stances, bills, relations, and groups :white_check_mark:
 - proofing the code ~ trying to run the entire system
 - make sure the following functions work:
 
@@ -42,16 +42,16 @@ update_decision_dbase(decision) # insert into database
 - add pretty print to analyze
 - files to complete
   - vote.py
-  - strategies.py
-     - majority
-     - consensus
-     - strat_simple_consensus
-     - strat_popular
-     - firm decision
-     - decision outcome
-     - strat_simple_majority
+  - strategies.py : we need decision object to store bill mongo ids
+     - majority :white_check_mark:
+     - consensus :white_check_mark:
+     - strat_simple_consensus :white_check_mark:
+     - strat_popular :white_check_mark:
+     - firm_decision :white_check_mark:
+     - set_decision_outcome :white_check_mark:
+     - strat_simple_majority :white_check_mark:
   - decision.py
-- readme 
+- readme
 - initialize_db.py
 - requirements to install ~
 - project summary

@@ -35,7 +35,7 @@ def main():
     COLLECTION = DB[dbName]
 
     result = loads(open(fileName).read())
-          
+
     for hash_data in result:
         an_object = class_names[dbName](**hash_data)
 

@@ -1,4 +1,6 @@
 import operator
+import pol.database as db
+from pol.decision import *
 
 """
       As of 9/25/90
@@ -34,25 +36,27 @@ def flatten(a_list):
 #  firm-decision  sets final outcome of decision structure
 # ------------------------------------------------------------------
 
+# TODO: check collect_bills correctly defined
 def firm_decision(decision, side, reasons, old_downside, strat):
-    bill = DBBill.getById(decision.bill)
+    bill = db.get(db.BILL, {"_id": decision.bill})
     filter_fin = lambda stance : stance.source == bill.id
     downside = filter(filter_fun, flatten(old_downside))
     record = collect_bills(downside)
-    
+
     decision.result = side
     decision.reason = reasons
     decision.strategy = strat
-    
+
     if record:
         decision.downside_record = record
         decision.downside = remove_intersection(downside, record, operator.eq)
-    
+
     else:
         decision.downside = downside
 
     return decision
 
+# TODO
 def set_decision_outcome(decision, result, strat):
     if result == "FOR":
         reason = decision.for_stances
@@ -63,7 +67,7 @@ def set_decision_outcome(decision, result, strat):
     else:
         print "Reason expected to be FOR or AGN. Got: %s" % reason
         return
-    
+
     return firm_dicision(decision, result, reason, downside, strat)
 
 """
@@ -80,12 +84,12 @@ def set_decision_outcome(decision, result, strat):
   Test-code:     STRAT-POPULAR
   Example:       (VOTE 'BRUCE 'PLANT-CLOSING)
 ==================================================================
-"""    
+"""
 
 def strat_popular(decision, strat):
-    for_stances = decision.for_Stances
+    for_stances = decision.for_stances
     agn_stances = decision.agn_stances
-    
+
     if not for_stances and agn_stances:
         return firm_decision(decision, "AGN", agn_stances, [], strat)
     elif not agn_stances and for_stances:
@@ -104,7 +108,7 @@ def strat_popular(decision, strat):
 def strat_inconsistent_constituency(decision, strat):
     source_conflicts = decision.split_group
     result = consensus(decision)
-    
+
     if not source_conflicts:
         return None
     elif result:
@@ -113,9 +117,9 @@ def strat_inconsistent_constituency(decision, strat):
         return None
 
 def majority(decision):
-    fors = decision.number_for
-    agns = decision.number_agn
-    
+    fors = decision.number_for if decision.number_for else len(decision.stance_for)
+    agns = decision.number_agn if decision.number_agn else len(decision.stance_agn)
+
     if fors > agns:
         return "FOR"
     elif agns > fors:
@@ -126,15 +130,15 @@ def majority(decision):
 def consensus(decision):
     filter_fun = lambda lst : lst[0]
     MI = map(filter_fun, collect_MI(decision))
-    
+
     if len(remove_duplicates(MI)) == 1 :
         return MI[0]
     else:
         return None
 
-def collect_MI(decion):
+def collect_MI(decision):
     result = [decision.MI_stance, decision.MI_group, decision.MI_credo, decision.MI_record, decision.MI_norm]
-    
+
     filter_fun = lambda x : x != []
     return filter(filter_fun, result)
 
@@ -142,7 +146,7 @@ def collect_MI(decion):
 """
 ==================================================================
       2   Non-partisan decision                   [B]  (NON-PARTISAN)
-  
+
   Remarks:       Vote of conscience or credo that violates party line.  Not a district vote.
   Quote:         Sometimes party loyalty demands too much. (JFK)
   Rank:          "B"
@@ -160,21 +164,21 @@ def strat_non_partisan(decision, strat):
     credo_side = credo[0]
     credo_stance_list = credo[1]
     opposing_groups = decision.group_agn if credo_side == "FOR" else decision.group_for
-    
+
     party = "Unknown Party Affiliation"
     if member.party == "REP":
         party = "REPUBLICANS"
     if member.party == "DEM":
         party = "Democrats"
-    
+
     # Translate the following and add it to the if statement
     # below:
 
     # (member party (mapcar #'stance-source opposing-groups)
     #any(party == group.stance for group)
-    
+
     credo_stance1 = DBStance.getById(credo_stance_list[0])
-    
+
     if (credo and opposing_groups and credo_stance_list and
         most_important(credo_stance1.importance)):
         return set_decision_outcome(decision, credo_side, strat)
@@ -197,19 +201,19 @@ def strat_not_constitutional(decision, strat):
 
     result = consensus(decision)
 
-    if result == "AGN" and filter(filter_fun, decision.agn_stances):    
-    
+    if result == "AGN" and filter(filter_fun, decision.agn_stances):
+
         reason = decision.agn_stances
         downside = decision.for_stances
         return firm_decision(decision, result, reason, downside, strat)
-    
+
     else:
         return None
-    
+
 """
 ==================================================================
       4   Unimportant Bill                        [B]   (UNIMPORTANT-BILL)
-  
+
   Date-open:     Monday, May 22, 1989
   Symbol:        STRATEGY.681
   Name:          "Unimportant Bill"
@@ -217,15 +221,15 @@ def strat_not_constitutional(decision, strat):
   Synonyms:      (UNIMPORTANT-BILL)
   Isa-depth:     ""
   Remarks:       Not much riding on this bill.
-  
+
   Quote:         [Morrison:] some things that are close calls are not treated
                  as close calls because they're not important enough.  I mean
                  its very different if there's enough riding -- either substantively
                  or politically -- on a vote.  You might have exactly the same
-                 tensions among the various priorities if you were to pull 
+                 tensions among the various priorities if you were to pull
                  this up, but it might be about how you spend $100,000 and you
                  say, **** this.
-  
+
   Rank:          "B"
   Test:          Importance of bill is minimal.
 ==================================================================
@@ -234,7 +238,7 @@ def strat_not_constitutional(decision, strat):
 def strat_unimportant_bill(decision, strat):
     result = consensus(decision)
     importance = DBBill.GetById(decision.bill).importance
-    
+
     if result and importance == "C":
         return set_decision_outcome(decision, result, strat)
     else:
@@ -286,9 +290,9 @@ def strat_best_for_country(decision, strat):
                               #'(lambda (st) (eq country (reveal-source st)))))
     country_for = None
     # (country-agn (collect (decision-group-agn decision)
-                              #'(lambda (st) (eq country (reveal-source st))))) 
+                              #'(lambda (st) (eq country (reveal-source st)))))
     country_agn = None
-    
+
     if result == "FOR" and country_for and not country_agn:
         return set_decision_outcome(decision, result, strat)
     elif result == "AGN" and country_agn and not country_for:
@@ -299,7 +303,7 @@ def strat_best_for_country(decision, strat):
 """
 ==================================================================
       7   Change of heart                         [C]  (CHANGE-OF-HEART)
-  
+
   Remarks:       Reverse a credo/vote position on the record to accomodate
                  conflict in constituencies.
   Quote:         A foolish consistency is the hobgoblin of small minds.
@@ -319,7 +323,7 @@ def strat_change_of_heart(decision, strat):
 """
 ==================================================================
       8   Inoculation                            [C]  (INOCULATION)
-  
+
   Remarks:       Decision which may prove to be unpopular later on.
                  Need to begin laying groundwork for defense early on.
   Rank:          "C"
@@ -337,7 +341,7 @@ def strat_inoculation(decision, strat):
         temp = decision.group_for + decision.group_agn
         temp.sort(key=lambda stance: stance.sort_key)
         importance_level = temp[0].importance
-        
+
     if (result and split_groups and less_than_importance(importance_level1, "B")):
         return set_decision_outcome(decision, result, strat)
     else:
@@ -367,7 +371,7 @@ def strat_could_not_pass(decision, strat):
 
 def might_pass(billid):
     tally = DBBill.GetById(billid).vote_tally
-    
+
     if tally:
         return approved(billid) or vote_ratio(billid) > 1
 
@@ -380,15 +384,15 @@ def vote_ratio(billid):
     tally = DBBill.GetById(billid).vote_tally
     fors = tally[0]
     agns = tally[1]
-    
+
     if type(fors) != type(0) and type(agns) != type(0):
         return None
-    
+
     # Simply let the ratio be fors if agn is 0 to avoid divide
     # by 0.
     if agn == 0:
         return fors
-    
+
     if fors and agns:
         return fors/agns
 
@@ -418,17 +422,16 @@ def strat_minimize_adverse_effects(decision, strat):
         MI_up_level = get_MI_level(decision, result)
         MI_down_level = get_MI_level(decision, oposite_result(result))
         if greater_than_importance(MI_up_level, MI_down_level):
-            return set_decision_outcome(decision, result, strat)        
-        
+            return set_decision_outcome(decision, result, strat)
     return None
 
 def get_MI_level(decision, result):
-    stances = None 
+    stances = None
     if result == "FOR":
-        stances = decision.for_stances 
+        stances = decision.for_stances
     if result == "AGN":
         stances = decision.agn_stances
-    
+
     if stances:
         stances.sort(key=lambda stance: stance.sort_key)
         return stances[0].importance
@@ -470,7 +473,7 @@ def strat_not_good_enough(decision, strat):
     if result:
         MI_up_level = get_MI_level(decision, result)
         MI_bill_level = get-MI-bill-level(decision, result)
-    
+
     if result == "FOR" and greater_than_importance(MI_up_level, MI_bill_level):
         return set_decision_outcome(decision, "AGN", strat)
     else:
@@ -483,7 +486,7 @@ def get_MI_bill_level(decision, result):
         stances = bill.stance_for
     if result == "AGN":
         stances = bill.stance_agn
-     
+
     if stances:
         stances.sort(key=lambda stance: stance.sort_key)
         return stances[0].importance
@@ -512,7 +515,7 @@ def start_partisan(decision, strat):
         MI_up_level = get_MI_level(decision, result)
         update_con_rel_stances(decision)
         MI_con_rel_level = get_MI_con_rel_level(decision, opposite_result(result))
-    
+
         if MI_con_rel_level and less_than_importance(MI_up_level , MI_con_rel_level):
             return set_decision_outcome(decision, result, strat)
 
@@ -520,7 +523,7 @@ def start_partisan(decision, strat):
 
 def update_con_rel_stances(decision):
     decision.con_rel_for_stances = match_con_rel_stances_for_agn(decision, "FOR")
-    
+
     decision.con_rel_agn_stances = match_con_rel_stances_for_agn(decision, "AGN")
     return "DONE"
 
@@ -530,7 +533,7 @@ def get_MI_con_rel_level(decision, result):
         stances = decision.con_rel_for_stances
     elif result == "AGN":
         stances = decision.con_rel_agn_stances
-    
+
     if stances:
         stances.sort(key = lambda stance: stance.sort_key)
         return stances[0].importance
@@ -545,7 +548,7 @@ def match_con_rel_stances(stance_id, mem_id):
     member = DBMember.GetById(mem_id)
     filter_fun = lambda mem_stance : mem_stance.match(stance)
     matches = filter(filter_fun, member.con_rel_stances)
-    
+
     filter_fun = lambda element : element != []
     return filter(filter_fun, matches)
 
@@ -557,23 +560,23 @@ def match_con_rel_stances_for_agn(decision, side):
     print "Vote %s %s" % (side, bill.bnumber)
     print "Considering counter-planning implications of %s %s" % (side, bill.bnumber)
     print "Matching member con-rel stances with bill stances:"
-    
+
     bill_stance = bill.stance_for
-    
+
     if side == "AGN":
         bill_stance = bill.stance_agn
-     
+
     sort_key = member.stance_sort_key or "EQUITY"
-    
+
     stances = []
     for stance in bill_stance:
         stances += match_con_rel_stances(stance, decision.member)
 
     print "Sorting stances based on %s order..." % sort_key
-    
+
     for stance in stances:
         stance.set_sort_key(sort_key)
-    
+
     stances.sort(key=lambda stance: stance.sort_key)
     print "Done."
     print "Stances %s" %side
@@ -608,7 +611,7 @@ def strat_shifting_alliances(decision, strat):
 """
 ==================================================================
         15  Simple consensus                        [C] @ (SIMPLE-CONSENSUS)
-  
+
   Status:        "Active"
   Date-open:     Thursday, May 11, 1989
   Symbol:        STRATEGY.1018
@@ -617,15 +620,15 @@ def strat_shifting_alliances(decision, strat):
   Synonyms:      (SIMPLE-CONSENSUS)
   Isa-depth:     ""
   Remarks:       The most important issues/groups/norms etc. concur.
-  
+
   Rank:          "C"
   Test:          Check all most important features
-  
+
   Test-code:     STRAT-SIMPLE-CONSENSUS
 ==================================================================
 """
 
-def strat_stimple_consensus(decision, strat):
+def strat_simple_consensus(decision, strat):
     result = consensus(decision)
     if result:
         return set_decision_outcome(decision, result, strat)
@@ -635,7 +638,7 @@ def strat_stimple_consensus(decision, strat):
 """
 ==================================================================
     *   16  Deeper analysis                         [D+]   (DEEPER-ANALYSIS)
-  
+
   Status:        "Active"
   Date-open:     Sunday, February 11, 1990
   Symbol:        STRATEGY.323
@@ -643,7 +646,7 @@ def strat_stimple_consensus(decision, strat):
   Synonyms:      (DEEPER-ANALYSIS)
   Isa-depth:     ""
   Remarks:       Consider the symbolic implication of the for/agn stances of the bill.
-  
+
   Rank:          "D+"
   Test:          Find a consensus after expanding the bill-stance through inference.
 ==================================================================
@@ -659,7 +662,7 @@ def strat_deeper_analysis(decision, strat):
         strategies = DBStrategy.GetAll()
         return apply_strats(decision, filter(filter_fun, strategies))
     else:
-        return strat_deeper_analysis2(decision, strat)  
+        return strat_deeper_analysis2(decision, strat)
 
 def strat_deeper_analysis2(decision, strat):
     level = new_analysis_level(decision)
@@ -667,35 +670,35 @@ def strat_deeper_analysis2(decision, strat):
     bill = DBBill.GetById(billid)
     old_bill_for_stances = bill.stance_for
     old_bill_agn_stances = bill.stance_agn
-    
+
     filter_fun = lambda strategy : not strategy.no_second_try
     strategies = filter(filter_fun, DBStrategy.GetAll())
-    
+
     new_bill_for_stance  = expand_stances(old_bill_for_stances, level)
     new_bill_agn_stances = expand_stances(old_bill_agn_stances, level)
 
     temp_for = remove_intersection(new_bill_for_stances, new_bill_agn_stances, stance_equal)
-    
+
     temp_agn = remove_intersection(new_bill_agn_stances, new_bill_for_stances, stance_equal)
-    
+
     new_bill_for_stance  = temp_for
     new_bill_agn_stances = temp_agn
-    
+
     if level == "D":
         return None
     elif (len(new_bill_for_stances) > len(old_bill_for_stances) or
          len(new_bill_agn_stances) > len(old_bill_agn_stances)):
          print "Deeper Analysis results in new bill stances at level %s..." % level
-         
+
          print_new_stances(new_bill_for_stances, old_bill_for_stances, "FOR")
-         
+
          print_new_stances(new_bill_agn_stances, old_bill_agn_stances, "AGN")
-         
+
          bill.stance_for = new_bill_for_stances
          bill.stance_agn = new_bill_agn_stances
-         
+
          reanalyze_decision(decision)
-         
+
          result = apply_strats(decision, strats)
          bill.stance_for = old_bill_for_stances
          bill.stance_agn = old_bill_agn_stances
@@ -706,7 +709,7 @@ def strat_deeper_analysis2(decision, strat):
 
 def reanalyze_decision(decision):
     print "Re-Analyzing alternative positions"
-    
+
     decision.for_stances = match_stances_for_agn(decision, "FOR")
     decision.agn_stances = match_stances_for_agn(decision, "AGN")
     decision.update_decision_metrics()
@@ -738,18 +741,18 @@ def expand_stances(stance_list, level):
 
 
 #  Expand the stances that are of importance greater than or equal
-#  to the given level of importance.  
+#  to the given level of importance.
 
 def expand_one_stance(stance, level):
     side = stance.side
     issue = DBIssue.GetById(stance.issue)
-    
+
     new_stances = []
     if side == "PRO":
         new_stances = issue.pro_stances
     elif side == "CON":
         new_stances = issue.con_stances
-    
+
     filter_fun = lambda stance : greater_than_or_equal_importance(stance.importance, level)
     return filter(filter_fun, new_stances)
 
@@ -760,7 +763,7 @@ def set_filter(set1, set2):
 
 def strat_simple_majority(decision, strat):
     result = majority(decision)
-    
+
     if result:
         return set_decision_outcome(decision, result, strat)
     else:
@@ -769,10 +772,10 @@ def strat_simple_majority(decision, strat):
 def print_new_stances(new, old, side):
     if len(new) > len(old):
         print "New %s stances resulting from deeper analysis: " % side
-     
+
         for stance in remove_intersection(new, old, stance_equal):
             print stance
-        
+
 
 """
 ==================================================================
@@ -788,7 +791,7 @@ def print_new_stances(new, old, side):
 def strat_normative(decision, strat):
     for_norms = decision.for_bnorms
     agn_norms = decision.agn_bnorms
-    
+
     if not for_norms and agn_norms:
         return firm_decision(decision, "AGN", agn_norms, [], strat)
     elif for_norms and not agn_norms:
