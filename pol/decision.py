@@ -16,6 +16,10 @@ class Decision(PrintableObject):
         """
         Constructs a new Decision object.
 
+        isa_depth           -- ?
+        sort_key            -- ?
+        bill                -- the bill the decision is being made on
+        member              -- the member making the decision.
         for_stances         -- list of stances in favor
         agn_stances         -- list of stances opposed
         neg_for_stances     -- list of flip stances in favor
@@ -52,24 +56,24 @@ class Decision(PrintableObject):
         """
         self.isa_depth = None
         self.sort_key = None
-        self.bill = None
-        self.member = None
-        self.for_stances = None
-        self.agn_stances = None
-        self.neg_for_stances = None
-        self.neg_agn_stances = None
-        self.con_rel_for_stances = None
-        self.con_rel_agn_stances = None
+        self.bill = []
+        self.member = []
+        self.for_stances = []
+        self.agn_stances = []
+        self.neg_for_stances = []
+        self.neg_agn_stances = []
+        self.con_rel_for_stances = []
+        self.con_rel_agn_stances = []
         self.no_update = None
         self.number_for = None
         self.number_agn = None
-        self.group_for = None
-        self.group_agn = None
-        self.for_norms = None
-        self.agn_norms = None
-        self.for_bnorms = None
-        self.agn_bnorms = None
-        self.split_group = None
+        self.group_for = []
+        self.group_agn = []
+        self.for_norms = []
+        self.agn_norms = []
+        self.for_bnorms = []
+        self.agn_bnorms = []
+        self.split_group = []
         self.split_record = None
         self.split_credo = None
         self.MI_stance = None
@@ -81,7 +85,7 @@ class Decision(PrintableObject):
         self.result = None
         self.reason = None
         self.downside = None
-        self.downside_record = None
+        self.downside_record = []
         self.deeper_analysis = None
         self.real_vote = None
         self.score = None

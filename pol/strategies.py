@@ -180,7 +180,7 @@ def strat_non_partisan(decision, strat):
     credo_stance1 = DBStance.getById(credo_stance_list[0])
 
     if (credo and opposing_groups and credo_stance_list and
-        most_important?(credo_stance1.importance):
+        most_important(credo_stance1.importance)):
         return set_decision_outcome(decision, credo_side, strat)
     else:
         return None
@@ -342,9 +342,9 @@ def strat_inoculation(decision, strat):
         temp.sort(key=lambda stance: stance.sort_key)
         importance_level = temp[0].importance
 
-     if result and split_groups and less_than_importance?(importance_level1, "B"):
+    if (result and split_groups and less_than_importance(importance_level1, "B")):
         return set_decision_outcome(decision, result, strat)
-     else:
+    else:
         return None
 
 """
@@ -361,21 +361,21 @@ def strat_inoculation(decision, strat):
 ==================================================================
 """
 
-def strat_could_not_pass(decision, strat)
+def strat_could_not_pass(decision, strat):
     result = majority(decision)
     billid = decision.bill
-    if result == "AGN" and could_not_pass?(billid):
+    if result == "AGN" and could_not_pass(billid):
         return set_decision_outcome(decision, result, strat)
     else:
         return None
 
-def might_pass?(billid):
+def might_pass(billid):
     tally = DBBill.GetById(billid).vote_tally
 
     if tally:
-        return approved?(billid) or vote_ratio(billid) > 1
+        return approved(billid) or vote_ratio(billid) > 1
 
-def could_not_pass?(billid):
+def could_not_pass(billid):
     tally = DBBill.GetById(billid).vote_tally
     if tally:
         return vote_ratio(billid) < 1
@@ -396,11 +396,11 @@ def vote_ratio(billid):
     if fors and agns:
         return fors/agns
 
-def approved?(bill):
+def approved(bill):
     tally = DBBill.GetById(billid).vote_tally
     return tally[0] in ["PASSED", "ADOPTED", "APPROVED"]
 
-def rejected?(bill):
+def rejected(bill):
     tally = DBBill.GetById(billid).vote_tally
     return tally[0] in ["REJECTED", "FAILED"]
 
@@ -421,22 +421,21 @@ def strat_minimize_adverse_effects(decision, strat):
     if result:
         MI_up_level = get_MI_level(decision, result)
         MI_down_level = get_MI_level(decision, oposite_result(result))
-        if greater_than_importance?(MI_up_level, MI_down_level):
+        if greater_than_importance(MI_up_level, MI_down_level):
             return set_decision_outcome(decision, result, strat)
-
     return None
 
 def get_MI_level(decision, result):
     stances = None
     if result == "FOR":
         stances = decision.for_stances
-    if result == "AGN"
+    if result == "AGN":
         stances = decision.agn_stances
 
     if stances:
         stances.sort(key=lambda stance: stance.sort_key)
         return stances[0].importance
-     else:
+    else:
         return "D"
 
 """
@@ -475,7 +474,7 @@ def strat_not_good_enough(decision, strat):
         MI_up_level = get_MI_level(decision, result)
         MI_bill_level = get-MI-bill-level(decision, result)
 
-    if result == "FOR" and greater_than_importance?(MI_up_level, MI_bill_level):
+    if result == "FOR" and greater_than_importance(MI_up_level, MI_bill_level):
         return set_decision_outcome(decision, "AGN", strat)
     else:
         return None
@@ -485,13 +484,13 @@ def get_MI_bill_level(decision, result):
     stances = None
     if result == "FOR":
         stances = bill.stance_for
-    if result = "AGN":
+    if result == "AGN":
         stances = bill.stance_agn
 
-     if stances:
+    if stances:
         stances.sort(key=lambda stance: stance.sort_key)
         return stances[0].importance
-     else:
+    else:
         # In Python, "A" > None, but we want A to be of
         # higher importance. Hence, we use an importance
         # of "Z" that will be lower than all others.
@@ -517,7 +516,7 @@ def start_partisan(decision, strat):
         update_con_rel_stances(decision)
         MI_con_rel_level = get_MI_con_rel_level(decision, opposite_result(result))
 
-        if MI_con_rel_level and less_than_importance?(MI_up_level , MI_con_rel_level):
+        if MI_con_rel_level and less_than_importance(MI_up_level , MI_con_rel_level):
             return set_decision_outcome(decision, result, strat)
 
     return None
@@ -547,7 +546,7 @@ def match_con_rel_stances(stance_id, mem_id):
     print stance_id
     stance = DBStance.GetById(stance_id)
     member = DBMember.GetById(mem_id)
-    filter_fun = lambda mem_stance : mem_stance.match?(stance)
+    filter_fun = lambda mem_stance : mem_stance.match(stance)
     matches = filter(filter_fun, member.con_rel_stances)
 
     filter_fun = lambda element : element != []
@@ -661,7 +660,7 @@ def strat_deeper_analysis(decision, strat):
         reanalyze_decision(decision)
         filter_fun = lambda strategy : not strategy.no_second_try
         strategies = DBStrategy.GetAll()
-        return apply_strats(decision, filter(filter_fun, strategies)
+        return apply_strats(decision, filter(filter_fun, strategies))
     else:
         return strat_deeper_analysis2(decision, strat)
 
@@ -678,9 +677,9 @@ def strat_deeper_analysis2(decision, strat):
     new_bill_for_stance  = expand_stances(old_bill_for_stances, level)
     new_bill_agn_stances = expand_stances(old_bill_agn_stances, level)
 
-    temp_for = remove_intersection(new_bill_for_stances, new_bill_agn_stances, stance_equal?)
+    temp_for = remove_intersection(new_bill_for_stances, new_bill_agn_stances, stance_equal)
 
-    temp_agn = remove_intersection(new_bill_agn_stances, new_bill_for_stances, stance_equal?)
+    temp_agn = remove_intersection(new_bill_agn_stances, new_bill_for_stances, stance_equal)
 
     new_bill_for_stance  = temp_for
     new_bill_agn_stances = temp_agn
@@ -754,7 +753,7 @@ def expand_one_stance(stance, level):
     elif side == "CON":
         new_stances = issue.con_stances
 
-    filter_fun = lambda stance : greater_than_or_equal_importance?(stance.importance, level)
+    filter_fun = lambda stance : greater_than_or_equal_importance(stance.importance, level)
     return filter(filter_fun, new_stances)
 
 
@@ -774,7 +773,7 @@ def print_new_stances(new, old, side):
     if len(new) > len(old):
         print "New %s stances resulting from deeper analysis: " % side
 
-        for stance in remove_intersection(new, old, stance_equal?):
+        for stance in remove_intersection(new, old, stance_equal):
             print stance
 
 
