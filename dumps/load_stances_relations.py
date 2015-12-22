@@ -55,5 +55,10 @@ def load_relations():
     # member_name used as key
     for member_name in member_relations:
         relations = [db.Relation(**d) for d in member_relations[member_name]]
-        relations_encoded = map(encode_classes, relations)
+        relations_encoded = map(db.encode_classes, relations)
         db.MEMBER.update_one({"name": member_name}, {"$set": {"relations": relations_encoded}})
+
+load_bill_stances()
+load_groups()
+load_group_stances()
+load_relations()
