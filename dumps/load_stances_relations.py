@@ -6,7 +6,7 @@ from pol.group import Group
 
 def load_member_stances():
     bill_stances = json.load(open("lisp_dumps/bill_stances.json"))["stances"]
-
+    # bill_stances is just a list
     for stance in bill_stances:
         bill_syn = stance["name"].upper()
         for_stances = []
@@ -23,6 +23,7 @@ def load_member_stances():
 
 def load_groups():
     groups = json.load(open("lisp_dumps/group.json"))["groups"]
+    # groups is just a list
     for hash_data in groups:
         try:
             group = Group(**hash_data)
@@ -37,6 +38,7 @@ def load_groups():
 
 def load_group_stances():
     group_stances = json.load(open("lisp_dumps/group_stances.json"))
+    # group_synonym used as key
     for group_syn in group_stances:
         stances = []
         for hash_data in group_stances[group_syn]:
@@ -50,7 +52,7 @@ def load_group_stances():
 
 def load_relations():
     member_relations = json.load(open("lisp_dumps/member_relations.json"))
-
+    # member_name used as key
     for member_name in member_relations:
         relations = [db.Relation(**d) for d in member_relations[member_name]]
         relations_encoded = map(encode_classes, relations)
