@@ -4,7 +4,7 @@ from pol.database import *
 
 
 for COLLECTION in collection_list:
-    with open('test_folder/' + COLLECTION.name + '.txt', 'w') as f:
+    with open('mongo_dumps/' + COLLECTION.name + '.txt', 'w') as f:
         for data in COLLECTION.find({}):
             for key in ["stances", "stance_for", "stance_agn", "relations", "norm"]:
                 if key in data and isinstance(data[key], list):
