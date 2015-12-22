@@ -5,7 +5,7 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 
 - Python 2.7
 - [pymongo](http://api.mongodb.org/python/current/installation.html) >= 3.2
-- [MongoDB](https://docs.mongodb.org/v3.0/installation/) 3.0.7 (for Mac, just run 'brew install mongodb' in Terminal)
+- [MongoDB](https://docs.mongodb.org/v3.0/installation/) 3.0.7 (for Mac, just run '[brew](http://brew.sh) install mongodb' in Terminal)
 
 ## Running the code
 
