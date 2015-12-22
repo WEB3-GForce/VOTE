@@ -13,7 +13,7 @@
             "pro_french": null,
             "instances": null,
             "synonyms": [
-                "GOP"
+                "GOP", "REPUBLICANS"
             ],
             "stances": null,
             "french": null,
@@ -36,7 +36,7 @@
             "number": "PLUR",
             "pro_french": null,
             "instances": null,
-            "synonyms": null,
+            "synonyms": ["DEMOCRATS"],
             "stances": null,
             "french": "les membres du parti De'mocratique",
             "pro_english": "progressive, compassionate Democrats",

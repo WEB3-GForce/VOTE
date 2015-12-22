@@ -70,7 +70,11 @@ def vote_helper(member, bill):
 
     update_decision_metrics(decision)
 
+    print member
+    print decision
+
     apply_decision_strategies(decision)
+    #print bill
 
     # Future update. Add the real vote counts.
     #compare_with_real_vote(vote_decision)
@@ -250,7 +254,7 @@ def remove_old_votes(stances, bill):
 # This flag is used in remove_old_votes. This is used to determine whether the
 # function should filter stances such that only stances that originate from the
 # bill are kept.
-no_old_votes = True
+no_old_votes = False
 
 
 def no_old_votes(flag):

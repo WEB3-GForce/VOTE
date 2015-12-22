@@ -1,0 +1,45 @@
+{
+    "name"       : "Robert William Kastenmeier",
+    "fname"      : "Robert",
+    "lname"      : "Kastenmeier",
+    "votes"      : [["DEFENSE-AUTHORIZATION", "FOR"], ["SPACE-STATION", "FOR"], ["STAR-WARS", "FOR"]],
+    "district"   : "WI-2",
+    "term_start" : "1958",
+    "term_end"   : "1990",
+    "party"      : "DEM",
+    "committees" : ["HOUSE-JUDICIARY", "HOUSE-INTELLIGENCE"]
+}
+
+{
+  "name" :  "Timothy Peter Johnson",
+  "fname" : "TIMOTHY",
+  "lname" : "JOHNSON",
+  "gender" : "MALE",
+  "votes" : [["DEFENSE-AUTHORIZATION", "FOR"], ["CIVIL-RIGHTS-RESTORATION-ACT", "FOR"], ["CHILD-CARE", "FOR"]],
+  "district": "SD-AL",
+  "term_start": "1986",
+  "party"     : "DEM",
+  "committees" :  ["HOUSE-AGRICULTURE", "HOUSE-VETERANS-AFFAIRS"],
+}
+
+{
+  "name"  : "Stan Parris",
+  "fname" : "STAN",
+  "lname" : "PARRIS",
+  "votes" : [["DEFENSE-AUTHORIZATION" "AGN"], ["SPACE-STATION", "AGN"],
+                ["CIVIL-RIGHTS-RESTORATION-ACT" "AGN"]],
+  "district": "VA-8",
+  "term_start": 1980,
+  "term_end" :  1990,
+  "party"    :  "REP",
+  "committees" : ["HOUSE-BANKING", "HOUSE-DC"]
+}
+
+{
+	"name"   : "Republicans",
+        "english" : "Republicans",
+	"pro_english": "conservative and fiscally responsible Republicans",
+	"con_english": "heartless and reactionary Republicans",
+	"number":  "PLUR",
+	"synonyms": ["GOP"]
+}

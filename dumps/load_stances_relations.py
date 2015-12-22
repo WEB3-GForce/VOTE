@@ -39,7 +39,7 @@ def load_group_stances():
     # group_synonym used as key
     for group_syn in group_stances:
         stances = []
-        for hash_data in group_stances[group_syn]:p
+        for hash_data in group_stances[group_syn]:
             stances.append(Stance(**hash_data))
         stances_encoded = map(db.encode_classes, stances)
         query = {"$or": [{"name": group_syn},

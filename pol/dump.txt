@@ -1,0 +1,12 @@
+[{
+    "group" : {"$oid": "56720223a58a140c1598146c"},
+    "importance" : "AAAZAC",
+    "side" : "PRO",
+    "source" : {"$oid": "5671d7f9a58a145b1f1c906d"}
+},
+{
+    "group" : {"$oid": "56720223a58a140c1598146c"},
+    "importance" : "AAAZAC",
+    "side" : "PRO",
+    "source" : {"$oid": "5671d7f9a58a145b1f1c906d"}
+}]
