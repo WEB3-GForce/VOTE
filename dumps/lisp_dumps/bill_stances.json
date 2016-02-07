@@ -53,7 +53,7 @@
             "name": "STAR-WARS",
             "for": [{
                     "issue": "SDI",
-                    "side": "PRO",
+                    "side": "CON",
                     "importance": "C",
                     "source_db": "bill"
                 }, {

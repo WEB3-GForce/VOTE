@@ -37,5 +37,9 @@ def find_intersection(list1, list2, equal_fun):
     filter_fun = lambda item : any(equal_fun(item, element) for element in list2)
     return filter(filter_fun, list1)
 
+
+def find_intersection_both(list1, list2, equal_fun):
+    return find_intersection(list1, list2, equal_fun) + find_intersection(list2, list1, equal_fun)
+
 def remove_duplicates(the_list):
     return list(set(the_list))

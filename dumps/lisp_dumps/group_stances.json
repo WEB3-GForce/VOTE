@@ -6,6 +6,20 @@
             "issue": "DEREGULATION",
             "side": "PRO",
             "importance": "B"
+        },
+        {
+            "source": "REPUBLICANS",
+            "source_db": "group",
+            "issue": "SDI",
+            "side": "PRO",
+            "importance": "A"
+        },
+        {
+            "source": "REPUBLICANS",
+            "source_db": "group",
+            "issue": "SDI",
+            "side": "CON",
+            "importance": "B"
         }],
     "Democrats": [
         {

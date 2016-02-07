@@ -18,7 +18,7 @@ DB = CLIENT.vote
 
 # Collections for all the objects
 MEMBER   = DB.member
-GROUP    = DB.groups
+GROUP    = DB.group
 BILL     = DB.bill
 ISSUE    = DB.issue
 RELATION = DB.relation #(don't need relation table)
@@ -31,7 +31,7 @@ collection_list = [MEMBER, BILL, ISSUE, RELATION, STRATEGY, DECISION]
 
 # Maps the names of the collections to their corresponding object
 # class
-collection_to_class_map = {"member" : Member, "groups" : Group, "bill": Bill, "issue" : Issue, "relation": Relation, "stance": Stance, "strategy": Strategy, "decision" : Decision}
+collection_to_class_map = {"member" : Member, "group" : Group, "bill": Bill, "issue" : Issue, "relation": Relation, "stance": Stance, "strategy": Strategy, "decision" : Decision}
 
 # Performs a query on the collection and then converts it into
 # an object of the corresponding class.

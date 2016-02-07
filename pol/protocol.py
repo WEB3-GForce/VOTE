@@ -45,7 +45,7 @@ def protocol_unimportant_bill(decision):
 def protocol_inconsistent_constituency(decision):
     protocol_simple_consensus(decision)
     groups = decision.split_group
-    print "The same group {0} has stances on both sides of this bill: {1:>15}".format(len(groups), groups)
+    print "One or more groups have stances on both sides of this bill: {0:>15}".format(groups)
 
 
 def protocol_balance_the_books(decision):

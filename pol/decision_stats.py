@@ -1,6 +1,7 @@
 from printable_object import PrintableObject
 from database import *
 from constants import *
+from stance import *
 from utils import *
 
 def update_decision_metrics(decision):
@@ -41,7 +42,8 @@ def update_decision_metrics(decision):
     # group. If so, the group is split on the issue. I then include all stances
     # by that group in this variable.
     eq_fun = lambda x, y: x.source == y.source
-    decision.split_group = find_intersection(decision.group_for, decision.group_agn, eq_fun)
+    decision.split_group = find_intersection_both(decision.group_for, decision.group_agn, eq_fun)
+
 
     decision.split_record = None
     for_bills = collect_bills(fors)

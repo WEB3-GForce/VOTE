@@ -34,9 +34,9 @@ from remove import *
 def flatten(a_list):
     return [item for sublist in a_list for item in sublist]
 
-# ------------------------------------------------------------------
+#------------------------------------------------------------------
 #  firm-decision  sets final outcome of decision structure
-# ------------------------------------------------------------------
+#------------------------------------------------------------------
 
 def firm_decision(decision, side, reasons, old_downside, strat):
     bill = db.get(db.BILL, {"_id": decision.bill})
@@ -73,6 +73,37 @@ def set_decision_outcome(decision, result, strat):
         return
 
     return firm_decision(decision, result, reason, downside, strat)
+
+
+#------------------------------------------------------------------
+# Consensus and Majority Code.
+#------------------------------------------------------------------
+
+def majority(decision):
+    fors = decision.number_for if decision.number_for else len(decision.for_stances)
+    agns = decision.number_agn if decision.number_agn else len(decision.agn_stances)
+
+    if fors > agns:
+        return "FOR"
+    elif agns > fors:
+        return "AGN"
+    else:
+        return None
+
+def consensus(decision):
+    filter_fun = lambda lst : lst[0]
+    MI = map(filter_fun, collect_MI(decision))
+
+    if len(remove_duplicates(MI)) == 1 :
+        return MI[0]
+    else:
+        return None
+
+def collect_MI(decision):
+    result = [decision.MI_stance, decision.MI_group, decision.MI_credo, decision.MI_record, decision.MI_norm]
+
+    filter_fun = lambda x : x != []
+    return filter(filter_fun, result)
 
 """
 ==================================================================
@@ -119,33 +150,6 @@ def strat_inconsistent_constituency(decision, strat):
         return set_decision_outcome(decision, result, strat)
     else:
         return None
-
-def majority(decision):
-    fors = decision.number_for if decision.number_for else len(decision.for_stances)
-    agns = decision.number_agn if decision.number_agn else len(decision.agn_stances)
-
-    if fors > agns:
-        return "FOR"
-    elif agns > fors:
-        return "AGN"
-    else:
-        return None
-
-def consensus(decision):
-    filter_fun = lambda lst : lst[0]
-    MI = map(filter_fun, collect_MI(decision))
-
-    if len(remove_duplicates(MI)) == 1 :
-        return MI[0]
-    else:
-        return None
-
-def collect_MI(decision):
-    result = [decision.MI_stance, decision.MI_group, decision.MI_credo, decision.MI_record, decision.MI_norm]
-
-    filter_fun = lambda x : x != []
-    return filter(filter_fun, result)
-
 
 """
 ==================================================================
