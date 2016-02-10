@@ -191,6 +191,15 @@
 		"pro_stances": [],
 		"con_stances": []
 	}, {
+		"name": "Constitution",
+		"type": "PRINCIPLE",
+		"synonyms": ["CONSTITUTION", "BILL-OF-RIGHTS"],
+		"isa": ["DOMESTIC"],
+		"polarity": "Support the United States Constitution and Bill of Rights",
+		"english": "the United States Constitution and the Bill of Rights",
+		"pro_stances": [],
+		"con_stances": []
+	}, {
 		"name": "Fiscal responsibility",
 		"type": "PRINCIPLE",
 		"synonyms": ["FISCAL-RESPONSIBILITY"],

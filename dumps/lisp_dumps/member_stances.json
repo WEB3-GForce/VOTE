@@ -6,5 +6,11 @@
             "issue": "ELDERLY",
             "side": "PRO",
             "importance": "A"
+        }, {
+            "source": "PARRIS",
+            "source_db": "member",
+            "issue": "CONSTITUTION",
+            "side": "PRO",
+            "importance": "A"
         }]
 }

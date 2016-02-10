@@ -36,7 +36,8 @@ def protocol_non_partisan(decision):
 def protocol_not_constitutional(decision):
     protocol_simple_consensus(decision)
     print "There are constitutional grounds for opposing this bill:"
-    pp.pprint(filter(lambda stance: stance.reveal_issue == get_node("constitution", issue), decision.agn_stances))
+    constitution = get(ISSUE, {"name": "Constitution"})
+    pp.pprint(filter(lambda stance: stance.issue == constitution.name or stance.issue in constitution.synonyms, decision.agn_stances))
 
 
 def protocol_unimportant_bill(decision):

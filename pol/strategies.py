@@ -207,12 +207,12 @@ def strat_non_partisan(decision, strat):
 """
 
 def strat_not_constitutional(decision, strat):
-    constitution_issue = DBIssue.getByName("CONSTITUTION")
-    filter_fun = lambda stance : DBStance.getById(stance).issue == constitution_issue
+    constitution = get(ISSUE, {"name": "Constitution"})
+    filter_fun = lambda stance : stance.issue == constitution.name or stance.issue in constitution.synonyms
 
     result = consensus(decision)
 
-    if result == "AGN" and filter(filter_fun, decision.agn_stances):
+    if result == AGN and filter(filter_fun, decision.agn_stances):
 
         reason = decision.agn_stances
         downside = decision.for_stances

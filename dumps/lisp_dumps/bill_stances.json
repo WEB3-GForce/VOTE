@@ -143,6 +143,11 @@
                     "side": "CON",
                     "importance": "C",
                     "source_db": "bill"
+                }, {
+                    "issue": "CONSTITUTION",
+                    "side": "PRO",
+                    "importance": "B",
+                    "source_db": "bill"
                 }]
         }
     ]
