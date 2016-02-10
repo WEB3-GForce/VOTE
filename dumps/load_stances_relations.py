@@ -58,6 +58,15 @@ def load_relations():
         db.MEMBER.update_one({"name": member_name}, {"$set": {"relations": relations_encoded}})
     print "member relations loaded"
 
+def load_member_stances():
+    member_stances = json.load(open("lisp_dumps/member_stances.json"))
+    # member_name used as key
+    for member_name in member_stances:
+        stances = [db.Stance(**s) for s in member_stances[member_name]]
+        stances_encoded = map(db.encode_classes, stances)
+        db.MEMBER.update_one({"name": member_name}, {"$set": {"credo": stances_encoded}})
+    print "member credo stances loaded"
+
 
 def issue_norm_stance():
     for issue in db.ISSUE.find({}):
@@ -72,3 +81,4 @@ load_bill_stances()
 load_groups()
 load_group_stances()
 load_relations()
+load_member_stances()

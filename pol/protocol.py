@@ -19,13 +19,15 @@ def protocol_popular(decision):
 
 
 def protocol_non_partisan(decision):
-    credo = decision.mi_credo
+    member = get(MEMBER, {"_id" : decision.member})
+    
+    credo = decision.MI_credo
     credo_side = credo[0]
-    credo_stance_list = credo[1:]
-    opposing_groups = decision.group_agn if credo_side == "for" else decision.group_for
-    party = "republicans" if decision.member == "rep" else "democrats"
+    credo_stance_list = credo[1]
+    opposing_groups = decision.group_agn if credo_side == FOR else decision.group_for
+    party = REPUBLICANS if member.party == REP else DEMOCRATS
     party_stance = filter(lambda stance: party == stance.source, opposing_groups)
-    print "The member's party {0} has a stance {1} this bill:".format(party, opposite_result(credo_side))
+    print "The member's party ({0}) has a stance {1} this bill:".format(party, opposite_result(credo_side))
     pp.pprint(party_stance)
     print "While the member has a strong personal stance {0} the bill:".format(credo_side)
     pp.pprint(credo_stance_list)
@@ -97,8 +99,8 @@ def protocol_not_good_enough(decision):
 def protocol_partisan(decision):
     protocol_simple_majority(decision)
     result = decision.result
-    pro_stances = decision.for_stances if results == "for" else decision.agn_stances
-    con_rel_stances = decision.con_rel_agn_stances if results == "for" else decision.con_rel_for_stances
+    pro_stances = decision.for_stances if results == FOR else decision.agn_stances
+    con_rel_stances = decision.con_rel_agn_stances if results == FOR else decision.con_rel_for_stances
     print "Voting {0} this bill also thwarts the opposition, for whom this bill is of greater importance:{1:>15}: ".format(result, "Our side")
     pp.pprint(pro_stances)
     print "Their side:"

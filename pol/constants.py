@@ -14,3 +14,11 @@ C = "C"
 D = "D"
 
 IMPORTANCE = [A, B, C, D]
+
+REP = "REP"
+REPUBLICANS = "REPUBLICANS"
+DEM = "DEM"
+DEMOCRATS = "DEMOCRATS"
+
+UNKNOWN_PARTY = "Unknown Party Affiliation"
+

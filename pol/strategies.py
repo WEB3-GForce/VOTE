@@ -3,6 +3,7 @@ from decision import *
 from decision_stats import *
 from utils import *
 from remove import *
+from constants import *
 
 """
       As of 9/25/90
@@ -166,28 +167,30 @@ def strat_inconsistent_constituency(decision, strat):
 #  The credo position is very important.
 
 def strat_non_partisan(decision, strat):
-    member = DBMember.getById(decision.member)
+    member = get(MEMBER, {"_id" : decision.member})
 
     credo = decision.MI_credo
+    
+    if credo in [None, []]:
+        return None
+    
     credo_side = credo[0]
     credo_stance_list = credo[1]
-    opposing_groups = decision.group_agn if credo_side == "FOR" else decision.group_for
 
-    party = "Unknown Party Affiliation"
-    if member.party == "REP":
-        party = "REPUBLICANS"
-    if member.party == "DEM":
-        party = "Democrats"
+    opposing_groups = decision.group_agn if credo_side == FOR else decision.group_for
 
-    # Translate the following and add it to the if statement
-    # below:
+    party = UNKNOWN_PARTY
+    if member.party == REP:
+        party = REPUBLICANS
+    if member.party == DEM:
+        party = Democrats
 
-    # (member party (mapcar #'stance-source opposing-groups)
-    #any(party == group.stance for group)
-
-    credo_stance1 = DBStance.getById(credo_stance_list[0])
+    credo_stance1 = credo_stance_list[0]
+    
+    mapfun = lambda stance: stance.source
 
     if (credo and opposing_groups and credo_stance_list and
+        party in map(mapfun, opposing_groups) and 
         most_important(credo_stance1.importance)):
         return set_decision_outcome(decision, credo_side, strat)
     else:

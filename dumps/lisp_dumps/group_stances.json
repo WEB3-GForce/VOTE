@@ -20,6 +20,13 @@
             "issue": "SDI",
             "side": "CON",
             "importance": "B"
+        },
+        {
+            "source": "REPUBLICANS",
+            "source_db": "group",
+            "issue": "SPACE",
+            "side": "PRO",
+            "importance": "B"
         }],
     "Democrats": [
         {
