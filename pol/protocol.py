@@ -6,6 +6,7 @@
 
 from utils import *
 from strategies import *
+from decision_stats import collect_bills
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
