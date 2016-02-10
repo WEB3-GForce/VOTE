@@ -12,5 +12,17 @@
             "issue": "CONSTITUTION",
             "side": "PRO",
             "importance": "A"
-        }]
+        }, {
+            "source": "PARRIS",
+            "source_db": "member",
+            "issue": "CHEMICAL-WEAPONS",
+            "side": "CON",
+            "importance": "C"
+        }, {
+            "source": "PARRIS",
+            "source_db": "member",
+            "issue": "REAGAN",
+            "side": "PRO",
+            "importance": "C"}
+            ]
 }

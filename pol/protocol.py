@@ -42,7 +42,8 @@ def protocol_not_constitutional(decision):
 
 def protocol_unimportant_bill(decision):
     protocol_simple_consensus(decision)
-    print "And this bill has a low level of importance {0}".format(decision.bill.importance)
+    bill = get(BILL, {"_id":decision.bill})
+    print "And this bill has a low level of importance {0}".format(bill.importance)
 
 
 def protocol_inconsistent_constituency(decision):

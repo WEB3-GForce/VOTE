@@ -248,7 +248,8 @@ def strat_not_constitutional(decision, strat):
 
 def strat_unimportant_bill(decision, strat):
     result = consensus(decision)
-    importance = DBBill.GetById(decision.bill).importance
+    bill   = get(BILL, {"_id":decision.bill})
+    importance = bill.importance
 
     if result and importance == "C":
         return set_decision_outcome(decision, result, strat)
