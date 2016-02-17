@@ -352,10 +352,10 @@ def strat_inoculation(decision, strat):
     # or groups. Otherwise, stance-importance not defined.
     if split_groups:
         temp = decision.group_for + decision.group_agn
-        temp.sort(key=lambda stance: stance.sort_key)
+        temp.sort(key=lambda stance: stance.get_sort_key())
         importance_level = temp[0].importance
 
-    if (result and split_groups and less_than_importance(importance_level1, "B")):
+    if (result and split_groups and importance_level and less_than_importance(importance_level, B)):
         return set_decision_outcome(decision, result, strat)
     else:
         return None

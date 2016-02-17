@@ -86,6 +86,17 @@ def protocol_change_of_heart(decision):
     pp.pprint(decision.split_credo)
 
 
+def protocol_innoculation(decision):
+    protocol_simple_majority(decision)
+
+    print "Important groups are on both sides of the issue. However, their reasons are not extremely important to them. This may call for additional explaining later."
+    pp.pprint("FOR")
+    pp.pprint(decision.group_for)
+    pp.pprint("AGN")
+    pp.pprint(decision.group_for)
+
+
+
 def protocol_minimizing_adverse_effects(decision):
     protocol_simple_majority(decision)
     result = decision.result

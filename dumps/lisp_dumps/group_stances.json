@@ -26,7 +26,7 @@
             "source_db": "group",
             "issue": "SPACE",
             "side": "PRO",
-            "importance": "B"
+            "importance": "C"
         }],
     "Democrats": [
         {
@@ -62,6 +62,27 @@
             "source_db": "group",
             "issue": "SDI",
             "side": "CON",
+            "importance": "C"
+        },
+        {
+            "source": "DEMOCRATS",
+            "source_db": "group",
+            "issue": "URBAN-RENEWAL",
+            "side": "PRO",
+            "importance": "C"
+        },
+        {
+            "source": "DEMOCRATS",
+            "source_db": "group",
+            "issue": "ELDERLY",
+            "side": "PRO",
+            "importance": "C"
+        },
+        {
+            "source": "DEMOCRATS",
+            "source_db": "group",
+            "issue": "HANDICAPPED",
+            "side": "PRO",
             "importance": "C"
         }],
     "COUNTRY": [{
