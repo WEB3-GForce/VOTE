@@ -183,7 +183,7 @@ def strat_non_partisan(decision, strat):
     if member.party == REP:
         party = REPUBLICANS
     if member.party == DEM:
-        party = Democrats
+        party = DEMOCRATS
 
     credo_stance1 = credo_stance_list[0]
     
@@ -293,21 +293,22 @@ def strat_balance_the_books(decision, strat):
 
 def strat_best_for_country(decision, strat):
     result = consensus(decision)
-    country = DBGroup.GetByName("COUNTRY")
 
-    # Translate the following once you know more about group_for.
-    # Is it a stance object or group object?
+    query = {"$or": [{"name": COUNTRY}, 
+                     {"synonyms": { "$in" : [ COUNTRY ] }}
+                    ]
+            }
 
-    #(country-for (collect (decision-group-for decision)
-                              #'(lambda (st) (eq country (reveal-source st)))))
-    country_for = None
-    # (country-agn (collect (decision-group-agn decision)
-                              #'(lambda (st) (eq country (reveal-source st)))))
-    country_agn = None
+    country = get(GROUP, query)    
+    
+    filter_fun = lambda stance: stance.source == COUNTRY
+    
+    country_for = filter(filter_fun, decision.group_for)
+    country_agn = filter(filter_fun, decision.group_agn)
 
-    if result == "FOR" and country_for and not country_agn:
+    if result == FOR and country_for and not country_agn:
         return set_decision_outcome(decision, result, strat)
-    elif result == "AGN" and country_agn and not country_for:
+    elif result == AGN and country_agn and not country_for:
         return set_decision_outcome(decision, result, strat)
     else:
         return None

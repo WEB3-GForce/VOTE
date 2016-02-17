@@ -64,10 +64,17 @@ def protocol_balance_the_books(decision):
 
 def protocol_best_for_the_country(decision):
     protocol_simple_consensus(decision)
+
+    query = {"$or": [{"name": COUNTRY}, 
+                     {"synonyms": { "$in" : [ COUNTRY ] }}
+                    ]
+            }
+    country = get(GROUP, query)
+
     result = decision.result
-    country = get_node("country", group)
-    decision_group = decision.group_for if result == "for" else decision.group_agn
-    country_stance = filter(lambda st: country == st.reveal_source, decision_group)
+
+    decision_group = decision.group_for if result == FOR else decision.group_agn
+    country_stance = filter(lambda st: COUNTRY == st.source, decision_group)
 
     print "The country as a whole has a stance {0} this bill:".format(result)
     pp.pprint(country_stance)

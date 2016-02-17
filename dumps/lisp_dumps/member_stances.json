@@ -1,28 +1,55 @@
 {
-    "Stan Parris":
-        [{
+    "Stan Parris": [
+        {
             "source": "PARRIS",
             "source_db": "member",
             "issue": "ELDERLY",
             "side": "PRO",
             "importance": "A"
-        }, {
+        },
+        {
             "source": "PARRIS",
             "source_db": "member",
             "issue": "CONSTITUTION",
             "side": "PRO",
             "importance": "A"
-        }, {
+        },
+        {
             "source": "PARRIS",
             "source_db": "member",
             "issue": "CHEMICAL-WEAPONS",
             "side": "CON",
             "importance": "C"
-        }, {
+        },
+        {
             "source": "PARRIS",
             "source_db": "member",
             "issue": "REAGAN",
             "side": "PRO",
-            "importance": "C"}
-            ]
+            "importance": "C"
+        }
+    ],
+    "Robert William Kastenmeier": [
+        {
+            "source": "KASTENMEIER",
+            "source_db": "member",
+            "issue": "FISCAL-RESPONSIBILITY",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "KASTENMEIER",
+            "source_db": "member",
+            "issue": "CHILD-CARE",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "KASTENMEIER",
+            "source_db": "member",
+            "issue": "FAMILY",
+            "side": "PRO",
+            "importance": "B"
+        }
+    ]
 }
