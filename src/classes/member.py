@@ -51,14 +51,14 @@ class Member(PrintableObject):
         stance_sort_key: A key used to determine how stances should be sorted.
     """
 
-    def __init__(self, **entries):
+    def __init__(self, entries=None):
         """Constructs a new Member based upon a dictionary of attributes.
         
         Initializes the instance variables to default values and then updates
         them with the entries provided in the hash.
         
         Arguments:
-            **entries: The hash of the attribute values of the form
+            entries: The hash of the attribute values of the form
                 {"full_name" : "some_name", "first_name" : "some_first_name",
                 ...}
         """
@@ -84,4 +84,5 @@ class Member(PrintableObject):
         self.con_rel_stances = []
         self.stance_sort_key = None
         
-        self.__dict__.update(entries)
+        if entries is not None:
+            self.__dict__.update(entries)
