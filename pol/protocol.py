@@ -79,6 +79,12 @@ def protocol_best_for_the_country(decision):
     print "The country as a whole has a stance {0} this bill:".format(result)
     pp.pprint(country_stance)
 
+def protocol_change_of_heart(decision):
+    protocol_simple_majority(decision)
+
+    print "The congressperson's credo is split, yet there is a majority {0} this bill".format(decision.result)
+    pp.pprint(decision.split_credo)
+
 
 def protocol_minimizing_adverse_effects(decision):
     protocol_simple_majority(decision)

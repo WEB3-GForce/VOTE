@@ -50,6 +50,20 @@
             "issue": "FAMILY",
             "side": "PRO",
             "importance": "B"
+        },
+        {
+            "source": "KASTENMEIER",
+            "source_db": "member",
+            "issue": "REAGAN",
+            "side": "PRO",
+            "importance": "B"
+        },
+        {
+            "source": "KASTENMEIER",
+            "source_db": "member",
+            "issue": "CIVIL-RIGHTS",
+            "side": "PRO",
+            "importance": "B"
         }
     ]
 }
