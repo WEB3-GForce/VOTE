@@ -251,7 +251,7 @@ def strat_unimportant_bill(decision, strat):
     bill   = get(BILL, {"_id":decision.bill})
     importance = bill.importance
 
-    if result and importance == "C":
+    if result and importance == C:
         return set_decision_outcome(decision, result, strat)
     else:
         return None
