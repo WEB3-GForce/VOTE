@@ -63,10 +63,10 @@ def firm_decision(decision, side, reasons, old_downside, strat):
     return decision
 
 def set_decision_outcome(decision, result, strat):
-    if result == "FOR":
+    if result == FOR:
         reason = decision.for_stances
         downside = decision.agn_stances
-    elif result == "AGN":
+    elif result == AGN:
         reason = decision.agn_stances
         downside = decision.for_stances
     else:
@@ -85,9 +85,9 @@ def majority(decision):
     agns = decision.number_agn if decision.number_agn else len(decision.agn_stances)
 
     if fors > agns:
-        return "FOR"
+        return FOR
     elif agns > fors:
-        return "AGN"
+        return AGN
     else:
         return None
 
@@ -127,9 +127,9 @@ def strat_popular(decision, strat):
     agn_stances = decision.agn_stances
 
     if not for_stances and agn_stances:
-        return firm_decision(decision, "AGN", agn_stances, [], strat)
+        return firm_decision(decision, AGN, agn_stances, [], strat)
     elif not agn_stances and for_stances:
-        return firm_decision(decision, "FOR", for_stances, [], strat)
+        return firm_decision(decision, FOR, for_stances, [], strat)
     else:
         return None
 
