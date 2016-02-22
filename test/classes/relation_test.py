@@ -23,7 +23,7 @@ import unittest
 
 from src.classes.relation import Relation
 
-class relationTest(unittest.TestCase):
+class RelationTest(unittest.TestCase):
     """ Test suite for Relation."""
 
     def setUp(self):
