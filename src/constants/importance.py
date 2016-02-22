@@ -45,25 +45,25 @@ class _Importance(object):
     """
 
     def __init__(self, value):
-        self._value = value
+        self.value = value
 
     def __eq__(self, object2):
-        return self._value == object2._value
+        return self.value == object2.value
 
     def __ne__(self, object2):
-        return self._value != object2._value
+        return self.value != object2.value
 
     def __gt__(self, object2):
-        return self._value < object2._value
+        return self.value < object2.value
 
     def __lt__(self, object2):
-        return self._value > object2._value
+        return self.value > object2.value
 
     def __ge__(self, object2):
-        return self._value <= object2._value
+        return self.value <= object2.value
 
     def __le__(self, object2):
-        return self._value >= object2._value
+        return self.value >= object2.value
 
 
 # The following are constants representing the different levels of importance.
