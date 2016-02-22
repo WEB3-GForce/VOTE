@@ -64,7 +64,7 @@ class StanceTest(unittest.TestCase):
         self.assertEqual(stance.side, None)
         self.assertEqual(stance.relation, None)
         self.assertEqual(stance.siblings, [])
-        self.assertEqual(stance.sort_key, None)
+        self.assertEqual(stance._sort_key, None)
 
 
     def test_init_hash(self):
@@ -117,6 +117,7 @@ class StanceTest(unittest.TestCase):
 
     def test_sort_key_unknown(self):
         """Verifies sort_key can gracefully handle an unknown option."""
+        self.stance._sort_key = None
         self.stance.sort_key = "I am an unknown sort key"
         self.assertEqual(self.stance.sort_key,
             self.stance.importance)
