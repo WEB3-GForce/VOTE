@@ -49,7 +49,7 @@ class Stance(PrintableObject):
             owner of the stance
     """
 
-    def __init__(self, entries={}):
+    def __init__(self, entries=None):
         """Constructs a new Stance based upon a dictionary of attributes.
         
         Initializes the instance variables to default values and then updates
