@@ -20,7 +20,10 @@
 """
 import exceptions
 import pymongo
-from src.constants import database as constants_database
+from src.config import config
+from src.constants import config as config_constants
+from src.constants import database as db_constants
+
 
 class PymongoDB(object):
 
@@ -30,22 +33,22 @@ class PymongoDB(object):
     def db(cls):
         if PymongoDB._DB:
             return PymongoDB._DB
-        PymongoDB._DB = _PymongoDB("test")
+        PymongoDB._DB = _PymongoDB(config.CONFIG[config_constants.DATABASE])
         return PymongoDB._DB
 
 class _PymongoDB(object):
 
-    # This is the default Mongo client
-    _CLIENT = pymongo.MongoClient()
-
     def __init__(self, db_type):
-        if db_type not in constants_database.DB_TYPES:
+        if db_type not in db_constants.DB_TYPES:
             raise exceptions.ValueError("Invalid database type: " + db_type)
 
-        self.DB = _PymongoDB._CLIENT[db_type]
-        self.MEMBERS = self.DB[constants_database.MEMBERS_NAME]
-        self.GROUPS = self.DB[constants_database.GROUPS_NAME]
-        self.BILLS = self.DB[constants_database.BILLS_NAME]
-        self.ISSUES = self.DB[constants_database.ISSUES_NAME]
+        self._CLIENT = pymongo.MongoClient(
+            config.CONFIG[config_constants.DB_CLIENT])
+        self.DB = self._CLIENT[db_type]
+        self.MEMBERS = self.DB[db_constants.MEMBERS_NAME]
+        self.GROUPS = self.DB[db_constants.GROUPS_NAME]
+        self.BILLS = self.DB[db_constants.BILLS_NAME]
+        self.ISSUES = self.DB[db_constants.ISSUES_NAME]
 
+        # TODO(WEB3-GForce) Get translation working
         # self.DB.add_son_manipulator(Transform())
