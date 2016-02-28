@@ -42,5 +42,5 @@ def load_config(file_name):
         CONFIG = json.load(config_file)
     return CONFIG
 
-# _config_dir = os.path.dirname(os.path.abspath(__file__))
-# load_config(_config_dir + "/" + config_constants.DEFAULT_CONFIG_FILE)
+load_config(os.path.dirname(os.path.abspath(__file__)) + "/" +
+    config_constants.DEFAULT_CONFIG_FILE)
