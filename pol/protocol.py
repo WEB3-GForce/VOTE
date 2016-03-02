@@ -6,6 +6,7 @@
 
 from utils import *
 from strategies import *
+from decision_stats import collect_bills
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -19,13 +20,15 @@ def protocol_popular(decision):
 
 
 def protocol_non_partisan(decision):
-    credo = decision.mi_credo
+    member = get(MEMBER, {"_id" : decision.member})
+    
+    credo = decision.MI_credo
     credo_side = credo[0]
-    credo_stance_list = credo[1:]
-    opposing_groups = decision.group_agn if credo_side == "for" else decision.group_for
-    party = "republicans" if decision.member == "rep" else "democrats"
+    credo_stance_list = credo[1]
+    opposing_groups = decision.group_agn if credo_side == FOR else decision.group_for
+    party = REPUBLICANS if member.party == REP else DEMOCRATS
     party_stance = filter(lambda stance: party == stance.source, opposing_groups)
-    print "The member's party {0} has a stance {1} this bill:".format(party, opposite_result(credo_side))
+    print "The member's party ({0}) has a stance {1} this bill:".format(party, opposite_result(credo_side))
     pp.pprint(party_stance)
     print "While the member has a strong personal stance {0} the bill:".format(credo_side)
     pp.pprint(credo_stance_list)
@@ -34,18 +37,20 @@ def protocol_non_partisan(decision):
 def protocol_not_constitutional(decision):
     protocol_simple_consensus(decision)
     print "There are constitutional grounds for opposing this bill:"
-    pp.pprint(filter(lambda stance: stance.reveal_issue == get_node("constitution", issue), decision.agn_stances))
+    constitution = get(ISSUE, {"name": "Constitution"})
+    pp.pprint(filter(lambda stance: stance.issue == constitution.name or stance.issue in constitution.synonyms, decision.agn_stances))
 
 
 def protocol_unimportant_bill(decision):
     protocol_simple_consensus(decision)
-    print "And this bill has a low level of importance {0}".format(decision.bill.importance)
+    bill = get(BILL, {"_id":decision.bill})
+    print "And this bill has a low level of importance {0}".format(bill.importance)
 
 
 def protocol_inconsistent_constituency(decision):
     protocol_simple_consensus(decision)
     groups = decision.split_group
-    print "The same group {0} has stances on both sides of this bill: {1:>15}".format(len(groups), groups)
+    print "One or more groups have stances on both sides of this bill: {0:>15}".format(groups)
 
 
 def protocol_balance_the_books(decision):
@@ -59,13 +64,37 @@ def protocol_balance_the_books(decision):
 
 def protocol_best_for_the_country(decision):
     protocol_simple_consensus(decision)
+
+    query = {"$or": [{"name": COUNTRY}, 
+                     {"synonyms": { "$in" : [ COUNTRY ] }}
+                    ]
+            }
+    country = get(GROUP, query)
+
     result = decision.result
-    country = get_node("country", group)
-    decision_group = decision.group_for if result == "for" else decision.group_agn
-    country_stance = filter(lambda st: country == st.reveal_source, decision_group)
+
+    decision_group = decision.group_for if result == FOR else decision.group_agn
+    country_stance = filter(lambda st: COUNTRY == st.source, decision_group)
 
     print "The country as a whole has a stance {0} this bill:".format(result)
     pp.pprint(country_stance)
+
+def protocol_change_of_heart(decision):
+    protocol_simple_majority(decision)
+
+    print "The congressperson's credo is split, yet there is a majority {0} this bill".format(decision.result)
+    pp.pprint(decision.split_credo)
+
+
+def protocol_innoculation(decision):
+    protocol_simple_majority(decision)
+
+    print "Important groups are on both sides of the issue. However, their reasons are not extremely important to them. This may call for additional explaining later."
+    pp.pprint("FOR")
+    pp.pprint(decision.group_for)
+    pp.pprint("AGN")
+    pp.pprint(decision.group_for)
+
 
 
 def protocol_minimizing_adverse_effects(decision):
@@ -97,8 +126,8 @@ def protocol_not_good_enough(decision):
 def protocol_partisan(decision):
     protocol_simple_majority(decision)
     result = decision.result
-    pro_stances = decision.for_stances if results == "for" else decision.agn_stances
-    con_rel_stances = decision.con_rel_agn_stances if results == "for" else decision.con_rel_for_stances
+    pro_stances = decision.for_stances if results == FOR else decision.agn_stances
+    con_rel_stances = decision.con_rel_agn_stances if results == FOR else decision.con_rel_for_stances
     print "Voting {0} this bill also thwarts the opposition, for whom this bill is of greater importance:{1:>15}: ".format(result, "Our side")
     pp.pprint(pro_stances)
     print "Their side:"

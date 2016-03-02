@@ -367,7 +367,7 @@ def get_members(member_name=None):
     """
     member = None
     if member_name:
-        member = get(MEMBER, {"lname" : member_lname.upper()})
+        member = MEMBER.find_one({"lname" : member_name.upper()})
 
     if member:
         return [member]
@@ -388,7 +388,7 @@ def get_bills(bill_number=None):
     """
     bill = None
     if bill_number:
-        bill = get(BILL, {"bnumber" : bill_number.upper()})
+        bill = BILL.find_one({"bnumber" : bill_number.upper()})
 
     if bill:
         return [bill]

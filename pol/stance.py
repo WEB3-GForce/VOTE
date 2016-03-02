@@ -103,4 +103,5 @@ class Stance(PrintableObject):
         else:
             return False
         
-
+def match_group(stance, stance2):
+    return (stance.match(stance2) and stance.relation and stance2.relation and stance.relation.source == stance2.relation.source)

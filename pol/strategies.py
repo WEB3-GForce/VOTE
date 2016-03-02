@@ -3,6 +3,7 @@ from decision import *
 from decision_stats import *
 from utils import *
 from remove import *
+from constants import *
 
 """
       As of 9/25/90
@@ -34,9 +35,9 @@ from remove import *
 def flatten(a_list):
     return [item for sublist in a_list for item in sublist]
 
-# ------------------------------------------------------------------
+#------------------------------------------------------------------
 #  firm-decision  sets final outcome of decision structure
-# ------------------------------------------------------------------
+#------------------------------------------------------------------
 
 def firm_decision(decision, side, reasons, old_downside, strat):
     bill = db.get(db.BILL, {"_id": decision.bill})
@@ -62,10 +63,10 @@ def firm_decision(decision, side, reasons, old_downside, strat):
     return decision
 
 def set_decision_outcome(decision, result, strat):
-    if result == "FOR":
+    if result == FOR:
         reason = decision.for_stances
         downside = decision.agn_stances
-    elif result == "AGN":
+    elif result == AGN:
         reason = decision.agn_stances
         downside = decision.for_stances
     else:
@@ -73,6 +74,37 @@ def set_decision_outcome(decision, result, strat):
         return
 
     return firm_decision(decision, result, reason, downside, strat)
+
+
+#------------------------------------------------------------------
+# Consensus and Majority Code.
+#------------------------------------------------------------------
+
+def majority(decision):
+    fors = decision.number_for if decision.number_for else len(decision.for_stances)
+    agns = decision.number_agn if decision.number_agn else len(decision.agn_stances)
+
+    if fors > agns:
+        return FOR
+    elif agns > fors:
+        return AGN
+    else:
+        return None
+
+def consensus(decision):
+    filter_fun = lambda lst : lst[0]
+    MI = map(filter_fun, collect_MI(decision))
+
+    if len(remove_duplicates(MI)) == 1 :
+        return MI[0]
+    else:
+        return None
+
+def collect_MI(decision):
+    result = [decision.MI_stance, decision.MI_group, decision.MI_credo, decision.MI_record, decision.MI_norm]
+
+    filter_fun = lambda x : x != []
+    return filter(filter_fun, result)
 
 """
 ==================================================================
@@ -95,9 +127,9 @@ def strat_popular(decision, strat):
     agn_stances = decision.agn_stances
 
     if not for_stances and agn_stances:
-        return firm_decision(decision, "AGN", agn_stances, [], strat)
+        return firm_decision(decision, AGN, agn_stances, [], strat)
     elif not agn_stances and for_stances:
-        return firm_decision(decision, "FOR", for_stances, [], strat)
+        return firm_decision(decision, FOR, for_stances, [], strat)
     else:
         return None
 
@@ -120,33 +152,6 @@ def strat_inconsistent_constituency(decision, strat):
     else:
         return None
 
-def majority(decision):
-    fors = decision.number_for if decision.number_for else len(decision.for_stances)
-    agns = decision.number_agn if decision.number_agn else len(decision.agn_stances)
-
-    if fors > agns:
-        return "FOR"
-    elif agns > fors:
-        return "AGN"
-    else:
-        return None
-
-def consensus(decision):
-    filter_fun = lambda lst : lst[0]
-    MI = map(filter_fun, collect_MI(decision))
-
-    if len(remove_duplicates(MI)) == 1 :
-        return MI[0]
-    else:
-        return None
-
-def collect_MI(decision):
-    result = [decision.MI_stance, decision.MI_group, decision.MI_credo, decision.MI_record, decision.MI_norm]
-
-    filter_fun = lambda x : x != []
-    return filter(filter_fun, result)
-
-
 """
 ==================================================================
       2   Non-partisan decision                   [B]  (NON-PARTISAN)
@@ -162,28 +167,30 @@ def collect_MI(decision):
 #  The credo position is very important.
 
 def strat_non_partisan(decision, strat):
-    member = DBMember.getById(decision.member)
+    member = get(MEMBER, {"_id" : decision.member})
 
     credo = decision.MI_credo
+    
+    if credo in [None, []]:
+        return None
+    
     credo_side = credo[0]
     credo_stance_list = credo[1]
-    opposing_groups = decision.group_agn if credo_side == "FOR" else decision.group_for
 
-    party = "Unknown Party Affiliation"
-    if member.party == "REP":
-        party = "REPUBLICANS"
-    if member.party == "DEM":
-        party = "Democrats"
+    opposing_groups = decision.group_agn if credo_side == FOR else decision.group_for
 
-    # Translate the following and add it to the if statement
-    # below:
+    party = UNKNOWN_PARTY
+    if member.party == REP:
+        party = REPUBLICANS
+    if member.party == DEM:
+        party = DEMOCRATS
 
-    # (member party (mapcar #'stance-source opposing-groups)
-    #any(party == group.stance for group)
-
-    credo_stance1 = DBStance.getById(credo_stance_list[0])
+    credo_stance1 = credo_stance_list[0]
+    
+    mapfun = lambda stance: stance.source
 
     if (credo and opposing_groups and credo_stance_list and
+        party in map(mapfun, opposing_groups) and 
         most_important(credo_stance1.importance)):
         return set_decision_outcome(decision, credo_side, strat)
     else:
@@ -200,12 +207,12 @@ def strat_non_partisan(decision, strat):
 """
 
 def strat_not_constitutional(decision, strat):
-    constitution_issue = DBIssue.getByName("CONSTITUTION")
-    filter_fun = lambda stance : DBStance.getById(stance).issue == constitution_issue
+    constitution = get(ISSUE, {"name": "Constitution"})
+    filter_fun = lambda stance : stance.issue == constitution.name or stance.issue in constitution.synonyms
 
     result = consensus(decision)
 
-    if result == "AGN" and filter(filter_fun, decision.agn_stances):
+    if result == AGN and filter(filter_fun, decision.agn_stances):
 
         reason = decision.agn_stances
         downside = decision.for_stances
@@ -241,9 +248,10 @@ def strat_not_constitutional(decision, strat):
 
 def strat_unimportant_bill(decision, strat):
     result = consensus(decision)
-    importance = DBBill.GetById(decision.bill).importance
+    bill   = get(BILL, {"_id":decision.bill})
+    importance = bill.importance
 
-    if result and importance == "C":
+    if result and importance == C:
         return set_decision_outcome(decision, result, strat)
     else:
         return None
@@ -285,21 +293,22 @@ def strat_balance_the_books(decision, strat):
 
 def strat_best_for_country(decision, strat):
     result = consensus(decision)
-    country = DBGroup.GetByName("COUNTRY")
 
-    # Translate the following once you know more about group_for.
-    # Is it a stance object or group object?
+    query = {"$or": [{"name": COUNTRY}, 
+                     {"synonyms": { "$in" : [ COUNTRY ] }}
+                    ]
+            }
 
-    #(country-for (collect (decision-group-for decision)
-                              #'(lambda (st) (eq country (reveal-source st)))))
-    country_for = None
-    # (country-agn (collect (decision-group-agn decision)
-                              #'(lambda (st) (eq country (reveal-source st)))))
-    country_agn = None
+    country = get(GROUP, query)    
+    
+    filter_fun = lambda stance: stance.source == COUNTRY
+    
+    country_for = filter(filter_fun, decision.group_for)
+    country_agn = filter(filter_fun, decision.group_agn)
 
-    if result == "FOR" and country_for and not country_agn:
+    if result == FOR and country_for and not country_agn:
         return set_decision_outcome(decision, result, strat)
-    elif result == "AGN" and country_agn and not country_for:
+    elif result == AGN and country_agn and not country_for:
         return set_decision_outcome(decision, result, strat)
     else:
         return None
@@ -343,10 +352,10 @@ def strat_inoculation(decision, strat):
     # or groups. Otherwise, stance-importance not defined.
     if split_groups:
         temp = decision.group_for + decision.group_agn
-        temp.sort(key=lambda stance: stance.sort_key)
+        temp.sort(key=lambda stance: stance.get_sort_key())
         importance_level = temp[0].importance
 
-    if (result and split_groups and less_than_importance(importance_level1, "B")):
+    if (result and split_groups and importance_level and less_than_importance(importance_level, B)):
         return set_decision_outcome(decision, result, strat)
     else:
         return None
