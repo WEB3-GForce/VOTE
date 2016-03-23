@@ -1,0 +1,6 @@
+{
+    "LOG"   : false,
+    "DEBUG" : false,
+    "DATABASE": "test",
+    "DB_CLIENT": null
+}
