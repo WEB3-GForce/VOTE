@@ -19,6 +19,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+from src.classes.bill import Bill
+from src.classes.group import Group
+from src.classes.issue import Issue
+from src.classes.member import Member
+from src.classes.relation import Relation
+from src.classes.stance import Stance
+
+
 # The following are the names of databases that can be used.
 
 # PROD is the production database and should be used only when VOTE is running
@@ -39,9 +47,19 @@ DEV = "dev"
 # This is a list of all the database types used for error checking.
 DB_TYPES = [PROD, STAGING, TEST, DEV]
 
+# This is a list of the custom classes the DB supports.
+DB_CUSTOM_CLASSES = [Bill, Group, Issue, Member, Relation, Stance]
+
+# DB entries are returned as {"_id" : ..., "_type": ..., ...}
+# where "_id" is the id of the entry in the DB, "_type" is the custom class
+# type, and the last ... represents more data.
+ENTRY_TYPE = "_type"
+ENTRY_ID = "_id"
 
 # The following are the names of the different databases collections.
-MEMBERS_NAME = "members"
-GROUPS_NAME = "groups"
-BILLS_NAME = "bills"
-ISSUES_NAME = "issues"
+MEMBERS = "members"
+GROUPS = "groups"
+BILLS = "bills"
+ISSUES = "issues"
+
+DB_COLLECTIONS = [MEMBERS, GROUPS, BILLS, ISSUES]

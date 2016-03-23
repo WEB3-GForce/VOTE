@@ -23,32 +23,141 @@ import pymongo
 from src.config import config
 from src.constants import config as config_constants
 from src.constants import database as db_constants
-
+from src.database import vote_transform
+from src.database import vote_cursor
 
 class PymongoDB(object):
+    """ This class represents the database used to store objects in VOTE. It
+    defines wrapper methods that automatically convert src/classes objects into
+    json and vice versa. Hence, other code can work solely with the objects
+    defined in src/classes.
+    
+    To retrieve a database object, use the class method get_db(). DO NOT
+    directly instantiate an object for this class.
+    """
 
+    # An object representing the database to be used throughout the project.
     _DB = None
 
     @classmethod
-    def db(cls):
+    def get_db(cls):
+        """ A class method to retrieve the database object."""
         if PymongoDB._DB:
             return PymongoDB._DB
-        PymongoDB._DB = _PymongoDB(config.CONFIG[config_constants.DATABASE])
+        PymongoDB._DB = PymongoDB()
         return PymongoDB._DB
 
-class _PymongoDB(object):
-
-    def __init__(self, db_type):
+    def __init__(self):
+        """ Initializes a new PymongoDB instance based upon the configuration
+        settings.
+        
+        Raises:
+            ValueError: An invalid database type is specified in the
+                configurations.
+        """
+        db_type = config.CONFIG[config_constants.DATABASE]
         if db_type not in db_constants.DB_TYPES:
-            raise exceptions.ValueError("Invalid database type: " + db_type)
+            msg = "Invalid database type.\n Valid Options: %s\n Given: %s\n" % (
+                db_constants.DB_TYPES, db_type)
+            raise exceptions.ValueError(msg)
 
         self._CLIENT = pymongo.MongoClient(
             config.CONFIG[config_constants.DB_CLIENT])
-        self.DB = self._CLIENT[db_type]
-        self.MEMBERS = self.DB[db_constants.MEMBERS_NAME]
-        self.GROUPS = self.DB[db_constants.GROUPS_NAME]
-        self.BILLS = self.DB[db_constants.BILLS_NAME]
-        self.ISSUES = self.DB[db_constants.ISSUES_NAME]
+        self._DB = self._CLIENT[db_type]
+        self._transformer = vote_transform.VoteTransform()
 
-        # TODO(WEB3-GForce) Get translation working
-        # self.DB.add_son_manipulator(Transform())
+    def get_collection(self, name):
+        """ Returns a pymongo Collection corresponding to the given name
+        
+        Arguments:
+            name: the name of the collection
+        
+        Raises:
+            ValueError: If the collection is not defined
+        """
+        if name not in db_constants.DB_COLLECTIONS:
+            msg = "Invalid connection.\n Valid Options: %s\n Given: %s\n" % (
+                db_constants.DB_COLLECTIONS, str(name))
+            raise exceptions.ValueError(msg)
+        return self._DB[name]
+
+    def insert_one(self, collection, query):
+        """ A wrapper for the Pymongo Collection insert_one function that
+        properly translates src/classes objects.
+        
+        Arguments:
+            collection: the name of the collection to insert into.
+            query: the data to insert
+        
+        Return:
+            The result of Pymongo Collection insert_one
+        """
+        collection = self._get_collection(collection)
+        return collection.insert_one(
+            self._transformer.transform_incoming(query))
+
+    def find(self, collection, query={}):
+        """ A wrapper for the Pymongo Collection find function that properly
+        translates src/classes objects.
+        
+        This function is typically used as an iterator in a loop. The VoteCursor
+        translates the query results into src/classes objects.
+        
+        Arguments:
+            collection: the name of the collection to search
+            query: optional query parameters
+        
+        Return:
+            A VoteCursor that encapsulates the result of Pymongo Collection find
+        """
+        collection = self._get_collection(collection)
+        result = collection.find(query)
+        return vote_cursor.VoteCursor(result)
+
+    def find_one(self, collection, query):
+        """ A wrapper for the Pymongo Collection find_one function that properly
+        translates src/classes objects.
+        
+        Arguments:
+            collection: the name of the collection to search
+            query: a Pymongo query for the desired object
+        
+        Return:
+            The result of Pymongo Collection find_one
+        """
+        collection = self._get_collection(collection)
+        result = collection.find_one(query)
+        if result is None:
+            return None
+        return self._transformer.transform_outgoing(result)
+
+    def replace_one(self, collection, query, replacement):
+        """ A wrapper for the Pymongo Collection replace_one function that
+        properly translates src/classes objects.
+        
+        Arguments:
+            collection: the name of the collection to operate upon
+            query: A Pymongo query for the object to replace
+            replacement: the data to insert in place of the original
+        
+        Return:
+            The result of Pymongo Collection replace_one
+        """
+        collection = self._get_collection(collection)
+        return collection.replace_one(self, collection, query,
+            self._transformer.transform_incoming(replacement))
+
+    def delete_one(self, collection, query):
+        """ A wrapper for the Pymongo Collection delete_one function that
+        properly translates src/classes objects.
+        
+        Arguments:
+            collection: the name of the collection to operate on
+            query: A Pymongo query for the object to delete
+        
+        Return:
+            The result of Pymongo Collection delete_one
+        """
+        collection = self._get_collection(collection)
+        return collection.delete_one(
+            self._transformer.transform_incoming(query))
