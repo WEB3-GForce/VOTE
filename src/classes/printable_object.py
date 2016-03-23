@@ -17,7 +17,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-""" 
+"""
 
 class PrintableObject(object):
     """The parent class for all objects in VOTE.
