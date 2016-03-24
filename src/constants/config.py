@@ -22,6 +22,8 @@
 # These constants are the keys to the config hashes stored in the config json.
 # Use these to access a particular config parameter.
 LOG = "LOG"
+LOG_SIZE = "LOG_SIZE"
+LOG_BACKUP_SIZE = "LOG_BACKUP_SIZE"
 DEBUG = "DEBUG"
 DATABASE = "DATABASE"
 DB_CLIENT = "DB_CLIENT"

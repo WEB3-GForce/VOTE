@@ -1,5 +1,7 @@
 {
-    "LOG"   : false,
+    "LOG"   : true,
+    "LOG_SIZE" : 10485760,
+    "LOG_BACKUP_SIZE" : 5,
     "DEBUG" : true,
     "DATABASE": "dev",
     "DB_CLIENT": null
