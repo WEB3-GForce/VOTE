@@ -1,0 +1,492 @@
+{
+    "_id": {
+        "$oid": "56f41fdba58a144056b5311f"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "the ACLU's radical and subversive posture", 
+    "issues": [], 
+    "name": "American Civil Liberties Union", 
+    "norm": null, 
+    "notes": null, 
+    "number": null, 
+    "pro_english_description": "the ACLU's strong defense of the Bill of Rights", 
+    "stances": null, 
+    "synonyms": null
+}
+{
+    "_id": {
+        "$oid": "56f41fdba58a144056b53122"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "the ACU's right-wing reactionism", 
+    "issues": [
+        "FOREIGN", 
+        "SOCIAL", 
+        "DEFICIT"
+    ], 
+    "name": "American Conservative Union", 
+    "norm": null, 
+    "number": null, 
+    "pro_english_description": "the ACU's conservative ideology", 
+    "stances": [
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "LABOR", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "ACU", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "SDI", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "ACU", 
+            "source_db": "group"
+        }
+    ], 
+    "synonyms": [
+        "ACU"
+    ]
+}
+{
+    "_id": {
+        "$oid": "56f41fdba58a144056b53121"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "the COPE special interest agenda", 
+    "issues": [
+        "LABOR"
+    ], 
+    "name": "Committee on Political Education of the AFL-CIO", 
+    "norm": null, 
+    "number": null, 
+    "pro_english_description": "the progressive agenda of COPE", 
+    "stances": [
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "LABOR", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "COPE", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "CHILD-CARE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "COPE", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "SPENDING", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "COPE", 
+            "source_db": "group"
+        }
+    ], 
+    "synonyms": [
+        "COPE"
+    ]
+}
+{
+    "_id": {
+        "$oid": "56f41fdba58a144056b5311e"
+    }, 
+    "_type": "Group", 
+    "con_english_description": null, 
+    "issues": [], 
+    "name": "Country", 
+    "norm": null, 
+    "number": null, 
+    "pro_english_description": null, 
+    "stances": [
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "CHILD-CARE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "COUNTRY", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "CIVIL-LIBERTIES", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "COUNTRY", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "CIVIL-RIGHTS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "COUNTRY", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "EDUCATION-RIGHTS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "COUNTRY", 
+            "source_db": "group"
+        }
+    ], 
+    "synonyms": [
+        "COUNTRY", 
+        "US"
+    ]
+}
+{
+    "_id": {
+        "$oid": "56f41fdba58a144056b53124"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "the CEI business special interest lobby", 
+    "issues": [
+        "FREE-ENTERPRISE", 
+        "DEREGULATION", 
+        "PRIVATIZATION", 
+        "FREE-MARKET", 
+        "ANTI-TRUST-REFORM", 
+        "TRADE"
+    ], 
+    "name": "Competitive Enterprise Institute", 
+    "norm": null, 
+    "number": null, 
+    "pro_english_description": "the sound business agenda of CEI", 
+    "stances": [
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "DEREGULATION", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "CEI", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "FREE-ENTERPRISE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "CEI", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "PRIVATIZATION", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "CEI", 
+            "source_db": "group"
+        }
+    ], 
+    "synonyms": [
+        "CEI"
+    ]
+}
+{
+    "_id": {
+        "$oid": "56f41fdba58a144056b53123"
+    }, 
+    "con_english_description": "the narrow special interest of the Chamber of Commerce", 
+    "issues": [
+        "ECONOMY"
+    ], 
+    "name": "Chamber of Commerce of the United States", 
+    "norm": null, 
+    "notes": [], 
+    "pro_english_description": "the stabilizing influence of the Chamber of Commerce", 
+    "stances": [
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "DEREGULATION", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "COC", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "LABOR", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "COC", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "SPENDING", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "COC", 
+            "source_db": "group"
+        }
+    ], 
+    "synonyms": [
+        "COC"
+    ]
+}
+{
+    "_id": {
+        "$oid": "56f41fdaa58a144056b5311d"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "tax-and-spend, liberal Democrats", 
+    "issues": [], 
+    "name": "Democrats", 
+    "norm": null, 
+    "number": "PLUR", 
+    "pro_english_description": "progressive, compassionate Democrats", 
+    "stances": [
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "CHILD-CARE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DEMOCRATS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "CIVIL-RIGHTS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DEMOCRATS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "DOMESTIC", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DEMOCRATS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "LABOR", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DEMOCRATS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "SDI", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "DEMOCRATS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "URBAN-RENEWAL", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DEMOCRATS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "ELDERLY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DEMOCRATS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "HANDICAPPED", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DEMOCRATS", 
+            "source_db": "group"
+        }
+    ], 
+    "synonyms": [
+        "DEMOCRATS"
+    ]
+}
+{
+    "_id": {
+        "$oid": "56f41fdba58a144056b53120"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "the left-wing pinko ADA", 
+    "issues": [
+        "EQUALITY", 
+        "DEFENSE-SPENDING", 
+        "CIVIL-LIBERTIES", 
+        "HUMAN-RIGHTS"
+    ], 
+    "name": "Americans for Democratic Action", 
+    "norm": null, 
+    "number": null, 
+    "pro_english_description": "the ADA as a proponent of basic American values", 
+    "stances": [
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "HOUSING", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "ADA", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "LABOR", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "ADA", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "SDI", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "ADA", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "URBAN", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "ADA", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "FOOD-STAMPS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "ADA", 
+            "source_db": "group"
+        }
+    ], 
+    "synonyms": [
+        "ADA"
+    ]
+}
+{
+    "_id": {
+        "$oid": "56f41fdaa58a144056b5311c"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "heartless and reactionary Republicans", 
+    "issues": [], 
+    "name": "Republicans", 
+    "norm": null, 
+    "number": "PLUR", 
+    "pro_english_description": "conservative and fiscally responsible Republicans", 
+    "stances": [
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "DEREGULATION", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "REPUBLICANS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "A", 
+            "issue": "SDI", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "REPUBLICANS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "SDI", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "REPUBLICANS", 
+            "source_db": "group"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "SPACE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "REPUBLICANS", 
+            "source_db": "group"
+        }
+    ], 
+    "synonyms": [
+        "GOP", 
+        "REPUBLICANS"
+    ]
+}

@@ -1,0 +1,628 @@
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102eb"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "WEAPON"
+    ], 
+    "name": "Chemical Weapons", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "CHEMICAL-WEAPONS", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "CON", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support construction of binary chemical weapons", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "CHEMICAL-WEAPONS"
+    ], 
+    "type": null
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102ef"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "POVERTY"
+    ], 
+    "name": "Homelessness", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "HOMELESSNESS", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support federal efforts to relieve homelessness", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "HOMELESS", 
+        "HOMELESSNESS"
+    ], 
+    "type": "GROUP"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f0"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "HOUSING"
+    ], 
+    "name": "Urban Renewal", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "SLUM", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support federal efforts to build urban housing", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "SLUM", 
+        "CLEARANCE", 
+        "URBAN", 
+        "RENEWAL", 
+        "URBAN-RENEWAL"
+    ], 
+    "type": null
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f1"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "FEDERAL-PROGRAMS"
+    ], 
+    "name": "Space Exploration", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "SPACE", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support federal efforts for space exploration", 
+    "pro_english_description": "increased funding for space exploration", 
+    "pro_stances": [], 
+    "synonyms": [
+        "SPACE"
+    ], 
+    "type": "PROGRAM"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f2"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": "funding the wasteful Star Wars defense shield", 
+    "con_stances": [], 
+    "isa": [
+        "WEAPONS"
+    ], 
+    "name": "Strategic Defense Initiative", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "SDI", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support funding SDI", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "SDI"
+    ], 
+    "type": "PROGRAM"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f3"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": "wasteful government spending", 
+    "con_stances": [], 
+    "isa": [
+        "ECONOMIC"
+    ], 
+    "name": "Government Spending", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "SPENDING", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "CON", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support federal spending to address national concerns", 
+    "pro_english_description": "prudent spending in support of legitimate programs", 
+    "pro_stances": [], 
+    "synonyms": [
+        "SPENDING"
+    ], 
+    "type": null
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f6"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "CIVIL-RIGHTS"
+    ], 
+    "name": "Age Discrimination", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "AGE-DISCRIMINATION", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "CON", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support discrimination based on age", 
+    "pro_english_description": "recognition of the tangible differences of older members of society", 
+    "pro_stances": [], 
+    "synonyms": [
+        "AGE-DISCRIMINATION"
+    ], 
+    "type": "PROBLEM"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102fb"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "SOCIAL"
+    ], 
+    "name": "Education Policy", 
+    "norm": null, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support federal spending on education", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "EDUCATION"
+    ], 
+    "type": "POLICY"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f8"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "groups": [
+        "INDUSTRY"
+    ], 
+    "isa": [
+        "ECONOMIC"
+    ], 
+    "name": "Deregulation", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "DEREGULATION", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support limiting federal regulation of industry", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [], 
+    "type": "PRINCIPLE"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f9"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "SOCIAL"
+    ], 
+    "name": "Child Care", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "B", 
+        "issue": "CHILDCARE", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support federal funding for child care", 
+    "pro_english_description": "increased funding for child care", 
+    "pro_stances": [], 
+    "synonyms": [
+        "CHILDCARE", 
+        "DAYCARE", 
+        "CHILD-CARE"
+    ], 
+    "type": "PROPOSAL"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102fc"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": "big labor bosses", 
+    "con_stances": [], 
+    "isa": [
+        "DOMESTIC"
+    ], 
+    "name": "Labor Issues", 
+    "norm": null, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support issues beneficial to working people", 
+    "pro_english_description": "decent working people", 
+    "pro_stances": [], 
+    "synonyms": [
+        "LABOR"
+    ], 
+    "type": "GROUP"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102fd"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "ECONOMIC"
+    ], 
+    "name": "Fiscal responsibility", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "B", 
+        "issue": "FISCAL-RESPONSIBILITY", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support principle of fiscal responsibility", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "FISCAL-RESPONSIBILITY"
+    ], 
+    "type": "PRINCIPLE"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102ec"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "PRESIDENT"
+    ], 
+    "name": "President Reagan", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "REAGAN", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support the policies of President Reagan", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "REAGAN"
+    ], 
+    "type": null
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102ed"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "DOMESTIC"
+    ], 
+    "name": "Elderly", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "B", 
+        "issue": "ELDERLY", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support federal regulation and funding benefitting the elderly", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [], 
+    "type": "GROUP"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102ee"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "CIVIL-RIGHTS"
+    ], 
+    "name": "Handicapped", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "HANDICAPPED", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support federal efforts to help the handicapped", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [], 
+    "type": "GROUP"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f4"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "SOCIAL"
+    ], 
+    "name": "Civil Rights", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "CIVIL-RIGHTS", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support the cause of civil rights", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "CIVIL-RIGHTS"
+    ], 
+    "type": "CAUSE"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f5"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "VALUE"
+    ], 
+    "name": "Fairness", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "FAIRNESS", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support principle of fairness in society", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [], 
+    "type": "PRINCIPLE"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102f7"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "RIGHT"
+    ], 
+    "name": "Right to an Education", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "EDUCATION-RIGHTS", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support equal access to education", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "EDUCATION-RIGHTS"
+    ], 
+    "type": "RIGHT"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102fa"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "SOCIAL"
+    ], 
+    "name": "Family values", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "FAMILY", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support traditional family values", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "FAMILY", 
+        "FAMILY-VALUES"
+    ], 
+    "type": "SOCIAL"
+}
+{
+    "_id": {
+        "$oid": "567254d8fefe258fd61102fe"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "PRESIDENT"
+    ], 
+    "name": "President Bush", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": "C", 
+        "issue": "BUSH", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support the policies of President Bush", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "BUSH"
+    ], 
+    "type": null
+}
+{
+    "_id": {
+        "$oid": "56bb2e3da58a146f63c5150c"
+    }, 
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "DOMESTIC"
+    ], 
+    "name": "Constitution", 
+    "norm": null, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Support the United States Constitution and Bill of Rights", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "CONSTITUTION", 
+        "BILL-OF-RIGHTS"
+    ], 
+    "type": "PRINCIPLE"
+}

@@ -1,0 +1,369 @@
+{
+    "_id": {
+        "$oid": "5671e3b6a58a145b1f1c906f"
+    }, 
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-BANKING", 
+        "HOUSE-DC"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [
+        {
+            "_type": "Stance", 
+            "importance": "A", 
+            "issue": "ELDERLY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "PARRIS", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "A", 
+            "issue": "CONSTITUTION", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "PARRIS", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "CHEMICAL-WEAPONS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "PARRIS", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "C", 
+            "issue": "REAGAN", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "PARRIS", 
+            "source_db": "member"
+        }
+    ], 
+    "district": "VA-8", 
+    "english_short": null, 
+    "first_name": "STAN", 
+    "full_name": "Stan Parris", 
+    "gender": "MALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "PARRIS", 
+    "notes": [], 
+    "party": "REPUBLICANS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "ADA", 
+            "importance": "B", 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COPE", 
+            "importance": "B", 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COC", 
+            "importance": "B", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "CEI", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": "C", 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": 1990, 
+    "term_start": 1980, 
+    "voting_record": [
+        [
+            "DEFENSE-AUTHORIZATION", 
+            "AGN"
+        ], 
+        [
+            "SPACE-STATION", 
+            "AGN"
+        ], 
+        [
+            "CIVIL-RIGHTS-RESTORATION-ACT", 
+            "AGN"
+        ]
+    ]
+}
+{
+    "_id": {
+        "$oid": "5671e1e4a58a145b1f1c906e"
+    }, 
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-AGRICULTURE", 
+        "HOUSE-VETERANS-AFFAIRS"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [], 
+    "district": "SD-AL", 
+    "english_short": null, 
+    "first_name": "TIMOTHY", 
+    "full_name": "Timothy Peter Johnson", 
+    "gender": "MALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "JOHNSON", 
+    "notes": [], 
+    "party": "DEMOCRATS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "CEI", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": null, 
+    "term_start": 1986, 
+    "voting_record": [
+        [
+            "DEFENSE-AUTHORIZATION", 
+            "FOR"
+        ], 
+        [
+            "CIVIL-RIGHTS-RESTORATION-ACT", 
+            "FOR"
+        ], 
+        [
+            "CHILD-CARE", 
+            "FOR"
+        ]
+    ]
+}
+{
+    "_id": {
+        "$oid": "5671d7f9a58a145b1f1c906d"
+    }, 
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-JUDICIARY", 
+        "HOUSE-INTELLIGENCE"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "FISCAL-RESPONSIBILITY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "KASTENMEIER", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "CHILD-CARE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "KASTENMEIER", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "FAMILY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "KASTENMEIER", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "REAGAN", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "KASTENMEIER", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": "B", 
+            "issue": "CIVIL-RIGHTS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "KASTENMEIER", 
+            "source_db": "member"
+        }
+    ], 
+    "district": "WI-2", 
+    "english_short": null, 
+    "first_name": "ROBERT", 
+    "full_name": "Robert William Kastenmeier", 
+    "gender": "MALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "KASTENMEIER", 
+    "notes": [], 
+    "party": "DEMOCRATS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "ADA", 
+            "importance": "A", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COPE", 
+            "importance": "A", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COC", 
+            "importance": "B", 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "CEI", 
+            "importance": "B", 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": "C", 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": 1990, 
+    "term_start": 1958, 
+    "voting_record": [
+        [
+            "DEFENSE-AUTHORIZATION", 
+            "FOR"
+        ], 
+        [
+            "SPACE-STATION", 
+            "FOR"
+        ], 
+        [
+            "STAR-WARS", 
+            "FOR"
+        ], 
+        [
+            "STAR-WARS", 
+            "AGN"
+        ]
+    ]
+}
