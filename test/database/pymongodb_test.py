@@ -34,10 +34,17 @@ class PymongoDBTest(unittest.TestCase):
     ORIGINAL_CONFIG = copy.deepcopy(config.CONFIG)
 
     @classmethod
+    def drop_collections(cls, DB):
+        """Removes all the collections from a DB"""
+        for collection_name in db_constants.DB_COLLECTIONS:
+            DB.DB.drop_collection(collection_name)
+
+    @classmethod
     def setUpClass(cls):
         # Make sure that the database is clean before this class is run.
         DB = PymongoDB()
-        DB._CLIENT.drop_database(DB.DB)
+        PymongoDBTest.drop_collections(DB)
+
 
     def setUp(self):
         self.DB = PymongoDB.get_db()
@@ -46,8 +53,7 @@ class PymongoDBTest(unittest.TestCase):
         # Restore the original config so as not to mess up other tests
         config.CONFIG = copy.deepcopy(PymongoDBTest.ORIGINAL_CONFIG)
         # Delete the database each time to start fresh.
-        self.DB._CLIENT.drop_database(self.DB.DB)
-
+        PymongoDBTest.drop_collections(self.DB)
 
     def test_get_db(self):
         """ Verifies that get_db returns the proper DB to be used."""
