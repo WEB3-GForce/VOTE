@@ -20,15 +20,16 @@
 """
 
 import copy
-import sys
-from  StringIO import StringIO
-from contextlib import contextmanager
-import logging
 import os
+import sys
 import unittest
+
+from contextlib import contextmanager
+from  StringIO import StringIO
 
 from src.config import config
 from src.constants import config as config_constants
+from src.constants import logger
 from src.scripts import configure_logging
 
 class ConfigureLoggingTest(unittest.TestCase):
@@ -42,7 +43,7 @@ class ConfigureLoggingTest(unittest.TestCase):
 
     @contextmanager
     def capture(self, command, *args, **kwargs):
-        """Captures stderr. From:
+        """Captures stderr. Based on:
             http://schinckel.net/2013/04/15/capture-and-test-sys.stdout-sys.stderr-in-unittest.testcase/
         """
         command(*args, **kwargs)
@@ -63,7 +64,8 @@ class ConfigureLoggingTest(unittest.TestCase):
     def tearDown(self):
         # Restore the original config so as not to mess up other tests
         config.CONFIG = copy.deepcopy(ConfigureLoggingTest.ORIGINAL_CONFIG)
-        # Restor stderr.
+
+        # Restore stderr.
         sys.stderr = self.original_stderr
 
         # Clear the log after each test.
@@ -75,10 +77,8 @@ class ConfigureLoggingTest(unittest.TestCase):
         config.CONFIG[config_constants.LOG] = True
         configure_logging.configure_logging()
 
-        logger = logging.getLogger()
-
         test_message1 = "Here is the first test"
-        with self.capture(logger.info, test_message1) as output:
+        with self.capture(logger.LOGGER.info, test_message1) as output:
             self.assertTrue(test_message1 in output)
             self.assertTrue("INFO" in output)
 
@@ -93,10 +93,8 @@ class ConfigureLoggingTest(unittest.TestCase):
         config.CONFIG[config_constants.LOG] = False
         configure_logging.configure_logging()
 
-        logger = logging.getLogger()
-
         test_message1 = "Here is the first test"
-        with self.capture(logger.info, test_message1) as output:
+        with self.capture(logger.LOGGER.info, test_message1) as output:
             self.assertTrue(test_message1 in output)
             self.assertTrue("INFO" in output)
 
@@ -105,21 +103,18 @@ class ConfigureLoggingTest(unittest.TestCase):
             self.assertTrue(test_message1 not in output)
             self.assertTrue("INFO" not in output)
 
-
     def test_no_logging_except_errors(self):
         """Verifies that only errors are logging when no logging specified"""
         config.CONFIG[config_constants.DEBUG] = False
         config.CONFIG[config_constants.LOG] = False
         configure_logging.configure_logging()
 
-        logger = logging.getLogger()
-
         test_message1 = "Here is the first test"
-        with self.capture(logger.info, test_message1) as output:
+        with self.capture(logger.LOGGER.info, test_message1) as output:
             self.assertTrue(test_message1 not in output)
             self.assertTrue("INFO" not in output)
 
-        with self.capture(logger.error, test_message1) as output:
+        with self.capture(logger.LOGGER.error, test_message1) as output:
             self.assertTrue(test_message1 in output)
             self.assertTrue("ERROR" in output)
 
