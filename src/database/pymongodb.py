@@ -23,6 +23,7 @@ import pymongo
 from src.config import config
 from src.constants import config as config_constants
 from src.constants import database as db_constants
+from src.constants import logger
 from src.database import vote_transform
 from src.database import vote_cursor
 
@@ -64,6 +65,7 @@ class PymongoDB(object):
         if db_type not in db_constants.DB_TYPES:
             msg = "Invalid database type.\n Valid Options: %s\n Given: %s\n" % (
                 db_constants.DB_TYPES, db_type)
+            logger.LOGGER.error(msg)
             raise exceptions.ValueError(msg)
 
         self._CLIENT = pymongo.MongoClient(
@@ -83,6 +85,7 @@ class PymongoDB(object):
         if name not in db_constants.DB_COLLECTIONS:
             msg = "Invalid connection.\n Valid Options: %s\n Given: %s\n" % (
                 db_constants.DB_COLLECTIONS, str(name))
+            logger.LOGGER.error(msg)
             raise exceptions.ValueError(msg)
         return self.DB[name]
 

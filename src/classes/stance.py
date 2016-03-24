@@ -20,8 +20,9 @@
 """
 
 from src.classes.printable_object import PrintableObject
-from src.constants import stance_sort_key
+from src.constants import logger
 from src.constants import importance
+from src.constants import stance_sort_key
 
 class Stance(PrintableObject):
     """"Represents what an entity feels about a given issue.
@@ -103,8 +104,7 @@ class Stance(PrintableObject):
         elif keyword == stance_sort_key.EQUITY:
             self._sort_key = [stance_import, relation_import]
         else:
-            # TODO(WEB3-GForce) Use a logger here.
-            print "ERROR unknown sort_key: %s" % keyword
+            logger.LOGGER.error("Unknown sort_key: %s" % keyword)
 
     def match(self, stance2):
         """Determines if another stance matches this stance.
