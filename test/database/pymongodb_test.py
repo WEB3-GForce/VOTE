@@ -37,7 +37,7 @@ class PymongoDBTest(unittest.TestCase):
     def setUpClass(cls):
         # Make sure that the database is clean before this class is run.
         DB = PymongoDB()
-        DB._CLIENT.drop_database(DB._DB)
+        DB._CLIENT.drop_database(DB.DB)
 
     def setUp(self):
         self.DB = PymongoDB.get_db()
@@ -46,14 +46,14 @@ class PymongoDBTest(unittest.TestCase):
         # Restore the original config so as not to mess up other tests
         config.CONFIG = copy.deepcopy(PymongoDBTest.ORIGINAL_CONFIG)
         # Delete the database each time to start fresh.
-        self.DB._CLIENT.drop_database(self.DB._DB)
+        self.DB._CLIENT.drop_database(self.DB.DB)
 
 
     def test_get_db(self):
         """ Verifies that get_db returns the proper DB to be used."""
         PymongoDB._DB = None
         db = PymongoDB.get_db()
-        self.assertEqual(db._DB.name, config.CONFIG[config_constants.DATABASE])
+        self.assertEqual(db.DB.name, config.CONFIG[config_constants.DATABASE])
 
         # Subsequent calls to get_db should return the same object)
         self.assertEquals(db, PymongoDB.get_db())
@@ -63,7 +63,7 @@ class PymongoDBTest(unittest.TestCase):
         for db_type in db_constants.DB_TYPES:
             config.CONFIG[config_constants.DATABASE] = db_type
             db = PymongoDB()
-            self.assertEqual(db._DB.name, db_type)
+            self.assertEqual(db.DB.name, db_type)
 
     def test_create_db_invalid_type(self):
         """ Verifies an exception is thrown for invalid types."""

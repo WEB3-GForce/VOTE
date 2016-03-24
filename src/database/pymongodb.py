@@ -32,7 +32,7 @@ class PymongoDB(object):
     json and vice versa. Hence, other code can work solely with the objects
     defined in src/classes.
     
-    To retrieve a database object, use the class method get_db(). DO NOT
+    To retrieve a database object, use the class method getDB(). DO NOT
     directly instantiate an object for this class.
     """
 
@@ -51,6 +51,11 @@ class PymongoDB(object):
         """ Initializes a new PymongoDB instance based upon the configuration
         settings.
         
+        Attributes:
+            DB: This represents the direct Pymongo database. Generally, code
+            should use this class wrapper. However, since its functionality is
+            limited, code will occasionally need to access the DB directly.
+        
         Raises:
             ValueError: An invalid database type is specified in the
                 configurations.
@@ -63,7 +68,7 @@ class PymongoDB(object):
 
         self._CLIENT = pymongo.MongoClient(
             config.CONFIG[config_constants.DB_CLIENT])
-        self._DB = self._CLIENT[db_type]
+        self.DB = self._CLIENT[db_type]
         self._transformer = vote_transform.VoteTransform()
 
     def get_collection(self, name):
@@ -79,7 +84,7 @@ class PymongoDB(object):
             msg = "Invalid connection.\n Valid Options: %s\n Given: %s\n" % (
                 db_constants.DB_COLLECTIONS, str(name))
             raise exceptions.ValueError(msg)
-        return self._DB[name]
+        return self.DB[name]
 
     def insert_one(self, collection, query):
         """ A wrapper for the Pymongo Collection insert_one function that
