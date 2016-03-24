@@ -190,7 +190,7 @@ class VoteTransform(object):
         """
         check = lambda custom_class: isinstance(son, custom_class)
         if any(check(a_class) for a_class in  db_constants.DB_CUSTOM_CLASSES):
-            return self._encode(copy.deepcopy(son.__dict__))
+            return self._encode_custom_class(son)
 
         for (key, value) in son.items():
             son[key] = self._encode(value)
