@@ -92,7 +92,7 @@ class PymongoDB(object):
         Return:
             The result of Pymongo Collection insert_one
         """
-        collection = self._get_collection(collection)
+        collection = self.get_collection(collection)
         return collection.insert_one(
             self._transformer.transform_incoming(query))
 
@@ -110,7 +110,7 @@ class PymongoDB(object):
         Return:
             A VoteCursor that encapsulates the result of Pymongo Collection find
         """
-        collection = self._get_collection(collection)
+        collection = self.get_collection(collection)
         result = collection.find(query)
         return vote_cursor.VoteCursor(result)
 
@@ -125,7 +125,7 @@ class PymongoDB(object):
         Return:
             The result of Pymongo Collection find_one
         """
-        collection = self._get_collection(collection)
+        collection = self.get_collection(collection)
         result = collection.find_one(query)
         if result is None:
             return None
@@ -143,8 +143,8 @@ class PymongoDB(object):
         Return:
             The result of Pymongo Collection replace_one
         """
-        collection = self._get_collection(collection)
-        return collection.replace_one(self, collection, query,
+        collection = self.get_collection(collection)
+        return collection.replace_one(query,
             self._transformer.transform_incoming(replacement))
 
     def delete_one(self, collection, query):
@@ -158,6 +158,6 @@ class PymongoDB(object):
         Return:
             The result of Pymongo Collection delete_one
         """
-        collection = self._get_collection(collection)
+        collection = self.get_collection(collection)
         return collection.delete_one(
             self._transformer.transform_incoming(query))
