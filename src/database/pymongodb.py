@@ -101,7 +101,7 @@ class PymongoDB(object):
         return collection.insert_one(
             self._transformer.transform_incoming(query))
 
-    def find(self, collection, query={}):
+    def find(self, collection, query=None):
         """ A wrapper for the Pymongo Collection find function that properly
         translates src/classes objects.
         
