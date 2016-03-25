@@ -18,10 +18,11 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-import logging
 
-# The logger to be used throughout the project
-LOGGER = logging.getLogger()
+# The outcome of a vote for a bill, for or against.
+FOR = "FOR"
+AGN = "AGN"
 
-# The logging format
-FORMAT_STRING = "[%(levelname)s %(asctime)s @ %(pathname)s:%(funcName)s:%(lineno)d] %(message)s"
+# Whether one is for or against a given issue.
+PRO = "PRO"
+CON = "CON"

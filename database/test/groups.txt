@@ -1,0 +1,90 @@
+{
+    "_id": {
+        "$oid": "56f571d0a58a143e500c27cd"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "", 
+    "issues": [], 
+    "name": "GROUP1", 
+    "norm": null, 
+    "number": "", 
+    "pro_english_description": "", 
+    "stances": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "issue": "Rushing", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": null, 
+            "source_db": null
+        }, 
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "A"
+            }, 
+            "issue": "SPEED", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": null, 
+            "source_db": null
+        }
+    ], 
+    "synonyms": [
+        "member_analyze_test"
+    ]
+}
+{
+    "_id": {
+        "$oid": "56f5762da58a143e500c27cf"
+    }, 
+    "_type": "Group", 
+    "con_english_description": "", 
+    "issues": [], 
+    "name": "GROUP2", 
+    "norm": null, 
+    "number": "", 
+    "pro_english_description": "", 
+    "stances": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "C"
+            }, 
+            "issue": "MIGHT", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": null, 
+            "source_db": null
+        }, 
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "issue": "POWER", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": null, 
+            "source_db": null
+        }
+    ], 
+    "synonyms": [
+        "member_analyze_test"
+    ]
+}

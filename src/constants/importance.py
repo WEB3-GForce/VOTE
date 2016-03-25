@@ -44,8 +44,11 @@ class _Importance(object):
             uppercase.
     """
 
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, entries=None):
+        self.value = "Z"
+
+        if entries is not None:
+            self.__dict__.update(entries)
 
     def __eq__(self, object2):
         return self.value == object2.value
@@ -65,12 +68,15 @@ class _Importance(object):
     def __le__(self, object2):
         return self.value >= object2.value
 
+    def __str__(self):
+        return self.value
+
 
 # The following are constants representing the different levels of importance.
 # Use these in code.
-A = _Importance("A")
-B = _Importance("B")
-C = _Importance("C")
-D = _Importance("D")
+A = _Importance({"value" : "A"})
+B = _Importance({"value" : "B"})
+C = _Importance({"value" : "C"})
+D = _Importance({"value" : "D"})
 
-Z = _Importance("Z")
+Z = _Importance({"value" : "Z"})

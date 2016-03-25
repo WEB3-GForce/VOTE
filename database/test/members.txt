@@ -1,0 +1,57 @@
+{
+    "_id": {
+        "$oid": "56f57521a58a143e500c27ce"
+    }, 
+    "_type": "Member", 
+    "con_rel_stances": [], 
+    "credo": [], 
+    "district": "", 
+    "first_name": "TEST", 
+    "full_name": "member_analyze_test", 
+    "gender": null, 
+    "last_name": "MEMBER", 
+    "party": null, 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "GROUP1", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "side": "PRO", 
+            "source": "member_analyze_test", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "GROUP2", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "A"
+            }, 
+            "side": "CON", 
+            "source": "member_analyze_test", 
+            "source_db": "members"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": null, 
+    "term_start": null, 
+    "voting_record": [
+        [
+            "BILL1", 
+            "FOR"
+        ], 
+        [
+            "BILL2", 
+            "AGN"
+        ], 
+        [
+            "BILL3", 
+            "FOR"
+        ]
+    ]
+}
