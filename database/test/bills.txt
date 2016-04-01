@@ -156,3 +156,50 @@
     ], 
     "vote_tally": []
 }
+{
+    "_type": "Bill", 
+    "bill_number": "HR7789", 
+    "date_of_vote": null, 
+    "importance": null, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [], 
+    "majority_factor": null, 
+    "name": "decision_analyze_test", 
+    "president_position": null, 
+    "remarks": [], 
+    "session": "", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "C"
+            }, 
+            "issue": "decision_analyze_test_norm", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "issue"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "C"
+            }, 
+            "issue": "decision_analyze_test_norm", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "issue"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": []
+}

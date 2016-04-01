@@ -1,0 +1,42 @@
+{
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [], 
+    "name": "decision_analyze_test_norm", 
+    "norm": {
+        "_type": "Stance", 
+        "importance": {
+                "_type": "_Importance", 
+                "value": "C"
+            }, 
+        "issue": "decision_analyze_test_norm", 
+        "relation": null, 
+        "siblings": null, 
+        "side": "PRO", 
+        "source": null, 
+        "source_db": "issue"
+    }, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "", 
+    "pro_english_description": "", 
+    "pro_stances": [], 
+    "synonyms": [], 
+    "type": ""
+}
+{
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [], 
+    "name": "decision_analyze_test_no_norm", 
+    "norm": null, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "", 
+    "pro_english_description": "", 
+    "pro_stances": [], 
+    "synonyms": [], 
+    "type": ""
+}
