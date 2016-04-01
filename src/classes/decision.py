@@ -35,8 +35,8 @@ class Decision(PrintableObject):
             opposition
         con_rel_agn_stances: list of stances opposed to the bill held by the
             opposition
-        groups_for: list of groups in support of the bill
-        groups_agn : list of groups opposed to the bill
+        groups_for: list of stances from groups in support of the bill
+        groups_agn : list of stances from groups opposed to the bill
         for_norms: norms associated with for_stances
         agn_norms: norms associated with agn_stances
         for_bill_norms: norms associated with bill's for stances

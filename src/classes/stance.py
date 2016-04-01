@@ -67,6 +67,11 @@ class Stance(PrintableObject):
         self.side = None
         self.relation = None
         self.siblings = []
+        # This private value is used to specify the string value of the sort key
+        # such as LOYALTY. This is set by calling the sort_key value. This is
+        # private in the sense that this regular code should not set this
+        # directly. However, this value can be read if another code needs to
+        # determine what sort key is being used.
         self._sort_key = None
 
         if entries is not None:
@@ -80,7 +85,17 @@ class Stance(PrintableObject):
         used. If this is not provided, stances are sorted in order of
         importance.
         """
-        return self._sort_key or self.importance
+        stance_import = self.importance
+        relation_import = importance.B
+        if self.relation and self.relation.importance:
+            relation_import = self.relation.importance
+
+        if self._sort_key == stance_sort_key.LOYALTY:
+            return [relation_import, stance_import]
+        elif self._sort_key == stance_sort_key.EQUITY:
+            return [stance_import, relation_import]
+        else:
+            return self.importance
 
     @sort_key.setter
     def sort_key(self, keyword):
@@ -94,15 +109,8 @@ class Stance(PrintableObject):
             keyword: a constant from src.constants.stance_sort_key that defines
                 how to produce the sort_key.
         """
-        stance_import = self.importance
-        relation_import = importance.B
-        if self.relation and self.relation.importance:
-            relation_import = self.relation.importance
-
-        if keyword == stance_sort_key.LOYALTY:
-            self._sort_key = [relation_import, stance_import]
-        elif keyword == stance_sort_key.EQUITY:
-            self._sort_key = [stance_import, relation_import]
+        if keyword in stance_sort_key.SORT_KEY_LIST:
+            self._sort_key = keyword
         else:
             logger.LOGGER.error("Unknown sort_key: %s" % keyword)
 
