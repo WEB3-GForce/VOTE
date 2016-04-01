@@ -46,7 +46,6 @@ def extract_voting_stances(member):
 
     logger.LOGGER.info("Extracting voting stances completed.")
 
-# Private
 def _extract_single_voting_stance(vote):
     """Helper to extract_voting_stances. Extracts a stance the member holds
     based on voting for a particular bill. It checks the bill and returns
@@ -78,7 +77,8 @@ def _extract_single_voting_stance(vote):
     elif for_or_agn == outcomes.AGN:
         return bill.stances_agn
     else:
-        logger.LOGGER.error("Bad Bill outcome. Expected FOR or AGN. Received %s" % for_or_agn)
+        msg = "Bad Bill outcome. Expected FOR or AGN. Received %s" % for_or_agn
+        logger.LOGGER.error(msg)
         return []
 
 def extract_relations_stances(member):
