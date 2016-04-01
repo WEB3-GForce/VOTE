@@ -27,7 +27,7 @@ from src.constants import logger
 from src.constants import outcomes
 from src.database import queries
 from src.database.pymongodb import PymongoDB
-from src.util import common as util_common
+from src.util import util
 
 def update_decision_metrics(decision):
     """Updates the decision object based on stances for and agn the decision.
@@ -75,9 +75,9 @@ def _update_regular_stances(decision):
     # equal to each other in the normal sense. Hence, the intersection is done
     # twice to get all unique stances.
     eq_fun = lambda stance1, stance2: stance1.source == stance2.source
-    for_intersect = util_common.intersect(decision.groups_for,
+    for_intersect = util.intersect(decision.groups_for,
         decision.groups_agn, eq_fun)
-    agn_intersect = util_common.intersect(decision.groups_agn,
+    agn_intersect = util.intersect(decision.groups_agn,
         decision.groups_for, eq_fun)
     decision.split_group = for_intersect + agn_intersect
 
@@ -103,7 +103,7 @@ def _check_norms(stances):
     """
     filter_fun = lambda stance: _normative_stance(stance)
     norms = filter(filter_fun, stances)
-    return util_common.remove_duplicates(norms) if norms else []
+    return util.remove_duplicates(norms) if norms else []
 
 
 def _normative_stance(stance):
