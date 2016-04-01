@@ -28,3 +28,6 @@ EQUITY = "EQUITY"
 # For loyalty, the importance of the source relation of the stance is the
 # primary sort key. The importance of the stance itself is a secondary sort key.
 LOYALTY = "LOYALTY"
+
+# This is a list of all the acceptable stance sort keys
+SORT_KEY_LIST = [EQUITY, LOYALTY]
