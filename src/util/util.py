@@ -1,4 +1,4 @@
-def intersect(list1, list2, equal_fun):
+def intersection(list1, list2, equal_fun):
     """Returns the intersection of two lists
     
     Arguments:

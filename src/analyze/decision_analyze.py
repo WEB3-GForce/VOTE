@@ -75,9 +75,9 @@ def _update_regular_stances(decision):
     # equal to each other in the normal sense. Hence, the intersection is done
     # twice to get all unique stances.
     eq_fun = lambda stance1, stance2: stance1.source == stance2.source
-    for_intersect = util.intersect(decision.groups_for,
+    for_intersect = util.intersection(decision.groups_for,
         decision.groups_agn, eq_fun)
-    agn_intersect = util.intersect(decision.groups_agn,
+    agn_intersect = util.intersection(decision.groups_agn,
         decision.groups_for, eq_fun)
     decision.split_group = for_intersect + agn_intersect
 
