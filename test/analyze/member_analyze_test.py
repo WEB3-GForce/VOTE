@@ -89,13 +89,13 @@ class MemberAnalyzeTest(unittest.TestCase):
         """ Verifies functionality when the specified bill doesn't exist."""
         vote = ["DOES NOT EXIST", outcomes.FOR]
         result = member_analyze._extract_single_voting_stance(vote)
-        self.assertEqual(result, [])
+        self.assertEquals(result, [])
 
     def test_extract_single_voting_stance_invalid_side(self):
         """ Verifies functionality when the side on the bill is invalid."""
         vote = [self.BILL1, "DOES NOT MAKE SENSE"]
         result = member_analyze._extract_single_voting_stance(vote)
-        self.assertEqual(result, [])
+        self.assertEquals(result, [])
 
     def test_extract_single_voting_stance_for(self):
         """ Verifies stances for a single bill FOR are extracted."""
