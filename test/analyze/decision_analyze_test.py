@@ -66,71 +66,6 @@ class DecisionAnalyzeTest(unittest.TestCase):
         # Delete the database each time to start fresh.
         DecisionAnalyzeTest.drop_collections(self.DB)
 
-    def test_remove_less_important_only_one(self):
-        """ Verifies remove less importance where only one is left."""
-        stance1 = Stance()
-        stance1.importance = importance.A
-
-        stance2 = Stance()
-        stance2.importance = importance.B
-
-        stance3 = Stance()
-        stance3.importance = importance.C
-
-        answer = [stance1]
-        result = decision_analyze._remove_less_important([stance1, stance2, stance3])
-        self.assertEqual(len(result), len(answer))
-        for stance1, stance2 in zip(result, answer):
-            self.assertEquals(stance1, stance2)
-
-    def test_remove_less_important(self):
-        """ Verifies remove less importance where two are left."""
-        stance1 = Stance()
-        stance1.importance = importance.B
-
-        stance2 = Stance()
-        stance2.importance = importance.B
-
-        stance3 = Stance()
-        stance3.importance = importance.C
-
-        answer = [stance1, stance2]
-        result = decision_analyze._remove_less_important([stance1, stance2, stance3])
-        self.assertEqual(len(result), len(answer))
-        for stance1, stance2 in zip(result, answer):
-            self.assertEquals(stance1, stance2)
-
-
-    def test_remove_less_important_loyalty(self):
-        """ Verifies remove less importance when using a sort key."""
-        stance1 = Stance()
-        stance1.importance = importance.C
-        relation1 = Relation()
-        relation1.importance = importance.A
-        stance1.relation = relation1
-        stance1.sort_key = stance_sort_key.LOYALTY
-
-        stance2 = Stance()
-        stance2.importance = importance.C
-        relation2 = Relation()
-        relation2.importance = importance.A
-        stance2.relation = relation2
-        stance2.sort_key = stance_sort_key.LOYALTY
-
-        stance3 = Stance()
-        stance3.importance = importance.A
-        relation3 = Relation()
-        relation3.importance = importance.B
-        stance3.relation = relation3
-        stance3.sort_key = stance_sort_key.LOYALTY
-
-
-        answer = [stance1, stance2]
-        result = decision_analyze._remove_less_important([stance1, stance2, stance3])
-        self.assertEqual(len(result), len(answer))
-        for stance1, stance2 in zip(result, answer):
-            self.assertEquals(stance1, stance2)
-
     def generate_stance_array(self):
         """Generates the stance array for the _compare_stance tests"""
         stance1 = Stance()
@@ -247,50 +182,6 @@ class DecisionAnalyzeTest(unittest.TestCase):
         self.assertEqual(len(result), 2)
         self.assertEqual(result[0], outcomes.FOR)
 
-    def generate_collect_type_stance_array(self):
-        """Generates the stance array for the collect_type tests"""
-        stance1 = Stance()
-        stance1.source_db = db_constants.MEMBERS
-
-        stance2 = Stance()
-        stance1.source_db = db_constants.BILLS
-
-        stance3 = Stance()
-        stance1.source_db = db_constants.GROUPS
-        return [stance1, stance2, stance3]
-
-    def test_collect_source_type(self):
-        """ Verifies collect type return stances only with the specified source."""
-        array = self.generate_collect_type_stance_array()
-        result = decision_analyze._collect_source_type(db_constants.MEMBERS, array)
-
-        for stance in result:
-            self.assertEquals(stance.source_db, db_constants.MEMBERS)
-
-    def test_collect_groups_type(self):
-        """ Verifies the function only return stances from groups."""
-        array = self.generate_collect_type_stance_array()
-        result = decision_analyze._collect_groups(array)
-
-        for stance in result:
-            self.assertEquals(stance.source_db, db_constants.GROUPS)
-
-    def test_collect_credo_type(self):
-        """ Verifies the function only return stances from members."""
-        array = self.generate_collect_type_stance_array()
-        result = decision_analyze._collect_credo(array)
-
-        for stance in result:
-            self.assertEquals(stance.source_db, db_constants.MEMBERS)
-
-    def test_collect_bills_type(self):
-        """ Verifies the function only return stances from bills."""
-        array = self.generate_collect_type_stance_array()
-        result = decision_analyze._collect_bills(array)
-
-        for stance in result:
-            self.assertEquals(stance.source_db, db_constants.BILLS)
-
     def test_MI_stances(self):
         """Verifies MI_stances properly compares all for and agn stances."""
         decision = Decision()
@@ -336,73 +227,6 @@ class DecisionAnalyzeTest(unittest.TestCase):
         self.assertEqual(decision.MI_record[0], outcomes.AGN)
         self.assertEqual(decision.MI_group[0], outcomes.FOR)
         self.assertEqual(decision.MI_norm[0], outcomes.FOR)
-
-    def test_normative_stance_not_in_db(self):
-        """Verifies function returns False when the norm is not in the DB."""
-        stance = Stance()
-        stance.issue = "I Don't Exist"
-
-        result = decision_analyze._normative_stance(stance)
-        self.assertFalse(result)
-
-    def test_normative_stance_no_norm(self):
-        """Verifies function returns False when the Issue has no norm."""
-        stance = Stance()
-        stance.issue = "decision_analyze_test_no_norm"
-
-        result = decision_analyze._normative_stance(stance)
-        self.assertFalse(result)
-
-    def test_normative_stance_norm_doesnt_match(self):
-        """Verifies function returns False when the stance does not match the norm."""
-        stance = Stance()
-        stance.issue = "decision_analyze_test_norm"
-        stance.side = outcomes.CON
-
-        result = decision_analyze._normative_stance(stance)
-        self.assertFalse(result)
-
-    def test_normative_stance_norm_match(self):
-        """Verifies function returns True when the stance matches the norm."""
-        stance = Stance()
-        stance.issue = "decision_analyze_test_norm"
-        stance.side = outcomes.PRO
-
-        result = decision_analyze._normative_stance(stance)
-        self.assertTrue(result)
-
-    def test_check_norms(self):
-        """Verifies function returns only normative stances."""
-        stance = Stance()
-        stance.issue = "decision_analyze_test_norm"
-        stance.side = outcomes.PRO
-
-        agn_norm_stance = Stance()
-        agn_norm_stance.issue = "decision_analyze_test_norm"
-        agn_norm_stance.side = outcomes.CON
-
-        result = decision_analyze._check_norms([stance, agn_norm_stance])
-        self.assertEquals(len(result), 1)
-        self.assertEquals(result[0], stance)
-
-    def test_check_norms_no_duplicates(self):
-        """Verifies function return does not contain duplicates."""
-        stance = Stance()
-        stance.issue = "decision_analyze_test_norm"
-        stance.side = outcomes.PRO
-
-        result = decision_analyze._check_norms([stance, stance])
-        self.assertEquals(len(result), 1)
-        self.assertEquals(result[0], stance)
-
-    def test_check_norms_no_result(self):
-        """Verifies function return nothing if there are no normative stances."""
-        agn_norm_stance = Stance()
-        agn_norm_stance.issue = "decision_analyze_test_norm"
-        agn_norm_stance.side = outcomes.CON
-
-        result = decision_analyze._check_norms([agn_norm_stance, agn_norm_stance])
-        self.assertEquals(len(result), 0)
 
     def test_update_regular_stances_norms(self):
         """Verifies function properly updates for and agn norms."""

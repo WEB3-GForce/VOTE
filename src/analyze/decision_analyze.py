@@ -20,6 +20,7 @@
 """
 import itertools
 
+from src.analyze import stance_analyze
 from src.classes.stance import Stance
 from src.constants import database as db_constants
 from src.constants import importance
@@ -57,18 +58,18 @@ def _update_regular_stances(decision):
         queries.bill_query(decision.bill))
 
 
-    decision.for_norms = _check_norms(fors)
-    decision.agn_norms = _check_norms(agns)
+    decision.for_norms = stance_analyze.collect_normative_stances(fors)
+    decision.agn_norms = stance_analyze.collect_normative_stances(agns)
 
     if bill is None:
         logger.LOGGER.error("Decision bill not found.")
     else:
-        decision.for_bill_norms = _check_norms(bill.stances_for)
-        decision.agn_bill_norms = _check_norms(bill.stances_agn)
+        decision.for_bill_norms = stance_analyze.collect_normative_stances(bill.stances_for)
+        decision.agn_bill_norms = stance_analyze.collect_normative_stances(bill.stances_agn)
 
 
-    decision.groups_for = _collect_groups(fors)
-    decision.groups_agn = _collect_groups(agns)
+    decision.groups_for = util.collect_group_stances(fors)
+    decision.groups_agn = util.collect_group_stances(agns)
 
     # Equality is defined by seeing if a stance has the same source as another.
     # This is needed to detect split groups. However, the stances are not
@@ -81,46 +82,15 @@ def _update_regular_stances(decision):
         decision.groups_for, eq_fun)
     decision.split_group = for_intersect + agn_intersect
 
-    for_bills = _collect_bills(fors)
-    agn_bills = _collect_bills(agns)
+    for_bills = util.collect_bill_stances(fors)
+    agn_bills = util.collect_bill_stances(agns)
     if for_bills and agn_bills:
         decision.split_record = for_bills + agn_bills
 
-    for_credo = _collect_credo(fors)
-    agn_credo = _collect_credo(agns)
+    for_credo = util.collect_credo_stances(fors)
+    agn_credo = util.collect_credo_stances(agns)
     if for_credo and agn_credo:
         decision.split_credo = for_credo + agn_credo
-
-
-def _check_norms(stances):
-    """Filters a given list of stances to contain only those that are normative.
-    
-    Arguments:
-        stances: the list of stances to filter.
-        
-    Returns:
-        The filtered list with duplicates removed.
-    """
-    filter_fun = lambda stance: _normative_stance(stance)
-    norms = filter(filter_fun, stances)
-    return util.remove_duplicates(norms) if norms else []
-
-
-def _normative_stance(stance):
-    """Checks if a given stance is the normative stance on the issue (i.e. the
-    way most people in the country feel about the issue).
-    
-    Argument:
-        stance: the stance to check
-        
-    Returns:
-        True if the stance is normative, False otherwise.
-    """
-    stance_issue = PymongoDB.get_db().find_one(db_constants.ISSUES,
-        queries.issue_query(stance.issue))
-    if stance_issue and stance_issue.norm:
-        return stance.match(stance_issue.norm)
-    return False
 
 
 def _update_MI_stances(decision):
@@ -159,29 +129,9 @@ def _MI_stances(decision, db_source=None):
     agns = decision.agn_stances
 
     if db_source is not None:
-        fors = _collect_source_type(db_source, fors)
-        agns = _collect_source_type(db_source, agns)
+        fors = util.collect_source_db_type(db_source, fors)
+        agns = util.collect_source_db_type(db_source, agns)
     return _compare_stances(fors, agns)
-
-
-def _collect_source_type(db, stances):
-    """Filters a list of stances based on the database they are derived from.
-    
-    Arguments:
-        db: the source database to match
-        stances: the list of stances to filter.
-        
-    Returns:
-        The filtered list.
-    """
-    filter_fun = lambda stance : stance.source_db == db
-    return filter(filter_fun, stances)
-
-# Extensions to collect_source_type. Simple lambdas that collect from a
-# particular DB like groups
-_collect_groups = lambda stances: _collect_source_type(db_constants.GROUPS, stances)
-_collect_credo = lambda stances: _collect_source_type(db_constants.MEMBERS, stances)
-_collect_bills = lambda stances: _collect_source_type(db_constants.BILLS, stances)
 
 
 def _compare_stances(fors, agns):
@@ -232,22 +182,10 @@ def _compare_stances(fors, agns):
     enum = enumerate(itertools.izip_longest(fors, agns, fillvalue=base_stance))
     for index, (a_for, an_agn) in enum:
         if a_for.sort_key > an_agn.sort_key:
-            return [outcomes.FOR, _remove_less_important(fors[index:])]
+            stances = util.remove_less_important_stances(fors[index:])
+            return [outcomes.FOR, stances]
         if an_agn.sort_key > a_for.sort_key:
-            return [outcomes.AGN, _remove_less_important(agns[index:])]
+            stances = util.remove_less_important_stances(agns[index:])
+            return [outcomes.AGN, stances]
     return []
 
-
-def _remove_less_important(stances):
-    """Removes all stances that are not as important as the first stance in the
-    list.
-
-    Arguments:
-        stances: the stances to purge
-                    
-    Returns:
-        The new stances list that contains only stances that are greater than or
-        equal to the importance of the first stance in the original list.              
-    """
-    filter_fun = lambda stance : stance.sort_key >= stances[0].sort_key
-    return filter(filter_fun, stances)
