@@ -22,8 +22,8 @@ import itertools
 
 from src.analyze import stance_analyze
 from src.classes.stance import Stance
+from src.classes.data import importance
 from src.constants import database as db_constants
-from src.constants import importance
 from src.constants import logger
 from src.constants import outcomes
 from src.database import queries

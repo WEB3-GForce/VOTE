@@ -23,7 +23,7 @@ import unittest
 
 from src.classes.stance import Stance
 from src.classes.relation import Relation
-from src.constants import importance
+from src.classes.data import importance
 from src.constants import stance_sort_key
 
 class StanceTest(unittest.TestCase):

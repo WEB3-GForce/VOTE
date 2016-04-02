@@ -23,8 +23,8 @@ import unittest
 
 from src.classes.stance import Stance
 from src.classes.relation import Relation
+from src.classes.data import importance
 from src.constants import database as db_constants
-from src.constants import importance
 from src.constants import outcomes
 from src.constants import stance_sort_key
 from src.util import util

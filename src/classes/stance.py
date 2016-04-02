@@ -20,8 +20,8 @@
 """
 
 from src.classes.printable_object import PrintableObject
+from src.classes.data import importance
 from src.constants import logger
-from src.constants import importance
 from src.constants import stance_sort_key
 
 class Stance(PrintableObject):

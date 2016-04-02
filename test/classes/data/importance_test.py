@@ -21,7 +21,7 @@
 
 import unittest
 
-from src.constants import importance
+from src.classes.data import importance
 
 class ImportanceTest(unittest.TestCase):
     """ Test suite for importance."""

@@ -25,8 +25,7 @@ from src.classes.issue import Issue
 from src.classes.member import Member
 from src.classes.relation import Relation
 from src.classes.stance import Stance
-
-from src.constants.importance import _Importance
+from src.classes.data.importance import _Importance
 
 
 # The following are the names of databases that can be used.
