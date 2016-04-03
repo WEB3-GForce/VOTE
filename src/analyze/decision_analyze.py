@@ -23,6 +23,7 @@ import itertools
 from src.analyze import stance_analyze
 from src.classes.stance import Stance
 from src.classes.data import importance
+from src.classes.data.result_data import ResultData
 from src.constants import database as db_constants
 from src.constants import logger
 from src.constants import outcomes
@@ -182,10 +183,14 @@ def _compare_stances(fors, agns):
     enum = enumerate(itertools.izip_longest(fors, agns, fillvalue=base_stance))
     for index, (a_for, an_agn) in enum:
         if a_for.sort_key > an_agn.sort_key:
-            stances = util.remove_less_important_stances(fors[index:])
-            return [outcomes.FOR, stances]
+            result = ResultData()
+            result.outcome = outcomes.FOR
+            result.data = util.remove_less_important_stances(fors[index:])
+            return result
         if an_agn.sort_key > a_for.sort_key:
-            stances = util.remove_less_important_stances(agns[index:])
-            return [outcomes.AGN, stances]
+            result = ResultData()
+            result.outcome = outcomes.AGN
+            result.data = util.remove_less_important_stances(agns[index:])
+            return result
     return []
 

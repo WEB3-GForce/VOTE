@@ -123,10 +123,9 @@ class DecisionAnalyzeTest(unittest.TestCase):
         stance2.relation.importance = importance.A
 
         result = decision_analyze._compare_stances(fors, agns)
-        self.assertEqual(len(result), 2)
-        self.assertEqual(result[0], outcomes.FOR)
-        self.assertEqual(len(result[1]), 1)
-        self.assertEquals(result[1][0], stance2)
+        self.assertEqual(result.outcome, outcomes.FOR)
+        self.assertEqual(len(result.data), 1)
+        self.assertEquals(result.data[0], stance2)
 
     def test_compare_stances_agns(self):
         """ Verifies compare stances returns properly when AGNS win."""
@@ -139,10 +138,9 @@ class DecisionAnalyzeTest(unittest.TestCase):
         agns[2].relation.importance = importance.A
 
         result = decision_analyze._compare_stances(fors, agns)
-        self.assertEqual(len(result), 2)
-        self.assertEqual(result[0], outcomes.AGN)
-        self.assertEqual(len(result[1]), 2)
-        for stance1, stance2 in zip(result[1], agns[1:]):
+        self.assertEqual(result.outcome, outcomes.AGN)
+        self.assertEqual(len(result.data), 2)
+        for stance1, stance2 in zip(result.data, agns[1:]):
             self.assertEquals(stance1, stance2)
 
     def test_compare_stances_longer_wins(self):
@@ -157,10 +155,9 @@ class DecisionAnalyzeTest(unittest.TestCase):
         agns.append(stance4)
 
         result = decision_analyze._compare_stances(fors, agns)
-        self.assertEqual(len(result), 2)
-        self.assertEqual(result[0], outcomes.AGN)
-        self.assertEqual(len(result[1]), 1)
-        self.assertEquals(result[1][0], stance4)
+        self.assertEqual(result.outcome, outcomes.AGN)
+        self.assertEqual(len(result.data), 1)
+        self.assertEquals(result.data[0], stance4)
 
     def test_compare_stances_fors_empty(self):
         """ Verifies that the base_stance is created properly when FORS are
@@ -169,8 +166,7 @@ class DecisionAnalyzeTest(unittest.TestCase):
         agns = self.generate_stance_array()
 
         result = decision_analyze._compare_stances(fors, agns)
-        self.assertEqual(len(result), 2)
-        self.assertEqual(result[0], outcomes.AGN)
+        self.assertEqual(result.outcome, outcomes.AGN)
 
     def test_compare_stances_agns_empty(self):
         """ Verifies that the base_stance is created properly when AGNS are
@@ -179,8 +175,7 @@ class DecisionAnalyzeTest(unittest.TestCase):
         agns = []
 
         result = decision_analyze._compare_stances(fors, agns)
-        self.assertEqual(len(result), 2)
-        self.assertEqual(result[0], outcomes.FOR)
+        self.assertEqual(result.outcome, outcomes.FOR)
 
     def test_MI_stances(self):
         """Verifies MI_stances properly compares all for and agn stances."""
@@ -191,8 +186,8 @@ class DecisionAnalyzeTest(unittest.TestCase):
         decision.for_stances[1].importance = importance.B
         result = decision_analyze._MI_stances(decision)
 
-        self.assertEqual(result[0], outcomes.FOR)
-        self.assertGreater(len(result[1]), 0)
+        self.assertEqual(result.outcome, outcomes.FOR)
+        self.assertGreater(len(result.data), 0)
 
     def test_MI_stance_with_source(self):
         """Verifies MI_stance properly compares stances from the given source."""
@@ -203,8 +198,8 @@ class DecisionAnalyzeTest(unittest.TestCase):
         decision.agn_stances[2].source_db = db_constants.MEMBERS
         result = decision_analyze._MI_stances(decision, db_constants.MEMBERS)
 
-        self.assertEqual(result[0], outcomes.AGN)
-        self.assertGreater(len(result[1]), 0)
+        self.assertEqual(result.outcome, outcomes.AGN)
+        self.assertGreater(len(result.data), 0)
 
     def test_update_MI_stances(self):
         """Verifies _update_MI_stance properly updates all MI stances."""
@@ -222,11 +217,11 @@ class DecisionAnalyzeTest(unittest.TestCase):
         decision.for_norms[0].importance = importance.A
 
         decision_analyze._update_MI_stances(decision)
-        self.assertEqual(decision.MI_stance[0], outcomes.AGN)
-        self.assertEqual(decision.MI_credo[0], outcomes.FOR)
-        self.assertEqual(decision.MI_record[0], outcomes.AGN)
-        self.assertEqual(decision.MI_group[0], outcomes.FOR)
-        self.assertEqual(decision.MI_norm[0], outcomes.FOR)
+        self.assertEqual(decision.MI_stance.outcome, outcomes.AGN)
+        self.assertEqual(decision.MI_credo.outcome, outcomes.FOR)
+        self.assertEqual(decision.MI_record.outcome, outcomes.AGN)
+        self.assertEqual(decision.MI_group.outcome, outcomes.FOR)
+        self.assertEqual(decision.MI_norm.outcome, outcomes.FOR)
 
     def test_update_regular_stances_norms(self):
         """Verifies function properly updates for and agn norms."""
@@ -452,8 +447,8 @@ class DecisionAnalyzeTest(unittest.TestCase):
         self.assertEqual(decision.split_credo, [])
         self.assertEqual(decision.split_group, [])
         self.assertEqual(decision.split_record, [])
-        self.assertEqual(decision.MI_stance[0], outcomes.AGN)
-        self.assertEqual(decision.MI_credo[0], outcomes.FOR)
-        self.assertEqual(decision.MI_record[0], outcomes.AGN)
-        self.assertEqual(decision.MI_group[0], outcomes.FOR)
-        self.assertEqual(decision.MI_norm[0], outcomes.FOR)
+        self.assertEqual(decision.MI_stance.outcome, outcomes.AGN)
+        self.assertEqual(decision.MI_credo.outcome, outcomes.FOR)
+        self.assertEqual(decision.MI_record.outcome, outcomes.AGN)
+        self.assertEqual(decision.MI_group.outcome, outcomes.FOR)
+        self.assertEqual(decision.MI_norm.outcome, outcomes.FOR)

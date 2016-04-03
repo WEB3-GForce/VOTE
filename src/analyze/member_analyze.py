@@ -19,6 +19,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 from src.database.pymongodb import PymongoDB
+from src.database import queries
 from src.constants import database as db_constants
 from src.constants import logger
 from src.constants import outcomes
@@ -59,25 +60,21 @@ def _extract_single_voting_stance(vote):
     """
     logger.LOGGER.info("Extracting stances from vote: %s" % vote)
 
-    bill_identifier = vote[0]
-    for_or_agn = vote[1]
-
     # Check if the name used in vote is the name of the bill, bill number, or
     # a synonym
-    query = {"$or": [{"name": bill_identifier},
-             {"synonyms": { "$in" : [ bill_identifier ] }},
-             {"bill_number" : bill_identifier} ] }
+    bill_identifier = vote.data
+    query = queries.bill_query(bill_identifier)
     bill = PymongoDB.get_db().find_one(db_constants.BILLS, query)
     if bill is None:
         logger.LOGGER.error("Bill not found: %s" % bill_identifier)
         return []
 
-    if for_or_agn == outcomes.FOR:
+    if vote.outcome == outcomes.FOR:
         return bill.stances_for
-    elif for_or_agn == outcomes.AGN:
+    elif vote.outcome == outcomes.AGN:
         return bill.stances_agn
     else:
-        msg = "Bad Bill outcome. Expected FOR or AGN. Received %s" % for_or_agn
+        msg = "Bad Bill outcome. Expected FOR or AGN. Received %s" % vote.outcome
         logger.LOGGER.error(msg)
         return []
 
@@ -120,9 +117,7 @@ def _extract_single_relation_stances(relation):
     """
     results = []
     # Check if the relation group is identified by name or id or synonym.
-    query = {"$or": [{"name": relation.group},
-                     {"synonyms": { "$in" : [ relation.group ]}},
-                     {"_id" : relation.group}] }
+    query = queries.group_query(relation.group)
     group = PymongoDB.get_db().find_one(db_constants.GROUPS, query)
 
     if group is None:

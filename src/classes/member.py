@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
- 
+
 from src.classes.printable_object import PrintableObject
 
 class Member(PrintableObject):
@@ -40,8 +40,10 @@ class Member(PrintableObject):
         party: The political party affiliation of the member
         committees: A list of committees on which the member serves
 
-        voting_record: A list of votes on previous bills. Formatted as:
-            [["BillNumber1", "FOR|AGN"], ["BillNumber2", "FOR|AGN"], ...]         
+        voting_record: A list of votes on previous bills. Formatted as a list
+            of ResultData objects where:
+                ResultData.outcome = "FOR|AGN"
+                ResultData.data = "BillNumber"
         credo: A list of stances personal to this member
         relations: A list of relations the member has with groups
 
@@ -73,7 +75,7 @@ class Member(PrintableObject):
         self.party = None
 
         # Attributes that identify the stances and groups the member cares about
-        self.voting_record = []  
+        self.voting_record = []
         self.credo = []
         self.relations = []
 
@@ -83,6 +85,6 @@ class Member(PrintableObject):
         self.pro_rel_stances = []
         self.con_rel_stances = []
         self.stance_sort_key = None
-        
+
         if entries is not None:
             self.__dict__.update(entries)

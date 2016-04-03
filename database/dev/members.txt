@@ -124,18 +124,21 @@
     "term_end": 1990, 
     "term_start": 1980, 
     "voting_record": [
-        [
-            "DEFENSE-AUTHORIZATION", 
-            "AGN"
-        ], 
-        [
-            "SPACE-STATION", 
-            "AGN"
-        ], 
-        [
-            "CIVIL-RIGHTS-RESTORATION-ACT", 
-            "AGN"
-        ]
+        {
+            "_type": "ResultData",        
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "AGN"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "SPACE-STATION", 
+            "outcome": "AGN"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "CIVIL-RIGHTS-RESTORATION-ACT", 
+            "outcome": "AGN"
+        }
     ]
 }
 {
@@ -199,18 +202,21 @@
     "term_end": null, 
     "term_start": 1986, 
     "voting_record": [
-        [
-            "DEFENSE-AUTHORIZATION", 
-            "FOR"
-        ], 
-        [
-            "CIVIL-RIGHTS-RESTORATION-ACT", 
-            "FOR"
-        ], 
-        [
-            "CHILD-CARE", 
-            "FOR"
-        ]
+        {
+            "_type": "ResultData",
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "CIVIL-RIGHTS-RESTORATION-ACT", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "CHILD-CARE", 
+            "outcome": "FOR"
+        }
     ]
 }
 {
@@ -349,21 +355,25 @@
     "term_end": 1990, 
     "term_start": 1958, 
     "voting_record": [
-        [
-            "DEFENSE-AUTHORIZATION", 
-            "FOR"
-        ], 
-        [
-            "SPACE-STATION", 
-            "FOR"
-        ], 
-        [
-            "STAR-WARS", 
-            "FOR"
-        ], 
-        [
-            "STAR-WARS", 
-            "AGN"
-        ]
+        {
+            "_type": "ResultData",
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "SPACE-STATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "STAR-WARS", 
+            "outcome": "FOR"
+        }, 
+        {
+             "_type": "ResultData",
+            "data": "STAR-WARS", 
+            "outcome": "AGN"
+        }
     ]
 }

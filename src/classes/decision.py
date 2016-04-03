@@ -52,6 +52,9 @@ class Decision(PrintableObject):
         MI_credo: for/agn/nil
         MI_record: for/agn/nil
         MI_norm: for/agn/nil
+            MI data is stored as a ResultData object formatted as follows.
+                ResultData.outcome = "FOR|AGN"
+                ResultData.data = list of stances supporting outcome
         result: whether to vote FOR or AGN the bill
         strategy: decision strategy used to arrive at result
         reason: stances supporting the result

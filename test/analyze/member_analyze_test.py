@@ -26,6 +26,7 @@ from StringIO import StringIO
 
 from src.analyze import member_analyze
 from src.classes.relation import Relation
+from src.classes.data.result_data import ResultData
 from src.constants import database as db_constants
 from src.constants import outcomes
 from src.database import queries
@@ -87,19 +88,19 @@ class MemberAnalyzeTest(unittest.TestCase):
 
     def test_extract_single_voting_stance_invalid_bill(self):
         """ Verifies functionality when the specified bill doesn't exist."""
-        vote = ["DOES NOT EXIST", outcomes.FOR]
+        vote = ResultData({"data" : "DOES NOT EXIST", "outcome" : outcomes.FOR})
         result = member_analyze._extract_single_voting_stance(vote)
         self.assertEquals(result, [])
 
     def test_extract_single_voting_stance_invalid_side(self):
         """ Verifies functionality when the side on the bill is invalid."""
-        vote = [self.BILL1, "DOES NOT MAKE SENSE"]
+        vote = ResultData({"data" : self.BILL1, "outcome" : "Random Value"})
         result = member_analyze._extract_single_voting_stance(vote)
         self.assertEquals(result, [])
 
     def test_extract_single_voting_stance_for(self):
         """ Verifies stances for a single bill FOR are extracted."""
-        vote = [self.BILL1, outcomes.FOR]
+        vote = ResultData({"data" : self.BILL1, "outcome" : outcomes.FOR})
         result = member_analyze._extract_single_voting_stance(vote)
         self.assertEqual(len(result), len(self.bill1.stances_for))
         for stance1, stance2 in zip(result, self.bill1.stances_for):
@@ -107,7 +108,7 @@ class MemberAnalyzeTest(unittest.TestCase):
 
     def test_extract_single_voting_stance_agn(self):
         """ Verifies stances for a single bill AGN are extracted."""
-        vote = [self.BILL1, outcomes.AGN]
+        vote = ResultData({"data" : self.BILL1, "outcome" : outcomes.AGN})
         result = member_analyze._extract_single_voting_stance(vote)
         self.assertEqual(len(result), len(self.bill1.stances_agn))
         for stance1, stance2 in zip(result, self.bill1.stances_agn):

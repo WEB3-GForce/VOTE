@@ -26,7 +26,7 @@ from src.classes.member import Member
 from src.classes.relation import Relation
 from src.classes.stance import Stance
 from src.classes.data.importance import _Importance
-
+from src.classes.data.result_data import ResultData
 
 # The following are the names of databases that can be used.
 
@@ -49,7 +49,8 @@ DEV = "dev"
 DB_TYPES = [PROD, STAGING, TEST, DEV]
 
 # This is a list of the custom classes the DB supports.
-DB_CUSTOM_CLASSES = [Bill, Group, Issue, Member, Relation, Stance, _Importance]
+DB_CUSTOM_CLASSES = [Bill, Group, Issue, Member, Relation, Stance, _Importance,
+                     ResultData]
 
 # DB entries are returned as {"_id" : ..., "_type": ..., ...}
 # where "_id" is the id of the entry in the DB, "_type" is the custom class

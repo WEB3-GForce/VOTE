@@ -41,17 +41,20 @@
     "term_end": null, 
     "term_start": null, 
     "voting_record": [
-        [
-            "BILL1", 
-            "FOR"
-        ], 
-        [
-            "BILL2", 
-            "AGN"
-        ], 
-        [
-            "BILL3", 
-            "FOR"
-        ]
+        {
+            "_type": "ResultData",
+            "data": "BILL1", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "BILL2", 
+            "outcome": "AGN"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "BILL3", 
+            "outcome": "FOR"
+        }
     ]
 }
