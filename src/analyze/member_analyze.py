@@ -18,12 +18,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+from src.analyze import stance_analyze
 from src.database.pymongodb import PymongoDB
 from src.database import queries
 from src.constants import database as db_constants
 from src.constants import logger
 from src.constants import outcomes
-
 
 def extract_voting_stances(member):
     """Extracts stances the member holds based on voting history.
@@ -78,7 +78,7 @@ def _extract_single_voting_stance(vote):
         logger.LOGGER.error(msg)
         return []
 
-def extract_relations_stances(member):
+def infer_relations_stances(member):
     """This function looks through the member's relations and extracts stances
     the member might hold by association. The member opposes what his enemies
     like and supports what his friends support.
@@ -90,21 +90,21 @@ def extract_relations_stances(member):
     Arguments:
         member: the member to examine
     """
-    logger.LOGGER.info("Extracting stances from relations of %s..."
+    logger.LOGGER.info("Inferring stances from relations of %s..."
         % member.full_name)
 
     results = []
     for relation in member.relations:
-        results += _extract_single_relation_stances(relation)
+        results += _infer_single_relation_stances(relation)
 
     pro_stance = lambda stance : outcomes.PRO == stance.relation.side
     con_stance = lambda stance : outcomes.CON == stance.relation.side
     member.pro_rel_stances = filter(pro_stance, results)
     member.con_rel_stances = filter(con_stance, results)
 
-    logger.LOGGER.info("Extracting relation stances completed.")
+    logger.LOGGER.info("Inferring relation stances completed.")
 
-def _extract_single_relation_stances(relation):
+def _infer_single_relation_stances(relation):
     """A helper method for extract_relations_stances(). It queries the database
     for an individual group a member has relations with and extracts stances
     from it.
@@ -130,3 +130,54 @@ def _extract_single_relation_stances(relation):
         results.append(stance)
 
     return results
+
+
+def match_stances(member, bill, side):
+    """This function filters the member's stances by the stances that are
+    implied by voting for a given side of a bill. In other words, it determines
+    which stances a member has that might suggest that the member would vote
+    for the given side of the bill.
+
+    Arguments:
+        member: the member whose stances will be filtered
+        bill: the bill whose stances will be used to filter the member stances
+        side: the side of the bill to examine (e.g. FOR or AGN)
+
+    Return:
+        A list that contains only those member stances that are the same as
+        those implied by voting on the given side of the bill.
+    """
+    logger.LOGGER.info("Considering implications of voting %s bill %s..." %
+        (side, bill.bill_number))
+    logger.LOGGER.info("Matching member stances with bill stances...")
+
+    stances = []
+    if side == outcomes.FOR:
+        stances = _match_stances_helper(member, bill.stances_for)
+    elif side == outcomes.AGN:
+        stances = _match_stances_helper(member, bill.stances_agn)
+    else:
+        logger.LOGGER.error("Invalid side to match: %s" % side)
+
+    stance_analyze.sort_stances(stances, member)
+    logger.LOGGER.info("Considering %s implications completed." % side)
+    return stances
+
+def _match_stances_helper(member, stances):
+    """Filters the member's stances keeping only those that match a stance in
+    stances. The member's stances consist of personal stances (member.credo),
+    voting record stances (member.stances), and group stances
+    (member.pro_rel_stances)
+
+    Arguments:
+        member: the member whose stances will be filtered.
+        stances: the list of stances to filter the member stances by
+        
+    Returns:
+        The list of filtered stances.
+    """
+    member_stances = member.credo + member.stances + member.pro_rel_stances
+
+    filter_fun = lambda member_stance : (
+        any(stance.match(member_stance) for stance in stances))
+    return filter(filter_fun, member_stances)

@@ -25,10 +25,15 @@ import unittest
 from StringIO import StringIO
 
 from src.analyze import member_analyze
+from src.classes.bill import Bill
+from src.classes.member import Member
 from src.classes.relation import Relation
+from src.classes.stance import Stance
+from src.classes.data import importance
 from src.classes.data.result_data import ResultData
 from src.constants import database as db_constants
 from src.constants import outcomes
+from src.constants import stance_sort_key
 from src.database import queries
 from src.database.pymongodb import PymongoDB
 from src.scripts.database import load_data
@@ -125,28 +130,28 @@ class MemberAnalyzeTest(unittest.TestCase):
         for stance1, stance2 in zip(self.member.stances, answer):
             self.assertTrue(stance1.total_match(stance2))
 
-    def test_extract_single_relation_stances_invalid_relation(self):
+    def test_infer_single_relation_stances_invalid_relation(self):
         """ Verifies functionality when the group provided is invalid."""
         relation = Relation()
         relation.group = "I DON'T EXIST"
-        result = member_analyze._extract_single_relation_stances(relation)
+        result = member_analyze._infer_single_relation_stances(relation)
         self.assertEqual(result, [])
 
-    def test_extract_single_relation_stances(self):
+    def test_infer_single_relation_stances(self):
         """ Verifies a single group's stances are extracted."""
         relation = Relation()
         relation.group = self.GROUP1
-        result = member_analyze._extract_single_relation_stances(relation)
+        result = member_analyze._infer_single_relation_stances(relation)
 
         self.assertEqual(len(result), len(self.group1.stances))
         for stance1, stance2 in zip(result, self.group1.stances):
-            # Ensure that the source relation is addded as the source.
+            # Ensure that the source relation is added as the source.
             self.assertEqual(stance1.relation, relation)
             self.assertTrue(stance1.total_match(stance2))
 
-    def test_extract_relations_stances(self):
+    def test_infer_relations_stances(self):
         """ Verifies all group stances are extracted."""
-        member_analyze.extract_relations_stances(self.member)
+        member_analyze.infer_relations_stances(self.member)
 
         # Stances from friends of the member should be in pro_rel_stances
         self.assertEqual(len(self.member.pro_rel_stances), len(self.group1.stances))
@@ -157,3 +162,120 @@ class MemberAnalyzeTest(unittest.TestCase):
         self.assertEqual(len(self.member.con_rel_stances), len(self.group2.stances))
         for stance1, stance2 in zip(self.member.con_rel_stances, self.group2.stances):
             self.assertTrue(stance1.total_match(stance2))
+
+    def generate_member_with_stances(self):
+        member = Member()
+        credo_stance = Stance()
+        credo_stance.issue = "Credo"
+        credo_stance.side = outcomes.PRO
+
+        stances_stance = Stance()
+        stances_stance.issue = "Stances"
+        stances_stance.side = outcomes.CON
+
+        pro_rel_stance = Stance()
+        pro_rel_stance.issue = "Pro-Relation"
+        pro_rel_stance.side = outcomes.PRO
+
+        member.credo.append(credo_stance)
+        member.stances.append(stances_stance)
+        member.pro_rel_stances.append(pro_rel_stance)
+        return member
+
+    def test__match_stances_helper_match_credo(self):
+        """ Verifies member.credo stances are matched."""
+        member = self.generate_member_with_stances()
+        stances = member.credo
+
+        result = member_analyze._match_stances_helper(member, stances)
+        self.assertEqual(result, stances)
+
+    def test__match_stances_helper_match_stances(self):
+        """ Verifies member.stances stances are matched."""
+        member = self.generate_member_with_stances()
+        stances = member.stances
+
+        result = member_analyze._match_stances_helper(member, stances)
+        self.assertEqual(result, stances)
+
+    def test__match_stances_helper_match_pro_rel_stances(self):
+        """ Verifies member.pro_rel_stances stances are matched."""
+        member = self.generate_member_with_stances()
+        stances = member.pro_rel_stances
+
+        result = member_analyze._match_stances_helper(member, stances)
+        for entry in result:
+            self.assertTrue(entry in stances)
+
+    def test__match_stances_helper_match_multiple_stances(self):
+        """ Verifies member stances from multiple sources are matched."""
+        member = self.generate_member_with_stances()
+        stances = member.credo + member.pro_rel_stances
+
+        result = member_analyze._match_stances_helper(member, stances)
+        for entry in result:
+            self.assertTrue(entry in stances)
+
+    def test__match_stances_helper_extra_stances(self):
+        """ Verifies that extra stances in the filter stances list are not added."""
+        member = self.generate_member_with_stances()
+        stances = member.credo + member.pro_rel_stances
+
+        stance = Stance()
+        stance.issue = "Not Found"
+        stance.side = outcomes.PRO
+        stances.append(stance)
+
+        result = member_analyze._match_stances_helper(member, stances)
+        answer = member.credo + member.pro_rel_stances
+        for entry in result:
+            self.assertTrue(entry in answer)
+
+    def test_match_stances_for(self):
+        """ Verifies stances are matched by the bill FOR stances."""
+        member = self.generate_member_with_stances()
+
+        bill = Bill()
+        bill.stances_for = member.credo
+        bill.stances_agn = member.pro_rel_stances
+
+        result = member_analyze.match_stances(member, bill, outcomes.FOR)
+        for entry in result:
+            self.assertTrue(entry in bill.stances_for)
+
+    def test_match_stances_agn(self):
+        """ Verifies the returned stances are sorted by importance."""
+        member = Member()
+        member.stance_sort_key = stance_sort_key.EQUITY
+        credo_stance = Stance()
+        credo_stance.issue = "Credo"
+        credo_stance.side = outcomes.PRO
+        credo_stance.importance = importance.B
+
+        stances_stance1 = Stance()
+        stances_stance1.issue = "Stances"
+        stances_stance1.side = outcomes.CON
+        stances_stance1.importance = importance.D
+
+        stances_stance2 = Stance()
+        stances_stance2.issue = "An Outcomes"
+        stances_stance2.side = outcomes.PRO
+        stances_stance2.importance = importance.A
+
+        pro_rel_stance = Stance()
+        pro_rel_stance.issue = "Pro-Relation"
+        pro_rel_stance.side = outcomes.PRO
+        pro_rel_stance.importance = importance.C
+
+        member.credo.append(credo_stance)
+        member.stances.append(stances_stance1)
+        member.stances.append(stances_stance2)
+        member.pro_rel_stances.append(pro_rel_stance)
+
+        bill = Bill()
+        bill.stances_for = member.credo + member.stances
+        bill.stances_agn = member.pro_rel_stances
+
+        result = member_analyze.match_stances(member, bill, outcomes.FOR)
+        sorted_answer = [stances_stance2, credo_stance, stances_stance1]
+        self.assertEqual(result, sorted_answer)
