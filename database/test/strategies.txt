@@ -1,0 +1,24 @@
+{
+    "_type" : "StrategyEntry",
+    "name" : "AlwaysSucceed",
+    "rank" : 5,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "AlwaysFail",
+    "rank" : 10,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "AlwaysFail2",
+    "rank" : 0,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Inactive",
+    "rank" : 3,
+    "active" : false
+}

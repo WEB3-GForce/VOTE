@@ -219,6 +219,7 @@
     "_id": {
         "$oid": "56f41fdba58a144056b53123"
     }, 
+    "_type": "Group", 
     "con_english_description": "the narrow special interest of the Chamber of Commerce", 
     "issues": [
         "ECONOMY"

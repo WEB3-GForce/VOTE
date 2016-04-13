@@ -88,3 +88,87 @@
         "member_analyze_test"
     ]
 }
+{
+    "_type": "Group", 
+    "con_english_description": "", 
+    "issues": [], 
+    "name": "VOTE_GROUP1", 
+    "norm": null, 
+    "number": "", 
+    "pro_english_description": "", 
+    "stances": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "issue": "Rushing", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_GROUP1", 
+            "source_db": "groups"
+        }, 
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "A"
+            }, 
+            "issue": "SPEED", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_GROUP1", 
+            "source_db": "groups"
+        }
+    ], 
+    "synonyms": [
+        "vote_test"
+    ]
+}
+{
+    "_type": "Group", 
+    "con_english_description": "", 
+    "issues": [], 
+    "name": "VOTE_GROUP2", 
+    "norm": null, 
+    "number": "", 
+    "pro_english_description": "", 
+    "stances": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "C"
+            }, 
+            "issue": "MIGHT", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_GROUP2", 
+            "source_db": "groups"
+        }, 
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "issue": "POWER", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_GROUP2", 
+            "source_db": "groups"
+        }
+    ], 
+    "synonyms": [
+        "vote_test"
+    ]
+}

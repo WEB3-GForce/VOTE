@@ -58,3 +58,60 @@
         }
     ]
 }
+{
+    "_type": "Member", 
+    "con_rel_stances": [], 
+    "credo": [], 
+    "district": "", 
+    "first_name": "TEST", 
+    "full_name": "vote_test", 
+    "gender": null, 
+    "last_name": "VOTE", 
+    "party": null, 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "VOTE_GROUP1", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "side": "PRO", 
+            "source": "vote_test", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "VOTE_GROUP2", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "A"
+            }, 
+            "side": "CON", 
+            "source": "vote_test", 
+            "source_db": "members"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": null, 
+    "term_start": null, 
+    "voting_record": [
+        {
+            "_type": "ResultData",
+            "data": "VOTE_BILL1", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "VOTE_BILL2", 
+            "outcome": "AGN"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "VOTE_BILL3", 
+            "outcome": "AGN"
+        }
+    ]
+}

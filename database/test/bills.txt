@@ -203,3 +203,152 @@
     "synonyms": [], 
     "vote_tally": []
 }
+{
+    "_type": "Bill", 
+    "bill_number": "VOTE_BILL1", 
+    "date_of_vote": null, 
+    "importance": null, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [], 
+    "majority_factor": null, 
+    "name": "vote_test", 
+    "president_position": null, 
+    "remarks": [], 
+    "session": "", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "issue": "Rushing", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "AGN", 
+            "source": "VOTE_BILL1", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "A"
+            }, 
+            "issue": "Unit Test", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_BILL1", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": []
+}
+{
+    "_type": "Bill", 
+    "bill_number": "vote_test", 
+    "date_of_vote": null, 
+    "importance": null, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [], 
+    "majority_factor": null, 
+    "name": "VOTE_BILL2", 
+    "president_position": null, 
+    "remarks": [], 
+    "session": "", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "C"
+            }, 
+            "issue": "POWER", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_BILL2", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "issue": "SPEED", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_BILL2", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": []
+}
+{
+    "_type": "Bill", 
+    "bill_number": "HR7789", 
+    "date_of_vote": null, 
+    "importance": null, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [], 
+    "majority_factor": null, 
+    "name": "vote_test", 
+    "president_position": null, 
+    "remarks": [], 
+    "session": "", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "issue": "TIME", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_BILL3", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_sort_key": null, 
+            "_type": "Stance", 
+            "importance": {
+                "_type": "_Importance", 
+                "value": "B"
+            }, 
+            "issue": "SPACE", 
+            "relation": null, 
+            "siblings": [], 
+            "side": "FOR", 
+            "source": "VOTE_BILL3", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [
+        "VOTE_BILL3"
+    ], 
+    "vote_tally": []
+}
