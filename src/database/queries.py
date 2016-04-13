@@ -19,6 +19,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+def member_query(member_identifier):
+    return {"$or": [{"full_name": member_identifier},
+                    {"first_name": member_identifier},
+                    {"last_name": member_identifier},
+                    {"_id" : member_identifier}] }
+
 def bill_query(bill_identifier):
     return {"$or": [{"name": bill_identifier},
                     {"synonyms": { "$in" : [ bill_identifier ] }},
