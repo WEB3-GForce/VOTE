@@ -24,14 +24,14 @@ import unittest
 from src.classes.decision import Decision
 from src.classes.strategies.strategy import Strategy
 
-class StrategyEntryTest(unittest.TestCase):
+class StrategyTest(unittest.TestCase):
     """ Test suite for strategy.py."""
 
     def setUp(self):
         self.decision = Decision()
 
     def test_init(self):
-        """Tests whether a Strategy can be constructed properly"""
+        """Tests whether a strategy can be constructed properly"""
         result = Strategy(self.decision)
 
         self.assertEqual(result._decision, self.decision)
