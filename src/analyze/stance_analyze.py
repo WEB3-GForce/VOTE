@@ -21,6 +21,7 @@
 
 from src.constants import database as db_constants
 from src.constants import logger
+from src.constants import stance_sort_key
 from src.database import queries
 from src.database.pymongodb import PymongoDB
 from src.util import util
@@ -56,3 +57,31 @@ def collect_normative_stances(stances):
     filter_fun = lambda stance: normative_stance(stance)
     norms = filter(filter_fun, stances)
     return util.remove_duplicates(norms) if norms else []
+
+
+def sort_stances(stances, member):
+    """Sorts a stance list by the member's stance_sort_key. If the member has
+    no stance_sort_key, EQUITY is chosen by default. The sort_key of each
+    individual stance in stances will be set to that key.
+
+    Arguments:
+        stances: the stances to be sorted.
+        member: the member whose stance_sort_key will be used.
+    """
+    sort_key = member.stance_sort_key or stance_sort_key.EQUITY
+    logger.LOGGER.info("Sorting stances based on %s order..." % sort_key)
+
+    for stance in stances:
+        stance.sort_key = sort_key
+    stances.sort(key=lambda stance: stance.sort_key, reverse=True)
+
+
+def group_stances(stances):
+    """Groups together stances in the input list so that stances on the same
+    issue and on the same side are next to each other.
+
+    Arguments:
+        stances: the list of stances to group
+    """
+    sort_key_fun = lambda stance : [stance.issue, stance.side]
+    stances.sort(key=sort_key_fun)

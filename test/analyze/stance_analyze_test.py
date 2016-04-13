@@ -25,9 +25,13 @@ import unittest
 from StringIO import StringIO
 
 from src.analyze import stance_analyze
+from src.classes.member import Member
+from src.classes.relation import Relation
 from src.classes.stance import Stance
+from src.classes.data import importance
 from src.constants import database as db_constants
 from src.constants import outcomes
+from src.constants import stance_sort_key
 from src.database.pymongodb import PymongoDB
 from src.scripts.database import load_data
 
@@ -128,3 +132,84 @@ class StanceAnalyzeTest(unittest.TestCase):
 
         result = stance_analyze.collect_normative_stances([agn_norm_stance, agn_norm_stance])
         self.assertEquals(len(result), 0)
+
+    def generate_stance_array(self):
+        """Generates the stance array for the _compare_stance tests"""
+        stance1 = Stance()
+        stance1.importance = importance.B
+        relation1 = Relation()
+        relation1.importance = importance.C
+        stance1.relation = relation1
+
+        stance2 = Stance()
+        stance2.importance = importance.B
+        relation2 = Relation()
+        relation2.importance = importance.A
+        stance2.relation = relation2
+
+        stance3 = Stance()
+        stance3.importance = importance.C
+        relation3 = Relation()
+        relation3.importance = importance.B
+        stance3.relation = relation3
+
+        stance4 = Stance()
+        stance4.importance = importance.D
+        relation4 = Relation()
+        relation4.importance = importance.A
+        stance4.relation = relation4
+        return [stance1, stance2, stance3, stance4]
+
+
+    def test_sort_stances_key_given(self):
+        """Verifies sort when the member key is defined."""
+        stances = self.generate_stance_array()
+        member = Member()
+        member.stance_sort_key = stance_sort_key.LOYALTY
+
+        stance_analyze.sort_stances(stances, member)
+        for i in range(0, len(stances) - 1):
+            self.assertEqual(stances[i]._sort_key, stance_sort_key.LOYALTY)
+            self.assertTrue(stances[i].sort_key >= stances[i + 1].sort_key)
+
+    def test_sort_stances_key_not_given(self):
+        """Verifies sort when the member key is not defined."""
+        stances = self.generate_stance_array()
+        member = Member()
+
+        stance_analyze.sort_stances(stances, member)
+        for i in range(0, len(stances) - 1):
+            self.assertEqual(stances[i]._sort_key, stance_sort_key.EQUITY)
+            self.assertTrue(stances[i].sort_key >= stances[i + 1].sort_key)
+
+    def test_group_stances(self):
+        """Verifies stances are grouped by stance and side."""
+        stance1 = Stance()
+        stance1.issue = "Apples"
+        stance1.side = outcomes.PRO
+
+        stance2 = Stance()
+        stance2.issue = "Oranges"
+        stance2.side = outcomes.PRO
+
+        stance3 = Stance()
+        stance3.issue = "Banana"
+        stance3.side = outcomes.CON
+
+        stance4 = Stance()
+        stance4.issue = "Apples"
+        stance4.side = outcomes.CON
+
+        stance5 = Stance()
+        stance5.issue = "Banana"
+        stance5.side = outcomes.CON
+
+        stance6 = Stance()
+        stance6.issue = "Oranges"
+        stance6.side = outcomes.CON
+
+        input_list = [stance1, stance2, stance3, stance4, stance5, stance6]
+        correct_list = [stance4, stance1, stance3, stance5, stance6, stance2]
+
+        stance_analyze.group_stances(input_list)
+        self.assertEquals(input_list, correct_list)
