@@ -19,24 +19,31 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from src.database import vote_transform
+from src.classes.stance import Stance
+from src.classes.strategies.strategy import Strategy
+from src.constants import outcomes
 
-class VoteCursor(object):
-    """ A simple wrapper class over the Pymongo Cursor from a Pymongo Collection
-    find() call. It translates data from the cursor before returning it to
-    the user.
+class AlwaysSucceedStrategy(Strategy):
+    """"A Strategy used in tests cases. It always produces a decision.
     """
 
-    def __init__(self, cursor):
-        self.cursor = cursor
-        self._transformer = vote_transform.VoteTransform()
+    def run(self):
+        stance = Stance()
+        stance.issue = "Some Stance"
+        stance.side = outcomes.FOR
 
-    def __iter__(self):
-        return self
+        stance2 = Stance()
+        stance2.issue = "Some Stance"
+        stance2.side = outcomes.AGN
 
-    def __next__(self):
-        document = self.cursor.next()
-        return self._transformer.transform_outgoing(document)
+        stance3 = Stance()
+        stance3.issue = "Another Stance"
+        stance3.side = outcomes.FOR
 
-    def next(self):
-        return self.__next__()
+        self._decision.strategy = "AlwaysSucceedStrategy"
+        self._decision.reason = [stance, stance3, stance2]
+        self._decision.downside = [stance2, stance, stance3, stance2]
+        return True
+
+    def explain(self):
+        pass
