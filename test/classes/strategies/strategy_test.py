@@ -23,8 +23,11 @@ import unittest
 
 from src.classes.bill import Bill
 from src.classes.decision import Decision
+from src.classes.stance import Stance
 from src.classes.member import Member
 from src.classes.strategies.strategy import Strategy
+from src.classes.data.result_data import ResultData
+from src.constants import outcomes
 
 from test.test_helpers.always_fail_strategy import AlwaysFailStrategy
 from test.test_helpers.always_succeed_strategy import AlwaysSucceedStrategy
@@ -61,11 +64,6 @@ class StrategyTest(unittest.TestCase):
         result = strategy.run()
         self.assertFalse(result)
 
-    def test__run(self):
-        """ Verifies that _run() throws a NotImplementedError"""
-        result = Strategy(self.decision, self.member, self.bill)
-        self.assertRaises(NotImplementedError, result._run)
-
     def test_explain_when_not_successful(self):
         """ Verifies explain() exits gracefully when strategy._succeed == F"""
         result = Strategy(self.decision, self.member, self.bill)
@@ -77,7 +75,210 @@ class StrategyTest(unittest.TestCase):
         result._success = True
         self.assertRaises(NotImplementedError, result.explain)
 
+    def test__run(self):
+        """ Verifies that _run() throws a NotImplementedError"""
+        result = Strategy(self.decision, self.member, self.bill)
+        self.assertRaises(NotImplementedError, result._run)
+
     def test__explain(self):
         """ Verifies that _explain() throws a NotImplementedError"""
         result = Strategy(self.decision, self.member, self.bill)
         self.assertRaises(NotImplementedError, result._explain)
+
+    def test__finalize_decision(self):
+        """ Verifies a decision can properly be updated with the result"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        stance = Stance()
+        stance.issue = "Something good"
+        stance.side = "FOR"
+
+        stance1 = Stance()
+        stance1.issue = "Fire"
+        stance1.side = "AGN"
+
+        stance2 = Stance()
+        stance2.issue = "Ice"
+        stance2.side = "FOR"
+
+        reason = [stance, stance1]
+        downside = [stance2]
+
+        strategy._finalize_decision(outcomes.FOR, reason, downside)
+
+        self.assertEqual(self.decision.strategy, strategy._name)
+        self.assertEqual(self.decision.result, outcomes.FOR)
+        self.assertEqual(self.decision.reason, reason)
+        self.assertEqual(self.decision.downside, downside)
+        self.assertEqual(self.decision.downside_record, [])
+
+    def test__finalize_decision_with_record_stances(self):
+        """ Verifies downside_record is properly set"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        stance = Stance()
+        stance.issue = "Something good"
+        stance.side = "FOR"
+
+        stance1 = Stance()
+        stance1.issue = "Fire"
+        stance1.side = "AGN"
+        stance1.source_db = "bills"
+
+        stance2 = Stance()
+        stance2.issue = "Ice"
+        stance2.side = "FOR"
+
+        reason = [stance2]
+        downside = [stance, stance1]
+
+        strategy._finalize_decision(outcomes.FOR, reason, downside)
+
+        self.assertEqual(self.decision.strategy, strategy._name)
+        self.assertEqual(self.decision.result, outcomes.FOR)
+        self.assertEqual(self.decision.reason, reason)
+        self.assertEqual(self.decision.downside, [stance])
+        self.assertEqual(self.decision.downside_record, [stance1])
+
+    def test__set_decision_FOR(self):
+        """ Verifies the decision is properly set FOR the bill"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        stance = Stance()
+        stance.issue = "Something good"
+        stance.side = "FOR"
+
+        stance1 = Stance()
+        stance1.issue = "Something Bad"
+        stance1.side = "AGN"
+
+        self.decision.for_stances = [stance]
+        self.decision.agn_stances = [stance1]
+
+        strategy._set_decision(outcomes.FOR)
+
+        self.assertEqual(self.decision.strategy, strategy._name)
+        self.assertEqual(self.decision.result, outcomes.FOR)
+        self.assertEqual(self.decision.reason, self.decision.for_stances)
+        self.assertEqual(self.decision.downside, self.decision.agn_stances)
+
+    def test__set_decision_AGN(self):
+        """ Verifies the decision is properly set AGN the bill"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        stance = Stance()
+        stance.issue = "Something good"
+        stance.side = "FOR"
+
+        stance1 = Stance()
+        stance1.issue = "Something Bad"
+        stance1.side = "AGN"
+        stance1.source_db = "bills"
+
+        self.decision.for_stances = [stance]
+        self.decision.agn_stances = [stance1]
+
+        strategy._set_decision(outcomes.AGN)
+
+        self.assertEqual(self.decision.strategy, strategy._name)
+        self.assertEqual(self.decision.result, outcomes.AGN)
+        self.assertEqual(self.decision.reason, self.decision.agn_stances)
+        self.assertEqual(self.decision.downside, self.decision.for_stances)
+
+    def test__set_decision_neither(self):
+        """ Verifies no result is set for an invalid result"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        strategy._set_decision("Invalid result")
+        self.assertEqual(self.decision.strategy, None)
+
+    def test__majority_FOR(self):
+        """ Verifies when there is a majority for the bill"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        stance = Stance()
+        stance.issue = "Something good"
+        stance.side = "FOR"
+
+        self.decision.for_stances = [stance]
+        self.decision.agn_stances = []
+        result = strategy._majority()
+        self.assertEqual(result, outcomes.FOR)
+
+    def test__majority_AGN(self):
+        """ Verifies when there is a majority against the bill"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        stance1 = Stance()
+        stance1.issue = "Something Bad"
+        stance1.side = "AGN"
+
+        self.decision.for_stances = []
+        self.decision.agn_stances = [stance1]
+        result = strategy._majority()
+        self.assertEqual(result, outcomes.AGN)
+
+    def test__majority_neither(self):
+        """ Verifies when both sides are equally supported"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        stance = Stance()
+        stance.issue = "Something good"
+        stance.side = "FOR"
+
+        stance1 = Stance()
+        stance1.issue = "Something Bad"
+        stance1.side = "AGN"
+
+        self.decision.for_stances = [stance]
+        self.decision.agn_stances = [stance1]
+        result = strategy._majority()
+        self.assertEqual(result, None)
+
+    def test__consensus_FOR(self):
+        """ Verifies when there is a consensus FOR the bill"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        strategy._decision.MI_stance = ResultData({"outcome": outcomes.FOR, "data": []})
+        strategy._decision.MI_group = ResultData({"outcome": outcomes.FOR, "data": []})
+        strategy._decision.MI_credo = ResultData({"outcome": outcomes.FOR, "data": []})
+        strategy._decision.MI_record = ResultData({"outcome": outcomes.FOR, "data": []})
+        strategy._decision.MI_norm = ResultData({"outcome": outcomes.FOR, "data": []})
+
+        result = strategy._consensus()
+        self.assertEqual(result, outcomes.FOR)
+
+    def test__consensus_AGN(self):
+        """ Verifies when there is a consensus AGN the bill"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        strategy._decision.MI_stance = ResultData({"outcome": outcomes.AGN, "data": []})
+        strategy._decision.MI_group = ResultData({"outcome": outcomes.AGN, "data": []})
+        strategy._decision.MI_credo = ResultData({"outcome": outcomes.AGN, "data": []})
+        strategy._decision.MI_record = ResultData({"outcome": outcomes.AGN, "data": []})
+        strategy._decision.MI_norm = ResultData({"outcome": outcomes.AGN, "data": []})
+
+        result = strategy._consensus()
+        self.assertEqual(result, outcomes.AGN)
+
+    def test__consensus_neither(self):
+        """ Verifies when there is no consensus"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        strategy._decision.MI_stance = ResultData({"outcome": outcomes.AGN, "data": []})
+        strategy._decision.MI_group = ResultData({"outcome": outcomes.AGN, "data": []})
+        strategy._decision.MI_credo = ResultData({"outcome": outcomes.AGN, "data": []})
+        strategy._decision.MI_record = ResultData({"outcome": outcomes.AGN, "data": []})
+        strategy._decision.MI_norm = ResultData({"outcome": outcomes.FOR, "data": []})
+
+        result = strategy._consensus()
+        self.assertEqual(result, None)
+
+    def test__consensus_ignore_none(self):
+        """ Verifies that MI sources that are None are ignored"""
+        strategy = Strategy(self.decision, self.member, self.bill)
+
+        strategy._decision.MI_stance = ResultData({"outcome": outcomes.AGN, "data": []})
+
+        result = strategy._consensus()
+        self.assertEqual(result, outcomes.AGN)

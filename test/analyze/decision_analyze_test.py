@@ -97,7 +97,7 @@ class DecisionAnalyzeTest(unittest.TestCase):
         agns = self.generate_stance_array()
 
         result = decision_analyze._compare_stances(fors, agns)
-        self.assertEqual(result, [])
+        self.assertEqual(result, None)
 
     def test_compare_stances_sort(self):
         """ Verifies compare stances sorts arrays it gets by sort_key."""
@@ -111,7 +111,7 @@ class DecisionAnalyzeTest(unittest.TestCase):
         fors[2] = temp
 
         result = decision_analyze._compare_stances(fors, agns)
-        self.assertEqual(result, [])
+        self.assertEqual(result, None)
 
     def test_compare_stances_fors(self):
         """ Verifies compare stances returns properly when FORS win."""

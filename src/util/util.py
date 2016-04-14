@@ -42,6 +42,22 @@ def intersection(list1, list2, equal_fun):
     return [element for element in list1 if element in list2]
 
 
+def difference(list1, list2, equal_fun):
+    """Returns the difference of two lists
+    
+    Arguments:
+        list1: The first list of the difference
+        list2: The second list of the difference
+        equal_fun: The function for testing equality between two elements in the
+            lists
+    
+    Returns:
+        The difference of list1 from list2
+    """
+    filter_fun = lambda item : not any(equal_fun(item, element) for element in list2)
+    return filter(filter_fun, list1)
+    return [element for element in list1 if element in list2]
+
 def remove_duplicates(the_list):
     """Removes duplicates from a list. This is done by turning the list to a
     set and then back to a list.
@@ -54,6 +70,16 @@ def remove_duplicates(the_list):
     """
     return list(set(the_list))
 
+def flatten(a_list):
+    """Takes a list of lists and flattens it into a single list.
+    
+    Arguments:
+        a_list: The list to flatten
+    
+    Returns:
+        The flattened list
+    """
+    return [item for sublist in a_list for item in sublist]
 
 #-----------------------------------------------------------------------------#
 #                             Stance List Methods                             #

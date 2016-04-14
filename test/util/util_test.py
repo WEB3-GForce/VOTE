@@ -50,6 +50,24 @@ class UtilTest(unittest.TestCase):
         result = util.intersection([stance, stance3], [stance2], eq_fun)
         self.assertEquals(result, [stance])
 
+    def test_difference(self):
+        """Verify only the difference of the list is included."""
+        stance = Stance()
+        stance.issue = "Test"
+        stance.side = outcomes.PRO
+
+        stance2 = Stance()
+        stance2.issue = "Test"
+        stance2.side = outcomes.PRO
+
+        stance3 = Stance()
+        stance3.issue = "Test"
+        stance3.side = outcomes.CON
+
+        eq_fun = lambda stance1, stance2: stance1.match(stance2)
+        result = util.difference([stance, stance2, stance3], [stance, stance2], eq_fun)
+        self.assertEquals(result, [stance3])
+
     def test_remove_duplicates(self):
         """Verify only the intersection of the list is included."""
         stance = Stance()
@@ -135,6 +153,12 @@ class UtilTest(unittest.TestCase):
         self.assertEqual(len(result), len(answer))
         for stance1, stance2 in zip(result, answer):
             self.assertEquals(stance1, stance2)
+
+    def test_flatten_list(self):
+        """Verifies lists of lists are flattened into a single list."""
+        the_list = [[1], [2, 3], [4], [5]]
+        result = util.flatten(the_list)
+        self.assertEqual(result, [1, 2, 3, 4, 5])
 
     def generate_collect_type_stance_array(self):
         """Generates the stance array for the collect_type tests"""

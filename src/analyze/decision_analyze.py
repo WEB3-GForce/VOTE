@@ -206,5 +206,5 @@ def _compare_stances(fors, agns):
             logger.LOGGER.info("MI stance is AGN the bill.")
             return result
     logger.LOGGER.info("MI stance is neutral on the bill.")
-    return []
+    return None
 

@@ -21,6 +21,8 @@
 
 from src.classes.printable_object import PrintableObject
 from src.constants import logger
+from src.constants import outcomes
+from src.util import util
 
 class Strategy(PrintableObject):
     """"This is the parent class for all strategies. It defines an interface
@@ -64,6 +66,10 @@ class Strategy(PrintableObject):
         self._bill = bill
         self._success = False
 
+    ###########################################################################
+    #                             Public Methods                              #
+    ###########################################################################
+
     def run(self):
         """Runs the strategy attempting to compute a result on the Decision
         object it was constructed with.
@@ -86,12 +92,6 @@ class Strategy(PrintableObject):
             logger.LOGGER.info("%s failed." % self._name)
         return self._success
 
-    def _run(self):
-        """This private method actually computes a possible decision. It should
-        be overridden by child classes.
-        """
-        raise NotImplementedError
-
     def explain(self):
         """Explains why the strategy decided on a specific side (FOR or AGN)
         for its Decision object.
@@ -108,8 +108,125 @@ class Strategy(PrintableObject):
         logger.LOGGER.info("Explaining decision...")
         self._explain()
 
+    ###########################################################################
+    #                  Methods Child Classes Should Overwrite                 #
+    ###########################################################################
+
+    def _run(self):
+        """This private method actually computes a possible decision. It should
+        be overridden by child classes.
+        """
+        raise NotImplementedError
+
     def _explain(self):
         """This private method actually logs the explanation. It should be
         overridden by child classes.
         """
         raise NotImplementedError
+
+
+    ###########################################################################
+    #                    Helper Methods Child Classes Can Use                 #
+    ###########################################################################
+
+    def _finalize_decision(self, side, reasons, downside):
+        """ A helper method, finalizes a given decision on an object. It ensures
+        that the outcome and reasons for a decision are updated in the decision
+        object.
+        
+        Child classes can use this to finalize a decision they have made.
+        
+        Arguments:
+            side: The decision on the bill either FOR or AGN
+            reasons: a list of stances supporting the decision
+            downside: a list of stances against the decision
+        """
+        self._decision.result = side
+        self._decision.reason = reasons
+        self._decision.strategy = self._name
+
+        # In Lisp code. Might not be needed now though.+
+        # downside = util.flatten(downside)
+        record = util.collect_bill_stances(downside)
+
+        if record:
+            self._decision.downside_record = record
+            # Consider how to better compare
+            eq_fun = lambda stance1, stance2: stance1.match(stance2)
+            self._decision.downside = util.difference(downside, record, eq_fun)
+
+        else:
+            self._decision.downside = downside
+
+    def _set_decision(self, result):
+        """Sets the decision to be the given result (either FOR or AGN). This
+        method then sets the reason and downside arrays and passes them to
+        finalize_decision(...) to actually set self._decision.
+        
+        Arguments:
+            result: The result of the decision either FOR or AGN
+        """
+        if result == outcomes.FOR:
+            reason = self._decision.for_stances
+            downside = self._decision.agn_stances
+        elif result == outcomes.AGN:
+            reason = self._decision.agn_stances
+            downside = self._decision.for_stances
+        else:
+            logger.LOGGER.error("Result should be %s or %s. Got: %s" %
+                (outcomes.FOR, outcomes.AGN, result))
+            return
+
+        self._finalize_decision(result, reason, downside)
+
+    def _majority(self):
+        """Determines if there is a simple majority of stances either for or
+        against the bill. It calculates the length of the for_stances and
+        agn_stances to see which one is larger.
+        
+        Returns:
+            outcomes.FOR if there are more FOR stances, outcomes.AGN if there
+            are more AGN stances, None otherwise
+        """
+        fors = len(self._decision.for_stances)
+        agns = len(self._decision.agn_stances)
+
+        if fors > agns:
+            return outcomes.FOR
+        elif agns > fors:
+            return outcomes.AGN
+        else:
+            return None
+
+    def _consensus(self):
+        """ Determines if there is a general consensus among different sources
+        of stances. This function checks all the different MI_... stance lists
+        that determine whether a given source of stances (like a credo or norms)
+        is FOR or AGN the bill. 
+        
+        A consensus is met if all MI sources are either neutral or come down on
+        the same side.
+        
+        Returns:
+            outcomes.FOR if the sources agree on voting FOR the bill,
+            outcomes.AGN if the sources agree on voting AGN the bill, None 
+            otherwise.
+        """
+
+        MI_stances = [self._decision.MI_stance, self._decision.MI_group,
+                      self._decision.MI_credo, self._decision.MI_record,
+                      self._decision.MI_norm]
+
+        # Removes MI sources that were never set.
+        filter_fun = lambda x : x != None
+        MI_stances = filter(filter_fun, MI_stances)
+
+        # Maps MI_stances to be a list only of the outcomes.
+        filter_fun = lambda result_data : result_data.outcome
+        MI_stances = map(filter_fun, MI_stances)
+
+        # Check to see if the sources are all in favor of one outcome.
+        if len(util.remove_duplicates(MI_stances)) == 1 :
+            return MI_stances[0]
+        else:
+            return None
