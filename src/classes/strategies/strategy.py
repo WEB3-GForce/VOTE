@@ -20,6 +20,7 @@
 """
 
 from src.classes.printable_object import PrintableObject
+from src.constants import logger
 
 class Strategy(PrintableObject):
     """"This is the parent class for all strategies. It defines an interface
@@ -33,21 +34,34 @@ class Strategy(PrintableObject):
     predicted vote and the reason for this vote in the Decision object it
     is passed.
     
+    Child classes should override the _run() and _explain() methods. They should
+    also override __init__(...) to specify there own name. However, they are
+    expected to keep the signature of __init__(...) exactly the same.
+    
     Attributes:
-        decision: The Decision object representing the decision the strategy is
+        _name: The string name of this strategy
+        _decision: The Decision object representing the decision the strategy is
             trying to compute
-        success: Whether or not this Strategy was successful in computing a
+        _member: A Member object that represents the member who is making the
+            decision
+        _bill: A bill object that represents the bill being voted upon.
+        _success: Whether or not this Strategy was successful in computing a
             result for the Decision object
     """
 
-    def __init__(self, decision):
+    def __init__(self, decision, member, bill):
         """Constructs a new Strategy.
         
         Arguments:
             decision: The Decision object the Strategy will attempt to compute
                 a result for.
+            member: A Member object of the member who is deciding on the bill
+            bill: A Bill object of the bill being decided upon.
         """
+        self._name = "Strategy"
         self._decision = decision
+        self._member = member
+        self._bill = bill
         self._success = False
 
     def run(self):
@@ -61,6 +75,21 @@ class Strategy(PrintableObject):
         Returns:
             True if successful, False otherwise.
         """
+        self._run()
+
+        if(self._success):
+            logger.LOGGER.info("%s succeeded." % self._name)
+            logger.LOGGER.info("%s will vote %s bill %s" %
+                (self._member.full_name, self._decision.result,
+                 self._bill.bill_number))
+        else:
+            logger.LOGGER.info("%s failed." % self._name)
+        return self._success
+
+    def _run(self):
+        """This private method actually computes a possible decision. It should
+        be overridden by child classes.
+        """
         raise NotImplementedError
 
     def explain(self):
@@ -71,6 +100,16 @@ class Strategy(PrintableObject):
         failed to make a decision, this method will log a warning and nothing
         else.
         
-        If it succeeds, it will log the rational for making the decision.
+        If run() succeeds, it will log the rational for making the decision.
+        """
+        if not self._success:
+            logger.LOGGER.info("%s failed to produce a decision." % self._name)
+            return
+        logger.LOGGER.info("Explaining decision...")
+        self._explain()
+
+    def _explain(self):
+        """This private method actually logs the explanation. It should be
+        overridden by child classes.
         """
         raise NotImplementedError

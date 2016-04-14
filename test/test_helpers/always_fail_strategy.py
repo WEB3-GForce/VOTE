@@ -26,6 +26,9 @@ class AlwaysFailStrategy(Strategy):
     """
     call_count = 0
 
-    def run(self):
+    def __init__(self, decision, member, bill):
+        super(AlwaysFailStrategy, self).__init__(decision, member, bill)
+        self._name = "AlwaysFail"
+
+    def _run(self):
         AlwaysFailStrategy.call_count += 1
-        return False

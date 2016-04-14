@@ -245,17 +245,9 @@ def _apply_decision_strategies(member, bill, decision):
             continue
 
         strategy_class = strategy_hash.STRATEGY_HASH[strategy_entry.name]
-        strategy = strategy_class(decision)
+        strategy = strategy_class(decision, member, bill)
         result = strategy.run()
         if result:
-            # TODO put this in the run function.
-            # print "Success!"
-            # print "DECISION: %s will vote %s on bill %s" %
-            # (member.name, decision.result, bill.bnumber)
-            # logger.LOGGER.info("%s failed." % strategy.name)
-
-            # TODO Put this in explain:
-            # print "Explaining decision..."
             strategy.explain()
             stance_analyze.group_stances(decision.reason)
             stance_analyze.group_stances(decision.downside)

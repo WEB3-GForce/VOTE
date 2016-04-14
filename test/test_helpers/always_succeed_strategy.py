@@ -24,10 +24,13 @@ from src.classes.strategies.strategy import Strategy
 from src.constants import outcomes
 
 class AlwaysSucceedStrategy(Strategy):
-    """"A Strategy used in tests cases. It always produces a decision.
-    """
+    """"A Strategy used in tests cases. It always produces a decision."""
 
-    def run(self):
+    def __init__(self, decision, member, bill):
+        super(AlwaysSucceedStrategy, self).__init__(decision, member, bill)
+        self._name = "AlwaysSucceed"
+
+    def _run(self):
         stance = Stance()
         stance.issue = "Some Stance"
         stance.side = outcomes.FOR
@@ -43,7 +46,8 @@ class AlwaysSucceedStrategy(Strategy):
         self._decision.strategy = "AlwaysSucceedStrategy"
         self._decision.reason = [stance, stance3, stance2]
         self._decision.downside = [stance2, stance, stance3, stance2]
+        self._success = True
         return True
 
-    def explain(self):
+    def _explain(self):
         pass
