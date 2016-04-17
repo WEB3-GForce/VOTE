@@ -42,3 +42,8 @@ def issue_query(issue_identifier):
                      {"_id" : issue_identifier}
                     ]
             }
+
+def is_issue_identified(issue_identifier, issue):
+    return  (issue_identifier == issue.name or
+             issue_identifier in issue.synonyms or
+             issue_identifier == issue._id)

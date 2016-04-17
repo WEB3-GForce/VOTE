@@ -38,6 +38,10 @@ class NonPartisanDecisionStrategy(Strategy):
     In short, if a member feels strongly about a particular bill but that
     person's party is against it, the person will vote in line with his/her
     convictions.
+    
+    Attributes:
+        _opposing_groups: A list of stances from groups that oppose the position
+            of the member's credo on the bill
     """
 
     def __init__(self, decision, member, bill):

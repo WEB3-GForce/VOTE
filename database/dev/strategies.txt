@@ -13,6 +13,12 @@
 {
     "_type" : "StrategyEntry",
     "name" : "Non-partisan Decision",
-    "rank" : 1,
+    "rank" : 2,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Not Constitutional",
+    "rank" : 3,
     "active" : true
 }
