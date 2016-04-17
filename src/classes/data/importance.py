@@ -71,6 +71,9 @@ class _Importance(object):
     def __str__(self):
         return self.value
 
+    def most_important(self):
+        return self == A
+
 
 # The following are constants representing the different levels of importance.
 # Use these in code.

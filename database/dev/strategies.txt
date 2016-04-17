@@ -1,0 +1,18 @@
+{
+    "_type" : "StrategyEntry",
+    "name" : "Popular Decision",
+    "rank" : 0,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Inconsistent Constituency",
+    "rank" : 1,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Non-partisan Decision",
+    "rank" : 1,
+    "active" : true
+}

@@ -19,5 +19,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+from src.classes.strategies.inconsistent_constituency_strategy import InconsistentConstituencyStrategy
+from src.classes.strategies.nonpartisan_decision_strategy import NonPartisanDecisionStrategy
+from src.classes.strategies.popular_decision_strategy import PopularDecisionStrategy
+
 # Maps the name of a strategy to the class that represents the strategy
-STRATEGY_HASH = {}
+STRATEGY_HASH = {"Popular Decision" : PopularDecisionStrategy,
+                 "Inconsistent Constituency" : InconsistentConstituencyStrategy,
+                 "Non-partisan Decision" : NonPartisanDecisionStrategy}

@@ -130,9 +130,9 @@ class Strategy(PrintableObject):
     ###########################################################################
 
     def _finalize_decision(self, side, reasons, downside):
-        """ A helper method, finalizes a given decision on an object. It ensures
+        """ A helper method, finalizes a given decision on a bill. It ensures
         that the outcome and reasons for a decision are updated in the decision
-        object.
+        object. It also sets the Strategy's private variable _success to True.
         
         Child classes can use this to finalize a decision they have made.
         
@@ -141,6 +141,7 @@ class Strategy(PrintableObject):
             reasons: a list of stances supporting the decision
             downside: a list of stances against the decision
         """
+        self._success = True
         self._decision.result = side
         self._decision.reason = reasons
         self._decision.strategy = self._name
@@ -230,3 +231,21 @@ class Strategy(PrintableObject):
             return MI_stances[0]
         else:
             return None
+
+    def _explain_simple_consensus(self):
+        """ This is a helper method for explain. It is a general explanation
+        for when a consensus is found and used to make a decision.
+        """
+        result = self._decision.result
+        logger.LOGGER.info("Found a consensus %s this bill." % result)
+        logger.LOGGER.info("The most important stances are all %s this bill:" % result)
+        pairs = [["Group", self._decision.MI_group],
+                 ["Credo", self._decision.MI_credo],
+                 ["Record", self._decision.MI_record],
+                 ["Norm", self._decision.MI_norm]]
+        for pair in pairs:
+            name = pair[0]
+            result_data = pair[1]
+            if result_data:
+                logger.LOGGER.info(name)
+                logger.LOGGER.info(result_data)

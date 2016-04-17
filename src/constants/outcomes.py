@@ -26,3 +26,6 @@ AGN = "AGN"
 # Whether one is for or against a given issue.
 PRO = "PRO"
 CON = "CON"
+
+# A hash that defines what is the opposite outcome for a given outcome.
+OPPOSITE = {FOR : AGN, AGN : FOR, PRO: CON, CON : PRO}

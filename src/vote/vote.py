@@ -156,6 +156,7 @@ def _vote_helper(member, bill):
 
     if decision.strategy:
         _save(decision)
+
     return decision
 
 

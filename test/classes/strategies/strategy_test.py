@@ -282,3 +282,19 @@ class StrategyTest(unittest.TestCase):
 
         result = strategy._consensus()
         self.assertEqual(result, outcomes.AGN)
+
+    def test__explain_simple_consensus(self):
+        """ Verifies the function works without raising an error"""
+        stance = Stance()
+        stance.issue = "Some Issue"
+        stance.side = outcomes.FOR
+
+        group_result = ResultData()
+        group_result.outcome = outcomes.FOR
+        group_result.data = [stance]
+
+        self.decision.result = outcomes.FOR
+        self.decision.MI_group = group_result
+
+        strategy = Strategy(self.decision, self.member, self.bill)
+        strategy._explain_simple_consensus()
