@@ -28,3 +28,9 @@
     "rank" : 4,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Balance the Books",
+    "rank" : 5,
+    "active" : true
+}

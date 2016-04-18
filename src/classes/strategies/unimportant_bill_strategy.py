@@ -21,11 +21,7 @@
 
 from src.classes.data import importance
 from src.classes.strategies.strategy import Strategy
-from src.constants import database as db_constants
 from src.constants import logger
-from src.constants import outcomes
-from src.database.pymongodb import PymongoDB
-from src.database import queries
 
 class UnimportantBillStrategy(Strategy):
     """ From Professor Slade's Lisp code:

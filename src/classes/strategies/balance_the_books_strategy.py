@@ -21,22 +21,29 @@
 
 from src.classes.strategies.strategy import Strategy
 from src.constants import logger
+from src.constants import outcomes
+from src.util import util
 
-class InconsistentConstituencyStrategy(Strategy):
+class BalanceTheBooksStrategy(Strategy):
     """ From Professor Slade's Lisp code:
-    
+
         ==================================================================
-          1   Inconsistent constituency               [B] @(INCONSISTENT-CONSTITUENCY)
-         Same group on both sides of issue
+          5   Balance the books                       [C]  (BALANCE-THE-BOOKS)
+
+          Remarks:       Offset current vote with past or future votes.
+          Quote:         I know you are upset with this vote, but I have always been there in the
+                           past, and I shall be there in the future.
+                         I will make it up to you.
+                         (point to specific past votes)
+          Rank:          "C"
         ==================================================================
-        
-    In short, if the MI stance sources have come to a consensus on a given
-    course of action yet some groups are split on the issue, the member
-    will decide in line with the consensus.
+
+    In short, if there is a majority opinion on the bill and the member's voting
+    history shows that the member is split on the decision, go with the majority
     """
 
     def __init__(self, decision, member, bill):
-        """Constructs a new InconsistentConstituencyStrategy.
+        """Constructs a new BalanceTheBooksStrategy.
         
         Arguments:
             decision: The Decision object the Strategy will attempt to compute
@@ -44,21 +51,21 @@ class InconsistentConstituencyStrategy(Strategy):
             member: A Member object of the member who is deciding on the bill
             bill: A Bill object of the bill being decided upon.
         """
-        super(InconsistentConstituencyStrategy, self).__init__(decision, member, bill)
-        self._name = "Inconsistent Constituency"
+        super(BalanceTheBooksStrategy, self).__init__(decision, member, bill)
+        self._name = "Balance the Books"
 
     def _run(self):
-        """Implements the logic of Inconsistent Constituency. Simply put, if
-        there is a consensus toward a decision and some groups are divided on
-        the issue, go with the consensus.
-        """
-        result = self._consensus()
-        if self._decision.split_group and result:
-            self._set_decision(result)
+        """Implements the logic of Balance the Books."""
+        result = self._majority()
+        if result and self._decision.split_record:
+            return self._set_decision(result)
 
     def _explain(self):
-        """Explains the Inconsistent Constituency."""
-        self._explain_simple_consensus()
-        logger.LOGGER.info("One or more groups have stances on both sides of this bill:")
-        logger.LOGGER.info(self._decision.split_group)
+        """Explains the Balance the Books decision."""
+        self._explain_simple_majority()
+        logger.LOGGER.info("The record supports positions on both sides of the bill.")
+        logger.LOGGER.info(outcomes.FOR)
+        logger.LOGGER.info(util.collect_bill_stances(self._decision.for_stances))
 
+        logger.LOGGER.info(outcomes.AGN)
+        logger.LOGGER.info(util.collect_bill_stances(self._decision.agn_stances))

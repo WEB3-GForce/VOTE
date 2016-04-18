@@ -249,3 +249,16 @@ class Strategy(PrintableObject):
             if result_data:
                 logger.LOGGER.info(name)
                 logger.LOGGER.info(result_data)
+
+    def _explain_simple_majority(self):
+        result = self._decision.result
+        logger.LOGGER.info("Found a simple majority %s this bill." % self._decision.result)
+        self._log_majority_stances(result)
+        self._log_majority_stances(outcomes.OPPOSITE[result])
+
+    def _log_majority_stances(self, result):
+        stances = self._decision.for_stances
+        if result == outcomes.AGN:
+            stances = self._decision.agn_stances
+        logger.LOGGER.info("Stances %s this bill: %d" % (result, len(stances)))
+        logger.LOGGER.info(stances)

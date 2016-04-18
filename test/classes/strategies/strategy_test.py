@@ -298,3 +298,42 @@ class StrategyTest(unittest.TestCase):
 
         strategy = Strategy(self.decision, self.member, self.bill)
         strategy._explain_simple_consensus()
+
+    def test__log_majority_stances(self):
+        """ Verifies the function works without raising an error"""
+        stance = Stance()
+        stance.issue = "Something good"
+        stance.side = "FOR"
+
+        stance1 = Stance()
+        stance1.issue = "Something Bad"
+        stance1.side = "AGN"
+
+        self.decision.for_stances = [stance]
+        self.decision.agn_stances = [stance1, stance1]
+
+        self.decision.result = outcomes.AGN
+
+        strategy = Strategy(self.decision, self.member, self.bill)
+        strategy._log_majority_stances(outcomes.FOR)
+        strategy._log_majority_stances(outcomes.AGN)
+
+    def test__explain_simple_majority(self):
+        """ Verifies the function works without raising an error"""
+        stance = Stance()
+        stance.issue = "Something good"
+        stance.side = "FOR"
+
+        stance1 = Stance()
+        stance1.issue = "Something Bad"
+        stance1.side = "AGN"
+
+        self.decision.for_stances = [stance]
+        self.decision.agn_stances = [stance1, stance1]
+
+        self.decision.result = outcomes.AGN
+
+        strategy = Strategy(self.decision, self.member, self.bill)
+        strategy._explain_simple_majority()
+        strategy._log_majority_stances(outcomes.FOR)
+        strategy._log_majority_stances(outcomes.AGN)
