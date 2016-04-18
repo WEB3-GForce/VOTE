@@ -23,9 +23,12 @@ from src.classes.strategies.inconsistent_constituency_strategy import Inconsiste
 from src.classes.strategies.not_constitutional_strategy import NotConstitutionalStrategy
 from src.classes.strategies.nonpartisan_decision_strategy import NonPartisanDecisionStrategy
 from src.classes.strategies.popular_decision_strategy import PopularDecisionStrategy
+from src.classes.strategies.unimportant_bill_strategy import UnimportantBillStrategy
+
 
 # Maps the name of a strategy to the class that represents the strategy
 STRATEGY_HASH = {"Popular Decision" : PopularDecisionStrategy,
                  "Inconsistent Constituency" : InconsistentConstituencyStrategy,
                  "Non-partisan Decision" : NonPartisanDecisionStrategy,
-                 "Not Constitutional" : NotConstitutionalStrategy}
+                 "Not Constitutional" : NotConstitutionalStrategy,
+                 "Unimportant Bill": UnimportantBillStrategy}
