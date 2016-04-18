@@ -20,6 +20,7 @@
 """
 
 from src.classes.strategies.balance_the_books_strategy import BalanceTheBooksStrategy
+from src.classes.strategies.best_for_the_country_strategy import BestForTheCountryStrategy
 from src.classes.strategies.inconsistent_constituency_strategy import InconsistentConstituencyStrategy
 from src.classes.strategies.not_constitutional_strategy import NotConstitutionalStrategy
 from src.classes.strategies.nonpartisan_decision_strategy import NonPartisanDecisionStrategy
@@ -33,4 +34,5 @@ STRATEGY_HASH = {"Popular Decision" : PopularDecisionStrategy,
                  "Non-partisan Decision" : NonPartisanDecisionStrategy,
                  "Not Constitutional" : NotConstitutionalStrategy,
                  "Unimportant Bill" : UnimportantBillStrategy,
-                 "Balance the Books" : BalanceTheBooksStrategy}
+                 "Balance the Books" : BalanceTheBooksStrategy,
+                 "Best for the Country" : BestForTheCountryStrategy}

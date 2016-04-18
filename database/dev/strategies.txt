@@ -34,3 +34,9 @@
     "rank" : 5,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Best for the Country",
+    "rank" : 6,
+    "active" : true
+}
