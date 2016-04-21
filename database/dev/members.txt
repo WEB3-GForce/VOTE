@@ -377,3 +377,206 @@
         }
     ]
 }
+{
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-JUDICIARY", 
+        "HOUSE-INTELLIGENCE"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [], 
+    "district": "WI-2", 
+    "english_short": null, 
+    "first_name": "JOHN", 
+    "full_name": "John Smith", 
+    "gender": "MALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "SMITH", 
+    "notes": [], 
+    "party": "DEMOCRATS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "ADA", 
+            "importance": "A", 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COPE", 
+            "importance": "A", 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COC", 
+            "importance": "B", 
+            "side": "CON", 
+            "source": "SMITH", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "CEI", 
+            "importance": "B", 
+            "side": "CON", 
+            "source": "SMITH", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": "C", 
+            "side": "CON", 
+            "source": "SMITH", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "member"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": 1990, 
+    "term_start": 1958, 
+    "voting_record": [
+        {
+            "_type": "ResultData",
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "SPACE-STATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "STAR-WARS", 
+            "outcome": "FOR"
+        }, 
+        {
+             "_type": "ResultData",
+            "data": "STAR-WARS", 
+            "outcome": "AGN"
+        }
+    ]
+}
+{
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-BANKING", 
+        "HOUSE-DC"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [], 
+    "district": "VA-8", 
+    "english_short": null, 
+    "first_name": "JOHN", 
+    "full_name": "John Doe", 
+    "gender": "MALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "DOE", 
+    "notes": [], 
+    "party": "REPUBLICANS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "ADA", 
+            "importance": "B", 
+            "side": "CON", 
+            "source": "DOE", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COPE", 
+            "importance": "B", 
+            "side": "CON", 
+            "source": "DOE", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COC", 
+            "importance": "B", 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "CEI", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": "DOE", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": "C", 
+            "side": "CON", 
+            "source": "DOE", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": "DOE", 
+            "source_db": "member"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": "C", 
+            "side": "PRO", 
+            "source": "DOE", 
+            "source_db": "member"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": 1990, 
+    "term_start": 1980, 
+    "voting_record": [
+        {
+            "_type": "ResultData",        
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "AGN"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "SPACE-STATION", 
+            "outcome": "AGN"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "CIVIL-RIGHTS-RESTORATION-ACT", 
+            "outcome": "AGN"
+        }
+    ]
+}

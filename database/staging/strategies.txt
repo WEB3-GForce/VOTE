@@ -1,0 +1,42 @@
+{
+    "_type" : "StrategyEntry",
+    "name" : "Popular Decision",
+    "rank" : 0,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Inconsistent Constituency",
+    "rank" : 1,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Non-partisan Decision",
+    "rank" : 2,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Not Constitutional",
+    "rank" : 3,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Unimportant Bill",
+    "rank" : 4,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Balance the Books",
+    "rank" : 5,
+    "active" : true
+}
+{
+    "_type" : "StrategyEntry",
+    "name" : "Best for the Country",
+    "rank" : 6,
+    "active" : true
+}

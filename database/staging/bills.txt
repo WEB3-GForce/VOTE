@@ -1,0 +1,416 @@
+{
+    "_id": {
+        "$oid": "56784a982d1f1e0ee06e3dd4"
+    }, 
+    "_type": "Bill", 
+    "bill_number": "AMD", 
+    "date_of_vote": "Monday, May 18, 1987", 
+    "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "DEFENSE", 
+        "CHEMICAL-WEAPONS"
+    ], 
+    "majority_factor": null, 
+    "name": "Defense Authorization, Fiscal 1988 / Chemical Weapons", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": 100, 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "REAGAN", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "CHEMICAL-WEAPONS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "CHEMICAL-WEAPONS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [
+        "DEFENSE-AUTHORIZATION"
+    ], 
+    "vote_tally": [
+        "REJECTED", 
+        191, 
+        230, 
+        {
+            "DEMOCRATS": [
+                161, 
+                86
+            ], 
+            "REPUBLICANS": [
+                30, 
+                144
+            ]
+        }
+    ]
+}
+{
+    "_id": {
+        "$oid": "56784a982d1f1e0ee06e3dd5"
+    }, 
+    "_type": "Bill", 
+    "bill_number": "HR-4800", 
+    "date_of_vote": "Wednesday, June 22, 1988", 
+    "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "SPACE", 
+        "VETERANS", 
+        "ELDERLY", 
+        "HANDICAPPED", 
+        "HOMELESS", 
+        "URBAN-DEVELOPMENT"
+    ], 
+    "majority_factor": null, 
+    "name": "Space Station", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": "100 - 2", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "SPACE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "ELDERLY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "HANDICAPPED", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "HOMELESSNESS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "URBAN-RENEWAL", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [
+        "SPACE-STATION"
+    ], 
+    "vote_tally": [
+        "REJECTED", 
+        166, 
+        256, 
+        {
+            "DEMOCRATS": [
+                126, 
+                123
+            ], 
+            "REPUBLICANS": [
+                40, 
+                133
+            ]
+        }
+    ]
+}
+{
+    "_id": {
+        "$oid": "56784a982d1f1e0ee06e3dd6"
+    }, 
+    "_type": "Bill", 
+    "bill_number": "HR-4264", 
+    "date_of_vote": "Wednesday, May 4, 1988", 
+    "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "SDI"
+    ], 
+    "majority_factor": null, 
+    "name": "Star Wars", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": "100 - 2", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "REAGAN", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+            "issue": "SDI", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "SDI", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "bills"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "SPENDING", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": null, 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [
+        "STAR-WARS"
+    ], 
+    "vote_tally": [
+        "APPROVED", 
+        223, 
+        195, 
+        {
+            "DEMOCRATS": [
+                197, 
+                47
+            ], 
+            "REPUBLICANS": [
+                26, 
+                148
+            ]
+        }
+    ]
+}
+{
+    "_type": "Bill", 
+    "bill_number": "HR-0", 
+    "date_of_vote": "Wednesday, May 4, 1988", 
+    "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "SDI"
+    ], 
+    "majority_factor": null, 
+    "name": "Curb Freedom Speech (Mock Data)", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": "100 - 2", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+            "issue": "Constitution", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-0", 
+            "source_db": "bills"
+        },
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "CIVIL-LIBERTIES", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-0", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "ORDER", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-0", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": []
+}
+{
+    "_type": "Bill", 
+    "bill_number": "HR-777", 
+    "date_of_vote": "Wednesday, May 4, 1988", 
+    "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "SDI"
+    ], 
+    "majority_factor": null, 
+    "name": "Government Child Care", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": "100 - 2", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "FISCAL-RESPONSIBILITY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-777", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "CHILDCARE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-777", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": []
+}
+{
+    "_type": "Bill", 
+    "bill_number": "HR-778", 
+    "date_of_vote": "Wednesday, May 4, 1988", 
+    "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "SDI"
+    ], 
+    "majority_factor": null, 
+    "name": "End Government Child Care", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": "100 - 2", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "CHILDCARE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-777", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "FISCAL-RESPONSIBILITY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-777", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": []
+}

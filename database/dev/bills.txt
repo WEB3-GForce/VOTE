@@ -18,7 +18,7 @@
     "remarks": [], 
     "session": 100, 
     "sort_key": null, 
-    "stance_agn": [
+    "stances_agn": [
         {
             "_type": "Stance", 
             "importance": "B", 
@@ -40,7 +40,7 @@
             "source_db": "bill"
         }
     ], 
-    "stance_for": [
+    "stances_for": [
         {
             "_type": "Stance", 
             "importance": "B", 
@@ -95,7 +95,7 @@
     "remarks": [], 
     "session": "100 - 2", 
     "sort_key": null, 
-    "stance_agn": [
+    "stances_agn": [
         {
             "_type": "Stance", 
             "importance": "B", 
@@ -107,7 +107,7 @@
             "source_db": "bill"
         }
     ], 
-    "stance_for": [
+    "stances_for": [
         {
             "_type": "Stance", 
             "importance": "C", 
@@ -187,7 +187,7 @@
     "remarks": [], 
     "session": "100 - 2", 
     "sort_key": null, 
-    "stance_agn": [
+    "stances_agn": [
         {
             "_type": "Stance", 
             "importance": "B", 
@@ -209,7 +209,7 @@
             "source_db": "bill"
         }
     ], 
-    "stance_for": [
+    "stances_for": [
         {
             "_type": "Stance", 
             "importance": "C", 
@@ -270,7 +270,7 @@
     "remarks": [], 
     "session": "100 - 2", 
     "sort_key": null, 
-    "stance_agn": [
+    "stances_agn": [
         {
             "_type": "Stance", 
             "importance": "B", 
@@ -292,7 +292,7 @@
             "source_db": "bill"
         }
     ], 
-    "stance_for": [
+    "stances_for": [
         {
             "_type": "Stance", 
             "importance": "B", 
@@ -372,7 +372,7 @@
     "remarks": [], 
     "session": "101 - 2", 
     "sort_key": null, 
-    "stance_agn": [
+    "stances_agn": [
         {
             "_type": "Stance", 
             "importance": "B", 
@@ -414,7 +414,7 @@
             "source_db": "bill"
         }
     ], 
-    "stance_for": [
+    "stances_for": [
         {
             "_type": "Stance", 
             "importance": "B", 

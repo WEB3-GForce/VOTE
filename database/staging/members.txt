@@ -1,0 +1,525 @@
+{
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-JUDICIARY", 
+        "HOUSE-INTELLIGENCE"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [
+            {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+            "issue": "SDI", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "members"
+        }
+    ], 
+    "district": "WI-2", 
+    "english_short": null, 
+    "first_name": "JOHN", 
+    "full_name": "John Smith", 
+    "gender": "MALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "SMITH", 
+    "notes": [], 
+    "party": "DEMOCRATS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "ADA", 
+            "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COC", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "CON", 
+            "source": "SMITH", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "CEI", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "CON", 
+            "source": "SMITH", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "CON", 
+            "source": "SMITH", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "members"
+        },
+        {
+            "_type": "Relation", 
+            "group": "DividedDemocrats", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "SMITH", 
+            "source_db": "members"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": 1990, 
+    "term_start": 1958, 
+    "voting_record": [
+        {
+            "_type": "ResultData",
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "SPACE-STATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "STAR-WARS", 
+            "outcome": "FOR"
+        }
+    ]
+}
+{
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-JUDICIARY", 
+        "HOUSE-INTELLIGENCE"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "ELDERLY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "SPACE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        },
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "FISCAL-RESPONSIBILITY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        },
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "CHILDCARE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        }
+    ], 
+    "district": "WI-2", 
+    "english_short": null, 
+    "first_name": "JANE", 
+    "full_name": "Jane Jordan", 
+    "gender": "FEMALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "JORDAN", 
+    "notes": [], 
+    "party": "DEMOCRATS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "ADA", 
+            "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+            "side": "PRO", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COC", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "CON", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "CEI", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "CON", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "CON", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "JORDAN", 
+            "source_db": "members"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": 1990, 
+    "term_start": 1958, 
+    "voting_record": [
+        {
+            "_type": "ResultData",
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "SPACE-STATION", 
+            "outcome": "FOR"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "STAR-WARS", 
+            "outcome": "FOR"
+        },
+        {
+            "_type": "ResultData",
+            "data": "STAR-WARS", 
+            "outcome": "AGN"
+        }
+    ]
+}
+{
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-BANKING", 
+        "HOUSE-DC"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+            "issue": "CHEMICAL-WEAPONS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "DOE", 
+            "source_db": "members"
+        },
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+            "issue": "Constitution", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DOE", 
+            "source_db": "members"
+        },
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "ORDER", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DOE", 
+            "source_db": "members"
+        }
+    ], 
+    "district": "VA-8", 
+    "english_short": null, 
+    "first_name": "JOHN", 
+    "full_name": "John Doe", 
+    "gender": "MALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "DOE", 
+    "notes": [], 
+    "party": "REPUBLICANS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "ADA", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "CON", 
+            "source": "DOE", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COPE", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "CON", 
+            "source": "DOE", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COC", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "PRO", 
+            "source": null, 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "CON", 
+            "source": "DOE", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "DOE", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "DOE", 
+            "source_db": "members"
+        },
+        {
+            "_type": "Relation", 
+            "group": "DividedRepublicans", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "DOE", 
+            "source_db": "members"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": 1990, 
+    "term_start": 1980, 
+    "voting_record": [
+        {
+            "_type": "ResultData",        
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "AGN"
+        }, 
+        {
+            "_type": "ResultData",
+            "data": "SPACE-STATION", 
+            "outcome": "AGN"
+        }
+    ]
+}
+{
+    "_type": "Member", 
+    "committees": [
+        "HOUSE-BANKING", 
+        "HOUSE-DC"
+    ], 
+    "con_rel_stances": [], 
+    "credo": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "ELDERLY", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "WILLIAMS", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "SPACE", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "WILLIAMS", 
+            "source_db": "members"
+        }
+    ], 
+    "district": "VA-8", 
+    "english_short": null, 
+    "first_name": "NATALIE", 
+    "full_name": "Natalie Williams", 
+    "gender": "FEMALE", 
+    "groups": [], 
+    "issues": [], 
+    "last_name": "WILLIAMS", 
+    "notes": [], 
+    "party": "REPUBLICANS", 
+    "pro_rel_stances": [], 
+    "relations": [
+        {
+            "_type": "Relation", 
+            "group": "ADA", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "CON", 
+            "source": "WILLAMS", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COPE", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "CON", 
+            "source": "WILLAMS", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COC", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "side": "PRO", 
+            "source": "WILLAMS", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "DEMOCRATS", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "CON", 
+            "source": "WILLAMS", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "REPUBLICANS", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "WILLAMS", 
+            "source_db": "members"
+        }, 
+        {
+            "_type": "Relation", 
+            "group": "COUNTRY", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "side": "PRO", 
+            "source": "WILLAMS", 
+            "source_db": "members"
+        }
+    ], 
+    "stance_sort_key": null, 
+    "stances": [], 
+    "term_end": 1990, 
+    "term_start": 1980, 
+    "voting_record": [
+        {
+            "_type": "ResultData",        
+            "data": "DEFENSE-AUTHORIZATION", 
+            "outcome": "AGN"
+        },
+        {
+            "_type": "ResultData",        
+            "data": "STAR-WARS", 
+            "outcome": "FOR"
+        },
+        {
+            "_type": "ResultData",        
+            "data": "STAR-WARS", 
+            "outcome": "AGN"
+        },
+        {
+            "_type": "ResultData",
+            "data": "SPACE-STATION", 
+            "outcome": "AGN"
+        }
+    ]
+}
