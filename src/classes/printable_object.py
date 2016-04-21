@@ -36,7 +36,7 @@ class PrintableObject(object):
             instance variable names, and instance variable parameters.
         """
         result = "{0}:\n".format(self.__class__.__name__)
-        for variable in self.__dict__.keys():
+        for variable in sorted(self.__dict__.keys()):
             result += "\t{0}: {1}\n".format(variable,
                 str(self.__dict__[variable]))
         return result
