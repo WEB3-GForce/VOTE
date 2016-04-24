@@ -40,3 +40,9 @@
     "rank" : 6,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Change of Heart",
+    "rank" : 7,
+    "active" : true
+}

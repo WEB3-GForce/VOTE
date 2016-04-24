@@ -157,6 +157,11 @@ def _vote_helper(member, bill):
     if decision.strategy:
         _save(decision)
 
+    # Debuging
+    # logger.LOGGER.info(member)
+    # logger.LOGGER.info(bill)
+    # logger.LOGGER.info(decision)
+
     return decision
 
 
