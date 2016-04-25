@@ -38,6 +38,17 @@ class BalanceTheBooksStrategy(Strategy):
           Rank:          "C"
         ==================================================================
 
+        This is also the same as:
+        
+        ==================================================================
+          11  Mixed constituency                      [C]  (MIXED-CONSTITUENCY)
+
+          Remarks:       E.g., rural/urban. can justify pro-rural vote to urbans by
+                         pointing to other constituency, and vice-versa.
+          Rank:          "C"
+          Test:          District must be divided and there should be symmetry on stances.
+        ==================================================================
+
     In short, if there is a majority opinion on the bill and the member's voting
     history shows that the member is split on the decision, go with the majority
     """

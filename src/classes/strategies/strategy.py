@@ -20,6 +20,7 @@
 """
 
 from src.classes.printable_object import PrintableObject
+from src.classes.data import importance
 from src.constants import logger
 from src.constants import outcomes
 from src.util import util
@@ -129,6 +130,11 @@ class Strategy(PrintableObject):
     #                    Helper Methods Child Classes Can Use                 #
     ###########################################################################
 
+
+    ###########################################################################
+    #                            Finalizing the Decision                      #
+    ###########################################################################
+
     def _finalize_decision(self, side, reasons, downside):
         """ A helper method, finalizes a given decision on a bill. It ensures
         that the outcome and reasons for a decision are updated in the decision
@@ -179,6 +185,11 @@ class Strategy(PrintableObject):
             return
 
         self._finalize_decision(result, reason, downside)
+
+
+    ###########################################################################
+    #                          Majority/ Consensus                            #
+    ###########################################################################
 
     def _majority(self):
         """Determines if there is a simple majority of stances either for or
@@ -231,6 +242,10 @@ class Strategy(PrintableObject):
             return MI_stances[0]
         else:
             return None
+
+    ###########################################################################
+    #                            Explain Functions                            #
+    ###########################################################################
 
     def _explain_simple_consensus(self):
         """ This is a helper method for explain. It is a general explanation

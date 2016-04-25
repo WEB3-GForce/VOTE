@@ -90,8 +90,8 @@ class MinimizeAdverseEffectsStrategy(Strategy):
         msg = "The high priority %s stance is more important than the high priority %s stance" % (result, opposite)
         logger.LOGGER.info(msg)
 
-        mi_for = self._decision.for_stances[0] if len(self._decision.for_stances) > 1 else None
-        mi_agn = self._decision.agn_stances[0] if len(self._decision.agn_stances) > 1 else None
+        mi_for = self._decision.for_stances[0] if len(self._decision.for_stances) > 0 else None
+        mi_agn = self._decision.agn_stances[0] if len(self._decision.agn_stances) > 0 else None
 
         logger.LOGGER.info(result)
         print_mi = mi_for if result == outcomes.FOR else mi_agn

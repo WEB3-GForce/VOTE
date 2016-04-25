@@ -64,3 +64,9 @@
     "rank" : 10,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Not Good Enough",
+    "rank" : 11,
+    "active" : true
+}
