@@ -52,3 +52,9 @@
     "rank" : 8,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Could Not Pass",
+    "rank" : 9,
+    "active" : true
+}

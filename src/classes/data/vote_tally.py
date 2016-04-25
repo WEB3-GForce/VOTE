@@ -61,3 +61,7 @@ class VoteTally(PrintableObject):
 
         if entries is not None:
             self.__dict__.update(entries)
+
+    def vote_ratio(self):
+        """Returns the ratio for votes to agn votes."""
+        return self.for_votes / (self.agn_votes * 1.0)

@@ -65,3 +65,12 @@ class VoteTallyaTest(unittest.TestCase):
         for key, value in self.input_hash.iteritems():
             self.assertEqual(value, result.__dict__[key])
         self.assertEqual(result.party_votes, {})
+
+    def test_vote_ratio(self):
+        """ Verifies the proper ratio is computed. """
+        vote_tally = VoteTally()
+        vote_tally.for_votes = 27
+        vote_tally.agn_votes = 52
+
+        result = vote_tally.vote_ratio()
+        self.assertEqual(result, 27.0 / 52.0)
