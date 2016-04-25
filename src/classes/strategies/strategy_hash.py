@@ -25,6 +25,7 @@ from src.classes.strategies.could_not_pass_strategy import CouldNotPassStrategy
 from src.classes.strategies.change_of_heart_strategy import ChangeOfHeartStrategy
 from src.classes.strategies.inconsistent_constituency_strategy import InconsistentConstituencyStrategy
 from src.classes.strategies.inoculation_strategy import InoculationStrategy
+from src.classes.strategies.minimize_adverse_effects_strategy import MinimizeAdverseEffectsStrategy
 from src.classes.strategies.not_constitutional_strategy import NotConstitutionalStrategy
 from src.classes.strategies.nonpartisan_decision_strategy import NonPartisanDecisionStrategy
 from src.classes.strategies.popular_decision_strategy import PopularDecisionStrategy
@@ -41,4 +42,5 @@ STRATEGY_HASH = {"Popular Decision" : PopularDecisionStrategy,
                  "Best for the Country" : BestForTheCountryStrategy,
                  "Change of Heart" : ChangeOfHeartStrategy,
                  "Inoculation" : InoculationStrategy,
-                 "Could Not Pass" : CouldNotPassStrategy}
+                 "Could Not Pass" : CouldNotPassStrategy,
+                 "Minimize Adverse Effects" : MinimizeAdverseEffectsStrategy}

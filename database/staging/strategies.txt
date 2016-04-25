@@ -58,3 +58,9 @@
     "rank" : 9,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Minimize Adverse Effects",
+    "rank" : 10,
+    "active" : true
+}
