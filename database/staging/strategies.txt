@@ -46,3 +46,9 @@
     "rank" : 7,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Inoculation",
+    "rank" : 8,
+    "active" : true
+}
