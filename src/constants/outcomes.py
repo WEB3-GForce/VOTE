@@ -27,5 +27,12 @@ AGN = "AGN"
 PRO = "PRO"
 CON = "CON"
 
+PASSED = "PASSED"
+REJECTED = "REJECTED"
+
+FOR_VOTES = "FOR_VOTES"
+AGN_VOTES = "AGN_VOTES"
+
 # A hash that defines what is the opposite outcome for a given outcome.
-OPPOSITE = {FOR : AGN, AGN : FOR, PRO: CON, CON : PRO}
+OPPOSITE = {FOR : AGN, AGN : FOR, PRO: CON, CON : PRO, PASSED : REJECTED,
+            REJECTED: PASSED}

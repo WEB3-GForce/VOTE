@@ -59,21 +59,13 @@
     "synonyms": [
         "DEFENSE-AUTHORIZATION"
     ], 
-    "vote_tally": [
-        "REJECTED", 
-        191, 
-        230, 
-        {
-            "DEMOCRATS": [
-                161, 
-                86
-            ], 
-            "REPUBLICANS": [
-                30, 
-                144
-            ]
+    "vote_tally": {"_type": "VoteTally",
+        "outcome" : "REJECTED",
+        "for_votes" : 191,
+        "agn_votes" : 230,
+        "party_votes" : { "DEMOCRATS": {"for_votes": 161, "agn_votes":86},
+                          "REPUBLICANS": {"for_votes": 30, "agn_votes": 144}}
         }
-    ]
 }
 {
     "_id": {
@@ -162,21 +154,13 @@
     "synonyms": [
         "SPACE-STATION"
     ], 
-    "vote_tally": [
-        "REJECTED", 
-        166, 
-        256, 
-        {
-            "DEMOCRATS": [
-                126, 
-                123
-            ], 
-            "REPUBLICANS": [
-                40, 
-                133
-            ]
+    "vote_tally": {"_type": "VoteTally",
+        "outcome" : "REJECTED",
+        "for_votes" : 166,
+        "agn_votes" : 256,
+        "party_votes" : { "DEMOCRATS": {"for_votes": 126, "agn_votes": 123},
+                          "REPUBLICANS": {"for_votes": 40, "agn_votes": 133}}
         }
-    ]
 }
 {
     "_id": {
@@ -249,21 +233,13 @@
     "synonyms": [
         "STAR-WARS"
     ], 
-    "vote_tally": [
-        "APPROVED", 
-        223, 
-        195, 
-        {
-            "DEMOCRATS": [
-                197, 
-                47
-            ], 
-            "REPUBLICANS": [
-                26, 
-                148
-            ]
+    "vote_tally": {"_type": "VoteTally",
+        "outcome" : "PASSED",
+        "for_votes" : 223,
+        "agn_votes" : 195,
+        "party_votes" : { "DEMOCRATS": {"for_votes": 197, "agn_votes": 47},
+                          "REPUBLICANS": {"for_votes": 26, "agn_votes": 148}}
         }
-    ]
 }
 {
     "_type": "Bill", 
@@ -320,7 +296,7 @@
         }
     ], 
     "synonyms": [], 
-    "vote_tally": []
+    "vote_tally": null
 }
 {
     "_type": "Bill", 
@@ -366,7 +342,7 @@
         }
     ], 
     "synonyms": [], 
-    "vote_tally": []
+    "vote_tally": null
 }
 {
     "_type": "Bill", 
@@ -412,5 +388,5 @@
         }
     ], 
     "synonyms": [], 
-    "vote_tally": []
+    "vote_tally": null
 }

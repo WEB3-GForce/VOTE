@@ -29,6 +29,7 @@ from src.classes.stance import Stance
 from src.classes.strategies.strategy_entry import StrategyEntry
 from src.classes.data.importance import _Importance
 from src.classes.data.result_data import ResultData
+from src.classes.data.vote_tally import VoteTally
 
 # The following are the names of databases that can be used.
 
@@ -52,7 +53,7 @@ DB_TYPES = [PROD, STAGING, TEST, DEV]
 
 # This is a list of the custom classes the DB supports.
 DB_CUSTOM_CLASSES = [Bill, Group, Issue, Member, Relation, Stance, Decision,
-                     StrategyEntry, _Importance, ResultData]
+                     StrategyEntry, _Importance, ResultData, VoteTally]
 
 # DB entries are returned as {"_id" : ..., "_type": ..., ...}
 # where "_id" is the id of the entry in the DB, "_type" is the custom class

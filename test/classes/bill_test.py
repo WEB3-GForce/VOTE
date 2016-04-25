@@ -25,14 +25,13 @@ from src.classes.bill import Bill
 
 class BillTest(unittest.TestCase):
     """ Test suite for Bill."""
-    
+
     def setUp(self):
         # This is fake data. Do not use it to make assumptions about how
         # data will look in the actual system.
         self.input_hash = {"synonyms": ["DEFENSE-AUTHORIZATION"],
             "session": "100",
-            "vote_tally": ["REJECTED", 191, 230,
-                {"R": [30, 144], "D": [161, 86]}],
+            "vote_tally": "Vote Tally Object",
             "stance_agn": ["Some Stances"],
             "issues": ["DEFENSE", "CHEMICAL-WEAPONS"],
             "bill_number": "AMD",
@@ -46,20 +45,20 @@ class BillTest(unittest.TestCase):
             "name": "Defense Authorization, Fiscal 1988 / Chemical Weapons",
             "president_position": "AGN",
             "notes": ["Note 1"]}
-    
+
     def test_init_default(self):
         """Tests that default values are set for instance variables"""
         bill = Bill()
 
         self.assertEqual(bill.bill_number, "")
-        self.assertEqual(bill.name,"")
+        self.assertEqual(bill.name, "")
         self.assertEqual(bill.synonyms, [])
         self.assertEqual(bill.importance, None)
         self.assertEqual(bill.session, "")
         self.assertEqual(bill.majority_factor, None)
         self.assertEqual(bill.date_of_vote, None)
-        
-        self.assertEqual(bill.vote_tally, [])
+
+        self.assertEqual(bill.vote_tally, None)
         self.assertEqual(bill.president_position, None)
         self.assertEqual(bill.sort_key, None)
 
@@ -68,17 +67,17 @@ class BillTest(unittest.TestCase):
         self.assertEqual(bill.stances_agn, [])
         self.assertEqual(bill.inferred_stances_for, [])
         self.assertEqual(bill.inferred_stances_agn, [])
-        
+
     def test_init_hash(self):
         """ Verifies that input data from a hash is properly set."""
-        bill = Bill(self.input_hash)        
+        bill = Bill(self.input_hash)
         for key, value in self.input_hash.iteritems():
             self.assertEqual(value, bill.__dict__[key])
 
     def test_init_hash_default(self):
         """ Verifies defaults are still defined when a hash is provided."""
         self.input_hash.pop("bill_number")
-        bill = Bill(self.input_hash)        
+        bill = Bill(self.input_hash)
         for key, value in self.input_hash.iteritems():
             self.assertEqual(value, bill.__dict__[key])
         self.assertEqual(bill.bill_number, "")

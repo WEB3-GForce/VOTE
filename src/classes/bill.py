@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
- 
+
 from src.classes.printable_object import PrintableObject
 
 class Bill(PrintableObject):
@@ -38,9 +38,8 @@ class Bill(PrintableObject):
             for a bill to pass
 
         date_of_vote: The date the bill was voted upon
-        vote_tally: A tally of the votes in the form:
-            ["PASSED|REJECTED", #FOR, #AGN,
-            {"REPUBLICANS": [#FOR, #AGN], "DEMOCRATS": [#FOR, #AGN], ...}]
+        vote_tally: A VoteTally object containing information about the number
+            of votes for the bill and whether it is likely to pass or fail.
         president_position: the president's position on the bill (FOR or AGN)
 
         sort_key: Determines how bills will be sorted.
@@ -75,7 +74,7 @@ class Bill(PrintableObject):
         self.date_of_vote = None
 
         # Attributes that relay the result of the actual-life vote on the bill
-        self.vote_tally = []
+        self.vote_tally = None
         self.president_position = None
         self.sort_key = None
 
@@ -88,5 +87,5 @@ class Bill(PrintableObject):
         self.remarks = []
 
         if entries is not None:
-            self.__dict__.update(entries) 
+            self.__dict__.update(entries)
 

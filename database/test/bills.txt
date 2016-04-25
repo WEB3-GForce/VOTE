@@ -48,7 +48,7 @@
         }
     ], 
     "synonyms": [], 
-    "vote_tally": []
+    "vote_tally": null
 }
 {
     "_id": {
@@ -100,7 +100,7 @@
         }
     ], 
     "synonyms": [], 
-    "vote_tally": []
+    "vote_tally": null
 }
 {
     "_id": {
@@ -154,7 +154,7 @@
     "synonyms": [
         "BILL3"
     ], 
-    "vote_tally": []
+    "vote_tally": null
 }
 {
     "_type": "Bill", 
@@ -201,7 +201,7 @@
         }
     ], 
     "synonyms": [], 
-    "vote_tally": []
+    "vote_tally": null
 }
 {
     "_type": "Bill", 
@@ -250,7 +250,7 @@
         }
     ], 
     "synonyms": [], 
-    "vote_tally": []
+    "vote_tally": null
 }
 {
     "_type": "Bill", 
@@ -299,7 +299,7 @@
         }
     ], 
     "synonyms": [], 
-    "vote_tally": []
+    "vote_tally": null
 }
 {
     "_type": "Bill", 
@@ -350,5 +350,5 @@
     "synonyms": [
         "VOTE_BILL3"
     ], 
-    "vote_tally": []
+    "vote_tally": null
 }
