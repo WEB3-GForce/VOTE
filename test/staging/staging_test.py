@@ -103,7 +103,7 @@ class StagingTest(unittest.TestCase):
         self.assertTrue(len(decision.downside + decision.downside_record) > 0)
 
     def test_unimportant_bill_FOR(self):
-        """Tests that VOTE can decide AGN with Unimportant Bill."""
+        """Tests that VOTE can decide FOR with Unimportant Bill."""
         decision = vote.vote("JORDAN", "HR-4800")
         self.assertEqual(decision.strategy, "Unimportant Bill")
         self.assertEqual(decision.result, outcomes.FOR)
@@ -119,7 +119,7 @@ class StagingTest(unittest.TestCase):
         self.assertTrue(len(decision.downside + decision.downside_record) > 0)
 
     def test_balance_the_books_FOR(self):
-        """Tests that VOTE can decide AGN with Balance the Books."""
+        """Tests that VOTE can decide FOR with Balance the Books."""
         decision = vote.vote("JORDAN", "HR-4264")
         self.assertEqual(decision.strategy, "Balance the Books")
         self.assertEqual(decision.result, outcomes.FOR)
@@ -135,7 +135,7 @@ class StagingTest(unittest.TestCase):
         self.assertTrue(len(decision.downside + decision.downside_record) > 0)
 
     def test_best_for_the_country_FOR(self):
-        """Tests that VOTE can decide AGN with Best for the Country."""
+        """Tests that VOTE can decide FOR with Best for the Country."""
         decision = vote.vote("JORDAN", "HR-777")
         self.assertEqual(decision.strategy, "Best for the Country")
         self.assertEqual(decision.result, outcomes.FOR)
@@ -149,3 +149,83 @@ class StagingTest(unittest.TestCase):
         self.assertEqual(decision.result, outcomes.AGN)
         self.assertTrue(len(decision.reason) > 0)
         self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_change_of_heart_FOR(self):
+        """Tests that VOTE can decide FOR with Change of Heart."""
+        decision = vote.vote("JORDAN", "HR-780")
+        self.assertEqual(decision.strategy, "Change of Heart")
+        self.assertEqual(decision.result, outcomes.FOR)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_change_of_heart_AGN(self):
+        """Tests that VOTE can decide AGN with Change of Heart."""
+        decision = vote.vote("JORDAN", "HR-779")
+        self.assertEqual(decision.strategy, "Change of Heart")
+        self.assertEqual(decision.result, outcomes.AGN)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_innoculation_FOR(self):
+        """Tests that VOTE can decide FOR with Inoculation."""
+        decision = vote.vote("YANG", "HR-4800")
+        self.assertEqual(decision.strategy, "Inoculation")
+        self.assertEqual(decision.result, outcomes.FOR)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_innoculation_AGN(self):
+        """Tests that VOTE can decide AGN with Inoculation."""
+        decision = vote.vote("YANG", "ANTI-HR-4800")
+        self.assertEqual(decision.strategy, "Inoculation")
+        self.assertEqual(decision.result, outcomes.AGN)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_could_not_pass(self):
+        """Tests that VOTE can decide with Could Not Pass."""
+        decision = vote.vote("YIN", "HR-900")
+        self.assertEqual(decision.strategy, "Could Not Pass")
+        self.assertEqual(decision.result, outcomes.AGN)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_not_good_enough(self):
+        """Tests that VOTE can decide with Not Good Enough."""
+        decision = vote.vote("YIN", "HR-4264")
+        self.assertEqual(decision.strategy, "Not Good Enough")
+        self.assertEqual(decision.result, outcomes.AGN)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_simple_consensus_FOR(self):
+        """Tests that VOTE can decide FOR with Simple Consensus."""
+        decision = vote.vote("YIN", "AMD-IMP")
+        self.assertEqual(decision.strategy, "Simple Consensus")
+        self.assertEqual(decision.result, outcomes.FOR)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_simple_consensus_AGN(self):
+        """Tests that VOTE can decide AGN with Simple Consensus."""
+        decision = vote.vote("YANG", "AMD-IMP")
+        self.assertEqual(decision.strategy, "Simple Consensus")
+        self.assertEqual(decision.result, outcomes.AGN)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_normative_decision_FOR(self):
+        """Tests that VOTE can decide FOR with Normative Decision."""
+        decision = vote.vote("WILLIAMS", "HR-780")
+        self.assertEqual(decision.strategy, "Normative Decision")
+        self.assertEqual(decision.result, outcomes.FOR)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) == 0)
+
+    def test_normative_decision_AGN(self):
+        """Tests that VOTE can decide AGN with Normative Decision."""
+        decision = vote.vote("WILLIAMS", "HR-779")
+        self.assertEqual(decision.strategy, "Normative Decision")
+        self.assertEqual(decision.result, outcomes.AGN)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) == 0)

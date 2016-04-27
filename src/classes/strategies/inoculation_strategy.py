@@ -79,4 +79,4 @@ class InoculationStrategy(Strategy):
         logger.LOGGER.info(outcomes.FOR)
         logger.LOGGER.info(self._decision.groups_for)
         logger.LOGGER.info(outcomes.AGN)
-        logger.LOGGER.info(self._decision.groups_for)
+        logger.LOGGER.info(self._decision.groups_agn)
