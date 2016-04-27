@@ -82,3 +82,9 @@
     "rank" : 16,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Normative Decision",
+    "rank" : 17,
+    "active" : true
+}
