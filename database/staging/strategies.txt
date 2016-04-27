@@ -70,3 +70,9 @@
     "rank" : 11,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Simple Consensus",
+    "rank" : 15,
+    "active" : true
+}
