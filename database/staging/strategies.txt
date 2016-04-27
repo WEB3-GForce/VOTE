@@ -76,3 +76,9 @@
     "rank" : 15,
     "active" : true
 }
+{
+    "_type" : "StrategyEntry",
+    "name" : "Simple Majority",
+    "rank" : 16,
+    "active" : true
+}

@@ -30,6 +30,7 @@ from src.classes.strategies.not_good_enough_strategy import NotGoodEnoughStrateg
 from src.classes.strategies.not_constitutional_strategy import NotConstitutionalStrategy
 from src.classes.strategies.nonpartisan_decision_strategy import NonPartisanDecisionStrategy
 from src.classes.strategies.simple_consensus_strategy import SimpleConsensusStrategy
+from src.classes.strategies.simple_majority_strategy import SimpleMajorityStrategy
 from src.classes.strategies.popular_decision_strategy import PopularDecisionStrategy
 from src.classes.strategies.unimportant_bill_strategy import UnimportantBillStrategy
 
@@ -47,4 +48,5 @@ STRATEGY_HASH = {"Popular Decision" : PopularDecisionStrategy,
                  "Could Not Pass" : CouldNotPassStrategy,
                  "Minimize Adverse Effects" : MinimizeAdverseEffectsStrategy,
                  "Not Good Enough" : NotGoodEnoughStrategy,
-                 "Simple Consensus" : SimpleConsensusStrategy}
+                 "Simple Consensus" : SimpleConsensusStrategy,
+                 "Simple Majority" : SimpleMajorityStrategy}

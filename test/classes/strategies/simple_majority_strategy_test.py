@@ -25,18 +25,17 @@ from src.classes.bill import Bill
 from src.classes.decision import Decision
 from src.classes.member import Member
 from src.classes.stance import Stance
-from src.classes.data.result_data import ResultData
-from src.classes.strategies.simple_consensus_strategy import SimpleConsensusStrategy
+from src.classes.strategies.simple_majority_strategy import SimpleMajorityStrategy
 from src.constants import outcomes
 
-class SimpleConsensusStrategyTest(unittest.TestCase):
+class SimpleMajorityStrategyTest(unittest.TestCase):
     """ Test suite for simple_consensus_strategy.py."""
 
     def setUp(self):
         self.decision = Decision()
         self.member = Member()
         self.bill = Bill()
-        self.strategy = SimpleConsensusStrategy(self.decision, self.member, self.bill)
+        self.strategy = SimpleMajorityStrategy(self.decision, self.member, self.bill)
 
         self.stance = Stance()
         self.stance.issue = "Some Issue"
@@ -46,35 +45,23 @@ class SimpleConsensusStrategyTest(unittest.TestCase):
         self.stance1.issue = "Some Other Issue"
         self.stance1.side = outcomes.AGN
 
-        self.group_result = ResultData()
-        self.group_result.data = [self.stance]
-
-        self.credo_result = ResultData()
-        self.credo_result.outcome = outcomes.AGN
-        self.credo_result.data = [self.stance]
-
-        self.decision.MI_group = self.group_result
-        self.decision.MI_credo = self.credo_result
-
-        self.decision.for_stances = [self.stance]
-        self.decision.agn_stances = [self.stance1]
 
     def test_init(self):
         """Tests whether a strategy can be constructed properly"""
-        result = SimpleConsensusStrategy(self.decision, self.member, self.bill)
+        result = SimpleMajorityStrategy(self.decision, self.member, self.bill)
 
-        self.assertEqual(result._name, "Simple Consensus")
+        self.assertEqual(result._name, "Simple Majority")
         self.assertEqual(result._decision, self.decision)
         self.assertEqual(result._member, self.member)
         self.assertEqual(result._bill, self.bill)
         self.assertEqual(result._success, False)
 
-    def test_run_no_consensus(self):
-        """ Verifies the function fails if there is no consensus"""
-        self.group_result.outcome = outcomes.FOR
-        self.credo_result.outcome = outcomes.AGN
-
+    def test_run_no_majority(self):
+        """ Verifies the function fails if there is no majority."""
+        self.decision.for_stances = [self.stance]
+        self.decision.agn_stances = [self.stance1]
         result = self.strategy.run()
+
         self.assertFalse(result)
         self.assertFalse(self.strategy._success)
         self.assertEquals(self.decision.result, None)
@@ -82,9 +69,8 @@ class SimpleConsensusStrategyTest(unittest.TestCase):
 
     def test_run_success_FOR(self):
         """ Verifies that run() successfully makes a decision FOR"""
-        self.group_result.outcome = outcomes.FOR
-        self.credo_result.outcome = outcomes.FOR
-
+        self.decision.for_stances = [self.stance, self.stance]
+        self.decision.agn_stances = [self.stance1]
         result = self.strategy.run()
 
         self.assertTrue(result)
@@ -95,9 +81,8 @@ class SimpleConsensusStrategyTest(unittest.TestCase):
 
     def test_run_success_AGN(self):
         """ Verifies that run() successfully makes a decision AGN"""
-        self.group_result.outcome = outcomes.AGN
-        self.credo_result.outcome = outcomes.AGN
-
+        self.decision.for_stances = [self.stance]
+        self.decision.agn_stances = [self.stance1, self.stance1]
         result = self.strategy.run()
 
         self.assertTrue(result)
@@ -108,9 +93,8 @@ class SimpleConsensusStrategyTest(unittest.TestCase):
 
     def test_explain(self):
         """ Verifies explain runs if there is a success [aka _explain is implemented]."""
-        self.group_result.outcome = outcomes.FOR
-        self.credo_result.outcome = outcomes.FOR
-
+        self.decision.for_stances = [self.stance, self.stance]
+        self.decision.agn_stances = [self.stance1]
         result = self.strategy.run()
 
         self.assertTrue(result)
