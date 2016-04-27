@@ -691,3 +691,178 @@
         "party_votes" : {}
      }
 }
+{
+    "_type": "Bill", 
+    "bill_number": "HR-901", 
+    "date_of_vote": "Wednesday, May 4, 1988", 
+    "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "SDI"
+    ], 
+    "majority_factor": null, 
+    "name": "Remove some business Regulations Take 2", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": "100 - 2", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "HOMELESSNESS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-900", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "DEREGULATION",
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-900", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": {"_type": "VoteTally",
+        "outcome" : "PASSED",
+        "for_votes" : 200,
+        "agn_votes" : 195,
+        "party_votes" : {}
+     }
+}
+{
+    "_type": "Bill", 
+    "bill_number": "HR-880", 
+    "date_of_vote": "Wednesday, May 4, 1988", 
+    "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "SDI"
+    ], 
+    "majority_factor": null, 
+    "name": "Balancing the budget for programs", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": "100 - 2", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "HANDICAPPED", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-880", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "FOOD-STAMPS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-880", 
+            "source_db": "bills"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "HOUSING", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-880", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": {"_type": "VoteTally",
+        "outcome" : "PASSED",
+        "for_votes" : 200,
+        "agn_votes" : 195,
+        "party_votes" : {}
+     }
+}
+{
+    "_type": "Bill", 
+    "bill_number": "HR-888", 
+    "date_of_vote": "Wednesday, May 4, 1988", 
+    "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
+    "inferred_stances_agn": [], 
+    "inferred_stances_for": [], 
+    "issues": [
+        "SDI"
+    ], 
+    "majority_factor": null, 
+    "name": "Balancing the budget for programs", 
+    "president_position": "AGN", 
+    "remarks": [], 
+    "session": "100 - 2", 
+    "sort_key": null, 
+    "stances_agn": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "FOOD-STAMPS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-880", 
+            "source_db": "bills"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "HOUSING", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-880", 
+            "source_db": "bills"
+        }
+    ], 
+    "stances_for": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "HANDICAPPED", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "HR-880", 
+            "source_db": "bills"
+        }
+    ], 
+    "synonyms": [], 
+    "vote_tally": {"_type": "VoteTally",
+        "outcome" : "PASSED",
+        "for_votes" : 200,
+        "agn_votes" : 195,
+        "party_votes" : {}
+     }
+}

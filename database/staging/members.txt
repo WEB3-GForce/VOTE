@@ -552,11 +552,23 @@
         "HOUSE-DC"
     ], 
     "con_rel_stances": [], 
-    "credo": [], 
+    "credo": [
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "HOMELESSNESS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "YANG", 
+            "source_db": "members"
+        }
+    ], 
     "district": "VA-8", 
     "english_short": null, 
-    "first_name": "YANG", 
-    "full_name": "Wong Yang", 
+    "first_name": "JIM", 
+    "full_name": "Jim Yang", 
     "gender": "MALE", 
     "groups": [], 
     "issues": [], 
@@ -658,18 +670,29 @@
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
-            "source": "YIN", 
+            "source": "WONG", 
+            "source_db": "members"
+        },
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "HOUSING", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO",
+            "source": "WONG", 
             "source_db": "members"
         }
     ], 
     "district": "WI-2", 
     "english_short": null, 
-    "first_name": "YIN", 
-    "full_name": "James Yin", 
+    "first_name": "James", 
+    "full_name": "James WONG", 
     "gender": "MALE", 
     "groups": [], 
     "issues": [], 
-    "last_name": "YIN", 
+    "last_name": "WONG", 
     "notes": [], 
     "party": "INDEPENDENT", 
     "pro_rel_stances": [], 
@@ -680,7 +703,7 @@
             "importance": {"_type": "_Importance",
                            "value" : "A"}, 
             "side": "PRO", 
-            "source": "YIN", 
+            "source": "WONG", 
             "source_db": "members"
         }, 
         {
@@ -689,7 +712,7 @@
             "importance": {"_type": "_Importance",
                            "value" : "B"}, 
             "side": "CON", 
-            "source": "YIN", 
+            "source": "WONG", 
             "source_db": "members"
         }, 
         {
@@ -698,7 +721,7 @@
             "importance": {"_type": "_Importance",
                            "value" : "B"}, 
             "side": "CON", 
-            "source": "YIN", 
+            "source": "WONG", 
             "source_db": "members"
         }, 
         {
@@ -707,7 +730,7 @@
             "importance": {"_type": "_Importance",
                            "value" : "C"}, 
             "side": "PRO", 
-            "source": "YIN", 
+            "source": "WONG", 
             "source_db": "members"
         }, 
         {
@@ -716,7 +739,7 @@
             "importance": {"_type": "_Importance",
                            "value" : "C"}, 
             "side": "PRO", 
-            "source": "YIN", 
+            "source": "WONG", 
             "source_db": "members"
         }, 
         {
@@ -725,7 +748,7 @@
             "importance": {"_type": "_Importance",
                            "value" : "C"}, 
             "side": "PRO", 
-            "source": "YIN", 
+            "source": "WONG", 
             "source_db": "members"
         }
     ], 

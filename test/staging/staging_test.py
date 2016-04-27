@@ -184,7 +184,7 @@ class StagingTest(unittest.TestCase):
 
     def test_could_not_pass(self):
         """Tests that VOTE can decide with Could Not Pass."""
-        decision = vote.vote("YIN", "HR-900")
+        decision = vote.vote("WONG", "HR-900")
         self.assertEqual(decision.strategy, "Could Not Pass")
         self.assertEqual(decision.result, outcomes.AGN)
         self.assertTrue(len(decision.reason) > 0)
@@ -192,15 +192,31 @@ class StagingTest(unittest.TestCase):
 
     def test_not_good_enough(self):
         """Tests that VOTE can decide with Not Good Enough."""
-        decision = vote.vote("YIN", "HR-4264")
+        decision = vote.vote("WONG", "HR-4264")
         self.assertEqual(decision.strategy, "Not Good Enough")
+        self.assertEqual(decision.result, outcomes.AGN)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_minimize_adverse_effects_FOR(self):
+        """Tests that VOTE can decide FOR with Minimize Adverse Effects."""
+        decision = vote.vote("WONG", "HR-880")
+        self.assertEqual(decision.strategy, "Minimize Adverse Effects")
+        self.assertEqual(decision.result, outcomes.FOR)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_minimize_adverse_effects_AGN(self):
+        """Tests that VOTE can decide AGN with Minimize Adverse Effects."""
+        decision = vote.vote("WONG", "HR-888")
+        self.assertEqual(decision.strategy, "Minimize Adverse Effects")
         self.assertEqual(decision.result, outcomes.AGN)
         self.assertTrue(len(decision.reason) > 0)
         self.assertTrue(len(decision.downside + decision.downside_record) > 0)
 
     def test_simple_consensus_FOR(self):
         """Tests that VOTE can decide FOR with Simple Consensus."""
-        decision = vote.vote("YIN", "AMD-IMP")
+        decision = vote.vote("WONG", "AMD-IMP")
         self.assertEqual(decision.strategy, "Simple Consensus")
         self.assertEqual(decision.result, outcomes.FOR)
         self.assertTrue(len(decision.reason) > 0)
@@ -210,6 +226,22 @@ class StagingTest(unittest.TestCase):
         """Tests that VOTE can decide AGN with Simple Consensus."""
         decision = vote.vote("YANG", "AMD-IMP")
         self.assertEqual(decision.strategy, "Simple Consensus")
+        self.assertEqual(decision.result, outcomes.AGN)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_simple_majority_FOR(self):
+        """Tests that VOTE can decide FOR with Simple Majority."""
+        decision = vote.vote("YANG", "HR-901")
+        self.assertEqual(decision.strategy, "Simple Majority")
+        self.assertEqual(decision.result, outcomes.FOR)
+        self.assertTrue(len(decision.reason) > 0)
+        self.assertTrue(len(decision.downside + decision.downside_record) > 0)
+
+    def test_simple_majority_AGN(self):
+        """Tests that VOTE can decide AGN with Simple Majority."""
+        decision = vote.vote("WONG", "HR-901")
+        self.assertEqual(decision.strategy, "Simple Majority")
         self.assertEqual(decision.result, outcomes.AGN)
         self.assertTrue(len(decision.reason) > 0)
         self.assertTrue(len(decision.downside + decision.downside_record) > 0)
