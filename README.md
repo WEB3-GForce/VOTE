@@ -14,7 +14,7 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 3. Run "load_data.load_data()"
 4. Run "from src.vote import vote"
 5. Run "vote.vote_all()" to see the outcome of all of the members voting on all bills
-6. Run "vote('JORDAN', 'HR-4264')" to see what a specific member would vote on a specific bill.
+6. Run "vote.vote('JORDAN', 'HR-4264')" to see what a specific member would vote on a specific bill.
 
 ### List of [sample members](https://github.com/WEB3-GForce/VOTE/blob/master/database/dev/members.txt):
 - John Smith ("SMITH")
@@ -29,6 +29,8 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 
 ### Screenshots (examples)
 ![screenshot 1](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/screenshot1.png)
+
+
 ![screenshot 2](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/screenshot2.png)
 
 
