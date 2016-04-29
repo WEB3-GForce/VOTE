@@ -10,7 +10,7 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 ## Running the code
 
 1. Open the Python 2 interpreter from the top level directory
-2. Run "from src.script.database import load_data"
+2. Run "from src.scripts.database import load_data"
 3. Run "load_data.load_data()"
 4. Run "from src.vote import vote"
 5. Run "vote.vote_all()" to see the outcome of all of the members voting on all bills
