@@ -31,23 +31,25 @@
     "stances": [
         {
             "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "LABOR", 
             "relation": null, 
             "siblings": null, 
             "side": "CON", 
             "source": "ACU", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "SDI", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "ACU", 
-            "source_db": "group"
+            "source_db": "groups"
         }
     ], 
     "synonyms": [
@@ -70,33 +72,36 @@
     "stances": [
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "LABOR", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "COPE", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "CHILD-CARE", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "COPE", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "SPENDING", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "COPE", 
-            "source_db": "group"
+            "source_db": "groups"
         }
     ], 
     "synonyms": [
@@ -117,43 +122,47 @@
     "stances": [
         {
             "_type": "Stance", 
-            "importance": "C", 
-            "issue": "CHILD-CARE", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
+            "issue": "CHILDCARE", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "COUNTRY", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "CIVIL-LIBERTIES", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "COUNTRY", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "CIVIL-RIGHTS", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "COUNTRY", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "EDUCATION-RIGHTS", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "COUNTRY", 
-            "source_db": "group"
+            "source_db": "groups"
         }
     ], 
     "synonyms": [
@@ -182,33 +191,36 @@
     "stances": [
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "DEREGULATION", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "CEI", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "FREE-ENTERPRISE", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "CEI", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "PRIVATIZATION", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "CEI", 
-            "source_db": "group"
+            "source_db": "groups"
         }
     ], 
     "synonyms": [
@@ -231,33 +243,36 @@
     "stances": [
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "DEREGULATION", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "COC", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "LABOR", 
             "relation": null, 
             "siblings": null, 
             "side": "CON", 
             "source": "COC", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "SPENDING", 
             "relation": null, 
             "siblings": null, 
             "side": "CON", 
             "source": "COC", 
-            "source_db": "group"
+            "source_db": "groups"
         }
     ], 
     "synonyms": [
@@ -278,83 +293,102 @@
     "stances": [
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "CHILD-CARE", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "DEMOCRATS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "CIVIL-RIGHTS", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "DEMOCRATS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "DOMESTIC", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "DEMOCRATS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "LABOR", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "DEMOCRATS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "SDI", 
             "relation": null, 
             "siblings": null, 
             "side": "CON", 
             "source": "DEMOCRATS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "URBAN-RENEWAL", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "DEMOCRATS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "ELDERLY", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "DEMOCRATS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "HANDICAPPED", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "DEMOCRATS", 
-            "source_db": "group"
+            "source_db": "groups"
+        },
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "CHEMICAL-WEAPONS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "DEMOCRATS", 
+            "source_db": "groups"
         }
     ], 
     "synonyms": [
@@ -380,53 +414,58 @@
     "stances": [
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "HOUSING", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "ADA", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "LABOR", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "ADA", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "SDI", 
             "relation": null, 
             "siblings": null, 
             "side": "CON", 
             "source": "ADA", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "URBAN", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "ADA", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "FOOD-STAMPS", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "ADA", 
-            "source_db": "group"
+            "source_db": "groups"
         }
     ], 
     "synonyms": [
@@ -447,47 +486,119 @@
     "stances": [
         {
             "_type": "Stance", 
-            "importance": "B", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
             "issue": "DEREGULATION", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "REPUBLICANS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "A", 
+            "importance": {"_type": "_Importance",
+                           "value" : "A"}, 
             "issue": "SDI", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "REPUBLICANS", 
-            "source_db": "group"
+            "source_db": "groups"
         }, 
         {
             "_type": "Stance", 
-            "importance": "B", 
-            "issue": "SDI", 
-            "relation": null, 
-            "siblings": null, 
-            "side": "CON", 
-            "source": "REPUBLICANS", 
-            "source_db": "group"
-        }, 
-        {
-            "_type": "Stance", 
-            "importance": "C", 
+            "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
             "issue": "SPACE", 
             "relation": null, 
             "siblings": null, 
             "side": "PRO", 
             "source": "REPUBLICANS", 
-            "source_db": "group"
+            "source_db": "groups"
+        },
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "REAGAN", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "REPUBLICANS", 
+            "source_db": "groups"
         }
     ], 
     "synonyms": [
         "GOP", 
         "REPUBLICANS"
     ]
+}
+{
+    "_type": "Group", 
+    "con_english_description": null, 
+    "issues": [], 
+    "name": "DividedRepublicans", 
+    "norm": null, 
+    "number": null, 
+    "pro_english_description": null, 
+    "stances": [
+       {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "REAGAN", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DividedRepublicans", 
+            "source_db": "groups"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "SPENDING", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "DividedRepublicans", 
+            "source_db": "groups"
+        }
+    ], 
+    "synonyms": []
+}
+{
+    "_type": "Group", 
+    "con_english_description": null, 
+    "issues": [], 
+    "name": "DividedDemocrats", 
+    "norm": null, 
+    "number": null, 
+    "pro_english_description": null, 
+    "stances": [
+       {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "REAGAN", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "PRO", 
+            "source": "DividedDemocrats", 
+            "source_db": "groups"
+        }, 
+        {
+            "_type": "Stance", 
+            "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
+            "issue": "CHEMICAL-WEAPONS", 
+            "relation": null, 
+            "siblings": null, 
+            "side": "CON", 
+            "source": "DividedDemocrats", 
+            "source_db": "groups"
+        }
+    ], 
+    "synonyms": []
 }

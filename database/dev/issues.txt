@@ -11,13 +11,14 @@
     "name": "Chemical Weapons", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "CHEMICAL-WEAPONS", 
         "relation": null, 
         "siblings": null, 
         "side": "CON", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -42,13 +43,14 @@
     "name": "Homelessness", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "HOMELESSNESS", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -74,13 +76,14 @@
     "name": "Urban Renewal", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "SLUM", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -109,13 +112,14 @@
     "name": "Space Exploration", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "SPACE", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -140,13 +144,14 @@
     "name": "Strategic Defense Initiative", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "SDI", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -171,13 +176,14 @@
     "name": "Government Spending", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "SPENDING", 
         "relation": null, 
         "siblings": null, 
         "side": "CON", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -202,13 +208,14 @@
     "name": "Age Discrimination", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "AGE-DISCRIMINATION", 
         "relation": null, 
         "siblings": null, 
         "side": "CON", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -258,13 +265,14 @@
     "name": "Deregulation", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "DEREGULATION", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -284,16 +292,17 @@
     "isa": [
         "SOCIAL"
     ], 
-    "name": "Child Care", 
+    "name": "fChild Care", 
     "norm": {
         "_type": "Stance", 
-        "importance": "B", 
+        "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
         "issue": "CHILDCARE", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -342,13 +351,14 @@
     "name": "Fiscal responsibility", 
     "norm": {
         "_type": "Stance", 
-        "importance": "B", 
+        "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
         "issue": "FISCAL-RESPONSIBILITY", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -373,13 +383,14 @@
     "name": "President Reagan", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "REAGAN", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -401,16 +412,17 @@
     "isa": [
         "DOMESTIC"
     ], 
-    "name": "Elderly", 
+    "name": "ELDERLY", 
     "norm": {
         "_type": "Stance", 
-        "importance": "B", 
+        "importance": {"_type": "_Importance",
+                           "value" : "B"}, 
         "issue": "ELDERLY", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -430,16 +442,17 @@
     "isa": [
         "CIVIL-RIGHTS"
     ], 
-    "name": "Handicapped", 
+    "name": "HANDICAPPED", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "HANDICAPPED", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -462,13 +475,14 @@
     "name": "Civil Rights", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "CIVIL-RIGHTS", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -493,13 +507,14 @@
     "name": "Fairness", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "FAIRNESS", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -522,13 +537,14 @@
     "name": "Right to an Education", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "EDUCATION-RIGHTS", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -553,13 +569,14 @@
     "name": "Family values", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "FAMILY", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -585,13 +602,14 @@
     "name": "President Bush", 
     "norm": {
         "_type": "Stance", 
-        "importance": "C", 
+        "importance": {"_type": "_Importance",
+                           "value" : "C"}, 
         "issue": "BUSH", 
         "relation": null, 
         "siblings": null, 
         "side": "PRO", 
         "source": null, 
-        "source_db": "issue"
+        "source_db": "issues"
     }, 
     "number": null, 
     "opposite": null, 
@@ -623,6 +641,25 @@
     "synonyms": [
         "CONSTITUTION", 
         "BILL-OF-RIGHTS"
+    ], 
+    "type": "PRINCIPLE"
+}
+{
+    "_type": "Issue", 
+    "con_english_description": null, 
+    "con_stances": [], 
+    "isa": [
+        "DOMESTIC"
+    ], 
+    "name": "Order", 
+    "norm": null, 
+    "number": null, 
+    "opposite": null, 
+    "polarity": "Provide order to the state", 
+    "pro_english_description": null, 
+    "pro_stances": [], 
+    "synonyms": [
+        "ORDER"
     ], 
     "type": "PRINCIPLE"
 }
