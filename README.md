@@ -29,6 +29,8 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 
 ### Screenshots (examples)
 ![screenshot 1](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/screenshot1.png)
+
+
 ![screenshot 2](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/screenshot2.png)
 
 
