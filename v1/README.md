@@ -21,7 +21,7 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 - Timothy Peter Johnson ("JOHNSON")
 - Stan Parris ("PARRIS")
 
-### List of [completed bills](https://github.com/WEB3-GForce/VOTE/blob/master/dumps/lisp_dumps/bill.txt):
+### List of [completed bills](https://github.com/WEB3-GForce/VOTE/blob/master/v1/dumps/lisp_dumps/bill.txt):
 - AMD
 - HR-4800
 - HR-4264
@@ -29,8 +29,8 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 - HR-3
 
 ### Screenshots (examples)
-![screenshot 1](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/screenshot-1.png)
-![screenshot 2](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/screenshot-2.png)
+![screenshot 1](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/v1/screenshot-1.png)
+![screenshot 2](https://raw.githubusercontent.com/WEB3-GForce/VOTE/master/v1/screenshot-2.png)
 
 File translation from Lisp repo to Python
 
