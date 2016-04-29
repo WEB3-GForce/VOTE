@@ -19,7 +19,7 @@ Translation of Professor Slade's VOTE system from Lisp to Python
 ### List of [sample members](https://github.com/WEB3-GForce/VOTE/blob/master/database/dev/members.txt):
 - John Smith ("SMITH")
 - Jane Jordan ("JORDAN")
-- John Doe ("DOERRIS")
+- John Doe ("DOE")
 
 ### List of [sample bills](https://github.com/WEB3-GForce/VOTE/blob/master/database/dev/bills.txt):
 - AMD
